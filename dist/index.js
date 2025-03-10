@@ -22,7 +22,6 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
 // Middleware để xử lý JSON
 app.use(express_1.default.json());
-console.log("OK");
 (0, index_router_1.default)(app);
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
