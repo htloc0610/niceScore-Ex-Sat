@@ -12,6 +12,8 @@ const port: string | number = process.env.PORT || 8080;
 // Middleware để xử lý JSON
 app.use(express.json());
 
+console.log("OK");
+
 setupRoutes(app);
 
 app.listen(port, (): void => {
