@@ -1,4 +1,5 @@
 import { Sequelize, Dialect } from "sequelize";
+import pg from "pg";
 import "dotenv/config";
 
 // Cấu hình kết nối
@@ -10,6 +11,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST as string, // Địa chỉ host (ví dụ: localhost)
     dialect: process.env.DB_DIALECT as Dialect, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
     logging: false, // Tắt log SQL query trong console (tùy chọn)
+    dialectModule: pg,
     pool: {
       max: 5, // Số lượng kết nối tối đa
       min: 0, // Số lượng kết nối tối thiểu
