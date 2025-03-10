@@ -7,9 +7,9 @@ const sequelize = new sequelize_1.Sequelize(process.env.DB_NAME, // Tên cơ s�
 process.env.DB_USER, // Tên người dùng
 process.env.DB_PASSWORD, // Mật khẩu
 {
-    // Địa chỉ host (ví dụ: localhost)
+    host: process.env.DB_HOST, // Địa chỉ host (ví dụ: localhost)
     dialect: process.env.DB_DIALECT, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
-    logging: false, // Tắt log SQL query trong console (tuỳ chọn)
+    logging: false, // Tắt log SQL query trong console (tùy chọn)
     pool: {
         max: 5, // Số lượng kết nối tối đa
         min: 0, // Số lượng kết nối tối thiểu
@@ -17,11 +17,13 @@ process.env.DB_PASSWORD, // Mật khẩu
         idle: 10000, // Thời gian tối đa (ms) kết nối không sử dụng sẽ bị đóng
     },
     dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false, // Nếu cần kết nối với SSL
+        },
         // ssl: {
-        //   require: true,
-        //   rejectUnauthorized: false // Đặt `false` nếu chứng chỉ không được xác thực
-        // }
-        ssl: false,
+        //   require: false,
+        // },
     },
 });
 exports.default = sequelize;
