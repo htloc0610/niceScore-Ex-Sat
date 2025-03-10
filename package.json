@@ -9,11 +9,13 @@
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist"
   },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
+  "pre-commit": {
+    "scripts": [
+      "ts.check",
+      "build",
+      "add-build"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
