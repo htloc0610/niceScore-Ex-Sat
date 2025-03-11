@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const tableBody = document.getElementById("student-table-body");
 
-  fetch("http://localhost:3000/api/student")
+  fetch("/api/student")
     .then((response) => response.json())
     .then((data) => {
       const students = data.students;
