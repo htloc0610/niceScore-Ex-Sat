@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 //this file is API router for student
 const express_1 = require("express");
-const student_controller_1 = __importDefault(require("../controllers/student.controller"));
-const studentRouter = (0, express_1.Router)();
-studentRouter.get("/student", student_controller_1.default.getStudentHome);
-exports.default = studentRouter;
-//# sourceMappingURL=student.router.js.map
+const path_1 = __importDefault(require("path"));
+const frontRouter = (0, express_1.Router)();
+frontRouter.get("/", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../public/index.html"));
+});
+exports.default = frontRouter;
+//# sourceMappingURL=front.router.js.map
