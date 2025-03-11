@@ -5,8 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .then((response) => response.json())
     .then((data) => {
       const students = data.students;
-      console.log(students);
-
       students.forEach((student) => {
         const row = document.createElement("tr");
         row.classList.add("text-gray-700", "dark:text-gray-400");
@@ -39,12 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         row.innerHTML = `
-            
             <td class="px-4 py-3">
               <div class="flex items-center text-sm">
-                <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                </div>
                 <div>
                   <p class="font-semibold">${student.full_name}</p>
                   <p class="text-xs text-gray-600 dark:text-gray-400">${student.student_id}</p>
@@ -53,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </td>
             <td class="px-4 py-3 text-sm">${student.date_of_birth}</td>
             <td class="px-4 py-3 text-sm">${student.gender}</td>
-            <td class="px-4 py-3 text-sm">${student.faculty_id}</td>
+            <td class="px-4 py-3 text-sm">${student.facultyName}</td>
             <td class="px-4 py-3 text-sm">${student.course}</td>
             <td class="px-4 py-3 text-sm">${student.program}</td>
             <td class="px-4 py-3 text-sm">${student.address}</td>

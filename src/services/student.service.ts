@@ -1,23 +1,51 @@
 import Student from "../models/student.model";
+import Faculty from "../models/faculty.model";
 
 const studentService = {
   // Get list of students
   async getList() {
     try {
       const students = await Student.findAll();
-      return students;
+      const studentsWithFaculty = await Promise.all(
+        students.map(async (student) => {
+          const faculty = await Faculty.findOne({
+            where: { faculty_id: student.faculty_id },
+          });
+          return {
+            ...student.toJSON(),
+            facultyName: faculty ? faculty.name : null,
+          };
+        })
+      );
+      return studentsWithFaculty;
     } catch (error) {
       throw new Error("Error fetching students list");
     }
   },
 
-  // Add a new student
-  async add(studentData: any) {
+  // Get list of faculties
+  async getFaculties() {
     try {
-      const newStudent = await Student.create(studentData);
-      return newStudent;
+      const faculties = await Faculty.findAll();
+      return faculties;
     } catch (error) {
-      throw new Error("Error adding new student");
+      throw new Error("Error fetching faculties list");
+    }
+  },
+
+  // Add a new student
+  async addStudent(data: any) {
+    try {
+      const newStudent = await Student.create(data);
+      const faculty = await Faculty.findOne({
+        where: { faculty_id: newStudent.faculty_id },
+      });
+      return {
+        ...newStudent.toJSON(),
+        facultyName: faculty ? faculty.name : null,
+      };
+    } catch (error) {
+      throw new Error("Error adding new student" + error);
     }
   },
 
