@@ -64,7 +64,7 @@ const studentService = {
     delete(studentId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield student_model_1.default.destroy({ where: { id: studentId } });
+                const result = yield student_model_1.default.destroy({ where: { student_id: studentId } });
                 if (result === 0) {
                     throw new Error("Student not found");
                 }
@@ -80,15 +80,15 @@ const studentService = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const [updated] = yield student_model_1.default.update(studentData, {
-                    where: { id: studentId },
+                    where: { student_id: studentId },
                 });
                 if (updated === 0) {
                     throw new Error("Student not found");
                 }
                 const updatedStudent = yield student_model_1.default.findOne({
-                    where: { id: studentId },
+                    where: { student_id: studentId },
                 });
-                return updatedStudent;
+                return updatedStudent ? updatedStudent.get() : null;
             }
             catch (error) {
                 throw new Error("Error updating student");

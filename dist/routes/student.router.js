@@ -10,5 +10,7 @@ const studentRouter = (0, express_1.Router)();
 studentRouter.get("/student", student_controller_1.default.getStudentHome);
 studentRouter.get("/faculty", student_controller_1.default.getListFaculties);
 studentRouter.post("/add_student", student_controller_1.default.addStudent);
+studentRouter.put("/update_student", student_controller_1.default.updateStudent);
+studentRouter.post('/delete_student', student_controller_1.default.deleteStudent);
 exports.default = studentRouter;
 //# sourceMappingURL=student.router.js.map

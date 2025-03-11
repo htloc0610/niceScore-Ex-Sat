@@ -185,12 +185,15 @@ document
                     </span>
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit">Edit</button>
-                    <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="submit">Delete</button>
+                    <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="editStudent('${studentData.student_id}')">Edit</button>
+                    <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="deleteStudent('${studentData.student_id}')">Delete</button>
                   </td>
                 `;
 
                 tableBody.appendChild(newRow);
+                students.push(studentData);
+                currentStudents.push(studentData);
+                document.getElementById("studentCount").innerHTML = students.length;
               } else {
                 alert("Đã xảy ra lỗi khi thêm sinh viên.");
               }

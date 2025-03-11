@@ -52,7 +52,7 @@ const studentService = {
   // Delete a student by ID
   async delete(studentId: number) {
     try {
-      const result = await Student.destroy({ where: { id: studentId } });
+      const result = await Student.destroy({ where: { student_id: studentId } });
       if (result === 0) {
         throw new Error("Student not found");
       }
@@ -66,15 +66,16 @@ const studentService = {
   async update(studentId: number, studentData: any) {
     try {
       const [updated] = await Student.update(studentData, {
-        where: { id: studentId },
+        where: { student_id: studentId },
       });
+      
       if (updated === 0) {
         throw new Error("Student not found");
       }
       const updatedStudent = await Student.findOne({
-        where: { id: studentId },
+        where: { student_id: studentId },
       });
-      return updatedStudent;
+  return updatedStudent ? updatedStudent.get() : null;
     } catch (error) {
       throw new Error("Error updating student");
     }
