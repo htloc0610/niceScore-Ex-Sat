@@ -26,6 +26,34 @@ const studentController = {
                 .send({ message: "An error occurred while fetching students." });
         }
     }),
+    getListFaculties: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const faculties = yield student_service_1.default.getFaculties();
+            res.send({ message: "List of faculties", faculties });
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching faculties." });
+        }
+    }),
+    addStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const data = req.body;
+            const newStudent = yield student_service_1.default.addStudent(data);
+            console.log(newStudent);
+            res
+                .status(201)
+                .send({ message: "Student added successfully", newStudent });
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while adding the student." });
+        }
+    }),
 };
 exports.default = studentController;
 //# sourceMappingURL=student.controller.js.map

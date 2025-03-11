@@ -6,4 +6,8 @@ const studentRouter = Router();
 
 studentRouter.get("/student", studentController.getStudentHome);
 
+studentRouter.get("/faculty", studentController.getListFaculties);
+
+studentRouter.post("/add_student", studentController.addStudent);
+
 export default studentRouter;
