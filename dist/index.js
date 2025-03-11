@@ -18,6 +18,8 @@ const index_router_1 = __importDefault(require("./routes/index.router"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const db_1 = __importDefault(require("./config/db"));
+const student_model_1 = __importDefault(require("./models/student.model"));
+const faculty_model_1 = __importDefault(require("./models/faculty.model"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
 // Middleware để xử lý JSON
@@ -44,5 +46,17 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
 // Sync models
 (() => __awaiter(void 0, void 0, void 0, function* () {
     yield connectDB();
+    yield student_model_1.default.sync();
+    yield faculty_model_1.default.sync();
+    // Kiểm tra nếu bảng Faculty rỗng, thì thêm dữ liệu mặc định
+    const faculties = [
+        "Khoa Luật",
+        "Khoa Tiếng Anh thương mại",
+        "Khoa Tiếng Nhật",
+        "Khoa Tiếng Pháp",
+    ];
+    for (const name of faculties) {
+        yield faculty_model_1.default.findOrCreate({ where: { name } });
+    }
 }))();
 //# sourceMappingURL=index.js.map

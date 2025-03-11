@@ -39,4 +39,16 @@ const connectDB = async () => {
 // Sync models
 (async () => {
   await connectDB();
+  await Student.sync();
+  await Faculty.sync();
+  // Kiểm tra nếu bảng Faculty rỗng, thì thêm dữ liệu mặc định
+  const faculties = [
+    "Khoa Luật",
+    "Khoa Tiếng Anh thương mại",
+    "Khoa Tiếng Nhật",
+    "Khoa Tiếng Pháp",
+  ];
+  for (const name of faculties) {
+    await Faculty.findOrCreate({ where: { name } });
+  }
 })();
