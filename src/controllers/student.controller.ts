@@ -42,7 +42,7 @@ const studentController = {
   updateStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const {student_id, full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status} = req.body;
-      const updatedData = {full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status};
+      const updatedData = req.body;
 
       const studentId = parseInt(student_id, 10);
       const updatedStudent = await studentService.update(studentId, updatedData);

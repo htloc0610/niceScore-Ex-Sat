@@ -57,7 +57,7 @@ const studentController = {
     updateStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { student_id, full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status } = req.body;
-            const updatedData = { full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status };
+            const updatedData = req.body;
             const studentId = parseInt(student_id, 10);
             const updatedStudent = yield student_service_1.default.update(studentId, updatedData);
             if (!updatedStudent) {

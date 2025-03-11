@@ -79,6 +79,8 @@ const studentService = {
     update(studentId, studentData) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const student = student_model_1.default.build(studentData);
+                yield student.validate();
                 const [updated] = yield student_model_1.default.update(studentData, {
                     where: { student_id: studentId },
                 });
@@ -91,7 +93,7 @@ const studentService = {
                 return updatedStudent ? updatedStudent.get() : null;
             }
             catch (error) {
-                throw new Error("Error updating student");
+                throw new Error(error.message);
             }
         });
     },

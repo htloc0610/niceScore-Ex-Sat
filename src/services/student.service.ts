@@ -65,6 +65,8 @@ const studentService = {
   // Update a student by ID
   async update(studentId: number, studentData: any) {
     try {
+      const student = Student.build(studentData);
+      await student.validate();
       const [updated] = await Student.update(studentData, {
         where: { student_id: studentId },
       });
@@ -77,7 +79,7 @@ const studentService = {
       });
   return updatedStudent ? updatedStudent.get() : null;
     } catch (error) {
-      throw new Error("Error updating student");
+      throw new Error(error.message);
     }
   },
 };
