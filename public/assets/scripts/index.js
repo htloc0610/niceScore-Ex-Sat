@@ -27,7 +27,7 @@ function RefreshTable(id)
   tableBody.innerHTML = ``; 
   currentStudents = [];
   students.forEach((student) => {
-    if (String(student.student_id).includes(id) )
+    if (String(student.student_id).includes(id) || student.full_name.toLowerCase().includes(id.toLowerCase()) )
     {
     const row = document.createElement("tr");
     row.classList.add("text-gray-700", "dark:text-gray-400");
