@@ -2,8 +2,8 @@ import express from "express";
 import "dotenv/config";
 import setupRoutes from "./routes/index.router";
 import path from "path";
+import cors from "cors";
 import sequelize from "./config/db";
-import { DataTypes } from "sequelize";
 import Student from "./models/student.model";
 import Faculty from "./models/faculty.model";
 
@@ -13,9 +13,10 @@ const port: string | number = process.env.PORT || 8080;
 // Middleware để xử lý JSON
 app.use(express.json());
 
+app.use(cors());
+
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, "../public")));
-
 
 setupRoutes(app);
 

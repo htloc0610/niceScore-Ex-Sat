@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 require("dotenv/config");
 const index_router_1 = __importDefault(require("./routes/index.router"));
 const path_1 = __importDefault(require("path"));
+const cors_1 = __importDefault(require("cors"));
 const db_1 = __importDefault(require("./config/db"));
 const student_model_1 = __importDefault(require("./models/student.model"));
 const faculty_model_1 = __importDefault(require("./models/faculty.model"));
@@ -23,6 +24,7 @@ const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
 // Middleware để xử lý JSON
 app.use(express_1.default.json());
+app.use((0, cors_1.default)());
 // Serve static files from the "public" directory
 app.use(express_1.default.static(path_1.default.join(__dirname, "../public")));
 (0, index_router_1.default)(app);
