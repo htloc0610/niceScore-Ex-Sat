@@ -6,13 +6,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const pg_1 = __importDefault(require("pg"));
 require("dotenv/config");
+const dialect = process.env.DB_DIALECT;
+const VALID_DIALECTS = ["mysql", "postgres", "sqlite", "mssql"];
+if (!VALID_DIALECTS.includes(dialect)) {
+    throw new Error(`Invalid DB_DIALECT: ${dialect}`);
+}
 // Cấu hình kết nối
 const sequelize = new sequelize_1.Sequelize(process.env.DB_NAME, // Tên cơ sở dữ liệu
 process.env.DB_USER, // Tên người dùng
 process.env.DB_PASSWORD, // Mật khẩu
 {
     host: process.env.DB_HOST, // Địa chỉ host (ví dụ: localhost)
-    dialect: process.env.DB_DIALECT, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
+    dialect: dialect, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
     logging: false, // Tắt log SQL query trong console (tùy chọn)
     dialectModule: pg_1.default,
     pool: {

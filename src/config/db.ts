@@ -2,6 +2,14 @@ import { Sequelize, Dialect } from "sequelize";
 import pg from "pg";
 import "dotenv/config";
 
+const dialect = process.env.DB_DIALECT as Dialect;
+
+const VALID_DIALECTS: Dialect[] = ["mysql", "postgres", "sqlite", "mssql"];
+
+if (!VALID_DIALECTS.includes(dialect)) {
+  throw new Error(`Invalid DB_DIALECT: ${dialect}`);
+}
+
 // Cấu hình kết nối
 const sequelize = new Sequelize(
   process.env.DB_NAME as string, // Tên cơ sở dữ liệu
@@ -9,7 +17,7 @@ const sequelize = new Sequelize(
   process.env.DB_PASSWORD as string, // Mật khẩu
   {
     host: process.env.DB_HOST as string, // Địa chỉ host (ví dụ: localhost)
-    dialect: process.env.DB_DIALECT as Dialect, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
+    dialect: dialect, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
     logging: false, // Tắt log SQL query trong console (tùy chọn)
     dialectModule: pg,
     pool: {
