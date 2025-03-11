@@ -22,12 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+const slugify = (text) => {
+  return text.toLowerCase()                            
+    .normalize('NFD')                                   
+    .replace(/[\u0300-\u036f]/g, '')                    
+    .replace(/\s+/g, '-')                                
+    .replace(/[^\w-]+/g, '');                        
+};
 function RefreshTable(id)
 {
   tableBody.innerHTML = ``; 
   currentStudents = [];
   students.forEach((student) => {
-    if (String(student.student_id).includes(id) || student.full_name.toLowerCase().includes(id.toLowerCase()) )
+    if (String(student.student_id).includes(id) || slugify(student.full_name).includes(slugify(id)) )
     {
     const row = document.createElement("tr");
     row.classList.add("text-gray-700", "dark:text-gray-400");
