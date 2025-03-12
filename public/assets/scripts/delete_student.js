@@ -16,7 +16,6 @@ async function deleteStudent(studentId) {
         const tableBody = document.getElementById("student-table-body");
         const row = tableBody.children[studentIndex];
         tableBody.removeChild(row);
-        console.log(studentId);
 
         students = students.filter(student => student.student_id != studentId);
         currentStudents = currentStudents.filter(student => student.student_id != studentId);
