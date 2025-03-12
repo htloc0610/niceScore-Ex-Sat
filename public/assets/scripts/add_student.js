@@ -31,7 +31,7 @@ document
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="student_id" class="block text-sm font-medium text-gray-700">MSSV:</label>
-                        <input type="text" id="student_id" name="student_id" required 
+                        <input type="number" id="student_id" name="student_id" required
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
                     <div>

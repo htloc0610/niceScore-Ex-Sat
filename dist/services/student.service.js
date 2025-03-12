@@ -97,6 +97,12 @@ const studentService = {
             }
         });
     },
+    getFacultyName(faculty_id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const faculty = yield faculty_model_1.default.findOne({ where: { faculty_id } });
+            return faculty;
+        });
+    }
 };
 exports.default = studentService;
 //# sourceMappingURL=student.service.js.map

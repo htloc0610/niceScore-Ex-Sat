@@ -65,6 +65,10 @@ const studentController = {
                     .send({ message: "Student not found or no changes made." });
             }
             else {
+                //before sending the response, we need to get Faculty name
+                const faculty = yield student_service_1.default.getFacultyName(faculty_id);
+                updatedStudent.faculty_id = faculty.name;
+                console.log(updatedStudent);
                 res.status(200).send({
                     message: "Student updated successfully",
                     updatedStudent,

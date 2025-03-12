@@ -9,6 +9,17 @@ document.addEventListener("DOMContentLoaded", () => {
       students = data.students;
       currentStudents = students;
       document.getElementById("studentCount").innerHTML = students.length;
+
+      graduatedCount = students.filter((student) => student.status === "Đã tốt nghiệp").length;
+      document.getElementById("graduatedCount").innerHTML = graduatedCount;
+
+      studyingCount = students.filter((student) => student.status === "Đang học").length;
+      document.getElementById("studyingCount").innerHTML = studyingCount;
+
+      pauseCount = students.filter((student) => student.status === "Tạm dừng học").length;
+      document.getElementById("pauseCount").innerHTML = pauseCount;
+
+      
       RefreshTable("");
     })
     .catch((error) => {

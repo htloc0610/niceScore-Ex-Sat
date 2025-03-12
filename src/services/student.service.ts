@@ -82,6 +82,10 @@ const studentService = {
       throw new Error(error.message);
     }
   },
+  async getFacultyName(faculty_id: string) {
+    const faculty = await Faculty.findOne({ where: { faculty_id } });
+    return faculty;
+  }
 };
 
 export default studentService;
