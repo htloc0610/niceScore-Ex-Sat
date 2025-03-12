@@ -42,7 +42,6 @@ const studentController = {
         try {
             const data = req.body;
             const newStudent = yield student_service_1.default.addStudent(data);
-            console.log(newStudent);
             res
                 .status(201)
                 .send({ message: "Student added successfully", newStudent });
@@ -52,6 +51,51 @@ const studentController = {
             res
                 .status(500)
                 .send({ message: "An error occurred while adding the student." });
+        }
+    }),
+    updateStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { student_id, full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status, } = req.body;
+            const updatedData = req.body;
+            const studentId = parseInt(student_id, 10);
+            const updatedStudent = yield student_service_1.default.update(studentId, updatedData);
+            if (!updatedStudent) {
+                res
+                    .status(404)
+                    .send({ message: "Student not found or no changes made." });
+            }
+            else {
+                res.status(200).send({
+                    message: "Student updated successfully",
+                    updatedStudent,
+                });
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while updating the student." });
+        }
+    }),
+    deleteStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { student_id } = req.body; // Extract the student ID from the request body
+            // Call the delete function in your service
+            const result = yield student_service_1.default.delete(student_id);
+            // If the student was successfully deleted, return a success response
+            if (result === 0) {
+                res.status(404).send({ message: "Student not found" });
+            }
+            else {
+                res.status(200).send({ message: "Xóa sinh viên thành công!" });
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while deleting the student." });
         }
     }),
 };
