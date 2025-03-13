@@ -54,3 +54,7 @@ DB_DIALECT=
 npm start
 ```
 
+## 4. Deploying
+```sh
+https://student-management-oary.vercel.app/
+```
