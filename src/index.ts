@@ -6,6 +6,7 @@ import cors from "cors";
 import sequelize from "./config/db";
 import Student from "./models/student.model";
 import Faculty from "./models/faculty.model";
+import setupRelation from "./models/realation";
 
 const app = express();
 const port: string | number = process.env.PORT || 8080;
@@ -30,6 +31,8 @@ const connectDB = async () => {
     await sequelize.authenticate();
     // Đồng bộ các models
     await sequelize.sync({ force: false });
+
+    setupRelation();
     console.log("Database connection established");
   } catch (e) {
     console.log("Database connection failed", e);

@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../config/db"));
 const faculty_model_1 = __importDefault(require("./faculty.model"));
+const status_model_1 = __importDefault(require("./status.model"));
+const address_model_1 = __importDefault(require("./address.model"));
+const identification_model_1 = __importDefault(require("./identification.model"));
+const course_model_1 = __importDefault(require("./course.model")); // Import Course
 class Student extends sequelize_1.Model {
 }
 Student.init({
@@ -34,16 +38,17 @@ Student.init({
             key: "faculty_id",
         },
     },
-    course: {
-        type: sequelize_1.DataTypes.STRING,
+    course_id: {
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: course_model_1.default, // Liên kết với bảng Course
+            key: "course_id",
+        },
     },
     program: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-    },
-    address: {
-        type: sequelize_1.DataTypes.TEXT,
     },
     email: {
         type: sequelize_1.DataTypes.STRING,
@@ -57,8 +62,32 @@ Student.init({
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    status: {
-        type: sequelize_1.DataTypes.ENUM("Đang học", "Đã tốt nghiệp", "Đã thôi học", "Tạm dừng học"),
+    status_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: status_model_1.default,
+            key: "status_id",
+        },
+    },
+    permanent_address_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        references: { model: address_model_1.default, key: "address_id" },
+    },
+    temporary_address_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        references: { model: address_model_1.default, key: "address_id" },
+    },
+    mailing_address_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        references: { model: address_model_1.default, key: "address_id" },
+    },
+    identification_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        references: { model: identification_model_1.default, key: "identification_id" },
+    },
+    nationality: {
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 }, {
@@ -66,8 +95,5 @@ Student.init({
     tableName: "students",
     timestamps: false,
 });
-// Thiết lập quan hệ giữa Student và Faculty
-Student.belongsTo(faculty_model_1.default, { foreignKey: "faculty_id" });
-faculty_model_1.default.hasMany(Student, { foreignKey: "faculty_id" });
 exports.default = Student;
 //# sourceMappingURL=student.model.js.map
