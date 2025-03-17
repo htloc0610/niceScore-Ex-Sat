@@ -13,10 +13,6 @@ Address.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    student_id: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
-    },
     house_number: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: true,

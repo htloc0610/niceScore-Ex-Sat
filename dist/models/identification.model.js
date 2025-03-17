@@ -13,10 +13,6 @@ Identification.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    student_id: {
-        type: sequelize_1.DataTypes.INTEGER,
-        allowNull: false,
-    },
     type: {
         type: sequelize_1.DataTypes.ENUM("CMND", "CCCD", "Passport"),
         allowNull: false,

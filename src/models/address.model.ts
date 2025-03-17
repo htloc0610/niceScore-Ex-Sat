@@ -19,10 +19,6 @@ Address.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    student_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     house_number: {
       type: DataTypes.STRING,
       allowNull: true,

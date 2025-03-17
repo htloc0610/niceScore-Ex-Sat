@@ -21,10 +21,6 @@ Identification.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    student_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     type: {
       type: DataTypes.ENUM("CMND", "CCCD", "Passport"),
       allowNull: false,
