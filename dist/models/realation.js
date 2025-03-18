@@ -12,11 +12,11 @@ const address_model_1 = __importDefault(require("./address.model"));
 const course_model_1 = __importDefault(require("./course.model"));
 function setupRelation() {
     // Student - Faculty
-    student_model_1.default.belongsTo(faculty_model_1.default, { foreignKey: "faculty_id" });
-    faculty_model_1.default.hasMany(student_model_1.default, { foreignKey: "faculty_id" });
+    student_model_1.default.belongsTo(faculty_model_1.default, { foreignKey: "faculty_id", as: "faculty" });
+    faculty_model_1.default.hasMany(student_model_1.default, { foreignKey: "faculty_id", as: "students" });
     // Student - Status
-    student_model_1.default.belongsTo(status_model_1.default, { foreignKey: "status_id" });
-    status_model_1.default.hasMany(student_model_1.default, { foreignKey: "status_id" });
+    student_model_1.default.belongsTo(status_model_1.default, { foreignKey: "status_id", as: "status" });
+    status_model_1.default.hasMany(student_model_1.default, { foreignKey: "status_id", as: "students" });
     // Student - Address (permanent, temporary, mailing)
     student_model_1.default.belongsTo(address_model_1.default, {
         foreignKey: "permanent_address_id",
@@ -30,7 +30,6 @@ function setupRelation() {
         foreignKey: "mailing_address_id",
         as: "mailingAddress",
     });
-    // Address - Student (Mỗi địa chỉ có thể thuộc nhiều sinh viên)
     address_model_1.default.hasMany(student_model_1.default, {
         foreignKey: "permanent_address_id",
         as: "permanentResidents",
@@ -44,11 +43,17 @@ function setupRelation() {
         as: "mailingResidents",
     });
     // Student - Identification
-    student_model_1.default.belongsTo(identification_model_1.default, { foreignKey: "identification_id" });
-    identification_model_1.default.hasMany(student_model_1.default, { foreignKey: "identification_id" });
+    student_model_1.default.belongsTo(identification_model_1.default, {
+        foreignKey: "identification_id",
+        as: "identification",
+    });
+    identification_model_1.default.hasMany(student_model_1.default, {
+        foreignKey: "identification_id",
+        as: "students",
+    });
     // Student - Course
-    student_model_1.default.belongsTo(course_model_1.default, { foreignKey: "course_id" });
-    course_model_1.default.hasMany(student_model_1.default, { foreignKey: "course_id" });
+    student_model_1.default.belongsTo(course_model_1.default, { foreignKey: "course_id", as: "course" });
+    course_model_1.default.hasMany(student_model_1.default, { foreignKey: "course_id", as: "students" });
     console.log("Database relation set up successfully!");
 }
 //# sourceMappingURL=realation.js.map

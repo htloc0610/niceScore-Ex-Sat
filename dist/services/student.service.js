@@ -14,22 +14,100 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_model_1 = __importDefault(require("../models/student.model"));
 const faculty_model_1 = __importDefault(require("../models/faculty.model"));
+const course_model_1 = __importDefault(require("../models/course.model"));
+const address_model_1 = __importDefault(require("../models/address.model"));
+const status_model_1 = __importDefault(require("../models/status.model"));
+const identification_model_1 = __importDefault(require("../models/identification.model"));
 const studentService = {
-    // Get list of students
+    // Get list of students with related data
     getList() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const students = yield student_model_1.default.findAll();
-                const studentsWithFaculty = yield Promise.all(students.map((student) => __awaiter(this, void 0, void 0, function* () {
-                    const faculty = yield faculty_model_1.default.findOne({
-                        where: { faculty_id: student.faculty_id },
-                    });
-                    return Object.assign(Object.assign({}, student.toJSON()), { facultyName: faculty ? faculty.name : null });
-                })));
-                return studentsWithFaculty;
+                const students = yield student_model_1.default.findAll({
+                    attributes: {
+                        exclude: [
+                            "status_id",
+                            "faculty_id",
+                            "course_id",
+                            "permanent_address_id",
+                            "temporary_address_id",
+                            "mailing_address_id",
+                            "identification_id",
+                        ],
+                    },
+                    include: [
+                        {
+                            model: faculty_model_1.default,
+                            as: "faculty",
+                            attributes: ["name"], // Lấy tên khoa
+                        },
+                        {
+                            model: course_model_1.default,
+                            as: "course",
+                            attributes: ["course_name"], // Lấy thông tin khóa học
+                        },
+                        {
+                            model: status_model_1.default,
+                            as: "status",
+                            attributes: ["name"], // Lấy trạng thái sinh viên
+                        },
+                        {
+                            model: address_model_1.default,
+                            as: "permanentAddress",
+                            attributes: [
+                                "house_number",
+                                "street_name",
+                                "ward",
+                                "district",
+                                "city",
+                                "country",
+                            ], // Địa chỉ thường trú
+                        },
+                        {
+                            model: address_model_1.default,
+                            as: "temporaryAddress",
+                            attributes: [
+                                "house_number",
+                                "street_name",
+                                "ward",
+                                "district",
+                                "city",
+                                "country",
+                            ], // Địa chỉ tạm trú
+                        },
+                        {
+                            model: address_model_1.default,
+                            as: "mailingAddress",
+                            attributes: [
+                                "house_number",
+                                "street_name",
+                                "ward",
+                                "district",
+                                "city",
+                                "country",
+                            ], // Địa chỉ nhận thư
+                        },
+                        {
+                            model: identification_model_1.default,
+                            as: "identification",
+                            attributes: [
+                                "type",
+                                "number",
+                                "issue_date",
+                                "expiry_date",
+                                "place_of_issue",
+                                "country_of_issue",
+                                "has_chip",
+                                "notes",
+                            ], // Thông tin căn cước công dân
+                        },
+                    ],
+                    order: [["student_id", "asc"]], // Sắp xếp theo id tăng dần
+                });
+                return students;
             }
             catch (error) {
-                throw new Error("Error fetching students list");
+                throw new Error("Error fetching students list: " + error.message);
             }
         });
     },
@@ -64,7 +142,9 @@ const studentService = {
     delete(studentId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const result = yield student_model_1.default.destroy({ where: { student_id: studentId } });
+                const result = yield student_model_1.default.destroy({
+                    where: { student_id: studentId },
+                });
                 if (result === 0) {
                     throw new Error("Student not found");
                 }

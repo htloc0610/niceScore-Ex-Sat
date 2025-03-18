@@ -7,12 +7,12 @@ import Course from "./course.model";
 
 export default function setupRelation() {
   // Student - Faculty
-  Student.belongsTo(Faculty, { foreignKey: "faculty_id" });
-  Faculty.hasMany(Student, { foreignKey: "faculty_id" });
+  Student.belongsTo(Faculty, { foreignKey: "faculty_id", as: "faculty" });
+  Faculty.hasMany(Student, { foreignKey: "faculty_id", as: "students" });
 
   // Student - Status
-  Student.belongsTo(Status, { foreignKey: "status_id" });
-  Status.hasMany(Student, { foreignKey: "status_id" });
+  Student.belongsTo(Status, { foreignKey: "status_id", as: "status" });
+  Status.hasMany(Student, { foreignKey: "status_id", as: "students" });
 
   // Student - Address (permanent, temporary, mailing)
   Student.belongsTo(Address, {
@@ -28,7 +28,6 @@ export default function setupRelation() {
     as: "mailingAddress",
   });
 
-  // Address - Student (Mỗi địa chỉ có thể thuộc nhiều sinh viên)
   Address.hasMany(Student, {
     foreignKey: "permanent_address_id",
     as: "permanentResidents",
@@ -43,12 +42,18 @@ export default function setupRelation() {
   });
 
   // Student - Identification
-  Student.belongsTo(Identification, { foreignKey: "identification_id" });
-  Identification.hasMany(Student, { foreignKey: "identification_id" });
+  Student.belongsTo(Identification, {
+    foreignKey: "identification_id",
+    as: "identification",
+  });
+  Identification.hasMany(Student, {
+    foreignKey: "identification_id",
+    as: "students",
+  });
 
   // Student - Course
-  Student.belongsTo(Course, { foreignKey: "course_id" });
-  Course.hasMany(Student, { foreignKey: "course_id" });
+  Student.belongsTo(Course, { foreignKey: "course_id", as: "course" });
+  Course.hasMany(Student, { foreignKey: "course_id", as: "students" });
 
   console.log("Database relation set up successfully!");
 }
