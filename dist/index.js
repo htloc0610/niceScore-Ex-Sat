@@ -18,6 +18,7 @@ const index_router_1 = __importDefault(require("./routes/index.router"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const db_1 = __importDefault(require("./config/db"));
+const realation_1 = __importDefault(require("./models/realation"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
 // Middleware để xử lý JSON
@@ -35,6 +36,7 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
         yield db_1.default.authenticate();
         // Đồng bộ các models
         yield db_1.default.sync({ force: false });
+        (0, realation_1.default)();
         console.log("Database connection established");
     }
     catch (e) {
