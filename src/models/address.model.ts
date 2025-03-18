@@ -3,7 +3,6 @@ import sequelize from "../config/db";
 
 class Address extends Model {
   public address_id!: number;
-  public student_id!: number;
   public house_number!: string;
   public street_name!: string;
   public ward!: string;

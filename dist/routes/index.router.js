@@ -6,9 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const student_router_1 = __importDefault(require("./student.router"));
 const front_router_1 = __importDefault(require("./front.router"));
 const export_routes_1 = __importDefault(require("./export.routes"));
+const import_router_1 = __importDefault(require("./import.router"));
 const setupRoutes = (app) => {
     app.use("/api", student_router_1.default);
     app.use("/export", export_routes_1.default);
+    app.use("/import", import_router_1.default);
     app.use("/", front_router_1.default);
 };
 exports.default = setupRoutes;
