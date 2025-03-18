@@ -18,6 +18,8 @@ const course_model_1 = __importDefault(require("../models/course.model"));
 const address_model_1 = __importDefault(require("../models/address.model"));
 const status_model_1 = __importDefault(require("../models/status.model"));
 const identification_model_1 = __importDefault(require("../models/identification.model"));
+const address_service_1 = __importDefault(require("./address.service"));
+const identification_model_2 = __importDefault(require("./identification.model"));
 const studentService = {
     // Get list of students with related data
     getList() {
@@ -174,6 +176,42 @@ const studentService = {
             }
             catch (error) {
                 throw new Error(error.message);
+            }
+        });
+    },
+    // Add a new student from JSON data
+    addJson(studentJson) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const studentData = studentJson;
+                // Create related entities first
+                const faculty = yield faculty_model_1.default.findOrCreate({
+                    where: { name: studentData.faculty.name },
+                });
+                const course = yield course_model_1.default.findOrCreate({
+                    where: { course_name: studentData.course.course_name },
+                });
+                const status = yield status_model_1.default.findOrCreate({
+                    where: { name: studentData.status.name },
+                });
+                const permanentAddress = yield address_service_1.default.addAddress(studentData.permanentAddress);
+                const temporaryAddress = yield address_service_1.default.addAddress(studentData.temporaryAddress);
+                const mailingAddress = yield address_service_1.default.addAddress(studentData.mailingAddress);
+                const identification = yield identification_model_2.default.addIdentification(studentData.identification);
+                // Assign the IDs of the related entities to the student data
+                studentData.faculty_id = faculty[0].faculty_id;
+                studentData.course_id = course[0].course_id;
+                studentData.status_id = status[0].status_id;
+                studentData.permanent_address_id = permanentAddress.address_id;
+                studentData.temporary_address_id = temporaryAddress.address_id;
+                studentData.mailing_address_id = mailingAddress.address_id;
+                studentData.identification_id = identification.identification_id;
+                // Create the student
+                const newStudent = yield student_model_1.default.create(studentData);
+                return newStudent;
+            }
+            catch (error) {
+                throw new Error("Error adding student from JSON: " + error.message);
             }
         });
     },

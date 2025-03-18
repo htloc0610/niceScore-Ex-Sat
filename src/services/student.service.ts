@@ -4,6 +4,8 @@ import Course from "../models/course.model";
 import Address from "../models/address.model";
 import Status from "../models/status.model";
 import Identification from "../models/identification.model";
+import addressService from "./address.service";
+import identificationService from "./identification.model";
 
 const studentService = {
   // Get list of students with related data
@@ -154,6 +156,53 @@ const studentService = {
       return updatedStudent ? updatedStudent.get() : null;
     } catch (error) {
       throw new Error(error.message);
+    }
+  },
+  // Add a new student from JSON data
+  async addJson(studentJson: object) {
+    try {
+      const studentData = studentJson as any;
+      // Create related entities first
+      const faculty = await Faculty.findOrCreate({
+        where: { name: studentData.faculty.name },
+      });
+      const course = await Course.findOrCreate({
+        where: { course_name: studentData.course.course_name },
+      });
+      const status = await Status.findOrCreate({
+        where: { name: studentData.status.name },
+      });
+
+      const permanentAddress = await addressService.addAddress(
+        studentData.permanentAddress
+      );
+
+      const temporaryAddress = await addressService.addAddress(
+        studentData.temporaryAddress
+      );
+
+      const mailingAddress = await addressService.addAddress(
+        studentData.mailingAddress
+      );
+
+      const identification = await identificationService.addIdentification(
+        studentData.identification
+      );
+
+      // Assign the IDs of the related entities to the student data
+      studentData.faculty_id = faculty[0].faculty_id;
+      studentData.course_id = course[0].course_id;
+      studentData.status_id = status[0].status_id;
+      studentData.permanent_address_id = permanentAddress.address_id;
+      studentData.temporary_address_id = temporaryAddress.address_id;
+      studentData.mailing_address_id = mailingAddress.address_id;
+      studentData.identification_id = identification.identification_id;
+
+      // Create the student
+      const newStudent = await Student.create(studentData);
+      return newStudent;
+    } catch (error) {
+      throw new Error("Error adding student from JSON: " + error.message);
     }
   },
 };
