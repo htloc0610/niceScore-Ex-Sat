@@ -205,6 +205,63 @@ const studentService = {
       throw new Error("Error adding student from JSON: " + error.message);
     }
   },
+  // Add a new student from Excel data
+  async addExcel(studentExcel: object) {
+    try {
+      const studentData = studentExcel as any;
+      // Create related entities first
+      const faculty = await Faculty.findOrCreate({
+        where: { name: studentData.faculty.name },
+      });
+      const course = await Course.findOrCreate({
+        where: { course_name: studentData.course.course_name },
+      });
+      const status = await Status.findOrCreate({
+        where: { name: studentData.status.name },
+      });
+
+      const permanentAddress = await addressService.addAddress(
+        studentData.permanentAddress
+      );
+
+      const temporaryAddress = await addressService.addAddress(
+        studentData.temporaryAddress
+      );
+
+      const mailingAddress = await addressService.addAddress(
+        studentData.mailingAddress
+      );
+
+      const identification = await identificationService.addIdentification(
+        studentData.identification
+      );
+
+      // Assign the IDs of the related entities to the student data
+      studentData.faculty_id = faculty[0].faculty_id;
+      studentData.course_id = course[0].course_id;
+      studentData.status_id = status[0].status_id;
+      studentData.permanent_address_id = permanentAddress.address_id;
+      studentData.temporary_address_id = temporaryAddress.address_id;
+      studentData.mailing_address_id = mailingAddress.address_id;
+      studentData.identification_id =
+        identification.dataValues.identification_id;
+
+      // Remove unnecessary fields
+      delete studentData.faculty;
+      delete studentData.course;
+      delete studentData.status;
+      delete studentData.permanentAddress;
+      delete studentData.temporaryAddress;
+      delete studentData.mailingAddress;
+      delete studentData.identification;
+      // Create the student
+      const newStudent = await Student.create(studentData);
+
+      return newStudent;
+    } catch (error) {
+      throw new Error("Error adding student from Excel: " + error.message);
+    }
+  },
 };
 
 export default studentService;
