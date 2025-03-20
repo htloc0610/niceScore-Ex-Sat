@@ -142,20 +142,76 @@ const studentService = {
             }
         });
     },
-    // Add a new student
+    // Add a new student 
+    /*
+    async addStudent(data: any) {
+      try {
+        const newStudent = await Student.create(data);
+        const faculty = await Faculty.findOne({
+          where: { faculty_id: newStudent.faculty_id },
+        });
+        return {
+          ...newStudent.toJSON(),
+          facultyName: faculty ? faculty.name : null,
+        };
+      } catch (error) {
+        logger.error("Error adding new student" + error);
+        console.log("Error adding new student:", error);
+        throw new Error("Error adding new student" + error);
+      }
+    },
+    */
     addStudent(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const newStudent = yield student_model_1.default.create(data);
-                const faculty = yield faculty_model_1.default.findOne({
-                    where: { faculty_id: newStudent.faculty_id },
+                console.log(data);
+                // Tạo promises để thêm địa chỉ thường trú, tạm trú, nhận thư
+                const permanentAddressPromise = address_service_1.default.addAddress(data.permanent);
+                const temporaryAddressPromise = address_service_1.default.addAddress(data.temporary);
+                const mailingAddressPromise = address_service_1.default.addAddress(data.mailing);
+                // Tạo promise để thêm giấy tờ tùy thân
+                const identificationPromise = identification_service_1.default.addIdentification({
+                    type: data.type,
+                    number: data.number,
+                    issue_date: data.issue_date,
+                    expiry_date: data.expiry_date,
+                    place_of_issue: data.place_of_issue,
+                    country_of_issue: data.country_of_issue,
+                    has_chip: data.has_chip || false,
+                    notes: data.notes || "",
                 });
-                return Object.assign(Object.assign({}, newStudent.toJSON()), { facultyName: faculty ? faculty.name : null });
+                console.log(data.type, data.number, "issue_date", data.issue_date, "expiry_date", data.expiry_date, "place_of_issue", data.place_of_issue, "country_of_issue", data.country_of_issue, "has_chip", data.has_chip || false, "notes", data.notes || "");
+                // Chạy tất cả promises cùng lúc
+                const [permanentAddress, temporaryAddress, mailingAddress, identification] = yield Promise.all([
+                    permanentAddressPromise,
+                    temporaryAddressPromise,
+                    mailingAddressPromise,
+                    identificationPromise,
+                ]);
+                // Sau khi đã có tất cả địa chỉ và giấy tờ, thêm sinh viên
+                const newStudent = yield student_model_1.default.create({
+                    student_id: data.student_id,
+                    full_name: data.full_name,
+                    date_of_birth: data.date_of_birth,
+                    gender: data.gender,
+                    faculty_id: data.faculty_id,
+                    course_id: data.course_id,
+                    program: data.program,
+                    status_id: data.status_id,
+                    nationality: data.nationality,
+                    email: data.email,
+                    phone_number: data.phone_number,
+                    permanent_address_id: permanentAddress.address_id,
+                    temporary_address_id: temporaryAddress.address_id,
+                    mailing_address_id: mailingAddress.address_id,
+                    identification_id: identification.identification_id,
+                });
+                return newStudent;
             }
             catch (error) {
-                logger_1.logger.error("Error adding new student" + error);
-                console.log("Error adding new student:", error);
-                throw new Error("Error adding new student" + error);
+                logger_1.logger.error("Error adding student: " + error.message);
+                console.error("Error adding student:", error);
+                throw error;
             }
         });
     },

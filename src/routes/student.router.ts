@@ -10,7 +10,6 @@ studentRouter.get("/faculty", studentController.getListFaculties);
 
 studentRouter.get("/status", studentController.getListStatus);
 
-//get course
 studentRouter.get("/course", studentController.getListCourse);
 
 studentRouter.post("/add_student", studentController.addStudent);

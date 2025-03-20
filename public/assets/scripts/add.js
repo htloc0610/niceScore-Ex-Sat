@@ -129,9 +129,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     
         console.log("Form Data JSON:", data);
-    /*
+    
         // Send data to the backend (Replace with your actual API endpoint)
-        fetch("https://your-backend-api.com/submit", {
+        fetch("/api/add_student", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("Error submitting form:", error);
             alert("There was an error submitting the form.");
-        });*/
+        });
     });
     
 });

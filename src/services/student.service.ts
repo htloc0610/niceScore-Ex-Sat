@@ -123,7 +123,8 @@ const studentService = {
     }
   },
 
-  // Add a new student
+  // Add a new student 
+  /*
   async addStudent(data: any) {
     try {
       const newStudent = await Student.create(data);
@@ -139,6 +140,69 @@ const studentService = {
       console.log("Error adding new student:", error);  
       throw new Error("Error adding new student" + error);
     }
+  },
+  */
+  async addStudent(data: any) {
+      try {
+        console.log(data);
+        // Tạo promises để thêm địa chỉ thường trú, tạm trú, nhận thư
+        const permanentAddressPromise = addressService.addAddress(data.permanent);
+        const temporaryAddressPromise = addressService.addAddress(data.temporary);
+        const mailingAddressPromise = addressService.addAddress(data.mailing);
+        
+        // Tạo promise để thêm giấy tờ tùy thân
+        const identificationPromise = identificationService.addIdentification({
+          type: data.type,
+          number: data.number,
+          issue_date: data.issue_date,
+          expiry_date: data.expiry_date,
+          place_of_issue: data.place_of_issue,
+          country_of_issue: data.country_of_issue,
+          has_chip: data.has_chip || false,
+          notes: data.notes || "",
+        });
+        console.log( data.type,
+          data.number,
+          "issue_date" ,data.issue_date,
+          "expiry_date", data.expiry_date,
+          "place_of_issue", data.place_of_issue,
+          "country_of_issue", data.country_of_issue,
+          "has_chip", data.has_chip || false,
+          "notes", data.notes || "");
+    
+        // Chạy tất cả promises cùng lúc
+        const [permanentAddress, temporaryAddress, mailingAddress, identification] = await Promise.all([
+          permanentAddressPromise,
+          temporaryAddressPromise,
+          mailingAddressPromise,
+          identificationPromise,
+        ]);
+    
+        // Sau khi đã có tất cả địa chỉ và giấy tờ, thêm sinh viên
+        const newStudent = await Student.create({
+          student_id: data.student_id,
+          full_name: data.full_name,
+          date_of_birth: data.date_of_birth,
+          gender: data.gender,
+          faculty_id: data.faculty_id,
+          course_id: data.course_id,
+          program: data.program,
+          status_id: data.status_id,
+          nationality: data.nationality,
+          email: data.email,
+          phone_number: data.phone_number,
+          permanent_address_id: permanentAddress.address_id,
+          temporary_address_id: temporaryAddress.address_id,
+          mailing_address_id: mailingAddress.address_id,
+          identification_id: identification.identification_id,
+        });
+    
+        return newStudent;
+      } catch (error) {
+        logger.error("Error adding student: " + error.message);
+        console.error("Error adding student:", error);
+        throw error;
+      }
   },
 
   // Delete a student by ID
