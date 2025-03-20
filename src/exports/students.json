@@ -1,214 +1,108 @@
 [
   {
-    "student_id": 1,
+    "student_id": 102,
     "full_name": "Nguyễn Văn A",
-    "date_of_birth": "2001-02-15",
+    "date_of_birth": "2025-03-09",
     "gender": "Nam",
     "program": "Cử nhân",
-    "email": "nguyenvaa@e5ample.com",
-    "phone_number": "0952375688",
-    "nationality": "Việt Nam",
+    "email": "dangdiennguyen2112@gmail.com",
+    "phone_number": "0375375375",
+    "nationality": "VN",
     "faculty": {
-      "name": "Công nghệ thông tin"
+      "name": "CNTT"
     },
     "course": {
-      "course_name": "Kỹ thuật phần mềm"
+      "course_name": "K22"
     },
     "status": {
-      "name": "Đang học"
+      "name": "Nghi hoc"
     },
     "permanentAddress": {
-      "house_number": "123",
-      "street_name": "Lê Lợi",
-      "ward": "Phường 1",
-      "district": "Quận 1",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
+      "house_number": "1",
+      "street_name": null,
+      "ward": "3",
+      "district": "4",
+      "city": "5",
+      "country": "61"
     },
     "temporaryAddress": {
-      "house_number": "456",
-      "street_name": "Trần Hưng Đạo",
-      "ward": "Phường 5",
-      "district": "Quận 5",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
+      "house_number": "1",
+      "street_name": null,
+      "ward": "4",
+      "district": "5",
+      "city": "6",
+      "country": "87"
     },
     "mailingAddress": {
-      "house_number": "789",
-      "street_name": "Nguyễn Trãi",
-      "ward": "Phường 3",
-      "district": "Quận 10",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
+      "house_number": "1",
+      "street_name": null,
+      "ward": "7",
+      "district": "i9",
+      "city": "7",
+      "country": "6"
     },
     "identification": {
-      "type": "CCCD",
-      "number": "12306889",
-      "issue_date": "2015-06-20",
-      "expiry_date": "2035-06-20",
-      "place_of_issue": "TP. Hồ Chí Minh",
-      "country_of_issue": "Việt Nam",
+      "type": "CMND",
+      "number": "00112233576",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "",
       "has_chip": false,
-      "notes": "Cấp đổi lần 1"
+      "notes": ""
     }
   },
   {
-    "student_id": 2,
-    "full_name": "Trần Thị c",
-    "date_of_birth": "2002-08-22",
-    "gender": "Nữ",
-    "program": "Thạc sĩ",
-    "email": "tranthic@ex6ample.com",
-    "phone_number": "0979543210",
-    "nationality": "Việt Nam",
-    "faculty": {
-      "name": "Khoa học máy tính"
-    },
-    "course": {
-      "course_name": "Trí tuệ nhân tạo"
-    },
-    "status": {
-      "name": "Đã tốt nghiệp"
-    },
-    "permanentAddress": {
-      "house_number": "99",
-      "street_name": "Điện Biên Phủ",
-      "ward": "Phường 15",
-      "district": "Bình Thạnh",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
-    },
-    "temporaryAddress": {
-      "house_number": "111",
-      "street_name": "Nguyễn Văn Cừ",
-      "ward": "Phường 4",
-      "district": "Quận 5",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
-    },
-    "mailingAddress": {
-      "house_number": "222",
-      "street_name": "Dương Bá Trạc",
-      "ward": "Phường 1",
-      "district": "Quận 8",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
-    },
-    "identification": {
-      "type": "CCCD",
-      "number": "987654381",
-      "issue_date": "2018-12-15",
-      "expiry_date": "2038-12-15",
-      "place_of_issue": "TP. Hồ Chí Minh",
-      "country_of_issue": "Việt Nam",
-      "has_chip": false,
-      "notes": "Cấp đổi lần 2"
-    }
-  },
-  {
-    "student_id": 6,
+    "student_id": 122,
     "full_name": "Nguyễn Văn B",
-    "date_of_birth": "2001-02-15",
+    "date_of_birth": "2025-03-09",
     "gender": "Nam",
     "program": "Cử nhân",
-    "email": "nguyenvaa@ex5ample.com",
-    "phone_number": "0952345688",
-    "nationality": "Việt Nam",
+    "email": "dangdiennguyen112@gmail.com",
+    "phone_number": "0375375375",
+    "nationality": "VN",
     "faculty": {
-      "name": "Công nghệ thông tin"
+      "name": "CNTT"
     },
     "course": {
-      "course_name": "Kỹ thuật phần mềm"
+      "course_name": "K23"
     },
     "status": {
-      "name": "Đang học"
+      "name": "Nghi hoc"
     },
     "permanentAddress": {
-      "house_number": "123",
-      "street_name": "Lê Lợi",
-      "ward": "Phường 1",
-      "district": "Quận 1",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
+      "house_number": "1",
+      "street_name": null,
+      "ward": "3",
+      "district": "4",
+      "city": "5",
+      "country": "61"
     },
     "temporaryAddress": {
-      "house_number": "456",
-      "street_name": "Trần Hưng Đạo",
-      "ward": "Phường 5",
-      "district": "Quận 5",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
+      "house_number": "1",
+      "street_name": null,
+      "ward": "4",
+      "district": "5",
+      "city": "6",
+      "country": "87"
     },
     "mailingAddress": {
-      "house_number": "789",
-      "street_name": "Nguyễn Trãi",
-      "ward": "Phường 3",
-      "district": "Quận 10",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
+      "house_number": "1",
+      "street_name": null,
+      "ward": "7",
+      "district": "i9",
+      "city": "7",
+      "country": "6"
     },
     "identification": {
-      "type": "CCCD",
-      "number": "12356889",
-      "issue_date": "2015-06-20",
-      "expiry_date": "2035-06-20",
-      "place_of_issue": "TP. Hồ Chí Minh",
-      "country_of_issue": "Việt Nam",
+      "type": "CMND",
+      "number": "00112238576",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "",
       "has_chip": false,
-      "notes": "Cấp đổi lần 1"
-    }
-  },
-  {
-    "student_id": 7,
-    "full_name": "Trần Thị C",
-    "date_of_birth": "2002-08-22",
-    "gender": "Nữ",
-    "program": "Thạc sĩ",
-    "email": "tranthic@ex5ample.com",
-    "phone_number": "0976543210",
-    "nationality": "Việt Nam",
-    "faculty": {
-      "name": "Khoa học máy tính"
-    },
-    "course": {
-      "course_name": "Trí tuệ nhân tạo"
-    },
-    "status": {
-      "name": "Đã tốt nghiệp"
-    },
-    "permanentAddress": {
-      "house_number": "99",
-      "street_name": "Điện Biên Phủ",
-      "ward": "Phường 15",
-      "district": "Bình Thạnh",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
-    },
-    "temporaryAddress": {
-      "house_number": "111",
-      "street_name": "Nguyễn Văn Cừ",
-      "ward": "Phường 4",
-      "district": "Quận 5",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
-    },
-    "mailingAddress": {
-      "house_number": "222",
-      "street_name": "Dương Bá Trạc",
-      "ward": "Phường 1",
-      "district": "Quận 8",
-      "city": "TP. Hồ Chí Minh",
-      "country": "Việt Nam"
-    },
-    "identification": {
-      "type": "CCCD",
-      "number": "987654321",
-      "issue_date": "2018-12-15",
-      "expiry_date": "2038-12-15",
-      "place_of_issue": "TP. Hồ Chí Minh",
-      "country_of_issue": "Việt Nam",
-      "has_chip": false,
-      "notes": "Cấp đổi lần 2"
+      "notes": ""
     }
   }
 ]
