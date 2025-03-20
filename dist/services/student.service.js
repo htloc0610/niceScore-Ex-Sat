@@ -445,6 +445,98 @@ const studentService = {
             }
         });
     },
+    //getStudentById
+    getStudentById(studentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const student = yield student_model_1.default.findOne({
+                    where: { student_id: studentId },
+                    attributes: {
+                        exclude: [
+                            "status_id",
+                            "faculty_id",
+                            "course_id",
+                            "permanent_address_id",
+                            "temporary_address_id",
+                            "mailing_address_id",
+                            "identification_id",
+                        ],
+                    },
+                    include: [
+                        {
+                            model: faculty_model_1.default,
+                            as: "faculty",
+                            attributes: ["name"], // Lấy tên khoa
+                        },
+                        {
+                            model: course_model_1.default,
+                            as: "course",
+                            attributes: ["course_name"], // Lấy thông tin khóa học
+                        },
+                        {
+                            model: status_model_1.default,
+                            as: "status",
+                            attributes: ["name"], // Lấy trạng thái sinh viên
+                        },
+                        {
+                            model: address_model_1.default,
+                            as: "permanentAddress",
+                            attributes: [
+                                "house_number",
+                                "street_name",
+                                "ward",
+                                "district",
+                                "city",
+                                "country",
+                            ], // Địa chỉ thường trú
+                        },
+                        {
+                            model: address_model_1.default,
+                            as: "temporaryAddress",
+                            attributes: [
+                                "house_number",
+                                "street_name",
+                                "ward",
+                                "district",
+                                "city",
+                                "country",
+                            ], // Địa chỉ tạm trú
+                        },
+                        {
+                            model: address_model_1.default,
+                            as: "mailingAddress",
+                            attributes: [
+                                "house_number",
+                                "street_name",
+                                "ward",
+                                "district",
+                                "city",
+                                "country",
+                            ], // Địa chỉ nhận thư
+                        },
+                        {
+                            model: identification_model_1.default,
+                            as: "identification",
+                            attributes: [
+                                "type",
+                                "number",
+                                "issue_date",
+                                "expiry_date",
+                                "place_of_issue",
+                                "country_of_issue",
+                                "has_chip",
+                                "notes",
+                            ], // Thông tin căn cước công dân
+                        },
+                    ],
+                });
+                return student;
+            }
+            catch (error) {
+                throw new Error("Error fetching student by id");
+            }
+        });
+    },
 };
 exports.default = studentService;
 //# sourceMappingURL=student.service.js.map

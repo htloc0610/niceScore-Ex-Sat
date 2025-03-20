@@ -254,6 +254,25 @@ const studentController = {
                 .send({ message: "An error occurred while updating the course." });
         }
     }),
+    //getStudentById
+    getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id } = req.params;
+            const student = yield student_service_1.default.getStudentById(parseInt(id, 10));
+            if (!student) {
+                res.status(404).send({ message: "Student not found" });
+            }
+            else {
+                res.status(200).send({ message: "Student found", student });
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching the student." });
+        }
+    }),
 };
 exports.default = studentController;
 //# sourceMappingURL=student.controller.js.map
