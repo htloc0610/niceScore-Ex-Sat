@@ -10,6 +10,8 @@ const studentRouter = (0, express_1.Router)();
 studentRouter.get("/student", student_controller_1.default.getStudentHome);
 studentRouter.get("/faculty", student_controller_1.default.getListFaculties);
 studentRouter.get("/status", student_controller_1.default.getListStatus);
+//get course
+studentRouter.get("/course", student_controller_1.default.getListCourse);
 studentRouter.post("/add_student", student_controller_1.default.addStudent);
 studentRouter.put("/update_student", student_controller_1.default.updateStudent);
 studentRouter.post('/delete_student', student_controller_1.default.deleteStudent);
@@ -17,5 +19,7 @@ studentRouter.post("/add_faculty", student_controller_1.default.addFaculty);
 studentRouter.put("/update_faculty", student_controller_1.default.updateFaculty);
 studentRouter.post("/add_status", student_controller_1.default.addStatus);
 studentRouter.put("/update_status", student_controller_1.default.updateStatus);
+studentRouter.post("/add_course", student_controller_1.default.addCourse);
+studentRouter.put("/update_course", student_controller_1.default.updateCourse);
 exports.default = studentRouter;
 //# sourceMappingURL=student.router.js.map

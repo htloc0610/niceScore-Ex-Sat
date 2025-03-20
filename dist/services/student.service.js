@@ -345,6 +345,50 @@ const studentService = {
             }
         });
     },
+    //add course
+    addCourse(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const newCourse = yield course_model_1.default.create(data);
+                return Object.assign({}, newCourse.toJSON());
+            }
+            catch (error) {
+                throw new Error("Error adding new course" + error);
+            }
+        });
+    },
+    //update course
+    updateCourse(courseId, courseData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const [updated] = yield course_model_1.default.update(courseData, {
+                    where: { course_id: courseId },
+                });
+                if (updated === 0) {
+                    throw new Error("Course not found");
+                }
+                const updatedCourse = yield course_model_1.default.findOne({
+                    where: { course_id: courseId },
+                });
+                return updatedCourse ? updatedCourse.get() : null;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        });
+    },
+    //getCourses
+    getCourses() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const courses = yield course_model_1.default.findAll();
+                return courses;
+            }
+            catch (error) {
+                throw new Error("Error fetching courses list");
+            }
+        });
+    },
 };
 exports.default = studentService;
 //# sourceMappingURL=student.service.js.map

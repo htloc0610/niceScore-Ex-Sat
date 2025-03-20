@@ -55,6 +55,18 @@ const studentController = {
                 .send({ message: "An error occurred while fetching status." });
         }
     }),
+    getListCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const courses = yield student_service_1.default.getCourses();
+            res.send({ message: "List of courses", courses });
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching courses." });
+        }
+    }),
     addStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
@@ -199,6 +211,47 @@ const studentController = {
             res
                 .status(500)
                 .send({ message: "An error occurred while updating the status." });
+        }
+    }),
+    //add course
+    addCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const data = req.body;
+            const newCourse = yield student_service_1.default.addCourse(data);
+            res
+                .status(201)
+                .send({ message: "Course added successfully", newCourse });
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while adding the course." });
+        }
+    }),
+    //update course
+    updateCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { course_id, name } = req.body;
+            const updatedData = req.body;
+            const updatedCourse = yield student_service_1.default.updateCourse(course_id, updatedData);
+            if (!updatedCourse) {
+                res
+                    .status(404)
+                    .send({ message: "Course not found or no changes made." });
+            }
+            else {
+                res.status(200).send({
+                    message: "Course updated successfully",
+                    updatedCourse,
+                });
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while updating the course." });
         }
     }),
 };

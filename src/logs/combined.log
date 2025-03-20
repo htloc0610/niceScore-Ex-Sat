@@ -18,3 +18,38 @@
 {"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:02:14.289Z"}
 {"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:02:14.306Z"}
 {"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T04:02:23.615Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:16.172Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:16.187Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:19.857Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:19.859Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T04:04:22.208Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:04:38.795Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:04:45.915Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:05:04.997Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:05:05.351Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:05:05.712Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:05:23.237Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:05:38.010Z"}
+{"level":"error","message":"Error adding new studentSequelizeValidationError: notNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null,\nnotNull Violation: Student.nationality cannot be null","timestamp":"2025-03-20T04:06:00.694Z"}
+{"level":"error","message":"Error adding new studentError: Error adding new studentSequelizeValidationError: notNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null,\nnotNull Violation: Student.nationality cannot be null","timestamp":"2025-03-20T04:06:00.699Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:07:35.047Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:07:58.768Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T04:10:37.419Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:10:38.914Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:39:37.421Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:44:26.712Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:45:00.182Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:50:20.491Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T04:51:05.208Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:02:18.867Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:03:25.042Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T05:05:22.002Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:05:22.207Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:06:22.192Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:09:05.435Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:10:17.443Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:10:32.891Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:12:07.864Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:12:37.633Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:15:23.476Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T05:15:57.686Z"}

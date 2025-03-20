@@ -348,6 +348,50 @@ const studentService = {
       throw new Error(error.message);
     }
   },
+
+  //add course
+  async addCourse(data: any) {
+    try {
+      const newCourse = await Course.create(data);
+     
+      return {
+        ...newCourse.toJSON(),
+      };
+    } catch (error) {
+      throw new Error("Error adding new course" + error);
+    }
+  },
+
+  //update course
+  async updateCourse(courseId: number, courseData: any) {
+    try {
+      
+      const [updated] = await Course.update(courseData, {
+        where: { course_id: courseId },
+      });
+      
+      if (updated === 0) {
+        throw new Error("Course not found");
+      }
+      const updatedCourse = await Course.findOne({
+        where: { course_id: courseId },
+      });
+  return updatedCourse ? updatedCourse.get() : null;
+    }
+    catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  //getCourses
+  async getCourses() {
+    try {
+      const courses = await Course.findAll();
+      return courses;
+    } catch (error) {
+      throw new Error("Error fetching courses list");
+    }
+  },
 };
 
 export default studentService;

@@ -46,5 +46,31 @@ document.addEventListener("DOMContentLoaded", () => {
     .catch((error) => {
       console.error("Error fetching student data:", error);
     });
+
+    fetch("/api/course")
+    .then((response) => response.json())
+    .then((data) => {
+        courses = data.courses;
+        
+        console.log(courses);
+
+        const courseTableBody = document.getElementById("course-table-body");
+        courseTableBody.innerHTML = ``;
+        courses.forEach((course) => {
+            const row = document.createElement("tr");
+            row.classList.add("text-gray-700", "dark:text-gray-400");
+            row.innerHTML = `
+                <td class="px-4 py-3 text-sm">${course.course_id}</td>
+                <td class="px-4 py-3 text-sm">${course.course_name}</td>
+                <td class="px-4 py-3 text-sm">
+                    <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="editCourse(${course.course_id})">Edit</button>
+                </td>
+            `;
+            courseTableBody.appendChild(row);
+        })
+    })
+    .catch((error) => {
+      console.error("Error fetching student data:", error);
+    });
   
   });

@@ -10,3 +10,9 @@
 {"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T03:56:54.279Z"}
 {"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:02:14.289Z"}
 {"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:02:14.306Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:16.172Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:16.187Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:19.857Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T04:04:19.859Z"}
+{"level":"error","message":"Error adding new studentSequelizeValidationError: notNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null,\nnotNull Violation: Student.nationality cannot be null","timestamp":"2025-03-20T04:06:00.694Z"}
+{"level":"error","message":"Error adding new studentError: Error adding new studentSequelizeValidationError: notNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null,\nnotNull Violation: Student.nationality cannot be null","timestamp":"2025-03-20T04:06:00.699Z"}
