@@ -504,8 +504,8 @@ const studentService = {
                     where: { name: studentData.status.name },
                 });
                 //updateAddress: async (addressId: number, addressData:
-                const permanentAddress = yield address_service_1.default.updateAddress(studentData.permanent.permanent_address_id, studentData.permanentAddress);
-                const temporaryAddress = yield address_service_1.default.updateAddress(studentData.temporary.temporary_address_id, studentData.temporaryAddress);
+                const permanentAddress = yield address_service_1.default.updateAddress(studentData.permanentAddress.permanent_address_id, studentData.permanentAddress);
+                const temporaryAddress = yield address_service_1.default.updateAddress(studentData.temporaryAddress.temporary_address_id, studentData.temporaryAddress);
                 const mailingAddress = yield address_service_1.default.updateAddress(studentData.mailingAddress.mailing_address_id, studentData.mailingAddress);
                 const identification = yield identification_service_1.default.updateIdentification(studentData.identification.identification_id, studentData.identification);
                 // Assign the IDs of the related entities to the student data

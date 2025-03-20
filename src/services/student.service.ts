@@ -516,12 +516,12 @@ const studentService = {
 
         //updateAddress: async (addressId: number, addressData:
         const permanentAddress = await addressService.updateAddress(
-            studentData.permanent.permanent_address_id ,studentData.permanentAddress
+            studentData.permanentAddress.permanent_address_id ,studentData.permanentAddress
         );
 
 
         const temporaryAddress = await addressService.updateAddress(
-          studentData.temporary.temporary_address_id,studentData.temporaryAddress
+          studentData.temporaryAddress.temporary_address_id,studentData.temporaryAddress
         );
 
         const mailingAddress = await addressService.updateAddress(

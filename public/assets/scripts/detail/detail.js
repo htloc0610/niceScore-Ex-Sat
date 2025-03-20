@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const url = window.location.pathname;
     const studentId = url.substring(url.lastIndexOf('/') + 1);
     console.log(studentId);
-    
+
     const apiUrl = `/api/student/${studentId}`;
 
     // Function to fetch data from the API and populate the form fields
@@ -61,6 +61,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('course_id').value = student.course.course_id || '';
                 document.getElementById('status_id').value = student.status.status_id || '';
 
+                // <input type="hidden" name="documentId" id="documentId">
+                // <input type="hidden" name="permAddress" id="permAddress">
+                // <input type="hidden" name="tempAddress" id="tempAddress">
+
+                // <input type="hidden" name="mailAddress" id="mailAddress">
+
+                document.getElementById('documentId').value = student.identification_id || '';
+                document.getElementById('permAddress').value = student.permanent_address_id || '';
+                document.getElementById('tempAddress').value = student.temporary_address_id || '';
+                document.getElementById('mailAddress').value = student.mailing_address_id || '';
+                
+
+
                 // Handle has_chip field (if applicable)
                 if (student.identification.has_chip !== undefined) {
                     document.getElementById('hasChip').value = student.identification.has_chip ? 'Có' : 'Không';
@@ -91,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
             status_id: document.getElementById('status_id').value,
 
             temporaryAddress: {
+                temporary_address_id: document.getElementById('tempAddress').value,
                 house_number: document.getElementById('tempHouseNumber').value,
                 street_name: document.getElementById('tempStreet').value,
                 ward: document.getElementById('tempWard').value,
@@ -99,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 country: document.getElementById('tempCountry').value,
             },
             mailingAddress: {
+                mailing_address_id: document.getElementById('mailAddress').value,
                 house_number: document.getElementById('mailHouseNumber').value,
                 street_name: document.getElementById('mailStreet').value,
                 ward: document.getElementById('mailWard').value,
@@ -109,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
             email: document.getElementById('email').value,
             phone_number: document.getElementById('phone').value,
             identification: {
+                identification_id: document.getElementById('documentId').value,
                 type: document.getElementById('documentType').value,
                 number: document.getElementById('documentNumber').value,
                 issue_date: document.getElementById('issueDate').value,
@@ -119,6 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 notes: document.getElementById('notes').value,
             },
             permanentAddress: {
+                permanent_address_id: document.getElementById('permAddress').value,
                 house_number: document.getElementById('permHouseNumber').value,
                 street_name: document.getElementById('permStreet').value,
                 ward: document.getElementById('permWard').value,
