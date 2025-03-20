@@ -104,10 +104,22 @@ const studentService = {
   async getFaculties() {
     try {
       const faculties = await Faculty.findAll();
+      console.log("faculty: ", faculties);
       return faculties;
     } catch (error) {
       logger.error("Error fetching faculties list");
       throw new Error("Error fetching faculties list");
+    }
+  },
+
+  
+  // Get list of status
+  async getStatus() {
+    try {
+      const status = await Status.findAll();
+      return status;
+    } catch (error) {
+      throw new Error("Error fetching status list");
     }
   },
 
@@ -272,6 +284,68 @@ const studentService = {
       logger.error("Error adding student from Excel: " + error.message);
       console.log("Error adding student from Excel:", error);
       throw new Error("Error adding student from Excel: " + error.message);
+    }
+  },
+
+  async addFaculty(data: any) {
+    try {
+      const newFaculty = await Faculty.create(data);
+     
+      return {
+        ...newFaculty.toJSON(),
+      };
+    } catch (error) {
+      throw new Error("Error adding new faculty" + error);
+    }
+  },
+
+  async updateFaculty(facultyId: number, facultyData: any) {
+    try {
+      
+      const [updated] = await Faculty.update(facultyData, {
+        where: { faculty_id: facultyId },
+      });
+      
+      if (updated === 0) {
+        throw new Error("Faculty not found");
+      }
+      const updatedFaculty = await Faculty.findOne({
+        where: { faculty_id: facultyId },
+      });
+  return updatedFaculty ? updatedFaculty.get() : null;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  },
+
+  async addStatus(data: any) {
+    try {
+      const newStatus = await Status.create(data);
+     
+      return {
+        ...newStatus.toJSON(),
+      };
+    } catch (error) {
+      throw new Error("Error adding new status" + error);
+    }
+  },
+
+  async updateStatus(statusId: number, statusData: any) {
+    try {
+      
+      const [updated] = await Status.update(statusData, {
+        where: { status_id: statusId },
+      });
+      
+      if (updated === 0) {
+        throw new Error("Status not found");
+      }
+      const updatedStatus = await Status.findOne({
+        where: { status_id: statusId },
+      });
+  return updatedStatus ? updatedStatus.get() : null;
+    } catch (error) {
+      throw new Error(error.message);
     }
   },
 };
