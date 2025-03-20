@@ -24,6 +24,18 @@ const studentController = {
         .send({ message: "An error occurred while fetching faculties." });
     }
   },
+  getListStatus: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const status = await studentService.getStatus();
+      res.send({ message: "List of status", status });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while fetching status." });
+    }
+  },
+  
   addStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
@@ -96,6 +108,93 @@ const studentController = {
       res
         .status(500)
         .send({ message: "An error occurred while deleting the student." });
+    }
+  },
+  addFaculty: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const data = req.body;
+      const newFaculty = await studentService.addFaculty(data);
+      res
+        .status(201)
+        .send({ message: "Faculty added successfully", newFaculty });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while adding the faculty." });
+    }
+  },
+
+  updateFaculty: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const {
+        faculty_id, name
+      } = req.body;
+      const updatedData = req.body;
+      console.log(updatedData, "id", faculty_id);
+      const updatedFaculty = await studentService.updateFaculty(
+        faculty_id,
+        updatedData
+      );
+
+      if (!updatedFaculty) {
+        res
+          .status(404)
+          .send({ message: "Faculty not found or no changes made." });
+      } else {
+        res.status(200).send({
+          message: "Faculty updated successfully",
+          updatedFaculty,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while updating the faculty." });
+    }
+  },
+  addStatus: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const data = req.body;
+      const newStatus = await studentService.addStatus(data);
+      res
+        .status(201)
+        .send({ message: "Status added successfully", newStatus });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while adding the status." });
+    }
+  },
+
+  updateStatus: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const {
+        status_id, name
+      } = req.body;
+      const updatedData = req.body;
+      const updatedStatus = await studentService.updateStatus(
+        status_id,
+        updatedData
+      );
+
+      if (!updatedStatus) {
+        res
+          .status(404)
+          .send({ message: "Status not found or no changes made." });
+      } else {
+        res.status(200).send({
+          message: "Status updated successfully",
+          updatedStatus,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while updating the status." });
     }
   },
 };

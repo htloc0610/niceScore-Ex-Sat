@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_model_1 = __importDefault(require("../models/student.model"));
 const faculty_model_1 = __importDefault(require("../models/faculty.model"));
+const status_model_1 = __importDefault(require("../models/status.model"));
 const studentService = {
     // Get list of students
     getList() {
@@ -38,10 +39,23 @@ const studentService = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const faculties = yield faculty_model_1.default.findAll();
+                console.log("faculty: ", faculties);
                 return faculties;
             }
             catch (error) {
                 throw new Error("Error fetching faculties list");
+            }
+        });
+    },
+    // Get list of status
+    getStatus() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const status = yield status_model_1.default.findAll();
+                return status;
+            }
+            catch (error) {
+                throw new Error("Error fetching status list");
             }
         });
     },
@@ -91,6 +105,66 @@ const studentService = {
                     where: { student_id: studentId },
                 });
                 return updatedStudent ? updatedStudent.get() : null;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        });
+    },
+    addFaculty(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const newFaculty = yield faculty_model_1.default.create(data);
+                return Object.assign({}, newFaculty.toJSON());
+            }
+            catch (error) {
+                throw new Error("Error adding new faculty" + error);
+            }
+        });
+    },
+    updateFaculty(facultyId, facultyData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const [updated] = yield faculty_model_1.default.update(facultyData, {
+                    where: { faculty_id: facultyId },
+                });
+                if (updated === 0) {
+                    throw new Error("Faculty not found");
+                }
+                const updatedFaculty = yield faculty_model_1.default.findOne({
+                    where: { faculty_id: facultyId },
+                });
+                return updatedFaculty ? updatedFaculty.get() : null;
+            }
+            catch (error) {
+                throw new Error(error.message);
+            }
+        });
+    },
+    addStatus(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const newStatus = yield status_model_1.default.create(data);
+                return Object.assign({}, newStatus.toJSON());
+            }
+            catch (error) {
+                throw new Error("Error adding new status" + error);
+            }
+        });
+    },
+    updateStatus(statusId, statusData) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const [updated] = yield status_model_1.default.update(statusData, {
+                    where: { status_id: statusId },
+                });
+                if (updated === 0) {
+                    throw new Error("Status not found");
+                }
+                const updatedStatus = yield status_model_1.default.findOne({
+                    where: { status_id: statusId },
+                });
+                return updatedStatus ? updatedStatus.get() : null;
             }
             catch (error) {
                 throw new Error(error.message);
