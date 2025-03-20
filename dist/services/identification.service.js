@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const identification_model_1 = __importDefault(require("../models/identification.model"));
+const logger_1 = require("../config/logger");
 const identificationService = {
     addIdentification: (identificationData) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -20,10 +21,11 @@ const identificationService = {
             return newIdentification;
         }
         catch (error) {
+            logger_1.logger.error("Error adding identification: " + error.message);
             console.error("Error adding identification:", error);
             throw error;
         }
     }),
 };
 exports.default = identificationService;
-//# sourceMappingURL=identification.model.js.map
+//# sourceMappingURL=identification.service.js.map

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import ExcelJS from "exceljs";
 import studentService from "../services/student.service";
+import {logger} from "../config/logger";
 
 function parseAddress(address: string) {
   const [house_number, street_name, ward, district, city, country] =
@@ -29,9 +30,11 @@ export const importJson = async (req: Request, res: Response) => {
     for (const student of students) {
       await studentService.addJson(student);
     }
-
+    logger.info("Import JSON thành công");
     res.status(200).json({ message: "Import JSON thành công" });
   } catch (error) {
+    logger.error("Error importing JSON: " + error.message);
+    console.log("Error importing JSON:", error);
     res.status(500).json({ message: "Lỗi khi import JSON", error: error });
   }
 };
@@ -89,9 +92,11 @@ export const importExcel = async (req: Request, res: Response) => {
     for (const student of students) {
       await studentService.addExcel(student);
     }
-
+    logger.info("Import Excel thành công");
     res.status(200).json({ message: "Import Excel thành công" });
   } catch (error) {
+    logger.error("Error importing Excel: " + error.message);
+    console.log("Error importing Excel", error);
     res.status(500).json({ message: "Lỗi khi import Excel", error: error });
   }
 };

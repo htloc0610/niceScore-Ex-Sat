@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
 import studentService from "../services/student.service";
+import {logger} from "../config/logger";
 
 const studentController = {
   getStudentHome: async (req: Request, res: Response): Promise<void> => {
     try {
       const students = await studentService.getList();
+      logger.info("Successfully fetched students list");
       res.send({ message: "Welcome to the Student Home Page", students });
     } catch (error) {
-      console.error(error);
+      logger.error("Error fetching students list: " + error.message);
+      console.log("Error fetching students list:", error);
       res
         .status(500)
         .send({ message: "An error occurred while fetching students." });
@@ -16,9 +19,11 @@ const studentController = {
   getListFaculties: async (req: Request, res: Response): Promise<void> => {
     try {
       const faculties = await studentService.getFaculties();
+      logger.info("Successfully fetched faculties list");
       res.send({ message: "List of faculties", faculties });
     } catch (error) {
-      console.error(error);
+      logger.error("Error fetching faculties list");
+      console.log("Error fetching faculties list:", error);
       res
         .status(500)
         .send({ message: "An error occurred while fetching faculties." });
@@ -28,11 +33,13 @@ const studentController = {
     try {
       const data = req.body;
       const newStudent = await studentService.addStudent(data);
+      logger.info("Student added successfully");
       res
         .status(201)
         .send({ message: "Student added successfully", newStudent });
     } catch (error) {
-      console.error(error);
+      logger.error("Error adding new student" + error);
+      console.log("Error adding new student:", error); 
       res
         .status(500)
         .send({ message: "An error occurred while adding the student." });
@@ -66,13 +73,15 @@ const studentController = {
           .status(404)
           .send({ message: "Student not found or no changes made." });
       } else {
+        logger.info("Student updated successfully");
         res.status(200).send({
           message: "Student updated successfully",
           updatedStudent,
         });
       }
     } catch (error) {
-      console.error(error);
+      logger.error("Error updating student" + error);
+      console.log("Error updating student:", error);
       res
         .status(500)
         .send({ message: "An error occurred while updating the student." });
@@ -87,12 +96,15 @@ const studentController = {
 
       // If the student was successfully deleted, return a success response
       if (result === 0) {
+        logger.error("Student not found");
         res.status(404).send({ message: "Student not found" });
       } else {
-        res.status(200).send({ message: "Xóa sinh viên thành công!" });
+        logger.info("Student deleted successfully");
+        res.status(200).send({ message: "Student deleted successfully" });
       }
     } catch (error) {
-      console.error(error);
+      logger.error("Error deleting student" + error);
+      console.log("Error deleting student:", error);
       res
         .status(500)
         .send({ message: "An error occurred while deleting the student." });

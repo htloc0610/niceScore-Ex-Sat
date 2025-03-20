@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const address_model_1 = __importDefault(require("../models/address.model")); // Adjust the import path as necessary
+const logger_1 = require("../config/logger");
 const addressService = {
     addAddress: (addressData) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -20,6 +21,7 @@ const addressService = {
             return newAddress;
         }
         catch (error) {
+            logger_1.logger.error("Error adding address: " + error.message);
             console.error("Error adding address:", error);
             throw error;
         }

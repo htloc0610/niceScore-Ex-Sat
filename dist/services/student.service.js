@@ -19,7 +19,8 @@ const address_model_1 = __importDefault(require("../models/address.model"));
 const status_model_1 = __importDefault(require("../models/status.model"));
 const identification_model_1 = __importDefault(require("../models/identification.model"));
 const address_service_1 = __importDefault(require("./address.service"));
-const identification_model_2 = __importDefault(require("./identification.model"));
+const identification_service_1 = __importDefault(require("./identification.service"));
+const logger_1 = require("../config/logger");
 const studentService = {
     // Get list of students with related data
     getList() {
@@ -109,6 +110,8 @@ const studentService = {
                 return students;
             }
             catch (error) {
+                logger_1.logger.error("Error fetching students list: " + error.message);
+                console.log("Error fetching students list:", error);
                 throw new Error("Error fetching students list: " + error.message);
             }
         });
@@ -121,6 +124,7 @@ const studentService = {
                 return faculties;
             }
             catch (error) {
+                logger_1.logger.error("Error fetching faculties list");
                 throw new Error("Error fetching faculties list");
             }
         });
@@ -136,6 +140,8 @@ const studentService = {
                 return Object.assign(Object.assign({}, newStudent.toJSON()), { facultyName: faculty ? faculty.name : null });
             }
             catch (error) {
+                logger_1.logger.error("Error adding new student" + error);
+                console.log("Error adding new student:", error);
                 throw new Error("Error adding new student" + error);
             }
         });
@@ -175,6 +181,8 @@ const studentService = {
                 return updatedStudent ? updatedStudent.get() : null;
             }
             catch (error) {
+                logger_1.logger.error("Error updating student: " + error.message);
+                console.log("Error updating student:", error);
                 throw new Error(error.message);
             }
         });
@@ -197,7 +205,7 @@ const studentService = {
                 const permanentAddress = yield address_service_1.default.addAddress(studentData.permanentAddress);
                 const temporaryAddress = yield address_service_1.default.addAddress(studentData.temporaryAddress);
                 const mailingAddress = yield address_service_1.default.addAddress(studentData.mailingAddress);
-                const identification = yield identification_model_2.default.addIdentification(studentData.identification);
+                const identification = yield identification_service_1.default.addIdentification(studentData.identification);
                 // Assign the IDs of the related entities to the student data
                 studentData.faculty_id = faculty[0].faculty_id;
                 studentData.course_id = course[0].course_id;
@@ -211,6 +219,8 @@ const studentService = {
                 return newStudent;
             }
             catch (error) {
+                logger_1.logger.error("Error adding student from JSON: " + error.message);
+                console.log("Error adding student from JSON:", error);
                 throw new Error("Error adding student from JSON: " + error.message);
             }
         });
@@ -233,7 +243,7 @@ const studentService = {
                 const permanentAddress = yield address_service_1.default.addAddress(studentData.permanentAddress);
                 const temporaryAddress = yield address_service_1.default.addAddress(studentData.temporaryAddress);
                 const mailingAddress = yield address_service_1.default.addAddress(studentData.mailingAddress);
-                const identification = yield identification_model_2.default.addIdentification(studentData.identification);
+                const identification = yield identification_service_1.default.addIdentification(studentData.identification);
                 // Assign the IDs of the related entities to the student data
                 studentData.faculty_id = faculty[0].faculty_id;
                 studentData.course_id = course[0].course_id;
@@ -256,6 +266,8 @@ const studentService = {
                 return newStudent;
             }
             catch (error) {
+                logger_1.logger.error("Error adding student from Excel: " + error.message);
+                console.log("Error adding student from Excel:", error);
                 throw new Error("Error adding student from Excel: " + error.message);
             }
         });
