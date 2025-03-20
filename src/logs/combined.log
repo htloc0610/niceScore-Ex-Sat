@@ -97,3 +97,79 @@
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:19:50.514Z"}
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:19:55.549Z"}
 {"level":"info","message":"Student added successfully","timestamp":"2025-03-20T09:20:51.133Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T09:23:30.460Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T09:23:30.475Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:23:32.619Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:25:04.011Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:25:33.536Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:27:36.610Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:27:53.042Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:38:42.478Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:38:42.805Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:38:57.506Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:38:57.836Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:39:25.035Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:39:25.398Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:40:24.380Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:40:24.711Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:40:57.397Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:40:57.746Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:40:58.286Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:40:58.288Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:41:07.528Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:41:07.537Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:41:11.174Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:41:11.191Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:41:27.365Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:41:27.452Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:42:17.579Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:42:17.581Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:45:49.855Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:45:49.858Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:46:06.614Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:46:06.712Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:46:56.154Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:46:56.520Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:47:11.370Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:47:11.375Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:47:34.845Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:47:35.184Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:47:59.394Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:47:59.464Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:48:06.241Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:48:06.257Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:48:23.662Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:48:23.666Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:48:37.193Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:48:37.589Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:49:32.795Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:49:32.805Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:50:05.693Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:50:07.331Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:50:09.263Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:50:14.474Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:04:27.589Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:04:27.977Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:05:41.399Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:05:41.403Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:05:42.350Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:05:42.376Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:08:12.000Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:08:12.096Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-20T10:09:11.365Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-20T10:09:11.404Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:09:13.997Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:09:14.337Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:12:05.312Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:12:05.329Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-20T10:12:23.648Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-20T10:12:23.654Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-20T10:12:23.657Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:14:30.413Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:14:30.737Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-20T10:14:58.202Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-20T10:14:58.214Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:27:05.203Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T10:27:05.552Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:27:11.313Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T10:27:14.823Z"}

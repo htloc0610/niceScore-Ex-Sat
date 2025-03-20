@@ -1,11 +1,39 @@
 var students;
 var currentStudents;
 const tableBody = document.getElementById("student-table-body");
+const facultySelect = document.getElementById("faculty_search");
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  fetch("/api/faculty")
+  .then((response) => response.json())
+  .then((data) => {
+   
+
+    // Clear any existing options
+    facultySelect.innerHTML = "";
+
+    // Add a default option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Tất cả khoa";
+    facultySelect.appendChild(defaultOption);
+
+    // Add the fetched faculties to the select list
+    data.faculties.forEach((faculty) => {
+      const option = document.createElement("option");
+      option.value = faculty.faculty_id; // Set faculty_id as value
+      option.textContent = faculty.name; // Set name as text
+      facultySelect.appendChild(option);
+    });
+  })
+  .catch((error) => console.error("Error fetching faculties:", error));
+
+
   fetch("/api/student")
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       students = data.students;
       currentStudents = students;
       document.getElementById("studentCount").innerHTML = students.length;
@@ -15,6 +43,11 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error fetching student data:", error);
     });
   const inputField = document.getElementById("searchInput");
+  facultySelect.addEventListener("change", function () {
+    tableBody.innerHTML = "";
+    RefreshTable(inputField.value);
+  });
+
   inputField.addEventListener("input", (event) => {
     tableBody.innerHTML = "";
     RefreshTable(inputField.value);
@@ -31,10 +64,14 @@ const slugify = (text) => {
 function RefreshTable(id) {
   tableBody.innerHTML = ``;
   currentStudents = [];
+  const selectedText = facultySelect.options[facultySelect.selectedIndex].text;
+
   students.forEach((student) => {
     if (
-      String(student.student_id).includes(id) ||
-      slugify(student.full_name).includes(slugify(id))
+      (selectedText === "Tất cả khoa" ||
+        student.faculty.name === selectedText )&&
+      ( String(student.student_id).includes(id) ||
+      slugify(student.full_name).includes(slugify(id)))
     ) {
       const row = document.createElement("tr");
       row.classList.add("text-gray-700", "dark:text-gray-400");
@@ -42,7 +79,7 @@ function RefreshTable(id) {
       let statusClass = "";
       let statusText = "";
 
-      switch (student.status) {
+      switch (student.status.name) {
         case "Đang học":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600";
@@ -78,15 +115,14 @@ function RefreshTable(id) {
         </td>
         <td class="px-4 py-3 text-sm">${student.date_of_birth}</td>
         <td class="px-4 py-3 text-sm">${student.gender}</td>
-        <td class="px-4 py-3 text-sm">${student.facultyName}</td>
-        <td class="px-4 py-3 text-sm">${student.course}</td>
+        <td class="px-4 py-3 text-sm">${student.faculty.name}</td>
+        <td class="px-4 py-3 text-sm">${student.course.course_name}</td>
         <td class="px-4 py-3 text-sm">${student.program}</td>
-        <td class="px-4 py-3 text-sm">${student.address}</td>
         <td class="px-4 py-3 text-sm">${student.email}</td>
         <td class="px-4 py-3 text-sm">${student.phone_number}</td>
         <td class="px-4 py-3 text-xs">
           <span class="${statusClass}">
-            ${student.status}
+            ${student.status.name}
           </span>
         </td>
         <td class="px-4 py-3 text-sm">

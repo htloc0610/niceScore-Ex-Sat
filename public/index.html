@@ -112,6 +112,12 @@
             <div
               class="flex justify-evenly w-full lg:mr-32 py-4 my-4 bg-blue-100"
             >
+              <select
+                id="faculty_search"
+                name="faculty_search"
+                class="w-30 text-black bg-white block self-start py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:text-gray-400 dark:bg-gray-800"
+              ></select>
+
               <div
                 class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
               >
@@ -129,6 +135,7 @@
                     ></path>
                   </svg>
                 </div>
+
                 <input
                   class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                   type="text"
@@ -151,13 +158,43 @@
               <div>
                 <button
                   class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                  type="submit"
                   name="add_student"
                   onclick="window.location.href='/more'"
                 >
                   Quản lý thông tin
                 </button>
               </div>
+              <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                onclick="handleImport('json')"
+              >
+                Import JSON
+              </button>
+              <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                onclick="handleImport('excel')"
+              >
+                Import Excel
+              </button>
+              <input
+                type="file"
+                id="importFile"
+                style="display: none"
+                onchange="uploadFile()"
+              />
+
+              <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                onclick="handleExport('json')"
+              >
+                Export JSON
+              </button>
+              <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                onclick="handleExport('excel')"
+              >
+                Export Excel
+              </button>
             </div>
 
             <!-- Cards -->
@@ -285,7 +322,6 @@
                       <th class="px-4 py-3">Khoa</th>
                       <th class="px-4 py-3">Khóa</th>
                       <th class="px-4 py-3">Chương trình</th>
-                      <th class="px-4 py-3">Địa chỉ</th>
                       <th class="px-4 py-3">Email</th>
                       <th class="px-4 py-3">Số điện thoại</th>
                       <th class="px-4 py-3">Tình trạng</th>
@@ -320,6 +356,37 @@
         .addEventListener("click", function () {
           window.location.href = "/add";
         });
+    </script>
+    <script>
+      let selectedType = "";
+
+      function handleImport(type) {
+        selectedType = type; // Save type (json/excel)
+        document.getElementById("importFile").click(); // Open file dialog
+      }
+      async function uploadFile() {
+        const fileInput = document.getElementById("importFile").files[0];
+        if (!fileInput) return; // No file selected
+
+        const formData = new FormData();
+        formData.append("file", fileInput);
+
+        const endpoint =
+          selectedType === "json" ? "/import/json" : "/import/excel";
+
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+        alert(result.message);
+      }
+
+      function handleExport(type) {
+        const endpoint = type === "json" ? "/export/json" : "/export/excel";
+        window.location.href = endpoint; // Download file
+      }
     </script>
   </body>
 </html>
