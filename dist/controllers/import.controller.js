@@ -94,7 +94,7 @@ const importExcel = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             students.push(student);
         });
         for (const student of students) {
-            yield student_service_1.default.addJson(student);
+            yield student_service_1.default.addExcel(student);
         }
         res.status(200).json({ message: "Import Excel thành công" });
     }

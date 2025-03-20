@@ -87,7 +87,7 @@ export const importExcel = async (req: Request, res: Response) => {
     });
 
     for (const student of students) {
-      await studentService.addJson(student);
+      await studentService.addExcel(student);
     }
 
     res.status(200).json({ message: "Import Excel thành công" });
