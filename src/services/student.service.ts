@@ -5,7 +5,8 @@ import Address from "../models/address.model";
 import Status from "../models/status.model";
 import Identification from "../models/identification.model";
 import addressService from "./address.service";
-import identificationService from "./identification.model";
+import identificationService from "./identification.service";
+import {logger} from "../config/logger";
 
 const studentService = {
   // Get list of students with related data
@@ -94,6 +95,8 @@ const studentService = {
       });
       return students;
     } catch (error) {
+      logger.error("Error fetching students list: " + error.message);
+      console.log("Error fetching students list:", error);
       throw new Error("Error fetching students list: " + error.message);
     }
   },
@@ -103,6 +106,7 @@ const studentService = {
       const faculties = await Faculty.findAll();
       return faculties;
     } catch (error) {
+      logger.error("Error fetching faculties list");
       throw new Error("Error fetching faculties list");
     }
   },
@@ -119,6 +123,8 @@ const studentService = {
         facultyName: faculty ? faculty.name : null,
       };
     } catch (error) {
+      logger.error("Error adding new student" + error);
+      console.log("Error adding new student:", error);  
       throw new Error("Error adding new student" + error);
     }
   },
@@ -155,6 +161,8 @@ const studentService = {
       });
       return updatedStudent ? updatedStudent.get() : null;
     } catch (error) {
+      logger.error("Error updating student: " + error.message);
+      console.log("Error updating student:", error);
       throw new Error(error.message);
     }
   },
@@ -202,6 +210,8 @@ const studentService = {
       const newStudent = await Student.create(studentData);
       return newStudent;
     } catch (error) {
+      logger.error("Error adding student from JSON: " + error.message);
+      console.log("Error adding student from JSON:", error);
       throw new Error("Error adding student from JSON: " + error.message);
     }
   },
@@ -259,6 +269,8 @@ const studentService = {
 
       return newStudent;
     } catch (error) {
+      logger.error("Error adding student from Excel: " + error.message);
+      console.log("Error adding student from Excel:", error);
       throw new Error("Error adding student from Excel: " + error.message);
     }
   },

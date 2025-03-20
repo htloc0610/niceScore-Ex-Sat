@@ -1,0 +1,4 @@
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T03:07:11.516Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T03:10:11.403Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-20T03:10:11.416Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T03:10:23.819Z"}

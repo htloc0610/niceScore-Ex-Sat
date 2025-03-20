@@ -17,6 +17,7 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const exceljs_1 = __importDefault(require("exceljs"));
 const student_service_1 = __importDefault(require("../services/student.service"));
+const logger_1 = require("../config/logger");
 // Hàm export dữ liệu ra JSON
 const exportToJson = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -26,6 +27,8 @@ const exportToJson = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.download(filePath);
     }
     catch (error) {
+        console.log("Error exporting JSON:", error);
+        logger_1.logger.error("Error exporting JSON: " + error.message);
         res.status(500).json({ message: "Lỗi khi export JSON", error });
     }
 });
@@ -94,6 +97,8 @@ const exportToExcel = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.download(filePath);
     }
     catch (error) {
+        logger_1.logger.error("Error exporting Excel: " + error.message);
+        console.log("Error exporting Excel:", error);
         res.status(500).json({ message: "Lỗi khi export Excel", error });
     }
 });

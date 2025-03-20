@@ -13,14 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_service_1 = __importDefault(require("../services/student.service"));
+const logger_1 = require("../config/logger");
 const studentController = {
     getStudentHome: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const students = yield student_service_1.default.getList();
+            logger_1.logger.info("Successfully fetched students list");
             res.send({ message: "Welcome to the Student Home Page", students });
         }
         catch (error) {
-            console.error(error);
+            logger_1.logger.error("Error fetching students list: " + error.message);
+            console.log("Error fetching students list:", error);
             res
                 .status(500)
                 .send({ message: "An error occurred while fetching students." });
@@ -29,10 +32,12 @@ const studentController = {
     getListFaculties: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const faculties = yield student_service_1.default.getFaculties();
+            logger_1.logger.info("Successfully fetched faculties list");
             res.send({ message: "List of faculties", faculties });
         }
         catch (error) {
-            console.error(error);
+            logger_1.logger.error("Error fetching faculties list");
+            console.log("Error fetching faculties list:", error);
             res
                 .status(500)
                 .send({ message: "An error occurred while fetching faculties." });
@@ -42,12 +47,14 @@ const studentController = {
         try {
             const data = req.body;
             const newStudent = yield student_service_1.default.addStudent(data);
+            logger_1.logger.info("Student added successfully");
             res
                 .status(201)
                 .send({ message: "Student added successfully", newStudent });
         }
         catch (error) {
-            console.error(error);
+            logger_1.logger.error("Error adding new student" + error);
+            console.log("Error adding new student:", error);
             res
                 .status(500)
                 .send({ message: "An error occurred while adding the student." });
@@ -65,6 +72,7 @@ const studentController = {
                     .send({ message: "Student not found or no changes made." });
             }
             else {
+                logger_1.logger.info("Student updated successfully");
                 res.status(200).send({
                     message: "Student updated successfully",
                     updatedStudent,
@@ -72,7 +80,8 @@ const studentController = {
             }
         }
         catch (error) {
-            console.error(error);
+            logger_1.logger.error("Error updating student" + error);
+            console.log("Error updating student:", error);
             res
                 .status(500)
                 .send({ message: "An error occurred while updating the student." });
@@ -85,14 +94,17 @@ const studentController = {
             const result = yield student_service_1.default.delete(student_id);
             // If the student was successfully deleted, return a success response
             if (result === 0) {
+                logger_1.logger.error("Student not found");
                 res.status(404).send({ message: "Student not found" });
             }
             else {
-                res.status(200).send({ message: "Xóa sinh viên thành công!" });
+                logger_1.logger.info("Student deleted successfully");
+                res.status(200).send({ message: "Student deleted successfully" });
             }
         }
         catch (error) {
-            console.error(error);
+            logger_1.logger.error("Error deleting student" + error);
+            console.log("Error deleting student:", error);
             res
                 .status(500)
                 .send({ message: "An error occurred while deleting the student." });

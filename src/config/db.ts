@@ -1,4 +1,5 @@
 import { Sequelize, Dialect } from "sequelize";
+import { dbLogger } from "./logger";
 import pg from "pg";
 import "dotenv/config";
 
@@ -18,7 +19,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST as string, // Địa chỉ host (ví dụ: localhost)
     dialect: dialect, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
-    logging: false, // Tắt log SQL query trong console (tùy chọn)
+    logging: (msg) => dbLogger.info(msg), // Ghi log SQL queries
     dialectModule: pg,
     pool: {
       max: 5, // Số lượng kết nối tối đa
@@ -27,11 +28,11 @@ const sequelize = new Sequelize(
       idle: 10000, // Thời gian tối đa (ms) kết nối không sử dụng sẽ bị đóng
     },
     dialectOptions: {
-      // ssl: {
-      //   require: true,
-      //   rejectUnauthorized: false, // Nếu cần kết nối với SSL
-      // },
-      ssl: false,
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // Nếu cần kết nối với SSL
+      },
+      // ssl: false,
     },
   }
 );
