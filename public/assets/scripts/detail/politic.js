@@ -44,14 +44,14 @@ document.addEventListener('DOMContentLoaded', function () {
             disableFields(issueCountry, notes, hasChip);
         } else if (selectedType === 'CCCD') {
             disableFields(issueCountry, notes);
-        } else if (selectedType === 'Hộ chiếu') {
+        } else if (selectedType === 'Passport') {
             disableFields(hasChip);
         }
     }
 
     // Xử lý sự kiện khi thay đổi loại giấy tờ
     documentType.addEventListener('change', handleDocumentTypeChange);
-
+    
     // Gọi hàm xử lý ngay khi trang được tải để xử lý giá trị mặc định
     handleDocumentTypeChange();
 });

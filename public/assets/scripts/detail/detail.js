@@ -11,19 +11,17 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch(apiUrl);
             const data = await response.json();
+            
 
             if (data.message === "Student found") {
                 const student = data.student;
 
                 // Populate the form fields with the fetched data
-                document.getElementById('studentId').value = student.student_id || '';
+                document.getElementById('studentId').value = studentId;
                 document.getElementById('fullName').value = student.full_name || '';
                 document.getElementById('dob').value = student.date_of_birth || '';
                 document.getElementById('gender').value = student.gender || '';
-                document.getElementById('faculty').value = student.faculty.name || '';
-                document.getElementById('course').value = student.course.course_name || '';
                 document.getElementById('program').value = student.program || '';
-                document.getElementById('studentStatus').value = student.status.name || '';
                 document.getElementById('tempHouseNumber').value = student.temporaryAddress.house_number || '';
                 document.getElementById('tempStreet').value = student.temporaryAddress.street_name || '';
                 document.getElementById('tempWard').value = student.temporaryAddress.ward || '';
@@ -39,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('email').value = student.email || '';
                 document.getElementById('phone').value = student.phone_number || '';
                 document.getElementById('documentType').value = student.identification.type || '';
+                document.getElementById('documentType').dispatchEvent(new Event("change")); 
                 document.getElementById('documentNumber').value = student.identification.number || '';
                 document.getElementById('issueDate').value = student.identification.issue_date || '';
                 document.getElementById('expiryDate').value = student.identification.expiry_date || '';
@@ -53,13 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('permCountry').value = student.permanentAddress.country || '';
                 document.getElementById('nationality').value = student.nationality || '';
 
-                // <input type="hidden" name="faculty_id" id="faculty_id">
-                // <input type="hidden" name="course_id" id="course_id">
-                // <input type="hidden" name="status_id" id="status_id">
-
-                document.getElementById('faculty_id').value = student.faculty.faculty_id || '';
-                document.getElementById('course_id').value = student.course.course_id || '';
-                document.getElementById('status_id').value = student.status.status_id || '';
 
                 // <input type="hidden" name="documentId" id="documentId">
                 // <input type="hidden" name="permAddress" id="permAddress">
@@ -73,7 +65,55 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('mailAddress').value = student.mailing_address_id || '';
                 
 
+                
+                fetch("/api/faculty")
+                .then((response) => response.json())
+                .then((data) => {
+                const facultySelect = document.getElementById("faculty");
 
+                data.faculties.forEach((faculty) => {
+                const option = document.createElement("option");
+                option.value = faculty.faculty_id; 
+                option.textContent = faculty.name; 
+                if (faculty.name === student.faculty.faculty_name)
+                    option.setAttribute("selected", "selected");
+                facultySelect.appendChild(option);
+                });
+                })
+                .catch((error) => console.error("Error fetching faculties:", error));
+                
+                fetch("/api/course")
+                .then((response) => response.json())
+                .then((data) => {
+                const courseSelect = document.getElementById("course");
+      
+                data.courses.forEach((course) => {
+                    const option = document.createElement("option");
+                    option.value = course.course_id; 
+                    option.textContent = course.course_name; 
+                    courseSelect.appendChild(option); 
+                    if (course.course_name === student.course.course_name)
+                        option.setAttribute("selected", "selected");
+                });
+                })
+                .catch((error) => console.error("Error fetching faculties:", error));
+
+                fetch("/api/status")
+                .then((response) => response.json())
+                .then((data) => {
+                const statusSelect = document.getElementById("status");
+
+                data.status.forEach((status) => {
+                const option = document.createElement("option");
+                option.value = status.status_id; // Set status_id as value
+                option.textContent = status.name; // Set name as text
+                if (status.name === student.status.name)
+                    option.setAttribute("selected", "selected");
+                statusSelect.appendChild(option);
+                });
+                })
+                .catch((error) => console.error("Error fetching faculties:", error));
+                
                 // Handle has_chip field (if applicable)
                 if (student.identification.has_chip !== undefined) {
                     document.getElementById('hasChip').value = student.identification.has_chip ? 'Có' : 'Không';
@@ -89,19 +129,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to update student data
     async function updateStudentData() {
         const updatedData = {
-            student_id: document.getElementById('studentId').value,
+            student_id: studentId,
             full_name: document.getElementById('fullName').value,
             date_of_birth: document.getElementById('dob').value,
             gender: document.getElementById('gender').value,
-            faculty: { name: document.getElementById('faculty').value },
-            course: { course_name: document.getElementById('course').value },
             program: document.getElementById('program').value,
-            status: { name: document.getElementById('studentStatus').value },
             nationality: document.getElementById('nationality').value,
-
-            faculty_id: document.getElementById('faculty_id').value,
-            course_id: document.getElementById('course_id').value,
-            status_id: document.getElementById('status_id').value,
+            faculty_id: document.getElementById('faculty').value,
+            course_id: document.getElementById('course').value,
+            status_id: document.getElementById('status').value,
 
             temporaryAddress: {
                 temporary_address_id: document.getElementById('tempAddress').value,
@@ -158,6 +194,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log('Student data updated successfully');
             } else {
                 console.error('Failed to update student data');
+                fetchAndPopulateData();
             }
         } catch (error) {
             console.error('Error updating student data:', error);

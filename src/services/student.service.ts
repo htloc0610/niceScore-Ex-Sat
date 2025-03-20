@@ -503,22 +503,10 @@ const studentService = {
   //updateStudentById
   async updateStudentById(studentId: number, studentData: any) {
     try {
-        // Update related entities first
-        const faculty = await Faculty.findOrCreate({
-            where: { name: studentData.faculty.name },
-        });
-        const course = await Course.findOrCreate({
-            where: { course_name: studentData.course.course_name },
-        });
-        const status = await Status.findOrCreate({
-            where: { name: studentData.status.name },
-        });
-
         //updateAddress: async (addressId: number, addressData:
         const permanentAddress = await addressService.updateAddress(
             studentData.permanentAddress.permanent_address_id ,studentData.permanentAddress
         );
-
 
         const temporaryAddress = await addressService.updateAddress(
           studentData.temporaryAddress.temporary_address_id,studentData.temporaryAddress
@@ -533,9 +521,6 @@ const studentService = {
         );
 
         // Assign the IDs of the related entities to the student data
-        studentData.faculty_id = faculty[0].faculty_id;
-        studentData.course_id = course[0].course_id;
-        studentData.status_id = status[0].status_id;
         studentData.permanent_address_id = permanentAddress.address_id;
         studentData.temporary_address_id = temporaryAddress.address_id;
         studentData.mailing_address_id = mailingAddress.address_id;

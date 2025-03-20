@@ -90,13 +90,13 @@
     </header>
 
     <main class="bg-gray-100 flex items-center justify-center min-h-screen">
-        <div class="w-screen bg-white rounded-lg shadow-lg">
+        <div class="w-screen bg-white rounded-lg shadow-lg m-12">
 
             <form id="addStudentForm" class="w-full h-full mx-auto p-8 ">
             <div class="flex flex-col">
                 <h2 class="text-xl font-bold mb-4">Thêm sinh viên mới</h2>
-                <div class="grid grid-cols-3 gap-4">
-                    <div class="flex flex-col">
+                <div class="grid grid-cols-[1fr_1fr_2fr] gap-8">
+                    <div class="flex flex-col space-y-1">
                         <div>
                             <label for="student_id" class="block text-sm font-medium text-gray-700">MSSV:</label>
                             <input type="text" id="student_id" name="student_id" required 
@@ -132,10 +132,11 @@
                             <label for="course_id" class="block text-sm font-medium text-gray-700">Khóa học:</label>
                             <select id="course_id" name="course_id" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            </select>
                         </div>
                         <div>
-                        <label for="program" class="block text-sm font-medium text-gray-700">Chương trình:</label>
-                        <input type="text" id="program" name="program" required 
+                            <label for="program" class="block text-sm font-medium text-gray-700">Chương trình:</label>
+                            <input type="text" id="program" name="program" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         </div>
                         <div>
@@ -144,15 +145,11 @@
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                         </select>
                         </div>
-                        <div>
-                            <label for="nationality" class="block text-sm font-medium text-gray-700">Quốc tịch:</label>
-                            <input type="text" id="nationality" name="nationality" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                        </div>
+                        
                         
                     </div>
                 
-                    <div class="flex flex-col">
+                    <div class="flex flex-col space-y-2">
                         <label class="block text-sm font-medium text-gray-700">Loại giấy tờ:</label>
                         <div class="flex justify-between">
                             <label>
@@ -266,12 +263,18 @@
                         <input type="text" id="phone_number" name="phone_number" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                     </div>
+                    <div>
+                        <label for="nationality" class="block text-sm font-medium text-gray-700">Quốc tịch:</label>
+                        <input type="text" id="nationality" name="nationality" required 
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
                 </div>
                    
         </div>
                 <div class="mt-4 flex justify-end">
                     <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Lưu</button>
-                    <button type="button" id="closeModal" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Quay lại</button>
+                    <button type="button" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    onclick="history.back()">Quay lại</button>
                 </div>
                 </div>
             </form>

@@ -110,7 +110,7 @@
           <div class="px-10 mx-auto grid flex">
             <!-- Search input -->
             <div
-              class="flex justify-evenly w-full lg:mr-32 py-4 my-4 bg-blue-100"
+              class="flex justify-start w-full lg:mr-32 py-4 my-4 bg-blue-100"
             >
             <!--
               <div
@@ -148,7 +148,17 @@
                   Thêm sinh viên mới
                 </button>
               </div> -->
+              <button onclick="history.back()" class="text-gray-700 hover:text-gray-900 self-start text-sm font-medium leading-5 text-white">
+                <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg> QUAY LẠI
+              </div>
+            </button>
+            <div class="flex flex-grow justify-evenly">
               <div>
+                
+              
                 <button
                   class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                   type="submit"
@@ -176,6 +186,8 @@
                 </button>
               </div>
             </div>
+            <div class="w-40"></div>
+          </div>
 
             <!-- New Table -->
             <div class="w-full overflow-hidden rounded-lg shadow-xs">

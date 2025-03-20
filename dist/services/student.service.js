@@ -493,25 +493,12 @@ const studentService = {
     updateStudentById(studentId, studentData) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // Update related entities first
-                const faculty = yield faculty_model_1.default.findOrCreate({
-                    where: { name: studentData.faculty.name },
-                });
-                const course = yield course_model_1.default.findOrCreate({
-                    where: { course_name: studentData.course.course_name },
-                });
-                const status = yield status_model_1.default.findOrCreate({
-                    where: { name: studentData.status.name },
-                });
                 //updateAddress: async (addressId: number, addressData:
                 const permanentAddress = yield address_service_1.default.updateAddress(studentData.permanentAddress.permanent_address_id, studentData.permanentAddress);
                 const temporaryAddress = yield address_service_1.default.updateAddress(studentData.temporaryAddress.temporary_address_id, studentData.temporaryAddress);
                 const mailingAddress = yield address_service_1.default.updateAddress(studentData.mailingAddress.mailing_address_id, studentData.mailingAddress);
                 const identification = yield identification_service_1.default.updateIdentification(studentData.identification.identification_id, studentData.identification);
                 // Assign the IDs of the related entities to the student data
-                studentData.faculty_id = faculty[0].faculty_id;
-                studentData.course_id = course[0].course_id;
-                studentData.status_id = status[0].status_id;
                 studentData.permanent_address_id = permanentAddress.address_id;
                 studentData.temporary_address_id = temporaryAddress.address_id;
                 studentData.mailing_address_id = mailingAddress.address_id;
