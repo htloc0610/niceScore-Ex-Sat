@@ -313,6 +313,13 @@
     <script src="./assets/scripts/delete_student.js"></script>
     <script src="./assets/scripts/edit_student.js"></script>
     <script src="./assets/scripts/index.js"></script>
-    <script src="./assets/scripts/add_student.js"></script>
+    <!--script src="./assets/scripts/add_student.js"></!--script-->
+    <script>
+      document
+        .querySelector('button[name="add_student"]')
+        .addEventListener("click", function () {
+          window.location.href = "/add";
+        });
+    </script>
   </body>
 </html>
