@@ -392,6 +392,97 @@ const studentService = {
       throw new Error("Error fetching courses list");
     }
   },
+
+  //getStudentById
+  async getStudentById(studentId: number) {
+    try {
+      const student = await Student.findOne({
+        where: { student_id: studentId },
+        attributes: {
+          exclude: [
+            "status_id",
+            "faculty_id",
+            "course_id",
+            "permanent_address_id",
+            "temporary_address_id",
+            "mailing_address_id",
+            "identification_id",
+          ],
+        },
+        include: [
+          {
+            model: Faculty,
+            as: "faculty",
+            attributes: ["name"], // Lấy tên khoa
+          },
+          {
+            model: Course,
+            as: "course",
+            attributes: ["course_name"], // Lấy thông tin khóa học
+          },
+          {
+            model: Status,
+            as: "status",
+            attributes: ["name"], // Lấy trạng thái sinh viên
+          },
+          {
+            model: Address,
+            as: "permanentAddress",
+            attributes: [
+              "house_number",
+              "street_name",
+              "ward",
+              "district",
+              "city",
+              "country",
+            ], // Địa chỉ thường trú
+          },
+          {
+            model: Address,
+            as: "temporaryAddress",
+            attributes: [
+              "house_number",
+              "street_name",
+              "ward",
+              "district",
+              "city",
+              "country",
+            ], // Địa chỉ tạm trú
+          },
+          {
+            model: Address,
+            as: "mailingAddress",
+            attributes: [
+              "house_number",
+              "street_name",
+              "ward",
+              "district",
+              "city",
+              "country",
+            ], // Địa chỉ nhận thư
+          },
+          {
+            model: Identification,
+            as: "identification",
+            attributes: [
+              "type",
+              "number",
+              "issue_date",
+              "expiry_date",
+              "place_of_issue",
+              "country_of_issue",
+              "has_chip",
+              "notes",
+            ], // Thông tin căn cước công dân
+          },
+        ],
+      });
+      return student;
+    }
+    catch (error) {
+      throw new Error("Error fetching student by id");
+    }
+  },
 };
 
 export default studentService;

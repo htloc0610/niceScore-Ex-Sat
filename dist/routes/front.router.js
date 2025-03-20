@@ -13,5 +13,8 @@ frontRouter.get("/more", (req, res) => {
 frontRouter.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../public/index.html"));
 });
+frontRouter.get("/detail", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../../public/detail.html"));
+});
 exports.default = frontRouter;
 //# sourceMappingURL=front.router.js.map
