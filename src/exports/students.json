@@ -1,0 +1,108 @@
+[
+  {
+    "student_id": 102,
+    "full_name": "Nguyễn Văn A",
+    "date_of_birth": "2025-03-09",
+    "gender": "Nam",
+    "program": "Cử nhân",
+    "email": "dangdiennguyen2112@gmail.com",
+    "phone_number": "0375375375",
+    "nationality": "VN",
+    "faculty": {
+      "name": "CNTT"
+    },
+    "course": {
+      "course_name": "K22"
+    },
+    "status": {
+      "name": "Nghi hoc"
+    },
+    "permanentAddress": {
+      "house_number": "1",
+      "street_name": null,
+      "ward": "3",
+      "district": "4",
+      "city": "5",
+      "country": "61"
+    },
+    "temporaryAddress": {
+      "house_number": "1",
+      "street_name": null,
+      "ward": "4",
+      "district": "5",
+      "city": "6",
+      "country": "87"
+    },
+    "mailingAddress": {
+      "house_number": "1",
+      "street_name": null,
+      "ward": "7",
+      "district": "i9",
+      "city": "7",
+      "country": "6"
+    },
+    "identification": {
+      "type": "CMND",
+      "number": "00112233576",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "",
+      "has_chip": false,
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 122,
+    "full_name": "Nguyễn Văn B",
+    "date_of_birth": "2025-03-09",
+    "gender": "Nam",
+    "program": "Cử nhân",
+    "email": "dangdiennguyen112@gmail.com",
+    "phone_number": "0375375375",
+    "nationality": "VN",
+    "faculty": {
+      "name": "CNTT"
+    },
+    "course": {
+      "course_name": "K23"
+    },
+    "status": {
+      "name": "Nghi hoc"
+    },
+    "permanentAddress": {
+      "house_number": "1",
+      "street_name": null,
+      "ward": "3",
+      "district": "4",
+      "city": "5",
+      "country": "61"
+    },
+    "temporaryAddress": {
+      "house_number": "1",
+      "street_name": null,
+      "ward": "4",
+      "district": "5",
+      "city": "6",
+      "country": "87"
+    },
+    "mailingAddress": {
+      "house_number": "1",
+      "street_name": null,
+      "ward": "7",
+      "district": "i9",
+      "city": "7",
+      "country": "6"
+    },
+    "identification": {
+      "type": "CMND",
+      "number": "00112238576",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "",
+      "has_chip": false,
+      "notes": ""
+    }
+  }
+]

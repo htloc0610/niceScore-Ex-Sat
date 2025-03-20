@@ -4,6 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
+const logger_1 = require("./logger");
 const pg_1 = __importDefault(require("pg"));
 require("dotenv/config");
 const dialect = process.env.DB_DIALECT;
@@ -18,7 +19,7 @@ process.env.DB_PASSWORD, // Mật khẩu
 {
     host: process.env.DB_HOST, // Địa chỉ host (ví dụ: localhost)
     dialect: dialect, // Loại CSDL (ví dụ: mysql, postgres, sqlite, mssql)
-    logging: false, // Tắt log SQL query trong console (tùy chọn)
+    logging: (msg) => logger_1.dbLogger.info(msg), // Ghi log SQL queries
     dialectModule: pg_1.default,
     pool: {
         max: 5, // Số lượng kết nối tối đa
@@ -31,9 +32,7 @@ process.env.DB_PASSWORD, // Mật khẩu
             require: true,
             rejectUnauthorized: false, // Nếu cần kết nối với SSL
         },
-        // ssl: {
-        //   require: false,
-        // },
+        // ssl: false,
     },
 });
 exports.default = sequelize;

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý sinh viên</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+      defer
+    ></script>
+    <script src="./assets/js/init-alpine.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
+      defer
+    ></script>
+    <script src="./assets/js/charts-lines.js" defer></script>
+    <script src="./assets/js/charts-pie.js" defer></script>
+
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  </head>
+
+  <body>
+    <div
+      class="flex h-screen bg-gray-50 dark:bg-gray-900"
+      :class="{ 'overflow-hidden': isSideMenuOpen }"
+    >
+      <div class="flex flex-col flex-1 w-full">
+        <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
+          <div
+            class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300"
+          >
+            <!-- Mobile hamburger -->
+            <button
+              class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
+              @click="toggleSideMenu"
+              aria-label="Menu"
+            >
+              <svg
+                class="w-6 h-6"
+                aria-hidden="true"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+
+            <ul class="flex items-center mx-auto gap-6 flex-shrink-0 space-x-6">
+              <!-- Profile menu -->
+              <li class="relative">
+                <h2
+                  class="text-2xl font-semibold text-gray-700 dark:text-gray-200"
+                >
+                  Hệ thống quản lý sinh viên FIT@HCMUS
+                </h2>
+              </li>
+
+              <!-- Theme toggler -->
+              <li class="flex">
+                <button
+                  class="rounded-md focus:outline-none focus:shadow-outline-purple"
+                  @click="toggleTheme"
+                  aria-label="Toggle color mode"
+                >
+                  <template x-if="!dark">
+                    <svg
+                      class="w-5 h-5"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+                      ></path>
+                    </svg>
+                  </template>
+                  <template x-if="dark">
+                    <svg
+                      class="w-5 h-5"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </template>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </header>
+        <main class="h-full overflow-y-auto">
+          <div class="px-10 mx-auto grid flex">
+            <!-- Search input -->
+            <div
+              class="flex justify-start w-full lg:mr-32 py-4 my-4 bg-blue-100"
+            >
+            <!--
+              <div
+                class="relative w-full max-w-xl mr-6 focus-within:text-purple-500"
+              >
+                <div class="absolute inset-y-0 flex items-center pl-2">
+                  <svg
+                    class="w-4 h-4"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                  type="text"
+                  placeholder="Nhập vào tên hoặc MSSV để tìm kiếm"
+                  aria-label="Search"
+                  id="searchInput"
+                />
+              </div>
+
+              <div>
+                <button
+                  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  type="submit"
+                  name="add_student"
+                >
+                  Thêm sinh viên mới
+                </button>
+              </div> -->
+              <button onclick="history.back()" class="text-gray-700 hover:text-gray-900 self-start text-sm font-medium leading-5 text-white">
+                <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg> QUAY LẠI
+              </div>
+            </button>
+            <div class="flex flex-grow justify-evenly">
+              <div>
+                
+              
+                <button
+                  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  type="submit"
+                  name="add_faculty"
+                >
+                  Thêm khoa mới
+                </button>
+              </div> 
+              <div>
+                <button
+                  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  type="submit"
+                  name="add_status"
+                >
+                  Thêm tình trạng mới
+                </button>
+            </div>
+            <div>
+                <button
+                  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  type="submit"
+                  name="add_course"
+                >
+                  Thêm khóa học mới
+                </button>
+              </div>
+            </div>
+            <div class="w-40"></div>
+          </div>
+
+            <!-- New Table -->
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+              <div class="w-full overflow-x-auto">
+                <div class="w-full overflow-hidden rounded-lg shadow-xs">
+                  <div class="w-full overflow-x-auto flex">
+                    <table id="faculty-table" class="w-full whitespace-no-wrap">
+                      <thead>
+                        <tr
+                          class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        >
+                          <th class="px-4 py-3">ID</th>
+                          <th class="px-4 py-3">Khoa</th>
+                          <th class="px-4 py-3">Hành động</th>
+                          </tr>
+                      </thead>
+                      <tbody
+                        id="faculty-table-body"
+                        class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                      ></tbody>
+                    </table>
+    
+                    <table id="status-table" class="w-full whitespace-no-wrap">
+                      <thead>
+                        <tr
+                          class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        >
+                          <th class="px-4 py-3">ID</th>
+                          <th class="px-4 py-3">Tình trạng</th>
+                          <th class="px-4 py-3">Hành động</th>
+                          </tr>
+                      </thead>
+                      <tbody
+                        id="status-table-body"
+                        class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                      ></tbody>
+                    </table>
+
+                    <table id="course-table" class="w-full whitespace-no-wrap">
+                      <thead>
+                        <tr
+                          class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                        >
+                          <th class="px-4 py-3">ID</th>
+                          <th class="px-4 py-3">Khóa học</th>
+                          <th class="px-4 py-3">Hành động</th>
+                          </tr>
+                      </thead>
+                      <tbody
+                        id="course-table-body"
+                        class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                      ></tbody>
+                    </table>
+
+              </div>
+            </div>
+          </div>
+          <footer class="bg-white dark:bg-gray-800 py-4">
+            <div
+              class="container mx-auto text-center text-gray-600 dark:text-gray-400"
+            >
+              <p>&copy; 2025 FIT@HCMUS. All rights reserved.</p>
+            </div>
+          </footer>
+        </main>
+      </div>
+    </div>
+    <script src="./assets/scripts/edit_faculty.js"></script>    
+    <script src="./assets/scripts/edit_status.js"></script>
+    <script src="./assets/scripts/more.js"></script>
+    <script src="./assets/scripts/add_faculty.js"></script>    
+    <script src="./assets/scripts/add_status.js"></script>
+
+  </body>
+</html>

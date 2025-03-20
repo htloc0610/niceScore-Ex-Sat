@@ -7,8 +7,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const path_1 = __importDefault(require("path"));
 const frontRouter = (0, express_1.Router)();
+frontRouter.get("/more", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../../public/more.html"));
+});
+frontRouter.get("/add", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../../public/add.html"));
+});
 frontRouter.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../public/index.html"));
+});
+frontRouter.get("/:id", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../../public/detail.html"));
 });
 exports.default = frontRouter;
 //# sourceMappingURL=front.router.js.map

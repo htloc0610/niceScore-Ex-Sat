@@ -1,31 +1,64 @@
 var students;
 var currentStudents;
 const tableBody = document.getElementById("student-table-body");
+const facultySelect = document.getElementById("faculty_search");
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  fetch("/api/faculty")
+    .then((response) => response.json())
+    .then((data) => {
+
+
+      // Clear any existing options
+      facultySelect.innerHTML = "";
+
+      // Add a default option
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = "Tất cả khoa";
+      facultySelect.appendChild(defaultOption);
+
+      // Add the fetched faculties to the select list
+      data.faculties.forEach((faculty) => {
+        const option = document.createElement("option");
+        option.value = faculty.faculty_id; // Set faculty_id as value
+        option.textContent = faculty.name; // Set name as text
+        facultySelect.appendChild(option);
+      });
+    })
+    .catch((error) => console.error("Error fetching faculties:", error));
+
+
   fetch("/api/student")
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
       students = data.students;
       currentStudents = students;
       document.getElementById("studentCount").innerHTML = students.length;
 
-      graduatedCount = students.filter((student) => student.status === "Đã tốt nghiệp").length;
+      graduatedCount = students.filter((student) => student.status.name === "Đã tốt nghiệp").length;
       document.getElementById("graduatedCount").innerHTML = graduatedCount;
 
-      studyingCount = students.filter((student) => student.status === "Đang học").length;
+      studyingCount = students.filter((student) => student.status.name === "Đang học").length;
       document.getElementById("studyingCount").innerHTML = studyingCount;
 
-      pauseCount = students.filter((student) => student.status === "Tạm dừng học").length;
+      pauseCount = students.filter((student) => student.status.name === "Tạm dừng học").length;
       document.getElementById("pauseCount").innerHTML = pauseCount;
 
-      
+
       RefreshTable("");
     })
     .catch((error) => {
       console.error("Error fetching student data:", error);
     });
   const inputField = document.getElementById("searchInput");
+  facultySelect.addEventListener("change", function () {
+    tableBody.innerHTML = "";
+    RefreshTable(inputField.value);
+  });
+
   inputField.addEventListener("input", (event) => {
     tableBody.innerHTML = "";
     RefreshTable(inputField.value);
@@ -42,10 +75,14 @@ const slugify = (text) => {
 function RefreshTable(id) {
   tableBody.innerHTML = ``;
   currentStudents = [];
+  const selectedText = facultySelect.options[facultySelect.selectedIndex].text;
+
   students.forEach((student) => {
     if (
-      String(student.student_id).includes(id) ||
-      slugify(student.full_name).includes(slugify(id))
+      (selectedText === "Tất cả khoa" ||
+        student.faculty.name === selectedText) &&
+      (String(student.student_id).includes(id) ||
+        slugify(student.full_name).includes(slugify(id)))
     ) {
       const row = document.createElement("tr");
       row.classList.add("text-gray-700", "dark:text-gray-400");
@@ -53,7 +90,9 @@ function RefreshTable(id) {
       let statusClass = "";
       let statusText = "";
 
-      switch (student.status) {
+      console.log(student.status.name, 'status');
+
+      switch (student.status.name) {
         case "Đang học":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600";
@@ -73,12 +112,12 @@ function RefreshTable(id) {
         default:
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700";
-          statusText = student.status;
+          statusText = student.status.name;
           break;
       }
 
       row.innerHTML = `
-        <td class="px-4 py-3">
+        <td class="px-2 py-3">
           <div class="flex items-center text-sm">
             
             <div>
@@ -87,22 +126,31 @@ function RefreshTable(id) {
             </div>
           </div>
         </td>
-        <td class="px-4 py-3 text-sm">${student.date_of_birth}</td>
-        <td class="px-4 py-3 text-sm">${student.gender}</td>
-        <td class="px-4 py-3 text-sm">${student.facultyName}</td>
-        <td class="px-4 py-3 text-sm">${student.course}</td>
-        <td class="px-4 py-3 text-sm">${student.program}</td>
-        <td class="px-4 py-3 text-sm">${student.address}</td>
-        <td class="px-4 py-3 text-sm">${student.email}</td>
-        <td class="px-4 py-3 text-sm">${student.phone_number}</td>
-        <td class="px-4 py-3 text-xs">
-          <span class="${statusClass}">
-            ${student.status}
+        <td class="px-2 py-3 text-sm">${student.date_of_birth}</td>
+        <td class="px-2 py-3 text-sm">${student.gender}</td>
+        <td class="px-2 py-3 text-sm">${student.faculty.name}</td>
+        <td class="px-2 py-3 text-sm">${student.course.course_name}</td>
+        <td class="px-2 py-3 text-sm">${student.program}</td>
+        <td class="px-2 py-3 text-sm">${student.permanentAddress.city}</td>
+        
+        <td class="px-2 py-3 text-sm max-w-[150px] truncate hover:overflow-visible hover:whitespace-normal">
+          <span class="relative group">
+            <span class="cursor-pointer">${student.email}</span>
+            <span class="absolute left-0 z-10 hidden w-auto p-2 text-xs text-white bg-gray-800 rounded-md group-hover:block">
+              ${student.email}
+            </span>
           </span>
         </td>
-        <td class="px-4 py-3 text-sm">
-          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="editStudent('${student.student_id}')">Edit</button>
-          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="deleteStudent('${student.student_id}')">Delete</button>
+
+        <td class="px-2 py-3 text-sm">${student.phone_number}</td>
+        <td class="px-2 py-3 text-xs">
+          <span class="${statusClass}">
+            ${student.status.name}
+          </span>
+        </td>
+        <td class="px-2 py-3 text-sm">
+          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="window.location.href='/${student.student_id}'">Chi tiết</button>
+          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="deleteStudent('${student.student_id}')">Xóa</button>
         </td>
       `;
 
