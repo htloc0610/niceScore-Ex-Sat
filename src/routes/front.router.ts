@@ -7,6 +7,11 @@ const frontRouter = Router();
 frontRouter.get("/more", (req, res) => {
     res.sendFile(path.join(__dirname, "../../public/more.html"));}
 );
+
+frontRouter.get("/add", (req, res) => {
+    res.sendFile(path.join(__dirname, "../../public/add.html"));}
+);
+
 frontRouter.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));}
 );
