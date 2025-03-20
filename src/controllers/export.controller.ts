@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import ExcelJS from "exceljs";
 import studentService from "../services/student.service";
+import {logger} from "../config/logger";
 
 // Hàm export dữ liệu ra JSON
 export const exportToJson = async (req: Request, res: Response) => {
@@ -12,6 +13,8 @@ export const exportToJson = async (req: Request, res: Response) => {
     fs.writeFileSync(filePath, JSON.stringify(students, null, 2), "utf-8");
     res.download(filePath);
   } catch (error) {
+    console.log("Error exporting JSON:", error);
+    logger.error("Error exporting JSON: " + error.message);
     res.status(500).json({ message: "Lỗi khi export JSON", error });
   }
 };
@@ -82,6 +85,8 @@ export const exportToExcel = async (req: Request, res: Response) => {
 
     res.download(filePath);
   } catch (error) {
+    logger.error("Error exporting Excel: " + error.message);
+    console.log("Error exporting Excel:", error);
     res.status(500).json({ message: "Lỗi khi export Excel", error });
   }
 };

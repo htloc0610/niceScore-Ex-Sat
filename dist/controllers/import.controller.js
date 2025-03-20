@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.importExcel = exports.importJson = void 0;
 const exceljs_1 = __importDefault(require("exceljs"));
 const student_service_1 = __importDefault(require("../services/student.service"));
+const logger_1 = require("../config/logger");
 function parseAddress(address) {
     const [house_number, street_name, ward, district, city, country] = address.split(", ");
     return {
@@ -38,9 +39,12 @@ const importJson = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         for (const student of students) {
             yield student_service_1.default.addJson(student);
         }
+        logger_1.logger.info("Import JSON thành công");
         res.status(200).json({ message: "Import JSON thành công" });
     }
     catch (error) {
+        logger_1.logger.error("Error importing JSON: " + error.message);
+        console.log("Error importing JSON:", error);
         res.status(500).json({ message: "Lỗi khi import JSON", error: error });
     }
 });
@@ -96,9 +100,12 @@ const importExcel = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         for (const student of students) {
             yield student_service_1.default.addExcel(student);
         }
+        logger_1.logger.info("Import Excel thành công");
         res.status(200).json({ message: "Import Excel thành công" });
     }
     catch (error) {
+        logger_1.logger.error("Error importing Excel: " + error.message);
+        console.log("Error importing Excel", error);
         res.status(500).json({ message: "Lỗi khi import Excel", error: error });
     }
 });

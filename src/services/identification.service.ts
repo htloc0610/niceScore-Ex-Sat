@@ -1,4 +1,5 @@
 import Identification from "../models/identification.model";
+import {logger} from "../config/logger";
 
 const identificationService = {
   addIdentification: async (identificationData: {
@@ -15,6 +16,7 @@ const identificationService = {
       const newIdentification = await Identification.create(identificationData);
       return newIdentification;
     } catch (error) {
+      logger.error("Error adding identification: " + error.message);
       console.error("Error adding identification:", error);
       throw error;
     }
