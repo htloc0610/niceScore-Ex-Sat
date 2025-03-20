@@ -26,6 +26,21 @@ const addressService = {
             throw error;
         }
     }),
+    updateAddress: (addressId, addressData) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const address = yield address_model_1.default.findByPk(addressId);
+            if (!address) {
+                throw new Error("Address not found");
+            }
+            yield address.update(addressData);
+            return address;
+        }
+        catch (error) {
+            logger_1.logger.error("Error updating address: " + error.message);
+            console.error("Error updating address:", error);
+            throw error;
+        }
+    }),
 };
 exports.default = addressService;
 //# sourceMappingURL=address.service.js.map

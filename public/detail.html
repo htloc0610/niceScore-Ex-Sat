@@ -97,7 +97,7 @@
                 <h2 class="text-2xl font-semibold text-gray-700">📘 Thông Tin Sinh Viên</h2>
                 <button id="editBtn"
                     class="px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
-                    ✏️ Chỉnh Sửa
+                    Chỉnh Sửa
                 </button>
             </div>
 
@@ -137,10 +137,13 @@
                     <div class="flex gap-4">
                         <div class="w-1/2">
                             <label>Khoa</label>
+                            <input type="hidden" name="faculty_id" id="faculty_id">
                             <input type="text" id="faculty" class="input-field" readonly>
                         </div>
                         <div class="w-1/2">
                             <label>Khóa học</label>
+                            <input type="hidden" name="faculty_id" id="faculty_id">
+                            <input type="hidden" name="course_id" id="course_id">   
                             <input type="text" id="course" class="input-field" readonly>
                         </div>
                     </div>
@@ -152,6 +155,7 @@
                         </div>
                         <div class="w-1/2">
                             <label>Tình trạng sinh viên</label>
+                            <input type="hidden" name="status_id" id="status_id">
                             <input type="text" id="studentStatus" class="input-field" readonly>
                         </div>
                     </div>
@@ -356,7 +360,7 @@
                     input.toggleAttribute('readonly');
                 }
             });
-            editBtn.textContent = editBtn.textContent.includes("Chỉnh Sửa") ? '✔️ Lưu' : '✏️ Chỉnh Sửa';
+            
         });
     </script>
 

@@ -26,6 +26,21 @@ const identificationService = {
             throw error;
         }
     }),
+    updateIdentification: (identificationId, identificationData) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const identification = yield identification_model_1.default.findByPk(identificationId);
+            if (!identification) {
+                throw new Error("Identification not found");
+            }
+            yield identification.update(identificationData);
+            return identification;
+        }
+        catch (error) {
+            logger_1.logger.error("Error updating identification: " + error.message);
+            console.error("Error updating identification:", error);
+            throw error;
+        }
+    }),
 };
 exports.default = identificationService;
 //# sourceMappingURL=identification.service.js.map

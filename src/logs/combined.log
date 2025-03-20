@@ -99,3 +99,11 @@
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:19:50.514Z"}
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-20T09:19:55.549Z"}
 {"level":"info","message":"Student added successfully","timestamp":"2025-03-20T09:20:51.133Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:27:30.570Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-20T09:27:30.955Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T09:52:32.196Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T09:53:11.648Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T10:01:30.693Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T10:05:55.198Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T10:09:22.523Z"}
+{"level":"error","message":"Error updating student: Cannot read properties of undefined (reading 'permanent_address_id')","timestamp":"2025-03-20T10:41:18.447Z"}

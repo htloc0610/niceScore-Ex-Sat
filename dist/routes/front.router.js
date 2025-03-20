@@ -16,7 +16,7 @@ frontRouter.get("/add", (req, res) => {
 frontRouter.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../public/index.html"));
 });
-frontRouter.get("/detail", (req, res) => {
+frontRouter.get("/:id", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../../public/detail.html"));
 });
 exports.default = frontRouter;

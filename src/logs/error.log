@@ -26,3 +26,9 @@
 {"level":"error","message":"Error adding new studentSequelizeUniqueConstraintError: Validation error","timestamp":"2025-03-20T09:10:28.467Z"}
 {"level":"error","message":"Error adding student: notNull Violation: Student.nationality cannot be null","timestamp":"2025-03-20T09:13:31.305Z"}
 {"level":"error","message":"Error adding new studentSequelizeValidationError: notNull Violation: Student.nationality cannot be null","timestamp":"2025-03-20T09:13:31.313Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T09:52:32.196Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T09:53:11.648Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T10:01:30.693Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T10:05:55.198Z"}
+{"level":"error","message":"Error updating student: notNull Violation: Student.faculty_id cannot be null,\nnotNull Violation: Student.course_id cannot be null,\nnotNull Violation: Student.status_id cannot be null","timestamp":"2025-03-20T10:09:22.523Z"}
+{"level":"error","message":"Error updating student: Cannot read properties of undefined (reading 'permanent_address_id')","timestamp":"2025-03-20T10:41:18.447Z"}

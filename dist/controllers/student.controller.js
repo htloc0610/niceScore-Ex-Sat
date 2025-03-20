@@ -258,6 +258,7 @@ const studentController = {
     getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { id } = req.params;
+            console.log(id);
             const student = yield student_service_1.default.getStudentById(parseInt(id, 10));
             if (!student) {
                 res.status(404).send({ message: "Student not found" });
@@ -271,6 +272,32 @@ const studentController = {
             res
                 .status(500)
                 .send({ message: "An error occurred while fetching the student." });
+        }
+    }),
+    //updateStudentById
+    updateStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { id } = req.params;
+            const updatedData = req.body;
+            console.log(updatedData, "id", id);
+            const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
+            if (!updatedStudent) {
+                res
+                    .status(404)
+                    .send({ message: "Student not found or no changes made." });
+            }
+            else {
+                res.status(200).send({
+                    message: "Student updated successfully",
+                    updatedStudent,
+                });
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while updating the student." });
         }
     }),
 };

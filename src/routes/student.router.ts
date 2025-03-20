@@ -12,6 +12,10 @@ studentRouter.get("/status", studentController.getListStatus);
 
 studentRouter.get("/course", studentController.getListCourse);
 
+studentRouter.get("/student/:id", studentController.getStudentById);
+
+studentRouter.put("/student/:id", studentController.updateStudentById);
+
 studentRouter.post("/add_student", studentController.addStudent);
 
 studentRouter.put("/update_student", studentController.updateStudent);

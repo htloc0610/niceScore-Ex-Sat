@@ -1,5 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const studentId = 22123456; // Replace with the actual student ID or get it dynamically
+    //get student id from the URL like /detail/:studentId
+    const url = window.location.pathname;
+    const studentId = url.substring(url.lastIndexOf('/') + 1);
+    console.log(studentId);
+    
     const apiUrl = `/api/student/${studentId}`;
 
     // Function to fetch data from the API and populate the form fields
@@ -8,46 +12,62 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch(apiUrl);
             const data = await response.json();
 
-            // Populate the form fields with the fetched data
-            document.getElementById('studentId').value = data.student_id;
-            document.getElementById('fullName').value = data.full_name;
-            document.getElementById('dob').value = data.date_of_birth;
-            document.getElementById('gender').value = data.gender;
-            document.getElementById('faculty').value = data.faculty.name;
-            document.getElementById('course').value = data.course.course_name;
-            document.getElementById('program').value = data.program;
-            document.getElementById('studentStatus').value = data.status.name;
-            document.getElementById('tempHouseNumber').value = data.temporaryAddress.house_number;
-            document.getElementById('tempStreet').value = data.temporaryAddress.street_name;
-            document.getElementById('tempWard').value = data.temporaryAddress.ward;
-            document.getElementById('tempDistrict').value = data.temporaryAddress.district;
-            document.getElementById('tempCity').value = data.temporaryAddress.city;
-            document.getElementById('tempCountry').value = data.temporaryAddress.country;
-            document.getElementById('mailHouseNumber').value = data.mailingAddress.house_number;
-            document.getElementById('mailStreet').value = data.mailingAddress.street_name;
-            document.getElementById('mailWard').value = data.mailingAddress.ward;
-            document.getElementById('mailDistrict').value = data.mailingAddress.district;
-            document.getElementById('mailCity').value = data.mailingAddress.city;
-            document.getElementById('mailCountry').value = data.mailingAddress.country;
-            document.getElementById('email').value = data.email;
-            document.getElementById('phone').value = data.phone_number;
-            document.getElementById('documentType').value = data.identification.type;
-            document.getElementById('documentNumber').value = data.identification.number;
-            document.getElementById('issueDate').value = data.identification.issue_date;
-            document.getElementById('expiryDate').value = data.identification.expiry_date;
-            document.getElementById('hasChip').value = data.identification.has_chip ? 'Có' : 'Không';
-            document.getElementById('issuePlace').value = data.identification.place_of_issue;
-            document.getElementById('issueCountry').value = data.identification.country_of_issue;
-            document.getElementById('notes').value = data.identification.notes;
-            document.getElementById('permHouseNumber').value = data.permanentAddress.house_number;
-            document.getElementById('permStreet').value = data.permanentAddress.street_name;
-            document.getElementById('permWard').value = data.permanentAddress.ward;
-            document.getElementById('permDistrict').value = data.permanentAddress.district;
-            document.getElementById('permCity').value = data.permanentAddress.city;
-            document.getElementById('permCountry').value = data.permanentAddress.country;
+            if (data.message === "Student found") {
+                const student = data.student;
 
-            //nationality
-            document.getElementById('nationality').value = data.nationality;
+                // Populate the form fields with the fetched data
+                document.getElementById('studentId').value = student.student_id || '';
+                document.getElementById('fullName').value = student.full_name || '';
+                document.getElementById('dob').value = student.date_of_birth || '';
+                document.getElementById('gender').value = student.gender || '';
+                document.getElementById('faculty').value = student.faculty.name || '';
+                document.getElementById('course').value = student.course.course_name || '';
+                document.getElementById('program').value = student.program || '';
+                document.getElementById('studentStatus').value = student.status.name || '';
+                document.getElementById('tempHouseNumber').value = student.temporaryAddress.house_number || '';
+                document.getElementById('tempStreet').value = student.temporaryAddress.street_name || '';
+                document.getElementById('tempWard').value = student.temporaryAddress.ward || '';
+                document.getElementById('tempDistrict').value = student.temporaryAddress.district || '';
+                document.getElementById('tempCity').value = student.temporaryAddress.city || '';
+                document.getElementById('tempCountry').value = student.temporaryAddress.country || '';
+                document.getElementById('mailHouseNumber').value = student.mailingAddress.house_number || '';
+                document.getElementById('mailStreet').value = student.mailingAddress.street_name || '';
+                document.getElementById('mailWard').value = student.mailingAddress.ward || '';
+                document.getElementById('mailDistrict').value = student.mailingAddress.district || '';
+                document.getElementById('mailCity').value = student.mailingAddress.city || '';
+                document.getElementById('mailCountry').value = student.mailingAddress.country || '';
+                document.getElementById('email').value = student.email || '';
+                document.getElementById('phone').value = student.phone_number || '';
+                document.getElementById('documentType').value = student.identification.type || '';
+                document.getElementById('documentNumber').value = student.identification.number || '';
+                document.getElementById('issueDate').value = student.identification.issue_date || '';
+                document.getElementById('expiryDate').value = student.identification.expiry_date || '';
+                document.getElementById('issuePlace').value = student.identification.place_of_issue || '';
+                document.getElementById('issueCountry').value = student.identification.country_of_issue || '';
+                document.getElementById('notes').value = student.identification.notes || '';
+                document.getElementById('permHouseNumber').value = student.permanentAddress.house_number || '';
+                document.getElementById('permStreet').value = student.permanentAddress.street_name || '';
+                document.getElementById('permWard').value = student.permanentAddress.ward || '';
+                document.getElementById('permDistrict').value = student.permanentAddress.district || '';
+                document.getElementById('permCity').value = student.permanentAddress.city || '';
+                document.getElementById('permCountry').value = student.permanentAddress.country || '';
+                document.getElementById('nationality').value = student.nationality || '';
+
+                // <input type="hidden" name="faculty_id" id="faculty_id">
+                // <input type="hidden" name="course_id" id="course_id">
+                // <input type="hidden" name="status_id" id="status_id">
+
+                document.getElementById('faculty_id').value = student.faculty.faculty_id || '';
+                document.getElementById('course_id').value = student.course.course_id || '';
+                document.getElementById('status_id').value = student.status.status_id || '';
+
+                // Handle has_chip field (if applicable)
+                if (student.identification.has_chip !== undefined) {
+                    document.getElementById('hasChip').value = student.identification.has_chip ? 'Có' : 'Không';
+                }
+            } else {
+                console.error('Student not found');
+            }
         } catch (error) {
             console.error('Error fetching student data:', error);
         }
@@ -64,7 +84,12 @@ document.addEventListener('DOMContentLoaded', function () {
             course: { course_name: document.getElementById('course').value },
             program: document.getElementById('program').value,
             status: { name: document.getElementById('studentStatus').value },
-            nationality: { name: document.getElementById('nationality').value },
+            nationality: document.getElementById('nationality').value,
+
+            faculty_id: document.getElementById('faculty_id').value,
+            course_id: document.getElementById('course_id').value,
+            status_id: document.getElementById('status_id').value,
+
             temporaryAddress: {
                 house_number: document.getElementById('tempHouseNumber').value,
                 street_name: document.getElementById('tempStreet').value,
@@ -128,8 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add event listener to the save button to update student data
     const editBtn = document.getElementById('editBtn');
     editBtn.addEventListener('click', () => {
-        if (editBtn.textContent.includes('✔️ Lưu')) {
+        if (editBtn.textContent.includes('Lưu')) {
             updateStudentData();
         }
+        editBtn.textContent = editBtn.textContent.includes("Chỉnh Sửa") ? 'Lưu' : 'Chỉnh Sửa';
     });
 });

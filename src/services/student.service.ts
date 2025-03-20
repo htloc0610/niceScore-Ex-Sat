@@ -462,89 +462,110 @@ const studentService = {
     try {
       const student = await Student.findOne({
         where: { student_id: studentId },
-        attributes: {
-          exclude: [
-            "status_id",
-            "faculty_id",
-            "course_id",
-            "permanent_address_id",
-            "temporary_address_id",
-            "mailing_address_id",
-            "identification_id",
-          ],
-        },
         include: [
           {
             model: Faculty,
             as: "faculty",
-            attributes: ["name"], // Lấy tên khoa
           },
           {
             model: Course,
             as: "course",
-            attributes: ["course_name"], // Lấy thông tin khóa học
           },
           {
             model: Status,
             as: "status",
-            attributes: ["name"], // Lấy trạng thái sinh viên
           },
           {
             model: Address,
             as: "permanentAddress",
-            attributes: [
-              "house_number",
-              "street_name",
-              "ward",
-              "district",
-              "city",
-              "country",
-            ], // Địa chỉ thường trú
           },
           {
             model: Address,
             as: "temporaryAddress",
-            attributes: [
-              "house_number",
-              "street_name",
-              "ward",
-              "district",
-              "city",
-              "country",
-            ], // Địa chỉ tạm trú
           },
           {
             model: Address,
             as: "mailingAddress",
-            attributes: [
-              "house_number",
-              "street_name",
-              "ward",
-              "district",
-              "city",
-              "country",
-            ], // Địa chỉ nhận thư
           },
           {
             model: Identification,
             as: "identification",
-            attributes: [
-              "type",
-              "number",
-              "issue_date",
-              "expiry_date",
-              "place_of_issue",
-              "country_of_issue",
-              "has_chip",
-              "notes",
-            ], // Thông tin căn cước công dân
           },
         ],
       });
       return student;
-    }
-    catch (error) {
+    } catch (error) {
       throw new Error("Error fetching student by id");
+    }
+  },
+  
+
+  //updateStudentById
+  async updateStudentById(studentId: number, studentData: any) {
+    try {
+        // Update related entities first
+        const faculty = await Faculty.findOrCreate({
+            where: { name: studentData.faculty.name },
+        });
+        const course = await Course.findOrCreate({
+            where: { course_name: studentData.course.course_name },
+        });
+        const status = await Status.findOrCreate({
+            where: { name: studentData.status.name },
+        });
+
+        //updateAddress: async (addressId: number, addressData:
+        const permanentAddress = await addressService.updateAddress(
+            studentData.permanent.permanent_address_id ,studentData.permanentAddress
+        );
+
+
+        const temporaryAddress = await addressService.updateAddress(
+          studentData.temporary.temporary_address_id,studentData.temporaryAddress
+        );
+
+        const mailingAddress = await addressService.updateAddress(
+            studentData.mailingAddress.mailing_address_id,studentData.mailingAddress
+        );
+
+        const identification = await identificationService.updateIdentification(
+            studentData.identification.identification_id,studentData.identification
+        );
+
+        // Assign the IDs of the related entities to the student data
+        studentData.faculty_id = faculty[0].faculty_id;
+        studentData.course_id = course[0].course_id;
+        studentData.status_id = status[0].status_id;
+        studentData.permanent_address_id = permanentAddress.address_id;
+        studentData.temporary_address_id = temporaryAddress.address_id;
+        studentData.mailing_address_id = mailingAddress.address_id;
+        studentData.identification_id = identification.identification_id;
+
+        // Remove unnecessary fields
+        delete studentData.faculty;
+        delete studentData.course;
+        delete studentData.status;
+        delete studentData.permanentAddress;
+        delete studentData.temporaryAddress;
+        delete studentData.mailingAddress;
+        delete studentData.identification;
+
+        // Update the student
+        const [updated] = await Student.update(studentData, {
+            where: { student_id: studentId },
+        });
+
+        if (updated === 0) {
+            throw new Error("Student not found");
+        }
+        const updatedStudent = await Student.findOne({
+            where: { student_id: studentId },
+        });
+        return updatedStudent ? updatedStudent.get() : null;
+    } catch (error) {
+        logger.error("Error updating student: " + error.message);
+        console.log("Error updating student:", error);
+        throw new Error(error.message);
     }
   },
 };
