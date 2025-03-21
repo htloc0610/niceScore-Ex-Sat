@@ -1,4 +1,5 @@
-# Student Management Program  
+# Student Management Program Version 2.0
+
 
 ## 1. Implementation Technologies  
 
@@ -8,7 +9,6 @@ We will use the following technologies:
 - **Backend**: Node.js, Express, TypeScript
 - **Database**: PostgreSQL with Sequelize ORM  
 
-
 ## 2. Project Structure  
 
 Student_Management/
@@ -17,8 +17,13 @@ Student_Management/
 ├── package.json         # Project dependencies and scripts  
 ├── public/              # Static assets for the frontend  
 │   ├── assets/          # CSS, JavaScript, and other static files  
-│   ├── scripts/         # JavaScript files for student management features  
-│   └── index.html       # Main frontend file  
+│   │   ├── css/         # CSS files  
+│   │   ├── js/          # JavaScript files  
+│   │   └── scripts/     # Additional JavaScript scripts  
+│   ├── add.html         # Add student page  
+│   ├── detail.html      # Student detail page  
+│   ├── index.html       # Main frontend file  
+│   └── more.html        # Additional information page  
 ├── src/                 # Backend source code  
 │   ├── config/          # Database configuration  
 │   ├── controllers/     # Handles business logic for students  
@@ -58,3 +63,13 @@ npm start
 ```sh
 https://student-management-oary.vercel.app/
 ```
+## 5. Screenshots
+![Import JSON](screenshot/import_json.png)
+
+![Import Excel](screenshot/import_excel.png)
+
+![Export JSON](screenshot/export_json.png)
+
+![Export Excel 1](screenshot/export_excel.png)
+
+![Export Excel 2](screenshot/export_excel_2.png)

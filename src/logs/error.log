@@ -1,0 +1,36 @@
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:38:45.110Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:38:45.122Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:08.241Z"}
+{"level":"error","message":"Error exporting Excel: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:08.248Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:11.016Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:11.018Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:48:55.629Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:48:55.641Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:48:55.645Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:57:57.005Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:57:57.007Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:57:57.009Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:59:15.865Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:15.867Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:15.869Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:59:51.622Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:51.627Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:51.629Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:03:58.198Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:03:58.204Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:03:58.206Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:06:50.815Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:06:50.818Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:08:45.214Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:08:45.215Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:08:45.217Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:10:19.235Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:10:19.238Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:10:19.241Z"}
+{"level":"error","message":"Error adding student from Excel: string violation: email cannot be an array or an object,\nValidation error: Validation isEmail on email failed","timestamp":"2025-03-21T04:13:34.923Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: string violation: email cannot be an array or an object,\nValidation error: Validation isEmail on email failed","timestamp":"2025-03-21T04:13:34.933Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:15:59.563Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:15:59.566Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:15:59.568Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:17:02.262Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:17:02.266Z"}

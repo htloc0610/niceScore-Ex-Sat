@@ -1,2 +1,89 @@
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T01:49:05.726Z"}
 {"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T01:49:06.154Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:15:28.809Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:15:28.829Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:15:46.593Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:15:46.716Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:17:12.492Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:17:12.601Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:17:27.099Z"}
+{"level":"info","message":"Student added successfully","timestamp":"2025-03-21T03:19:07.310Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:19:13.676Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:19:13.686Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:19:17.431Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:38:45.110Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:38:45.122Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:38:45.486Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:38:49.883Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:38:49.905Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:38:58.493Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:38:58.497Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:39:22.175Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:39:22.253Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:08.241Z"}
+{"level":"error","message":"Error exporting Excel: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:08.248Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:11.016Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T03:45:11.018Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:45:11.501Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:45:21.843Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:45:21.870Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:48:55.629Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:48:55.641Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:48:55.645Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:57:48.608Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:57:48.797Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:57:57.005Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:57:57.007Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T03:57:57.009Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:59:15.865Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:15.867Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:15.869Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T03:59:43.675Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T03:59:44.007Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T03:59:51.622Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:51.627Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T03:59:51.629Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:03:42.702Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:03:43.024Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:03:50.228Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:03:50.240Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:03:58.198Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:03:58.204Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:03:58.206Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:06:43.118Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:06:43.222Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:06:50.815Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:06:50.818Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:08:39.348Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:08:39.682Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:08:45.214Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:08:45.215Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:08:45.217Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:09:41.808Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:09:42.137Z"}
+{"level":"info","message":"Import JSON thành công","timestamp":"2025-03-21T04:09:48.698Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:09:51.908Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:09:51.923Z"}
+{"level":"info","message":"Student deleted successfully","timestamp":"2025-03-21T04:10:01.569Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:10:05.941Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:10:06.264Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:10:19.235Z"}
+{"level":"error","message":"Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:10:19.238Z"}
+{"level":"error","message":"Error importing JSON: Error adding student from JSON: Validation error","timestamp":"2025-03-21T04:10:19.241Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:10:46.407Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:10:46.757Z"}
+{"level":"info","message":"Import JSON thành công","timestamp":"2025-03-21T04:10:53.986Z"}
+{"level":"error","message":"Error adding student from Excel: string violation: email cannot be an array or an object,\nValidation error: Validation isEmail on email failed","timestamp":"2025-03-21T04:13:34.923Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: string violation: email cannot be an array or an object,\nValidation error: Validation isEmail on email failed","timestamp":"2025-03-21T04:13:34.933Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:15:46.826Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:15:46.861Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-03-21T04:15:59.563Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:15:59.566Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:15:59.568Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:16:55.107Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:16:55.110Z"}
+{"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:17:02.262Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:17:02.266Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:18:04.831Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:18:05.164Z"}
+{"level":"info","message":"Import Excel thành công","timestamp":"2025-03-21T04:18:10.942Z"}
