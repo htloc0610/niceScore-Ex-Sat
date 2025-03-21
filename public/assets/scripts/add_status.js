@@ -63,7 +63,7 @@ document
         .then((response) => response.json())
         .then((data) => {
           if (data.message === "Status added successfully") {
-            alert("Khoa mới đã được thêm!");
+            alert("Trạng thái mới đã được thêm!");
             document.body.removeChild(overlay);
 
             const statusData = data.newStatus;
@@ -81,12 +81,12 @@ document
             statuses.push(statusData);
 
           } else {
-            alert("Đã xảy ra lỗi khi thêm khoa.");
+            alert("Đã xảy ra lỗi khi thêm trạng thái.");
           }
         })
         .catch((error) => {
           console.error("Error adding status:", error);
-          alert("Đã xảy ra lỗi khi thêm khoa.");
+          alert("Đã xảy ra lỗi khi thêm trạng thái.");
         });
     });
 
