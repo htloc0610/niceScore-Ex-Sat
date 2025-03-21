@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .catch((error) => console.error("Error fetching faculties:", error));
 
-  graduatedCount = 0; studyingCount=0; pauseCount = 0;
+  graduatedCount = 0; studyingCount = 0; pauseCount = 0;
   fetch("/api/student")
     .then((response) => response.json())
     .then((data) => {
@@ -39,10 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
       students = data.students;
       currentStudents = students;
       document.getElementById("studentCount").innerHTML = students? students.length : 0;
+      RefreshTable("");
       document.getElementById("studyingCount").innerHTML = studyingCount;
       document.getElementById("graduatedCount").innerHTML = graduatedCount;
       document.getElementById("pauseCount").innerHTML = pauseCount;
-      RefreshTable("");
     })
     .catch((error) => {
       console.error("Error fetching student data:", error);
