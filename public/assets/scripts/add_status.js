@@ -17,7 +17,7 @@ document
     // Fetch statuses from API
     form.innerHTML = `
             <form id="statusForm">
-                <h2 class="text-xl font-bold mb-4">Thêm sinh viên mới</h2>
+                <h2 class="text-xl font-bold mb-4">Thêm sinh trạng thái mới</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="status_id" class="block text-sm font-medium text-gray-700">ID:</label>

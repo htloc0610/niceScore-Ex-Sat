@@ -17,7 +17,7 @@ document
     // Fetch faculties from API
     form.innerHTML = `
             <form id="facultyForm">
-                <h2 class="text-xl font-bold mb-4">Thêm sinh viên mới</h2>
+                <h2 class="text-xl font-bold mb-4">Thêm sinh khoa mới</h2>
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label for="faculty_id" class="block text-sm font-medium text-gray-700">ID:</label>
