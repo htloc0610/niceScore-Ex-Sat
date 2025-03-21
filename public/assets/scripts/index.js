@@ -12,14 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Clear any existing options
     facultySelect.innerHTML = "";
-    facultySelect.selectedIndex = 0;  
-    // Add a default option
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Tất cả khoa";
     defaultOption.setAttribute("selected", "selected");
 
     facultySelect.appendChild(defaultOption);
+    facultySelect.value = "";
 
     // Add the fetched faculties to the select list
     data.faculties.forEach((faculty) => {
@@ -120,8 +119,14 @@ function RefreshTable(id) {
         <td class="px-4 py-3 text-sm">${student.faculty.name}</td>
         <td class="px-4 py-3 text-sm">${student.course.course_name}</td>
         <td class="px-4 py-3 text-sm">${student.program}</td>
-        <td class="px-4 py-3 text-sm">${student.email}</td>
-        <td class="px-4 py-3 text-sm">${student.phone_number}</td>
+        <td class="px-4 py-3 text-sm">${student.city}</td>
+        <td class="border border-gray-300 px-2 py-1 relative group w-[10ch] overflow-hidden whitespace-nowrap text-ellipsis">
+            <span class="block truncate">${student.email}</span>
+            <span class="absolute left-0 hidden group-hover:block bg-white border border-gray-400 p-2 shadow-lg w-auto max-w-md z-10">
+                ${student.email}
+            </span>
+        </td>
+        <td class="px-4 py-3 text-sm" >${student.phone_number}</td>
         <td class="px-4 py-3 text-xs">
           <span class="${statusClass}">
             ${student.status.name}

@@ -125,3 +125,21 @@
 {"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:27:40.390Z"}
 {"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:28:39.468Z"}
 {"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:28:39.474Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T10:32:46.148Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T10:32:46.157Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:32:46.808Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:32:46.809Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:32:57.773Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:32:57.776Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:03:53.380Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:03:53.385Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T11:07:34.421Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T11:07:34.430Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:07:35.179Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:07:35.181Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T11:09:24.760Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T11:09:24.772Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:09:25.338Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:09:25.339Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:09:32.222Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:09:32.223Z"}
