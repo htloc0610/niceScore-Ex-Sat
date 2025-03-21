@@ -140,12 +140,13 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(result => {
-            alert("Form submitted successfully!");
+            alert("Thêm sinh viên thành công!");
+
             console.log("Server response:", result);
         })
         .catch(error => {
             console.error("Error submitting form:", error);
-            alert("There was an error submitting the form.");
+            alert("Đã xảy ra lỗi khi thêm sinh viên!");
         });
     });
     

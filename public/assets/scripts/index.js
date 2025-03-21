@@ -129,7 +129,7 @@ function RefreshTable(id) {
             <span class="absolute left-0 hidden group-hover:block bg-white p-2 shadow-lg w-auto max-w-md z-10">
                 ${student.email}
             </span>
-        </td>f
+        </td>
         <td class="px-4 py-3 text-sm" >${student.phone_number}</td>
         <td class="px-4 py-3 text-xs">
           <span class="${statusClass}">
