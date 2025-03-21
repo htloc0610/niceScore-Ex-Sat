@@ -2,7 +2,7 @@ var students;
 var currentStudents;
 const tableBody = document.getElementById("student-table-body");
 const facultySelect = document.getElementById("faculty_search");
-
+var graduatedCount, learningCount, stoppingCount;
 document.addEventListener("DOMContentLoaded", () => {
 
   fetch("/api/faculty")
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .catch((error) => console.error("Error fetching faculties:", error));
 
-
+  graduatedCount = 0; learningCount=0; stoppingCount = 0;
   fetch("/api/student")
     .then((response) => response.json())
     .then((data) => {
@@ -78,6 +78,7 @@ function RefreshTable(id) {
       ( String(student.student_id).includes(id) ||
       slugify(student.full_name).includes(slugify(id)))
     ) {
+      
       const row = document.createElement("tr");
       row.classList.add("text-gray-700", "dark:text-gray-400");
 
@@ -88,19 +89,23 @@ function RefreshTable(id) {
         case "Đang học":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600";
+            learningCount ++;
           break;
         case "Đã tốt nghiệp":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100";
+            graduatedCount ++;
           break;
-        case "Đã thôi học":
+        case "Đã nghỉ học":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700";
           break;
         case "Tạm dừng học":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:text-yellow-100 dark:bg-yellow-700";
-          break;
+            stoppingCount ++; 
+
+            break;
         default:
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700";

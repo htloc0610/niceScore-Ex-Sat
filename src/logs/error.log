@@ -78,3 +78,9 @@
 {"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T11:26:35.334Z"}
 {"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:26:36.038Z"}
 {"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:26:36.039Z"}
+{"level":"error","message":"Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T11:35:24.460Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: Faculty is not associated to Student!","timestamp":"2025-03-21T11:35:24.510Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:35:25.229Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:35:25.231Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:35:29.218Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T11:35:29.220Z"}
