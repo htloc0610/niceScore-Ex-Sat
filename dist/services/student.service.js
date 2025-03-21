@@ -142,7 +142,7 @@ const studentService = {
             }
         });
     },
-    // Add a new student 
+    // Add a new student
     /*
     async addStudent(data: any) {
       try {
@@ -182,7 +182,7 @@ const studentService = {
                 });
                 console.log(data.type, data.number, "issue_date", data.issue_date, "expiry_date", data.expiry_date, "place_of_issue", data.place_of_issue, "country_of_issue", data.country_of_issue, "has_chip", data.has_chip || false, "notes", data.notes || "");
                 // Chạy tất cả promises cùng lúc
-                const [permanentAddress, temporaryAddress, mailingAddress, identification] = yield Promise.all([
+                const [permanentAddress, temporaryAddress, mailingAddress, identification,] = yield Promise.all([
                     permanentAddressPromise,
                     temporaryAddressPromise,
                     mailingAddressPromise,

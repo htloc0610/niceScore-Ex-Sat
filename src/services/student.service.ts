@@ -6,7 +6,7 @@ import Status from "../models/status.model";
 import Identification from "../models/identification.model";
 import addressService from "./address.service";
 import identificationService from "./identification.service";
-import {logger} from "../config/logger";
+import { logger } from "../config/logger";
 
 const studentService = {
   // Get list of students with related data
@@ -112,7 +112,6 @@ const studentService = {
     }
   },
 
-  
   // Get list of status
   async getStatus() {
     try {
@@ -123,7 +122,7 @@ const studentService = {
     }
   },
 
-  // Add a new student 
+  // Add a new student
   /*
   async addStudent(data: any) {
     try {
@@ -143,66 +142,79 @@ const studentService = {
   },
   */
   async addStudent(data: any) {
-      try {
-        console.log(data);
-        // Tạo promises để thêm địa chỉ thường trú, tạm trú, nhận thư
-        const permanentAddressPromise = addressService.addAddress(data.permanent);
-        const temporaryAddressPromise = addressService.addAddress(data.temporary);
-        const mailingAddressPromise = addressService.addAddress(data.mailing);
-        
-        // Tạo promise để thêm giấy tờ tùy thân
-        const identificationPromise = identificationService.addIdentification({
-          type: data.type,
-          number: data.number,
-          issue_date: data.issue_date,
-          expiry_date: data.expiry_date,
-          place_of_issue: data.place_of_issue,
-          country_of_issue: data.country_of_issue,
-          has_chip: data.has_chip || false,
-          notes: data.notes || "",
-        });
-        console.log( data.type,
-          data.number,
-          "issue_date" ,data.issue_date,
-          "expiry_date", data.expiry_date,
-          "place_of_issue", data.place_of_issue,
-          "country_of_issue", data.country_of_issue,
-          "has_chip", data.has_chip || false,
-          "notes", data.notes || "");
-    
-        // Chạy tất cả promises cùng lúc
-        const [permanentAddress, temporaryAddress, mailingAddress, identification] = await Promise.all([
-          permanentAddressPromise,
-          temporaryAddressPromise,
-          mailingAddressPromise,
-          identificationPromise,
-        ]);
-    
-        // Sau khi đã có tất cả địa chỉ và giấy tờ, thêm sinh viên
-        const newStudent = await Student.create({
-          student_id: data.student_id,
-          full_name: data.full_name,
-          date_of_birth: data.date_of_birth,
-          gender: data.gender,
-          faculty_id: data.faculty_id,
-          course_id: data.course_id,
-          program: data.program,
-          status_id: data.status_id,
-          nationality: data.nationality,
-          email: data.email,
-          phone_number: data.phone_number,
-          permanent_address_id: permanentAddress.address_id,
-          temporary_address_id: temporaryAddress.address_id,
-          mailing_address_id: mailingAddress.address_id,
-          identification_id: identification.identification_id,
-        });
-    
-        return newStudent;
-      } catch (error) {
-        logger.error("Error adding student: " + error.message);
-        console.error("Error adding student:", error);
-        throw error;
-      }
+    try {
+      console.log(data);
+      // Tạo promises để thêm địa chỉ thường trú, tạm trú, nhận thư
+      const permanentAddressPromise = addressService.addAddress(data.permanent);
+      const temporaryAddressPromise = addressService.addAddress(data.temporary);
+      const mailingAddressPromise = addressService.addAddress(data.mailing);
+
+      // Tạo promise để thêm giấy tờ tùy thân
+      const identificationPromise = identificationService.addIdentification({
+        type: data.type,
+        number: data.number,
+        issue_date: data.issue_date,
+        expiry_date: data.expiry_date,
+        place_of_issue: data.place_of_issue,
+        country_of_issue: data.country_of_issue,
+        has_chip: data.has_chip || false,
+        notes: data.notes || "",
+      });
+      console.log(
+        data.type,
+        data.number,
+        "issue_date",
+        data.issue_date,
+        "expiry_date",
+        data.expiry_date,
+        "place_of_issue",
+        data.place_of_issue,
+        "country_of_issue",
+        data.country_of_issue,
+        "has_chip",
+        data.has_chip || false,
+        "notes",
+        data.notes || ""
+      );
+
+      // Chạy tất cả promises cùng lúc
+      const [
+        permanentAddress,
+        temporaryAddress,
+        mailingAddress,
+        identification,
+      ] = await Promise.all([
+        permanentAddressPromise,
+        temporaryAddressPromise,
+        mailingAddressPromise,
+        identificationPromise,
+      ]);
+
+      // Sau khi đã có tất cả địa chỉ và giấy tờ, thêm sinh viên
+      const newStudent = await Student.create({
+        student_id: data.student_id,
+        full_name: data.full_name,
+        date_of_birth: data.date_of_birth,
+        gender: data.gender,
+        faculty_id: data.faculty_id,
+        course_id: data.course_id,
+        program: data.program,
+        status_id: data.status_id,
+        nationality: data.nationality,
+        email: data.email,
+        phone_number: data.phone_number,
+        permanent_address_id: permanentAddress.address_id,
+        temporary_address_id: temporaryAddress.address_id,
+        mailing_address_id: mailingAddress.address_id,
+        identification_id: identification.identification_id,
+      });
+
+      return newStudent;
+    } catch (error) {
+      logger.error("Error adding student: " + error.message);
+      console.error("Error adding student:", error);
+      throw error;
+    }
   },
 
   // Delete a student by ID
@@ -354,7 +366,7 @@ const studentService = {
   async addFaculty(data: any) {
     try {
       const newFaculty = await Faculty.create(data);
-     
+
       return {
         ...newFaculty.toJSON(),
       };
@@ -365,18 +377,17 @@ const studentService = {
 
   async updateFaculty(facultyId: number, facultyData: any) {
     try {
-      
       const [updated] = await Faculty.update(facultyData, {
         where: { faculty_id: facultyId },
       });
-      
+
       if (updated === 0) {
         throw new Error("Faculty not found");
       }
       const updatedFaculty = await Faculty.findOne({
         where: { faculty_id: facultyId },
       });
-  return updatedFaculty ? updatedFaculty.get() : null;
+      return updatedFaculty ? updatedFaculty.get() : null;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -389,7 +400,7 @@ const studentService = {
   async addStatus(data: any) {
     try {
       const newStatus = await Status.create(data);
-     
+
       return {
         ...newStatus.toJSON(),
       };
@@ -400,18 +411,17 @@ const studentService = {
 
   async updateStatus(statusId: number, statusData: any) {
     try {
-      
       const [updated] = await Status.update(statusData, {
         where: { status_id: statusId },
       });
-      
+
       if (updated === 0) {
         throw new Error("Status not found");
       }
       const updatedStatus = await Status.findOne({
         where: { status_id: statusId },
       });
-  return updatedStatus ? updatedStatus.get() : null;
+      return updatedStatus ? updatedStatus.get() : null;
     } catch (error) {
       throw new Error(error.message);
     }
@@ -421,7 +431,7 @@ const studentService = {
   async addCourse(data: any) {
     try {
       const newCourse = await Course.create(data);
-     
+
       return {
         ...newCourse.toJSON(),
       };
@@ -433,20 +443,18 @@ const studentService = {
   //update course
   async updateCourse(courseId: number, courseData: any) {
     try {
-      
       const [updated] = await Course.update(courseData, {
         where: { course_id: courseId },
       });
-      
+
       if (updated === 0) {
         throw new Error("Course not found");
       }
       const updatedCourse = await Course.findOne({
         where: { course_id: courseId },
       });
-  return updatedCourse ? updatedCourse.get() : null;
-    }
-    catch (error) {
+      return updatedCourse ? updatedCourse.get() : null;
+    } catch (error) {
       throw new Error(error.message);
     }
   },
@@ -502,59 +510,62 @@ const studentService = {
       throw new Error("Error fetching student by id");
     }
   },
-  
 
   //updateStudentById
   async updateStudentById(studentId: number, studentData: any) {
     try {
-        //updateAddress: async (addressId: number, addressData:
-        const permanentAddress = await addressService.updateAddress(
-            studentData.permanentAddress.permanent_address_id ,studentData.permanentAddress
-        );
+      //updateAddress: async (addressId: number, addressData:
+      const permanentAddress = await addressService.updateAddress(
+        studentData.permanentAddress.permanent_address_id,
+        studentData.permanentAddress
+      );
 
-        const temporaryAddress = await addressService.updateAddress(
-          studentData.temporaryAddress.temporary_address_id,studentData.temporaryAddress
-        );
+      const temporaryAddress = await addressService.updateAddress(
+        studentData.temporaryAddress.temporary_address_id,
+        studentData.temporaryAddress
+      );
 
-        const mailingAddress = await addressService.updateAddress(
-            studentData.mailingAddress.mailing_address_id,studentData.mailingAddress
-        );
+      const mailingAddress = await addressService.updateAddress(
+        studentData.mailingAddress.mailing_address_id,
+        studentData.mailingAddress
+      );
 
-        const identification = await identificationService.updateIdentification(
-            studentData.identification.identification_id,studentData.identification
-        );
+      const identification = await identificationService.updateIdentification(
+        studentData.identification.identification_id,
+        studentData.identification
+      );
 
-        // Assign the IDs of the related entities to the student data
-        studentData.permanent_address_id = permanentAddress.address_id;
-        studentData.temporary_address_id = temporaryAddress.address_id;
-        studentData.mailing_address_id = mailingAddress.address_id;
-        studentData.identification_id = identification.identification_id;
+      // Assign the IDs of the related entities to the student data
+      studentData.permanent_address_id = permanentAddress.address_id;
+      studentData.temporary_address_id = temporaryAddress.address_id;
+      studentData.mailing_address_id = mailingAddress.address_id;
+      studentData.identification_id = identification.identification_id;
 
-        // Remove unnecessary fields
-        delete studentData.faculty;
-        delete studentData.course;
-        delete studentData.status;
-        delete studentData.permanentAddress;
-        delete studentData.temporaryAddress;
-        delete studentData.mailingAddress;
-        delete studentData.identification;
+      // Remove unnecessary fields
+      delete studentData.faculty;
+      delete studentData.course;
+      delete studentData.status;
+      delete studentData.permanentAddress;
+      delete studentData.temporaryAddress;
+      delete studentData.mailingAddress;
+      delete studentData.identification;
 
-        // Update the student
-        const [updated] = await Student.update(studentData, {
-            where: { student_id: studentId },
-        });
+      // Update the student
+      const [updated] = await Student.update(studentData, {
+        where: { student_id: studentId },
+      });
 
-        if (updated === 0) {
-            throw new Error("Student not found");
-        }
-        const updatedStudent = await Student.findOne({
-            where: { student_id: studentId },
-        });
-        return updatedStudent ? updatedStudent.get() : null;
+      if (updated === 0) {
+        throw new Error("Student not found");
+      }
+      const updatedStudent = await Student.findOne({
+        where: { student_id: studentId },
+      });
+      return updatedStudent ? updatedStudent.get() : null;
     } catch (error) {
-        logger.error("Error updating student: " + error.message);
-        console.log("Error updating student:", error);
-        throw new Error(error.message);
+      logger.error("Error updating student: " + error.message);
+      console.log("Error updating student:", error);
+      throw new Error(error.message);
     }
   },
 };
