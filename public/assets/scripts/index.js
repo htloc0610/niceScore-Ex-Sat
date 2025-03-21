@@ -2,7 +2,7 @@ var students;
 var currentStudents;
 const tableBody = document.getElementById("student-table-body");
 const facultySelect = document.getElementById("faculty_search");
-var graduatedCount, learningCount, stoppingCount;
+var graduatedCount, studyingCount, pauseCount;
 document.addEventListener("DOMContentLoaded", () => {
 
   fetch("/api/faculty")
@@ -31,14 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
   })
   .catch((error) => console.error("Error fetching faculties:", error));
 
-  graduatedCount = 0; learningCount=0; stoppingCount = 0;
+  graduatedCount = 0; studyingCount=0; pauseCount = 0;
   fetch("/api/student")
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
       students = data.students;
       currentStudents = students;
-      document.getElementById("studentCount").innerHTML = students.length;
+      document.getElementById("studentCount").innerHTML = students? students.length : 0;
+      document.getElementById("studyingCount").innerHTML = studyingCount;
+      document.getElementById("graduatedCount").innerHTML = graduatedCount;
+      document.getElementById("pauseCount").innerHTML = pauseCount;
       RefreshTable("");
     })
     .catch((error) => {
@@ -89,7 +92,7 @@ function RefreshTable(id) {
         case "Đang học":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600";
-            learningCount ++;
+            studyingCount ++;
           break;
         case "Đã tốt nghiệp":
           statusClass =
@@ -103,7 +106,7 @@ function RefreshTable(id) {
         case "Tạm dừng học":
           statusClass =
             "px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:text-yellow-100 dark:bg-yellow-700";
-            stoppingCount ++; 
+            pauseCount ++; 
 
             break;
         default:
