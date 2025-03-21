@@ -44,3 +44,7 @@
 {"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:38:03.743Z"}
 {"level":"error","message":"Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:38:03.746Z"}
 {"level":"error","message":"Error fetching students list: Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:38:03.767Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:27:40.385Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:27:40.390Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:28:39.468Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:28:39.474Z"}

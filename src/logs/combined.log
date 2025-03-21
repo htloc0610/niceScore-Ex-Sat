@@ -121,3 +121,7 @@
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:49:15.038Z"}
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:54:04.534Z"}
 {"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:54:04.575Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:27:40.385Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:27:40.390Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:28:39.468Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T10:28:39.474Z"}

@@ -89,68 +89,65 @@
         </div>
     </header>
 
-    <main class="bg-gray-100 flex items-center justify-center min-h-screen">
-        <div class="w-screen bg-white rounded-lg shadow-lg m-12">
+    <main class="bg-gray-100 flex justify-center text-[17px] min-h-screen">
+        <div class="w-[90%] bg-white rounded-lg shadow-lg m-auto mt-20   ">
 
-            <form id="addStudentForm" class="w-full h-full mx-auto p-8 ">
+            <form id="addStudentForm" class="w-full h-full mx-auto px-8 my-7">
             <div class="flex flex-col">
-                <h2 class="text-xl font-bold mb-4">Thêm sinh viên mới</h2>
-                <div class="grid grid-cols-[1fr_1fr_2fr] gap-8">
+                <h2 class="text-[25px] font-bold mb-4">Thêm sinh viên mới</h2>
+                <div class="grid grid-cols-3 gap-8">
                     <div class="flex flex-col space-y-1">
                         <div>
-                            <label for="student_id" class="block text-sm font-medium text-gray-700">MSSV:</label>
+                            <label for="student_id" class="block text-[17px] font-medium text-gray-700">MSSV:</label>
                             <input type="text" id="student_id" name="student_id" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="full_name" class="block text-sm font-medium text-gray-700">Họ tên:</label>
+                            <label for="full_name" class="block text-[17px] font-medium text-gray-700">Họ tên:</label>
                             <input type="text" id="full_name" name="full_name" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="date_of_birth" class="block text-sm font-medium text-gray-700">Ngày sinh:</label>
+                            <label for="date_of_birth" class="block text-[17px] font-medium text-gray-700">Ngày sinh:</label>
                             <input type="date" id="date_of_birth" name="date_of_birth" required 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="gender" class="block text-sm font-medium text-gray-700">Giới tính:</label>
+                            <label for="gender" class="block text-[17px] font-medium text-gray-700">Giới tính:</label>
                             <select id="gender" name="gender" required 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
                                 <option value="Khác">Khác</option>
                             </select>
                         </div>
                         <div>
-                            <label for="faculty_id" class="block text-sm font-medium text-gray-700">Khoa:</label>
+                            <label for="faculty_id" class="block text-[17px] font-medium text-gray-700">Khoa:</label>
                             <select id="faculty_id" name="faculty_id" required 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                                 
                         </select>
                         </div>
                         <div>
-                            <label for="course_id" class="block text-sm font-medium text-gray-700">Khóa học:</label>
+                            <label for="course_id" class="block text-[17px] font-medium text-gray-700">Khóa học:</label>
                             <select id="course_id" name="course_id" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                             </select>
                         </div>
                         <div>
-                            <label for="program" class="block text-sm font-medium text-gray-700">Chương trình:</label>
+                            <label for="program" class="block text-[17px] font-medium text-gray-700">Chương trình:</label>
                             <input type="text" id="program" name="program" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                        <label for="status_id" class="block text-sm font-medium text-gray-700">Trạng thái:</label>
+                        <label for="status_id" class="block text-[17px] font-medium text-gray-700">Trạng thái:</label>
                         <select id="status_id" name="status_id" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </select>
-                        </div>
-                        
-                        
+                        </div> 
                     </div>
-                
-                    <div class="flex flex-col space-y-2">
-                        <label class="block text-sm font-medium text-gray-700">Loại giấy tờ:</label>
+                    <div class="flex flex-col space-y-1">
+                        <label class="block text-[17px] font-medium text-gray-700">Loại giấy tờ:</label>
                         <div class="flex justify-between">
                             <label>
                                 <input type="radio" name="type" id="CMND" value="CMND" checked> CMND
@@ -163,117 +160,129 @@
                             </label>
                         </div>
                         <div>
-                            <label for="number" id="number-label" class="block text-sm font-medium text-gray-700">Số:</label>
+                            <label for="number" id="number-label" class="block text-[17px] font-medium text-gray-700">Số:</label>
                             <input type="text" id="number" name="number" required 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="issue_date" class="block text-sm font-medium text-gray-700">Ngày cấp:</label>
+                            <label for="issue_date" class="block text-[17px] font-medium text-gray-700">Ngày cấp:</label>
                             <input type="date" id="issue_date" name="issue_date" required 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div> 
                         <div>
-                            <label for="place_of_issue" class="block text-sm font-medium text-gray-700">Nơi cấp:</label>
+                            <label for="place_of_issue" class="block text-[17px] font-medium text-gray-700">Nơi cấp:</label>
                             <input type="text" id="place_of_issue" name="place_of_issue" required 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="expiry_date" class="block text-sm font-medium text-gray-700">Ngày hết hạn:</label>
+                            <label for="expiry_date" class="block text-[17px] font-medium text-gray-700">Ngày hết hạn:</label>
                             <input type="date" id="expiry_date" name="expiry_date" required 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <label id="has_chip-label" class="hidden">
                             <input type="checkbox" name="has_chip"> Có gắn chip
                         </label>
                         <div id="country_of_issue-div" class="hidden">
-                            <label for="country_of_issue" class="block text-sm font-medium text-gray-700">Quốc gia cấp:</label>
+                            <label for="country_of_issue" class="block text-[17px] font-medium text-gray-700">Quốc gia cấp:</label>
                             <input type="text" id="country_of_issue" name="country_of_issue" 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div id="notes-div" class="hidden">
-                            <label for="notes" class="block text-sm font-medium text-gray-700">Ghi chú:</label>
+                            <label for="notes" class="block text-[17px] font-medium text-gray-700">Ghi chú:</label>
                             <input type="text" id="notes" name="notes" 
-                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                     
                     </div>
-                    <div class="flex flex-col">
+                    <div class="flex flex-col space-y-1">
                         <div id="permanent-address">
-                            <label class="block text-sm font-medium text-gray-700">Địa chỉ thường trú:</label>
-                            <div class="flex">
+                            <label class="block text-[17px] font-medium text-gray-700">Địa chỉ thường trú:</label>
+                            <div class="flex flex-col space-y-1">
+                                <div class="flex space-x-1">
                                 <input type="text" id="permanent-house_number" name="permanent.house_number" placeholder="Số nhà"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="permanent-street" name="permanent.street" placeholder="Tên đường"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="permanent-ward" name="permanent.ward" placeholder="Phường/Xã"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
+                                </div>
+                                <div class="flex space-x-1">
                                 <input type="text" id="permanent-district" name="permanent.district" placeholder="Quận/Huyện"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="permanent-city" name="permanent.city" placeholder="Tỉnh/Thành phố"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="permanent-country" name="permanent.country" placeholder="Quốc gia"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
+                            </div>
                             </div>
                         </div>
                         
                         <div id="temporary-address">
-                            <label class="block text-sm font-medium text-gray-700">Địa chỉ tạm trú:</label>
-                            <div class="flex">
+                            <label class="block text-[17px] font-medium text-gray-700">Địa chỉ tạm trú:</label>
+                            <div class="flex flex-col space-y-1">
+                            <div class="flex space-x-1">
                                 <input type="text" id="temporary-house_number" name="temporary.house_number" placeholder="Số nhà"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="temporary-street" name="temporary.street" placeholder="Tên đường"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="temporary-ward" name="temporary.ward" placeholder="Phường/Xã"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-                                <input type="text" id="temporary-district" name="temporary.district" placeholder="Quận/Huyện"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <input type="text" id="temporary-district" name="temporary.district" placeholder="Quận/Huyện"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="temporary-city" name="temporary.city" placeholder="Tỉnh/Thành phố"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="temporary-country" name="temporary.country" placeholder="Quốc gia"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-                            </div>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
+                            </div></div>
                         </div>
                         
                         <div id="mailing-address">
-                            <label class="block text-sm font-medium text-gray-700">Địa chỉ nhận thư:</label>
-                            <div class="flex">
+                            <label class="block text-[17px] font-medium text-gray-700">Địa chỉ nhận thư:</label>
+                            <div class="flex flex-col space-y-1">
+                            <div class="flex space-x-1">
                                 <input type="text" id="mailing-house_number" name="mailing.house_number" placeholder="Số nhà"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="mailing-street" name="mailing.street" placeholder="Tên đường"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="mailing-ward" name="mailing.ward" placeholder="Phường/Xã"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
-                                <input type="text" id="mailing-district" name="mailing.district" placeholder="Quận/Huyện"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
+                                </div>
+                                <div class="flex space-x-1">
+                                    <input type="text" id="mailing-district" name="mailing.district" placeholder="Quận/Huyện"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="mailing-city" name="mailing.city" placeholder="Tỉnh/Thành phố"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 <input type="text" id="mailing-country" name="mailing.country" placeholder="Quốc gia"
-                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"/>
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                             </div>
+                        </div>
                         </div>
                         
 
                     <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+                        <label for="email" class="block text-[17px] font-medium text-gray-700">Email:</label>
                         <input type="email" id="email" name="email" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                     </div>
                     <div>
-                        <label for="phone_number" class="block text-sm font-medium text-gray-700">Số điện thoại:</label>
+                        <label for="phone_number" class="block text-[17px] font-medium text-gray-700">Số điện thoại:</label>
                         <input type="text" id="phone_number" name="phone_number" required 
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                     </div>
                     <div>
-                        <label for="nationality" class="block text-sm font-medium text-gray-700">Quốc tịch:</label>
+                        <label for="nationality" class="block text-[17px] font-medium text-gray-700">Quốc tịch:</label>
                         <input type="text" id="nationality" name="nationality" required 
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                     </div>
                 </div>
+                
                    
         </div>
                 <div class="mt-4 flex justify-end">
-                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Lưu</button>
-                    <button type="button" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-[17px] font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Lưu</button>
+                    <button type="button" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-[17px] font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                     onclick="history.back()">Quay lại</button>
                 </div>
                 </div>

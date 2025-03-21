@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add a default option
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
-    defaultOption.textContent = "Chọn khoa";
+    defaultOption.textContent = "Chọn khóa";
     courseSelect.appendChild(defaultOption);
 
     // Add the fetched faculties to the select list
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add a default option
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
-    defaultOption.textContent = "Chọn khoa";
+    defaultOption.textContent = "Chọn trạng thái";
     statusSelect.appendChild(defaultOption);
 
     // Add the fetched faculties to the select list
