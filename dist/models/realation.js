@@ -5,11 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = setupRelation;
 const faculty_model_1 = __importDefault(require("./faculty.model"));
-const student_model_1 = __importDefault(require("./student.model"));
 const status_model_1 = __importDefault(require("./status.model"));
 const identification_model_1 = __importDefault(require("./identification.model"));
 const address_model_1 = __importDefault(require("./address.model"));
 const course_model_1 = __importDefault(require("./course.model"));
+const student_model_1 = __importDefault(require("./student.model"));
 function setupRelation() {
     // Student - Faculty
     student_model_1.default.belongsTo(faculty_model_1.default, { foreignKey: "faculty_id", as: "faculty" });

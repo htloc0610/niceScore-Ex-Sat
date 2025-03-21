@@ -3,7 +3,6 @@ import sequelize from "../config/db";
 
 class Identification extends Model {
   public identification_id!: number;
-  public student_id!: number;
   public type!: string; // CMND, CCCD, Passport
   public number!: string;
   public issue_date!: Date;
