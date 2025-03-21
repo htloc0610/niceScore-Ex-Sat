@@ -15,9 +15,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
     defaultOption.textContent = "Tất cả khoa";
-    defaultOption.setAttribute("selected", "selected");
+    defaultOption.selected = true;
 
     facultySelect.appendChild(defaultOption);
+    facultySelect.value = "";
     facultySelect.selectedIndex = 0;
 
     // Add the fetched faculties to the select list
@@ -65,7 +66,10 @@ const slugify = (text) => {
 function RefreshTable(id) {
   tableBody.innerHTML = ``;
   currentStudents = [];
-  const selectedText = facultySelect.options[facultySelect.selectedIndex].text;
+  const selectedText = facultySelect.options[facultySelect.selectedIndex] 
+  ? facultySelect.options[facultySelect.selectedIndex].text 
+  : "";
+
 
   students.forEach((student) => {
     if (
@@ -120,7 +124,7 @@ function RefreshTable(id) {
         <td class="px-4 py-3 text-sm">${student.course.course_name}</td>
         <td class="px-4 py-3 text-sm">${student.program}</td>
         <td class="px-4 py-3 text-sm">${student.permanentAddress.city}</td>
-        <td class="border border-gray-300 px-2 py-1 relative group w-[10ch] overflow-hidden whitespace-nowrap text-ellipsis">
+        <td class="px-2 py-1 relative group w-[10ch] overflow-hidden whitespace-nowrap text-ellipsis">
             <span class="block truncate">${student.email}</span>
             <span class="absolute left-0 hidden group-hover:block bg-white border border-gray-400 p-2 shadow-lg w-auto max-w-md z-10">
                 ${student.email}
