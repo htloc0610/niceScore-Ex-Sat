@@ -87,3 +87,37 @@
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T04:18:04.831Z"}
 {"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T04:18:05.164Z"}
 {"level":"info","message":"Import Excel thành công","timestamp":"2025-03-21T04:18:10.942Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:30:30.471Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:30:30.478Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:34:36.680Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:34:36.683Z"}
+{"level":"info","message":"Import JSON thành công","timestamp":"2025-03-21T08:35:29.836Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:35:32.539Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:35:32.547Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:35:43.573Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:35:43.578Z"}
+{"level":"error","message":"Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:37:36.291Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:37:36.313Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:37:36.321Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:37:36.321Z"}
+{"level":"error","message":"Error adding student from Excel: relation \"faculties\" does not exist","timestamp":"2025-03-21T08:37:41.453Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: relation \"faculties\" does not exist","timestamp":"2025-03-21T08:37:41.462Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:38:03.742Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:38:03.743Z"}
+{"level":"error","message":"Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:38:03.746Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:38:03.767Z"}
+{"level":"info","message":"Import Excel thành công","timestamp":"2025-03-21T08:38:15.989Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:38:18.320Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:38:18.333Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:47:18.534Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:47:18.621Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:47:31.258Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:47:31.453Z"}
+{"level":"info","message":"Import Excel thành công","timestamp":"2025-03-21T08:47:35.707Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:47:45.426Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:48:12.450Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:48:38.281Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:49:12.110Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:49:15.038Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-21T08:54:04.534Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-21T08:54:04.575Z"}

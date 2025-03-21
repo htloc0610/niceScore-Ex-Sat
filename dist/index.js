@@ -34,9 +34,9 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Check database connection...");
     try {
         yield db_1.default.authenticate();
+        (0, realation_1.default)();
         // Đồng bộ các models
         yield db_1.default.sync({ force: false });
-        (0, realation_1.default)();
         console.log("Database connection established");
     }
     catch (e) {

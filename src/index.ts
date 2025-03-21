@@ -29,10 +29,9 @@ const connectDB = async () => {
   console.log("Check database connection...");
   try {
     await sequelize.authenticate();
+    setupRelation();
     // Đồng bộ các models
     await sequelize.sync({ force: false });
-
-    setupRelation();
     console.log("Database connection established");
   } catch (e) {
     console.log("Database connection failed", e);

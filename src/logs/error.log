@@ -34,3 +34,13 @@
 {"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:15:59.568Z"}
 {"level":"error","message":"Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:17:02.262Z"}
 {"level":"error","message":"Error importing Excel: Error adding student from Excel: Validation error","timestamp":"2025-03-21T04:17:02.266Z"}
+{"level":"error","message":"Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:37:36.291Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:37:36.313Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:37:36.321Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:37:36.321Z"}
+{"level":"error","message":"Error adding student from Excel: relation \"faculties\" does not exist","timestamp":"2025-03-21T08:37:41.453Z"}
+{"level":"error","message":"Error importing Excel: Error adding student from Excel: relation \"faculties\" does not exist","timestamp":"2025-03-21T08:37:41.462Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:38:03.742Z"}
+{"level":"error","message":"Error fetching faculties list","timestamp":"2025-03-21T08:38:03.743Z"}
+{"level":"error","message":"Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:38:03.746Z"}
+{"level":"error","message":"Error fetching students list: Error fetching students list: relation \"students\" does not exist","timestamp":"2025-03-21T08:38:03.767Z"}
