@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = setupRelation;
-const student_model_1 = __importDefault(require("./student.model"));
 const faculty_model_1 = __importDefault(require("./faculty.model"));
+const student_model_1 = __importDefault(require("./student.model"));
 const status_model_1 = __importDefault(require("./status.model"));
 const identification_model_1 = __importDefault(require("./identification.model"));
 const address_model_1 = __importDefault(require("./address.model"));

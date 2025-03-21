@@ -1,5 +1,5 @@
-import Student from "./student.model";
 import Faculty from "./faculty.model";
+import Student from "./student.model";
 import Status from "./status.model";
 import Identification from "./identification.model";
 import Address from "./address.model";

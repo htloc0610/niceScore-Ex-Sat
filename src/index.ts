@@ -4,8 +4,6 @@ import setupRoutes from "./routes/index.router";
 import path from "path";
 import cors from "cors";
 import sequelize from "./config/db";
-import Student from "./models/student.model";
-import Faculty from "./models/faculty.model";
 import setupRelation from "./models/realation";
 
 const app = express();
