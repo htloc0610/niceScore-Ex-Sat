@@ -2,22 +2,26 @@
 import { Router } from "express";
 import path from "path";
 
-const frontRouter = Router();
+const router = Router();
 
-frontRouter.get("/more", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../public/more.html"));}
-);
+// [GET] /more
+router.get("/more", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/more.html"));
+});
 
-frontRouter.get("/add", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../public/add.html"));}
-);
+// [GET] /add
+router.get("/add", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/add.html"));
+});
 
-frontRouter.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/index.html"));}
-);
+// [GET] /
+router.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+});
 
-frontRouter.get("/:id", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../public/detail.html"));}
-);
+// [GET] /:id
+router.get("/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../public/detail.html"));
+});
 
-export default frontRouter;
+export default router;

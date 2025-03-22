@@ -6,18 +6,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //this file is API router for student
 const express_1 = require("express");
 const path_1 = __importDefault(require("path"));
-const frontRouter = (0, express_1.Router)();
-frontRouter.get("/more", (req, res) => {
+const router = (0, express_1.Router)();
+// [GET] /more
+router.get("/more", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../../public/more.html"));
 });
-frontRouter.get("/add", (req, res) => {
+// [GET] /add
+router.get("/add", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../../public/add.html"));
 });
-frontRouter.get("/", (req, res) => {
+// [GET] /
+router.get("/", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../public/index.html"));
 });
-frontRouter.get("/:id", (req, res) => {
+// [GET] /:id
+router.get("/:id", (req, res) => {
     res.sendFile(path_1.default.join(__dirname, "../../public/detail.html"));
 });
-exports.default = frontRouter;
+exports.default = router;
 //# sourceMappingURL=front.router.js.map
