@@ -7,20 +7,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const student_controller_1 = __importDefault(require("../controllers/student.controller"));
 const studentRouter = (0, express_1.Router)();
-studentRouter.get("/student", student_controller_1.default.getStudentHome);
-studentRouter.get("/student/:id", student_controller_1.default.getStudentById);
-studentRouter.put("/student/:id", student_controller_1.default.updateStudentById);
-studentRouter.post("/add_student", student_controller_1.default.addStudent);
-studentRouter.put("/update_student", student_controller_1.default.updateStudent);
-studentRouter.post("/delete_student", student_controller_1.default.deleteStudent);
-studentRouter.get("/faculty", student_controller_1.default.getListFaculties);
-studentRouter.post("/add_faculty", student_controller_1.default.addFaculty);
-studentRouter.put("/update_faculty", student_controller_1.default.updateFaculty);
-studentRouter.get("/status", student_controller_1.default.getListStatus);
-studentRouter.post("/add_status", student_controller_1.default.addStatus);
-studentRouter.put("/update_status", student_controller_1.default.updateStatus);
-studentRouter.get("/course", student_controller_1.default.getListCourse);
-studentRouter.post("/add_course", student_controller_1.default.addCourse);
-studentRouter.put("/update_course", student_controller_1.default.updateCourse);
+// [GET] /api/student
+studentRouter.get("/", student_controller_1.default.getStudentHome);
+// [GET] /api/student/:id
+studentRouter.get("/:id", student_controller_1.default.getStudentById);
+// [PUT] /api/student:/id
+studentRouter.put("/:id", student_controller_1.default.updateStudentById);
+// [POST] /api/student
+studentRouter.post("/", student_controller_1.default.addStudent);
+// [PUT] /api/student
+studentRouter.put("/", student_controller_1.default.updateStudent);
+// [DELETE] /api/student
+studentRouter.delete("/", student_controller_1.default.deleteStudent);
 exports.default = studentRouter;
 //# sourceMappingURL=student.router.js.map

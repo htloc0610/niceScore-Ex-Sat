@@ -3,10 +3,13 @@ import facultyController from "../controllers/faculty.controller";
 
 const facultyRouter = Router();
 
-facultyRouter.get("/faculty", facultyController.getListFaculties);
+// [GET] /api/faculty
+facultyRouter.get("/", facultyController.getListFaculties);
 
-facultyRouter.post("/add_faculty", facultyController.addFaculty);
+// [POST] /api/faculty
+facultyRouter.post("/", facultyController.addFaculty);
 
-facultyRouter.put("/update_faculty", facultyController.updateFaculty);
+// [PUT] /api/faculty"
+facultyRouter.put("/", facultyController.updateFaculty);
 
 export default facultyRouter;

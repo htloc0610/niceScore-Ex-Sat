@@ -3,10 +3,13 @@ import statusController from "../controllers/student.controller";
 
 const statusRouter = Router();
 
-statusRouter.get("/status", statusController.getListStatus);
+// [GET] /api/status
+statusRouter.get("/", statusController.getListStatus);
 
-statusRouter.post("/add_status", statusController.addStatus);
+// [POST] /api/status
+statusRouter.post("/", statusController.addStatus);
 
-statusRouter.put("/update_status", statusController.updateStatus);
+// [PUT] /api/status
+statusRouter.put("/", statusController.updateStatus);
 
 export default statusRouter;

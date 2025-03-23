@@ -4,34 +4,22 @@ import studentController from "../controllers/student.controller";
 
 const studentRouter = Router();
 
-studentRouter.get("/student", studentController.getStudentHome);
+// [GET] /api/student
+studentRouter.get("/", studentController.getStudentHome);
 
-studentRouter.get("/student/:id", studentController.getStudentById);
+// [GET] /api/student/:id
+studentRouter.get("/:id", studentController.getStudentById);
 
-studentRouter.put("/student/:id", studentController.updateStudentById);
+// [PUT] /api/student:/id
+studentRouter.put("/:id", studentController.updateStudentById);
 
-studentRouter.post("/add_student", studentController.addStudent);
+// [POST] /api/student
+studentRouter.post("/", studentController.addStudent);
 
-studentRouter.put("/update_student", studentController.updateStudent);
+// [PUT] /api/student
+studentRouter.put("/", studentController.updateStudent);
 
-studentRouter.post("/delete_student", studentController.deleteStudent);
-
-studentRouter.get("/faculty", studentController.getListFaculties);
-
-studentRouter.post("/add_faculty", studentController.addFaculty);
-
-studentRouter.put("/update_faculty", studentController.updateFaculty);
-
-studentRouter.get("/status", studentController.getListStatus);
-
-studentRouter.post("/add_status", studentController.addStatus);
-
-studentRouter.put("/update_status", studentController.updateStatus);
-
-studentRouter.get("/course", studentController.getListCourse);
-
-studentRouter.post("/add_course", studentController.addCourse);
-
-studentRouter.put("/update_course", studentController.updateCourse);
+// [DELETE] /api/student
+studentRouter.delete("/", studentController.deleteStudent);
 
 export default studentRouter;

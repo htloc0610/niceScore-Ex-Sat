@@ -3,10 +3,13 @@ import courseController from "../controllers/course.controller";
 
 const courseRouter = Router();
 
-courseRouter.get("/course", courseController.getListCourse);
+// [GET] /api/course
+courseRouter.get("/", courseController.getListCourse);
 
-courseRouter.post("/add_course", courseController.addCourse);
+// [POST] /api/course
+courseRouter.post("/", courseController.addCourse);
 
-courseRouter.put("/update_course", courseController.updateCourse);
+// [PUT] /api/course
+courseRouter.put("/", courseController.updateCourse);
 
 export default courseRouter;
