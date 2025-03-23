@@ -9,12 +9,6 @@ const student_controller_1 = __importDefault(require("../controllers/student.con
 const studentRouter = (0, express_1.Router)();
 // [GET] /api/student
 studentRouter.get("/student", student_controller_1.default.getStudentHome);
-// [GET] /api/student/faculty
-studentRouter.get("/faculty", student_controller_1.default.getListFaculties);
-// [GET] /api/student/status
-studentRouter.get("/status", student_controller_1.default.getListStatus);
-// [GET] /api/student/course
-studentRouter.get("/course", student_controller_1.default.getListCourse);
 // [GET] /api/student/:id
 studentRouter.get("/student/:id", student_controller_1.default.getStudentById);
 // [PUT] /api/student/:id
@@ -25,14 +19,20 @@ studentRouter.post("/add_student", student_controller_1.default.addStudent);
 studentRouter.put("/update_student", student_controller_1.default.updateStudent);
 // [POST] /api/student/delete_student
 studentRouter.post("/delete_student", student_controller_1.default.deleteStudent);
+// [GET] /api/student/faculty
+studentRouter.get("/faculty", student_controller_1.default.getListFaculties);
 // [POST] /api/student/add_faculty
 studentRouter.post("/add_faculty", student_controller_1.default.addFaculty);
 // [PUT] /api/student/update_faculty
 studentRouter.put("/update_faculty", student_controller_1.default.updateFaculty);
+// [GET] /api/student/status
+studentRouter.get("/status", student_controller_1.default.getListStatus);
 // [POST] /api/student/add_status
 studentRouter.post("/add_status", student_controller_1.default.addStatus);
 // [PUT] /api/student/update_status
 studentRouter.put("/update_status", student_controller_1.default.updateStatus);
+// [GET] /api/student/course
+studentRouter.get("/course", student_controller_1.default.getListCourse);
 // [POST] /api/student/add_course
 studentRouter.post("/add_course", student_controller_1.default.addCourse);
 // [PUT] /api/student/update_course

@@ -143,24 +143,6 @@ const studentService = {
         });
     },
     // Add a new student
-    /*
-    async addStudent(data: any) {
-      try {
-        const newStudent = await Student.create(data);
-        const faculty = await Faculty.findOne({
-          where: { faculty_id: newStudent.faculty_id },
-        });
-        return {
-          ...newStudent.toJSON(),
-          facultyName: faculty ? faculty.name : null,
-        };
-      } catch (error) {
-        logger.error("Error adding new student" + error);
-        console.log("Error adding new student:", error);
-        throw new Error("Error adding new student" + error);
-      }
-    },
-    */
     addStudent(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
