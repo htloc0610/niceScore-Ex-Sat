@@ -17,7 +17,7 @@ const logger_1 = require("../config/logger");
 const studentController = {
     getStudentHome: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const students = yield student_service_1.default.getList();
+            const students = yield student_service_1.default.getListStudent();
             logger_1.logger.info("Successfully fetched students list");
             res.send({ message: "Welcome to the Student Home Page", students });
         }
@@ -101,7 +101,7 @@ const studentController = {
             const { student_id, full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status, } = req.body;
             const updatedData = req.body;
             const studentId = parseInt(student_id, 10);
-            const updatedStudent = yield student_service_1.default.update(studentId, updatedData);
+            const updatedStudent = yield student_service_1.default.updateStudent(studentId, updatedData);
             if (!updatedStudent) {
                 res
                     .status(404)
@@ -130,7 +130,7 @@ const studentController = {
         try {
             const { student_id } = req.body; // Extract the student ID from the request body
             // Call the delete function in your service
-            const result = yield student_service_1.default.delete(student_id);
+            const result = yield student_service_1.default.deleteStudent(student_id);
             // If the student was successfully deleted, return a success response
             if (result === 0) {
                 logger_1.logger.error("Student not found");

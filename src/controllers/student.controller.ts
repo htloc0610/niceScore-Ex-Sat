@@ -5,7 +5,7 @@ import { logger } from "../config/logger";
 const studentController = {
   getStudentHome: async (req: Request, res: Response): Promise<void> => {
     try {
-      const students = await studentService.getList();
+      const students = await studentService.getListStudent();
       logger.info("Successfully fetched students list");
       res.send({ message: "Welcome to the Student Home Page", students });
     } catch (error) {
@@ -100,7 +100,7 @@ const studentController = {
       const updatedData = req.body;
 
       const studentId = parseInt(student_id, 10);
-      const updatedStudent = await studentService.update(
+      const updatedStudent = await studentService.updateStudent(
         studentId,
         updatedData
       );
@@ -131,7 +131,7 @@ const studentController = {
     try {
       const { student_id } = req.body; // Extract the student ID from the request body
       // Call the delete function in your service
-      const result = await studentService.delete(student_id);
+      const result = await studentService.deleteStudent(student_id);
 
       // If the student was successfully deleted, return a success response
       if (result === 0) {

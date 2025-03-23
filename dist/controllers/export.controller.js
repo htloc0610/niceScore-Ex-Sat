@@ -21,7 +21,7 @@ const logger_1 = require("../config/logger");
 // Hàm export dữ liệu ra JSON
 const exportToJson = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const students = yield student_service_1.default.getList(); // Lấy dữ liệu từ DB
+        const students = yield student_service_1.default.getListStudent(); // Lấy dữ liệu từ DB
         const filePath = path_1.default.join(__dirname, "../exports/students.json");
         fs_1.default.writeFileSync(filePath, JSON.stringify(students, null, 2), "utf-8");
         res.download(filePath);
@@ -35,7 +35,7 @@ const exportToJson = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 exports.exportToJson = exportToJson;
 const exportToExcel = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const students = yield student_service_1.default.getList();
+        const students = yield student_service_1.default.getListStudent();
         const workbook = new exceljs_1.default.Workbook();
         const worksheet = workbook.addWorksheet("Students");
         // Định nghĩa tiêu đề cột

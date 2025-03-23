@@ -23,7 +23,7 @@ const identification_service_1 = __importDefault(require("./identification.servi
 const logger_1 = require("../config/logger");
 const studentService = {
     // Get list of students with related data
-    getList() {
+    getListStudent() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const students = yield student_model_1.default.findAll({
@@ -116,37 +116,10 @@ const studentService = {
             }
         });
     },
-    // Get list of faculties
-    getFaculties() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const faculties = yield faculty_model_1.default.findAll();
-                console.log("faculty: ", faculties);
-                return faculties;
-            }
-            catch (error) {
-                logger_1.logger.error("Error fetching faculties list");
-                throw new Error("Error fetching faculties list");
-            }
-        });
-    },
-    // Get list of status
-    getStatus() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const status = yield status_model_1.default.findAll();
-                return status;
-            }
-            catch (error) {
-                throw new Error("Error fetching status list");
-            }
-        });
-    },
     // Add a new student
     addStudent(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                console.log(data);
                 // Tạo promises để thêm địa chỉ thường trú, tạm trú, nhận thư
                 const permanentAddressPromise = address_service_1.default.addAddress(data.permanent);
                 const temporaryAddressPromise = address_service_1.default.addAddress(data.temporary);
@@ -198,7 +171,7 @@ const studentService = {
         });
     },
     // Delete a student by ID
-    delete(studentId) {
+    deleteStudent(studentId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const result = yield student_model_1.default.destroy({
@@ -215,7 +188,7 @@ const studentService = {
         });
     },
     // Update a student by ID
-    update(studentId, studentData) {
+    updateStudent(studentId, studentData) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const student = student_model_1.default.build(studentData);
@@ -323,117 +296,12 @@ const studentService = {
             }
         });
     },
-    addFaculty(data) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const newFaculty = yield faculty_model_1.default.create(data);
-                return Object.assign({}, newFaculty.toJSON());
-            }
-            catch (error) {
-                throw new Error("Error adding new faculty" + error);
-            }
-        });
-    },
-    updateFaculty(facultyId, facultyData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const [updated] = yield faculty_model_1.default.update(facultyData, {
-                    where: { faculty_id: facultyId },
-                });
-                if (updated === 0) {
-                    throw new Error("Faculty not found");
-                }
-                const updatedFaculty = yield faculty_model_1.default.findOne({
-                    where: { faculty_id: facultyId },
-                });
-                return updatedFaculty ? updatedFaculty.get() : null;
-            }
-            catch (error) {
-                throw new Error(error.message);
-            }
-        });
-    },
     getFacultyName(faculty_id) {
         return __awaiter(this, void 0, void 0, function* () {
             const faculty = yield faculty_model_1.default.findOne({ where: { faculty_id } });
             return faculty;
         });
     },
-    addStatus(data) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const newStatus = yield status_model_1.default.create(data);
-                return Object.assign({}, newStatus.toJSON());
-            }
-            catch (error) {
-                throw new Error("Error adding new status" + error);
-            }
-        });
-    },
-    updateStatus(statusId, statusData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const [updated] = yield status_model_1.default.update(statusData, {
-                    where: { status_id: statusId },
-                });
-                if (updated === 0) {
-                    throw new Error("Status not found");
-                }
-                const updatedStatus = yield status_model_1.default.findOne({
-                    where: { status_id: statusId },
-                });
-                return updatedStatus ? updatedStatus.get() : null;
-            }
-            catch (error) {
-                throw new Error(error.message);
-            }
-        });
-    },
-    //add course
-    addCourse(data) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const newCourse = yield course_model_1.default.create(data);
-                return Object.assign({}, newCourse.toJSON());
-            }
-            catch (error) {
-                throw new Error("Error adding new course" + error);
-            }
-        });
-    },
-    //update course
-    updateCourse(courseId, courseData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const [updated] = yield course_model_1.default.update(courseData, {
-                    where: { course_id: courseId },
-                });
-                if (updated === 0) {
-                    throw new Error("Course not found");
-                }
-                const updatedCourse = yield course_model_1.default.findOne({
-                    where: { course_id: courseId },
-                });
-                return updatedCourse ? updatedCourse.get() : null;
-            }
-            catch (error) {
-                throw new Error(error.message);
-            }
-        });
-    },
-    //getCourses
-    getCourses() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const courses = yield course_model_1.default.findAll();
-                return courses;
-            }
-            catch (error) {
-                throw new Error("Error fetching courses list");
-            }
-        });
-    },
-    //getStudentById
     getStudentById(studentId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
