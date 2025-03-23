@@ -29,42 +29,54 @@ const studentController = {
                 .send({ message: "An error occurred while fetching students." });
         }
     }),
-    getListFaculties: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //getStudentById
+    getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const faculties = yield student_service_1.default.getFaculties();
-            logger_1.logger.info("Successfully fetched faculties list");
-            res.send({ message: "List of faculties", faculties });
+            const { id } = req.params;
+            const student = yield student_service_1.default.getStudentById(parseInt(id, 10));
+            if (!student) {
+                logger_1.logger.error(`Student with ID ${id} not found`);
+                res.status(404).send({ message: "Student not found" });
+            }
+            else {
+                logger_1.logger.info(`Student with ID ${id} found`);
+                res.status(200).send({ message: "Student found", student });
+            }
         }
         catch (error) {
-            logger_1.logger.error("Error fetching faculties list");
-            console.log("Error fetching faculties list:", error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while fetching faculties." });
-        }
-    }),
-    getListStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const status = yield student_service_1.default.getStatus();
-            res.send({ message: "List of status", status });
-        }
-        catch (error) {
+            logger_1.logger.error("Error fetching student: " + error.message);
             console.error(error);
             res
                 .status(500)
-                .send({ message: "An error occurred while fetching status." });
+                .send({ message: "An error occurred while fetching the student." });
         }
     }),
-    getListCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //updateStudentById
+    updateStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const courses = yield student_service_1.default.getCourses();
-            res.send({ message: "List of courses", courses });
+            const { id } = req.params;
+            const updatedData = req.body;
+            const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
+            if (!updatedStudent) {
+                logger_1.logger.error(`Student with ID ${id} not found or no changes made.`);
+                res
+                    .status(404)
+                    .send({ message: "Student not found or no changes made." });
+            }
+            else {
+                logger_1.logger.info(`Student with ID ${id} updated successfully`);
+                res.status(200).send({
+                    message: "Student updated successfully",
+                    updatedStudent,
+                });
+            }
         }
         catch (error) {
+            logger_1.logger.error("Error updating student: " + error.message);
             console.error(error);
             res
                 .status(500)
-                .send({ message: "An error occurred while fetching courses." });
+                .send({ message: "An error occurred while updating the student." });
         }
     }),
     addStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -99,7 +111,6 @@ const studentController = {
                 //before sending the response, we need to get Faculty name
                 const faculty = yield student_service_1.default.getFacultyName(faculty_id);
                 updatedStudent.faculty_id = faculty.name;
-                console.log(updatedStudent);
                 logger_1.logger.info("Student updated successfully");
                 res.status(200).send({
                     message: "Student updated successfully",
@@ -136,172 +147,6 @@ const studentController = {
             res
                 .status(500)
                 .send({ message: "An error occurred while deleting the student." });
-        }
-    }),
-    addFaculty: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const data = req.body;
-            const newFaculty = yield student_service_1.default.addFaculty(data);
-            res
-                .status(201)
-                .send({ message: "Faculty added successfully", newFaculty });
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while adding the faculty." });
-        }
-    }),
-    updateFaculty: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { faculty_id, name } = req.body;
-            const updatedData = req.body;
-            console.log(updatedData, "id", faculty_id);
-            const updatedFaculty = yield student_service_1.default.updateFaculty(faculty_id, updatedData);
-            if (!updatedFaculty) {
-                res
-                    .status(404)
-                    .send({ message: "Faculty not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Faculty updated successfully",
-                    updatedFaculty,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the faculty." });
-        }
-    }),
-    addStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const data = req.body;
-            const newStatus = yield student_service_1.default.addStatus(data);
-            res
-                .status(201)
-                .send({ message: "Status added successfully", newStatus });
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while adding the status." });
-        }
-    }),
-    updateStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { status_id, name } = req.body;
-            const updatedData = req.body;
-            const updatedStatus = yield student_service_1.default.updateStatus(status_id, updatedData);
-            if (!updatedStatus) {
-                res
-                    .status(404)
-                    .send({ message: "Status not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Status updated successfully",
-                    updatedStatus,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the status." });
-        }
-    }),
-    //add course
-    addCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const data = req.body;
-            const newCourse = yield student_service_1.default.addCourse(data);
-            res
-                .status(201)
-                .send({ message: "Course added successfully", newCourse });
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while adding the course." });
-        }
-    }),
-    //update course
-    updateCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { course_id, name } = req.body;
-            const updatedData = req.body;
-            const updatedCourse = yield student_service_1.default.updateCourse(course_id, updatedData);
-            if (!updatedCourse) {
-                res
-                    .status(404)
-                    .send({ message: "Course not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Course updated successfully",
-                    updatedCourse,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the course." });
-        }
-    }),
-    //getStudentById
-    getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { id } = req.params;
-            console.log(id);
-            const student = yield student_service_1.default.getStudentById(parseInt(id, 10));
-            if (!student) {
-                res.status(404).send({ message: "Student not found" });
-            }
-            else {
-                res.status(200).send({ message: "Student found", student });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while fetching the student." });
-        }
-    }),
-    //updateStudentById
-    updateStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { id } = req.params;
-            const updatedData = req.body;
-            console.log(updatedData, "id", id);
-            const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
-            if (!updatedStudent) {
-                res
-                    .status(404)
-                    .send({ message: "Student not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Student updated successfully",
-                    updatedStudent,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the student." });
         }
     }),
 };
