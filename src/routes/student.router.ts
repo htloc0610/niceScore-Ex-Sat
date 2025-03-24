@@ -10,7 +10,7 @@ studentRouter.get("/", studentController.getStudentHome);
 // [GET] /api/student/:id
 studentRouter.get("/:id", studentController.getStudentById);
 
-// [PUT] /api/student:/id
+// [PUT] /api/student/:id
 studentRouter.put("/:id", studentController.updateStudentById);
 
 // [POST] /api/student

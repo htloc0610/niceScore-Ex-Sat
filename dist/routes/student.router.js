@@ -11,7 +11,7 @@ const studentRouter = (0, express_1.Router)();
 studentRouter.get("/", student_controller_1.default.getStudentHome);
 // [GET] /api/student/:id
 studentRouter.get("/:id", student_controller_1.default.getStudentById);
-// [PUT] /api/student:/id
+// [PUT] /api/student/:id
 studentRouter.put("/:id", student_controller_1.default.updateStudentById);
 // [POST] /api/student
 studentRouter.post("/", student_controller_1.default.addStudent);

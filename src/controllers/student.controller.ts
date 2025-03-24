@@ -38,42 +38,59 @@ const studentController = {
         .send({ message: "An error occurred while fetching the student." });
     }
   },
-  
+
   updateStudentById: async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
       const updatedData = req.body;
-      const email = updatedData.email; 
-      const phone_number = updatedData.phone_number; 
+      const email = updatedData.email;
+      const phone_number = updatedData.phone_number;
 
       // Check if the email domain is allowed
-      const emailConfig = await configurationService.getConfiguration("allowed_email_domain");
-      const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+      const emailConfig = await configurationService.getConfiguration(
+        "allowed_email_domain"
+      );
+      const emailRegex = new RegExp(
+        `^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`
+      );
       if (email && !emailRegex.test(email)) {
         logger.error("Invalid email domain");
-        res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+        res
+          .status(400)
+          .send({
+            message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+          });
         return;
       }
 
       // Check if the phone number is valid
-      const phoneConfig = await configurationService.getConfiguration("phone_country_code");
-      const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      const phoneConfig = await configurationService.getConfiguration(
+        "phone_country_code"
+      );
+      const phoneRegex = new RegExp(
+        phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
       if (phone_number && !phoneRegex.test(phone_number)) {
         logger.error("Invalid phone number");
-        res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+        res
+          .status(400)
+          .send({
+            message: "Invalid phone number. Please use a valid phone number.",
+          });
         return;
       }
 
       // Check if the status transition is allowed
-      const currentStatus = await studentService.getStudentStatus(parseInt(id, 10));      
+      const currentStatus = await studentService.getStudentStatus(
+        parseInt(id, 10)
+      );
       const newStatus = updatedData.status;
       const statusTransition = await StatusTransition.findOne({
-        where: { current_status: currentStatus, new_status: newStatus }
+        where: { current_status: currentStatus, new_status: newStatus },
       });
       if (!statusTransition) {
         logger.error("Invalid status transition");
         res.status(400).send({ message: "Invalid status transition." });
-        return;
       }
 
       const updatedStudent = await studentService.updateStudentById(
@@ -107,20 +124,36 @@ const studentController = {
       const data = req.body;
 
       // Check if the email domain is allowed
-      const emailConfig = await configurationService.getConfiguration("allowed_email_domain");
-      const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+      const emailConfig = await configurationService.getConfiguration(
+        "allowed_email_domain"
+      );
+      const emailRegex = new RegExp(
+        `^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`
+      );
       if (!emailRegex.test(data.email)) {
         logger.error("Invalid email domain");
-        res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+        res
+          .status(400)
+          .send({
+            message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+          });
         return;
       }
 
       // Check if the phone number is valid
-      const phoneConfig = await configurationService.getConfiguration("phone_country_code");
-      const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));  
+      const phoneConfig = await configurationService.getConfiguration(
+        "phone_country_code"
+      );
+      const phoneRegex = new RegExp(
+        phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
       if (!phoneRegex.test(data.phone_number)) {
         logger.error("Invalid phone number");
-        res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+        res
+          .status(400)
+          .send({
+            message: "Invalid phone number. Please use a valid phone number.",
+          });
         return;
       }
 
@@ -159,20 +192,36 @@ const studentController = {
       const studentId = parseInt(student_id, 10);
 
       // Check if the email domain is allowed
-      const emailConfig = await configurationService.getConfiguration("allowed_email_domain");
-      const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+      const emailConfig = await configurationService.getConfiguration(
+        "allowed_email_domain"
+      );
+      const emailRegex = new RegExp(
+        `^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`
+      );
       if (email && !emailRegex.test(email)) {
         logger.error("Invalid email domain");
-        res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+        res
+          .status(400)
+          .send({
+            message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+          });
         return;
       }
 
       // Check if the phone number is valid
-      const phoneConfig = await configurationService.getConfiguration("phone_country_code");
-      const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      const phoneConfig = await configurationService.getConfiguration(
+        "phone_country_code"
+      );
+      const phoneRegex = new RegExp(
+        phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
       if (phone_number && !phoneRegex.test(phone_number)) {
         logger.error("Invalid phone number");
-        res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+        res
+          .status(400)
+          .send({
+            message: "Invalid phone number. Please use a valid phone number.",
+          });
         return;
       }
 
@@ -180,14 +229,14 @@ const studentController = {
       const currentStatus = await studentService.getStudentStatus(studentId);
       const newStatus = status;
       const statusTransition = await StatusTransition.findOne({
-        where: { current_status: currentStatus, new_status: newStatus }
+        where: { current_status: currentStatus, new_status: newStatus },
       });
       if (!statusTransition) {
         logger.error("Invalid status transition");
         res.status(400).send({ message: "Invalid status transition." });
         return;
       }
-      
+
       const updatedStudent = await studentService.updateStudent(
         studentId,
         updatedData

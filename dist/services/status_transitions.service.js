@@ -18,7 +18,7 @@ const statusTransitionService = {
     checkStatusTransition: (currentStatus, newStatus) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const statusTransition = yield status_transitions_model_1.default.findOne({
-                where: { current_status: currentStatus, new_status: newStatus }
+                where: { current_status: currentStatus, new_status: newStatus },
             });
             return statusTransition !== null;
         }
@@ -27,13 +27,10 @@ const statusTransitionService = {
             console.error("Error checking status transition:", error);
             throw error;
         }
-        ;
     }),
-    getStatusTransitions: (currentStatus) => __awaiter(void 0, void 0, void 0, function* () {
+    getStatusTransitions: () => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const statusTransitions = yield status_transitions_model_1.default.findAll({
-                where: { current_status: currentStatus }
-            });
+            const statusTransitions = yield status_transitions_model_1.default.findAll();
             return statusTransitions;
         }
         catch (error) {
@@ -41,8 +38,44 @@ const statusTransitionService = {
             console.error("Error getting status transitions:", error);
             throw error;
         }
-        ;
-    })
+    }),
+    addStatusTransitions: (current_status, new_status) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const existingTransition = yield status_transitions_model_1.default.findOne({
+                where: { current_status, new_status },
+            });
+            if (existingTransition) {
+                throw new Error("Status transition already exists");
+            }
+            const newStatusTransition = yield status_transitions_model_1.default.create({
+                current_status,
+                new_status,
+            });
+            return newStatusTransition;
+        }
+        catch (error) {
+            logger_1.logger.error("Error adding status transition: " + error.message);
+            console.error("Error adding status transition:", error);
+            throw error;
+        }
+    }),
+    updateStatusTransitions: (id, current_status, new_status) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const statusTransition = yield status_transitions_model_1.default.findByPk(id);
+            if (!statusTransition) {
+                throw new Error("Status transition not found");
+            }
+            statusTransition.current_status = current_status;
+            statusTransition.new_status = new_status;
+            yield statusTransition.save();
+            return statusTransition;
+        }
+        catch (error) {
+            logger_1.logger.error("Error updating status transition: " + error.message);
+            console.error("Error updating status transition:", error);
+            throw error;
+        }
+    }),
 };
 exports.default = statusTransitionService;
 //# sourceMappingURL=status_transitions.service.js.map

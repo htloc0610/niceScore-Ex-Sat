@@ -8,21 +8,23 @@ const db_1 = __importDefault(require("../config/db"));
 class StatusTransition extends sequelize_1.Model {
 }
 StatusTransition.init({
+    id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
+    },
     current_status: {
         type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
-        primaryKey: true,
-        onDelete: 'CASCADE',
     },
     new_status: {
         type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
-        primaryKey: true,
     },
 }, {
     sequelize: db_1.default,
-    modelName: 'StatusTransition',
-    tableName: 'status_transitions',
+    modelName: "StatusTransition",
+    tableName: "status_transitions",
     timestamps: false,
 });
 exports.default = StatusTransition;

@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const status_model_1 = __importDefault(require("../models/status.model"));
 const logger_1 = require("../config/logger");
-const studentService = {
+const statusService = {
     // Get list of status
     getStatus() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -64,6 +64,20 @@ const studentService = {
             }
         });
     },
+    isAvailable(new_status) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const status = yield status_model_1.default.findOne({
+                    where: { name: new_status },
+                });
+                return status !== null;
+            }
+            catch (error) {
+                logger_1.logger.error(`Error checking availability of status ${new_status}: ${error.message}`);
+                throw new Error("Error checking status availability");
+            }
+        });
+    },
 };
-exports.default = studentService;
+exports.default = statusService;
 //# sourceMappingURL=status.service.js.map
