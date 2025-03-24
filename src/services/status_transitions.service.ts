@@ -1,7 +1,7 @@
 import StatusTransition from "../models/status_transitions.model";
 import { logger } from "../config/logger";
 
-const configurationService = {
+const statusTransitionService = {
   checkStatusTransition: async (currentStatus: string, newStatus: string) => {
     try {
       const statusTransition = await StatusTransition.findOne({
@@ -28,4 +28,4 @@ const configurationService = {
   }
 };
 
-export default configurationService;
+export default statusTransitionService;

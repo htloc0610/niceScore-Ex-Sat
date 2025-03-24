@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import studentService from "../services/student.service";
 import configurationService from "../services/configurations.service";
+import StatusTransition from "../models/status_transitions.model";
 import { logger } from "../config/logger";
 
 const studentController = {
@@ -42,10 +43,44 @@ const studentController = {
     try {
       const { id } = req.params;
       const updatedData = req.body;
+      const email = updatedData.email; 
+      const phone_number = updatedData.phone_number; 
+
+      // Check if the email domain is allowed
+      const emailConfig = await configurationService.getConfiguration("allowed_email_domain");
+      const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+      if (email && !emailRegex.test(email)) {
+        logger.error("Invalid email domain");
+        res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+        return;
+      }
+
+      // Check if the phone number is valid
+      const phoneConfig = await configurationService.getConfiguration("phone_country_code");
+      const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      if (phone_number && !phoneRegex.test(phone_number)) {
+        logger.error("Invalid phone number");
+        res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+        return;
+      }
+
+      // Check if the status transition is allowed
+      const currentStatus = await studentService.getStudentStatus(parseInt(id, 10));      
+      const newStatus = updatedData.status;
+      const statusTransition = await StatusTransition.findOne({
+        where: { current_status: currentStatus, new_status: newStatus }
+      });
+      if (!statusTransition) {
+        logger.error("Invalid status transition");
+        res.status(400).send({ message: "Invalid status transition." });
+        return;
+      }
+
       const updatedStudent = await studentService.updateStudentById(
         parseInt(id, 10),
         updatedData
       );
+
       if (!updatedStudent) {
         logger.error(`Student with ID ${id} not found or no changes made.`);
         res
@@ -122,6 +157,37 @@ const studentController = {
       const updatedData = req.body;
 
       const studentId = parseInt(student_id, 10);
+
+      // Check if the email domain is allowed
+      const emailConfig = await configurationService.getConfiguration("allowed_email_domain");
+      const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+      if (email && !emailRegex.test(email)) {
+        logger.error("Invalid email domain");
+        res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+        return;
+      }
+
+      // Check if the phone number is valid
+      const phoneConfig = await configurationService.getConfiguration("phone_country_code");
+      const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      if (phone_number && !phoneRegex.test(phone_number)) {
+        logger.error("Invalid phone number");
+        res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+        return;
+      }
+
+      // Check if the status transition is allowed
+      const currentStatus = await studentService.getStudentStatus(studentId);
+      const newStatus = status;
+      const statusTransition = await StatusTransition.findOne({
+        where: { current_status: currentStatus, new_status: newStatus }
+      });
+      if (!statusTransition) {
+        logger.error("Invalid status transition");
+        res.status(400).send({ message: "Invalid status transition." });
+        return;
+      }
+      
       const updatedStudent = await studentService.updateStudent(
         studentId,
         updatedData

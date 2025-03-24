@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_service_1 = __importDefault(require("../services/student.service"));
 const configurations_service_1 = __importDefault(require("../services/configurations.service"));
+const status_transitions_model_1 = __importDefault(require("../models/status_transitions.model"));
 const logger_1 = require("../config/logger");
 const studentController = {
     getStudentHome: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -55,6 +56,35 @@ const studentController = {
         try {
             const { id } = req.params;
             const updatedData = req.body;
+            const email = updatedData.email;
+            const phone_number = updatedData.phone_number;
+            // Check if the email domain is allowed
+            const emailConfig = yield configurations_service_1.default.getConfiguration("allowed_email_domain");
+            const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+            if (email && !emailRegex.test(email)) {
+                logger_1.logger.error("Invalid email domain");
+                res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+                return;
+            }
+            // Check if the phone number is valid
+            const phoneConfig = yield configurations_service_1.default.getConfiguration("phone_country_code");
+            const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+            if (phone_number && !phoneRegex.test(phone_number)) {
+                logger_1.logger.error("Invalid phone number");
+                res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+                return;
+            }
+            // Check if the status transition is allowed
+            const currentStatus = yield student_service_1.default.getStudentStatus(parseInt(id, 10));
+            const newStatus = updatedData.status;
+            const statusTransition = yield status_transitions_model_1.default.findOne({
+                where: { current_status: currentStatus, new_status: newStatus }
+            });
+            if (!statusTransition) {
+                logger_1.logger.error("Invalid status transition");
+                res.status(400).send({ message: "Invalid status transition." });
+                return;
+            }
             const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
             if (!updatedStudent) {
                 logger_1.logger.error(`Student with ID ${id} not found or no changes made.`);
@@ -117,6 +147,33 @@ const studentController = {
             const { student_id, full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status, } = req.body;
             const updatedData = req.body;
             const studentId = parseInt(student_id, 10);
+            // Check if the email domain is allowed
+            const emailConfig = yield configurations_service_1.default.getConfiguration("allowed_email_domain");
+            const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+            if (email && !emailRegex.test(email)) {
+                logger_1.logger.error("Invalid email domain");
+                res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+                return;
+            }
+            // Check if the phone number is valid
+            const phoneConfig = yield configurations_service_1.default.getConfiguration("phone_country_code");
+            const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+            if (phone_number && !phoneRegex.test(phone_number)) {
+                logger_1.logger.error("Invalid phone number");
+                res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+                return;
+            }
+            // Check if the status transition is allowed
+            const currentStatus = yield student_service_1.default.getStudentStatus(studentId);
+            const newStatus = status;
+            const statusTransition = yield status_transitions_model_1.default.findOne({
+                where: { current_status: currentStatus, new_status: newStatus }
+            });
+            if (!statusTransition) {
+                logger_1.logger.error("Invalid status transition");
+                res.status(400).send({ message: "Invalid status transition." });
+                return;
+            }
             const updatedStudent = yield student_service_1.default.updateStudent(studentId, updatedData);
             if (!updatedStudent) {
                 res

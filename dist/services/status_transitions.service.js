@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const status_transitions_model_1 = __importDefault(require("../models/status_transitions.model"));
 const logger_1 = require("../config/logger");
-const configurationService = {
+const statusTransitionService = {
     checkStatusTransition: (currentStatus, newStatus) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const statusTransition = yield status_transitions_model_1.default.findOne({
@@ -44,5 +44,5 @@ const configurationService = {
         ;
     })
 };
-exports.default = configurationService;
+exports.default = statusTransitionService;
 //# sourceMappingURL=status_transitions.service.js.map

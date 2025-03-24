@@ -385,6 +385,31 @@ const studentService = {
             }
         });
     },
+    getStudentStatus(studentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const student = yield student_model_1.default.findOne({
+                    where: { student_id: studentId },
+                    include: [
+                        {
+                            model: status_model_1.default,
+                            as: "status",
+                            attributes: ["name"],
+                        },
+                    ],
+                });
+                if (!student) {
+                    throw new Error("Student not found");
+                }
+                return student.dataValues.status.name;
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching student status: " + error.message);
+                console.log("Error fetching student status:", error);
+                throw new Error("Error fetching student status: " + error.message);
+            }
+        });
+    }
 };
 exports.default = studentService;
 //# sourceMappingURL=student.service.js.map

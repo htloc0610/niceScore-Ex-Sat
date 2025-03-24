@@ -406,6 +406,30 @@ const studentService = {
       throw new Error(error.message);
     }
   },
+  async getStudentStatus(studentId: number) {
+    try {
+      const student = await Student.findOne({
+        where: { student_id: studentId },
+        include: [
+          {
+            model: Status,
+            as: "status",
+            attributes: ["name"],
+          },
+        ],
+      });
+
+      if (!student) {
+        throw new Error("Student not found");
+      }
+
+      return student.dataValues.status.name;
+    } catch (error) {
+      logger.error("Error fetching student status: " + error.message);
+      console.log("Error fetching student status:", error);
+      throw new Error("Error fetching student status: " + error.message);
+    }
+  }
 };
 
 export default studentService;
