@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_service_1 = __importDefault(require("../services/student.service"));
+const configurations_service_1 = __importDefault(require("../services/configurations.service"));
 const logger_1 = require("../config/logger");
 const studentController = {
     getStudentHome: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,7 +30,6 @@ const studentController = {
                 .send({ message: "An error occurred while fetching students." });
         }
     }),
-    //getStudentById
     getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { id } = req.params;
@@ -51,7 +51,6 @@ const studentController = {
                 .send({ message: "An error occurred while fetching the student." });
         }
     }),
-    //updateStudentById
     updateStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { id } = req.params;
@@ -82,7 +81,24 @@ const studentController = {
     addStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
-            const newStudent = yield student_service_1.default.addStudent(data);
+            // Check if the email domain is allowed
+            const emailConfig = yield configurations_service_1.default.getConfiguration("allowed_email_domain");
+            const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+            if (!emailRegex.test(data.email)) {
+                logger_1.logger.error("Invalid email domain");
+                res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+                return;
+            }
+            // Check if the phone number is valid
+            const phoneConfig = yield configurations_service_1.default.getConfiguration("phone_country_code");
+            const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+            if (!phoneRegex.test(data.phone_number)) {
+                logger_1.logger.error("Invalid phone number");
+                res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+                return;
+            }
+            // const newStudent = await studentService.addStudent(data);
+            const newStudent = "ok";
             logger_1.logger.info("Student added successfully");
             res
                 .status(201)

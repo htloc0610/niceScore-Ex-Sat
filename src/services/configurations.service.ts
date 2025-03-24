@@ -5,9 +5,9 @@ const configurationService = {
   getConfiguration: async (configName: string) => {
     try {
       const config = await Configuration.findOne({
-        where: {  name: configName }
+        where: {  config_key: configName }
       });
-      return config;
+      return config.dataValues;
     } catch (error) {
       logger.error("Error getting configuration: " + error.message);
       console.error("Error getting configuration:", error);

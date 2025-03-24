@@ -18,9 +18,9 @@ const configurationService = {
     getConfiguration: (configName) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const config = yield configurations_model_1.default.findOne({
-                where: { name: configName }
+                where: { config_key: configName }
             });
-            return config;
+            return config.dataValues;
         }
         catch (error) {
             logger_1.logger.error("Error getting configuration: " + error.message);

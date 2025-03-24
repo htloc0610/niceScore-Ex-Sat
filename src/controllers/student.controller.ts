@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import studentService from "../services/student.service";
+import configurationService from "../services/configurations.service";
 import { logger } from "../config/logger";
 
 const studentController = {
@@ -16,7 +17,7 @@ const studentController = {
         .send({ message: "An error occurred while fetching students." });
     }
   },
-  //getStudentById
+
   getStudentById: async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
@@ -36,8 +37,7 @@ const studentController = {
         .send({ message: "An error occurred while fetching the student." });
     }
   },
-
-  //updateStudentById
+  
   updateStudentById: async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
@@ -66,10 +66,31 @@ const studentController = {
         .send({ message: "An error occurred while updating the student." });
     }
   },
+
   addStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
-      const newStudent = await studentService.addStudent(data);
+
+      // Check if the email domain is allowed
+      const emailConfig = await configurationService.getConfiguration("allowed_email_domain");
+      const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+      if (!emailRegex.test(data.email)) {
+        logger.error("Invalid email domain");
+        res.status(400).send({ message: `Invalid email domain. Please use a ${emailConfig.config_value} email.` });
+        return;
+      }
+
+      // Check if the phone number is valid
+      const phoneConfig = await configurationService.getConfiguration("phone_country_code");
+      const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));  
+      if (!phoneRegex.test(data.phone_number)) {
+        logger.error("Invalid phone number");
+        res.status(400).send({ message: "Invalid phone number. Please use a valid phone number." });
+        return;
+      }
+
+      // const newStudent = await studentService.addStudent(data);
+      const newStudent = "ok";
       logger.info("Student added successfully");
       res
         .status(201)
@@ -82,6 +103,7 @@ const studentController = {
         .send({ message: "An error occurred while adding the student." });
     }
   },
+
   updateStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const {
@@ -127,6 +149,7 @@ const studentController = {
         .send({ message: "An error occurred while updating the student." });
     }
   },
+
   deleteStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const { student_id } = req.body; // Extract the student ID from the request body
