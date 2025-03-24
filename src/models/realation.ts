@@ -4,6 +4,8 @@ import Identification from "./identification.model";
 import Address from "./address.model";
 import Course from "./course.model";
 import Student from "./student.model";
+import Configuration from "./configurations.model";
+import StatusTransition from "./status_transitions.model";
 
 export default function setupRelation() {
   // Student - Faculty
@@ -54,6 +56,10 @@ export default function setupRelation() {
   // Student - Course
   Student.belongsTo(Course, { foreignKey: "course_id", as: "course" });
   Course.hasMany(Student, { foreignKey: "course_id", as: "students" });
+
+
+  Configuration.sync();
+  StatusTransition.sync();
 
   console.log("Database relation set up successfully!");
 }
