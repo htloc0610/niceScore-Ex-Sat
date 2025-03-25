@@ -31,7 +31,6 @@ app.use(express_1.default.static(path_1.default.join(__dirname, "../src/public")
 app.engine("hbs", handlebars_1.default.engine);
 app.set("view engine", "hbs");
 app.set("views", path_1.default.join(__dirname, "../src/views"));
-console.log("Views directory:", path_1.default.join(__dirname, "../src/views"));
 (0, index_router_1.default)(app);
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);

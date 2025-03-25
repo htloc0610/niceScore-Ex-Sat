@@ -1,6 +1,4 @@
-//this file is API router for student
 import { Router } from "express";
-import path from "path";
 
 const router = Router();
 

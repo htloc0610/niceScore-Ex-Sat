@@ -23,8 +23,6 @@ app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../src/views"));
 
-console.log("Views directory:", path.join(__dirname, "../src/views"));
-
 setupRoutes(app);
 
 app.listen(port, (): void => {
