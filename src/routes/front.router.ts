@@ -6,22 +6,22 @@ const router = Router();
 
 // [GET] /more
 router.get("/more", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../public/more.html"));
+  res.render("more"); // Render the "more" Handlebars template
 });
 
 // [GET] /add
 router.get("/add", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../public/add.html"));
+  res.render("add"); // Render the "add" Handlebars template
 });
 
 // [GET] /
 router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.render("index"); // Render the "index" Handlebars template
 });
 
 // [GET] /:id
 router.get("/:id", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../public/detail.html"));
+  res.render("detail", { id: req.params.id }); // Render the "detail" Handlebars template with the id parameter
 });
 
 export default router;

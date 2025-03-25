@@ -1,27 +1,23 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 //this file is API router for student
 const express_1 = require("express");
-const path_1 = __importDefault(require("path"));
 const router = (0, express_1.Router)();
 // [GET] /more
 router.get("/more", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../../public/more.html"));
+    res.render("more"); // Render the "more" Handlebars template
 });
 // [GET] /add
 router.get("/add", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../../public/add.html"));
+    res.render("add"); // Render the "add" Handlebars template
 });
 // [GET] /
 router.get("/", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../public/index.html"));
+    res.render("index"); // Render the "index" Handlebars template
 });
 // [GET] /:id
 router.get("/:id", (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, "../../public/detail.html"));
+    res.render("detail", { id: req.params.id }); // Render the "detail" Handlebars template with the id parameter
 });
 exports.default = router;
 //# sourceMappingURL=front.router.js.map

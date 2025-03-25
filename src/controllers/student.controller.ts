@@ -1,11 +1,13 @@
 import { Request, Response } from "express";
 import studentService from "../services/student.service";
-import {logger} from "../config/logger";
+import configurationService from "../services/configurations.service";
+import StatusTransition from "../models/status_transitions.model";
+import { logger } from "../config/logger";
 
 const studentController = {
   getStudentHome: async (req: Request, res: Response): Promise<void> => {
     try {
-      const students = await studentService.getList();
+      const students = await studentService.getListStudent();
       logger.info("Successfully fetched students list");
       res.send({ message: "Welcome to the Student Home Page", students });
     } catch (error) {
@@ -16,58 +18,160 @@ const studentController = {
         .send({ message: "An error occurred while fetching students." });
     }
   },
-  getListFaculties: async (req: Request, res: Response): Promise<void> => {
+
+  getStudentById: async (req: Request, res: Response): Promise<void> => {
     try {
-      const faculties = await studentService.getFaculties();
-      logger.info("Successfully fetched faculties list");
-      res.send({ message: "List of faculties", faculties });
+      const { id } = req.params;
+      const student = await studentService.getStudentById(parseInt(id, 10));
+      if (!student) {
+        logger.error(`Student with ID ${id} not found`);
+        res.status(404).send({ message: "Student not found" });
+      } else {
+        logger.info(`Student with ID ${id} found`);
+        res.status(200).send({ message: "Student found", student });
+      }
     } catch (error) {
-      logger.error("Error fetching faculties list");
-      console.log("Error fetching faculties list:", error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while fetching faculties." });
-    }
-  },
-  getListStatus: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const status = await studentService.getStatus();
-      res.send({ message: "List of status", status });
-    } catch (error) {
+      logger.error("Error fetching student: " + error.message);
       console.error(error);
       res
         .status(500)
-        .send({ message: "An error occurred while fetching status." });
+        .send({ message: "An error occurred while fetching the student." });
     }
   },
-  getListCourse: async (req: Request, res: Response): Promise<void> => {
+
+  updateStudentById: async (req: Request, res: Response): Promise<void> => {
     try {
-      const courses = await studentService.getCourses();
-      res.send({ message: "List of courses", courses });
+      const { id } = req.params;
+      const updatedData = req.body;
+      const email = updatedData.email;
+      const phone_number = updatedData.phone_number;
+
+      // Check if the email domain is allowed
+      const emailConfig = await configurationService.getConfiguration(
+        "allowed_email_domain"
+      );
+      const emailRegex = new RegExp(
+        `^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`
+      );
+      if (email && !emailRegex.test(email)) {
+        logger.error("Invalid email domain");
+        res
+          .status(400)
+          .send({
+            message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+          });
+        return;
+      }
+
+      // Check if the phone number is valid
+      const phoneConfig = await configurationService.getConfiguration(
+        "phone_country_code"
+      );
+      const phoneRegex = new RegExp(
+        phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
+      if (phone_number && !phoneRegex.test(phone_number)) {
+        logger.error("Invalid phone number");
+        res
+          .status(400)
+          .send({
+            message: "Invalid phone number. Please use a valid phone number.",
+          });
+        return;
+      }
+
+      // Check if the status transition is allowed
+      const currentStatus = await studentService.getStudentStatus(
+        parseInt(id, 10)
+      );
+      const newStatus = updatedData.status;
+      const statusTransition = await StatusTransition.findOne({
+        where: { current_status: currentStatus, new_status: newStatus },
+      });
+      if (!statusTransition) {
+        logger.error("Invalid status transition");
+        res.status(400).send({ message: "Invalid status transition." });
+      }
+
+      const updatedStudent = await studentService.updateStudentById(
+        parseInt(id, 10),
+        updatedData
+      );
+
+      if (!updatedStudent) {
+        logger.error(`Student with ID ${id} not found or no changes made.`);
+        res
+          .status(404)
+          .send({ message: "Student not found or no changes made." });
+      } else {
+        logger.info(`Student with ID ${id} updated successfully`);
+        res.status(200).send({
+          message: "Student updated successfully",
+          updatedStudent,
+        });
+      }
     } catch (error) {
+      logger.error("Error updating student: " + error.message);
       console.error(error);
       res
         .status(500)
-        .send({ message: "An error occurred while fetching courses." });
+        .send({ message: "An error occurred while updating the student." });
     }
   },
-  
+
   addStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
-      const newStudent = await studentService.addStudent(data);
+
+      // Check if the email domain is allowed
+      const emailConfig = await configurationService.getConfiguration(
+        "allowed_email_domain"
+      );
+      const emailRegex = new RegExp(
+        `^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`
+      );
+      if (!emailRegex.test(data.email)) {
+        logger.error("Invalid email domain");
+        res
+          .status(400)
+          .send({
+            message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+          });
+        return;
+      }
+
+      // Check if the phone number is valid
+      const phoneConfig = await configurationService.getConfiguration(
+        "phone_country_code"
+      );
+      const phoneRegex = new RegExp(
+        phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
+      if (!phoneRegex.test(data.phone_number)) {
+        logger.error("Invalid phone number");
+        res
+          .status(400)
+          .send({
+            message: "Invalid phone number. Please use a valid phone number.",
+          });
+        return;
+      }
+
+      // const newStudent = await studentService.addStudent(data);
+      const newStudent = "ok";
       logger.info("Student added successfully");
       res
         .status(201)
         .send({ message: "Student added successfully", newStudent });
     } catch (error) {
       logger.error("Error adding new student" + error);
-      console.log("Error adding new student:", error); 
+      console.log("Error adding new student:", error);
       res
         .status(500)
         .send({ message: "An error occurred while adding the student." });
     }
   },
+
   updateStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const {
@@ -86,7 +190,54 @@ const studentController = {
       const updatedData = req.body;
 
       const studentId = parseInt(student_id, 10);
-      const updatedStudent = await studentService.update(
+
+      // Check if the email domain is allowed
+      const emailConfig = await configurationService.getConfiguration(
+        "allowed_email_domain"
+      );
+      const emailRegex = new RegExp(
+        `^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`
+      );
+      if (email && !emailRegex.test(email)) {
+        logger.error("Invalid email domain");
+        res
+          .status(400)
+          .send({
+            message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+          });
+        return;
+      }
+
+      // Check if the phone number is valid
+      const phoneConfig = await configurationService.getConfiguration(
+        "phone_country_code"
+      );
+      const phoneRegex = new RegExp(
+        phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      );
+      if (phone_number && !phoneRegex.test(phone_number)) {
+        logger.error("Invalid phone number");
+        res
+          .status(400)
+          .send({
+            message: "Invalid phone number. Please use a valid phone number.",
+          });
+        return;
+      }
+
+      // Check if the status transition is allowed
+      const currentStatus = await studentService.getStudentStatus(studentId);
+      const newStatus = status;
+      const statusTransition = await StatusTransition.findOne({
+        where: { current_status: currentStatus, new_status: newStatus },
+      });
+      if (!statusTransition) {
+        logger.error("Invalid status transition");
+        res.status(400).send({ message: "Invalid status transition." });
+        return;
+      }
+
+      const updatedStudent = await studentService.updateStudent(
         studentId,
         updatedData
       );
@@ -96,12 +247,9 @@ const studentController = {
           .status(404)
           .send({ message: "Student not found or no changes made." });
       } else {
-
         //before sending the response, we need to get Faculty name
         const faculty = await studentService.getFacultyName(faculty_id);
         updatedStudent.faculty_id = faculty.name;
-        console.log(updatedStudent);
-
         logger.info("Student updated successfully");
         res.status(200).send({
           message: "Student updated successfully",
@@ -116,12 +264,12 @@ const studentController = {
         .send({ message: "An error occurred while updating the student." });
     }
   },
+
   deleteStudent: async (req: Request, res: Response): Promise<void> => {
     try {
       const { student_id } = req.body; // Extract the student ID from the request body
-
       // Call the delete function in your service
-      const result = await studentService.delete(student_id);
+      const result = await studentService.deleteStudent(student_id);
 
       // If the student was successfully deleted, return a success response
       if (result === 0) {
@@ -137,189 +285,6 @@ const studentController = {
       res
         .status(500)
         .send({ message: "An error occurred while deleting the student." });
-    }
-  },
-  addFaculty: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const data = req.body;
-      const newFaculty = await studentService.addFaculty(data);
-      res
-        .status(201)
-        .send({ message: "Faculty added successfully", newFaculty });
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while adding the faculty." });
-    }
-  },
-
-  updateFaculty: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const {
-        faculty_id, name
-      } = req.body;
-      const updatedData = req.body;
-      console.log(updatedData, "id", faculty_id);
-      const updatedFaculty = await studentService.updateFaculty(
-        faculty_id,
-        updatedData
-      );
-
-      if (!updatedFaculty) {
-        res
-          .status(404)
-          .send({ message: "Faculty not found or no changes made." });
-      } else {
-        res.status(200).send({
-          message: "Faculty updated successfully",
-          updatedFaculty,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while updating the faculty." });
-    }
-  },
-  addStatus: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const data = req.body;
-      const newStatus = await studentService.addStatus(data);
-      res
-        .status(201)
-        .send({ message: "Status added successfully", newStatus });
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while adding the status." });
-    }
-  },
-
-  updateStatus: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const {
-        status_id, name
-      } = req.body;
-      const updatedData = req.body;
-      const updatedStatus = await studentService.updateStatus(
-        status_id,
-        updatedData
-      );
-
-      if (!updatedStatus) {
-        res
-          .status(404)
-          .send({ message: "Status not found or no changes made." });
-      } else {
-        res.status(200).send({
-          message: "Status updated successfully",
-          updatedStatus,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while updating the status." });
-    }
-  },
-
-  //add course
-  addCourse: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const data = req.body;
-      const newCourse = await studentService.addCourse(data);
-      res
-        .status(201)
-        .send({ message: "Course added successfully", newCourse });
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while adding the course." });
-    }
-  },
-
-  //update course
-  updateCourse: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const {
-        course_id, name
-      } = req.body;
-      const updatedData = req.body;
-      const updatedCourse = await studentService.updateCourse(
-        course_id,
-        updatedData
-      );
-
-      if (!updatedCourse) {
-        res
-          .status(404)
-          .send({ message: "Course not found or no changes made." });
-      } else {
-        res.status(200).send({
-          message: "Course updated successfully",
-          updatedCourse,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while updating the course." });
-    }
-  },
-
-  //getStudentById
-  getStudentById: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const { id } = req.params;
-      
-      console.log(id);
-
-      const student = await studentService.getStudentById(parseInt(id, 10));
-      if (!student) {
-        res.status(404).send({ message: "Student not found" });
-      } else {
-        res.status(200).send({ message: "Student found", student });
-      }
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while fetching the student." });
-    }
-  },
-  //updateStudentById
-  updateStudentById: async (req: Request, res: Response): Promise<void> => {
-    try {
-      const { id } = req.params;
-      const updatedData = req.body;
-      console.log(updatedData, "id", id);
-      
-      const updatedStudent = await studentService.updateStudentById(
-        parseInt(id, 10),
-        updatedData
-      );
-
-      if (!updatedStudent) {
-        res
-          .status(404)
-          .send({ message: "Student not found or no changes made." });
-      } else {
-        res.status(200).send({
-          message: "Student updated successfully",
-          updatedStudent,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while updating the student." });
     }
   },
 };

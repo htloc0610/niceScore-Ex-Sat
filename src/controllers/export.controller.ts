@@ -3,12 +3,12 @@ import fs from "fs";
 import path from "path";
 import ExcelJS from "exceljs";
 import studentService from "../services/student.service";
-import {logger} from "../config/logger";
+import { logger } from "../config/logger";
 
 // Hàm export dữ liệu ra JSON
 export const exportToJson = async (req: Request, res: Response) => {
   try {
-    const students = await studentService.getList(); // Lấy dữ liệu từ DB
+    const students = await studentService.getListStudent(); // Lấy dữ liệu từ DB
     const filePath = path.join(__dirname, "../exports/students.json");
     fs.writeFileSync(filePath, JSON.stringify(students, null, 2), "utf-8");
     res.download(filePath);
@@ -21,7 +21,7 @@ export const exportToJson = async (req: Request, res: Response) => {
 
 export const exportToExcel = async (req: Request, res: Response) => {
   try {
-    const students = await studentService.getList();
+    const students = await studentService.getListStudent();
     const workbook = new ExcelJS.Workbook();
     const worksheet = workbook.addWorksheet("Students");
 

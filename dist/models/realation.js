@@ -10,6 +10,8 @@ const identification_model_1 = __importDefault(require("./identification.model")
 const address_model_1 = __importDefault(require("./address.model"));
 const course_model_1 = __importDefault(require("./course.model"));
 const student_model_1 = __importDefault(require("./student.model"));
+const configurations_model_1 = __importDefault(require("./configurations.model"));
+const status_transitions_model_1 = __importDefault(require("./status_transitions.model"));
 function setupRelation() {
     // Student - Faculty
     student_model_1.default.belongsTo(faculty_model_1.default, { foreignKey: "faculty_id", as: "faculty" });
@@ -54,6 +56,8 @@ function setupRelation() {
     // Student - Course
     student_model_1.default.belongsTo(course_model_1.default, { foreignKey: "course_id", as: "course" });
     course_model_1.default.hasMany(student_model_1.default, { foreignKey: "course_id", as: "students" });
+    configurations_model_1.default.sync();
+    status_transitions_model_1.default.sync();
     console.log("Database relation set up successfully!");
 }
 //# sourceMappingURL=realation.js.map

@@ -10,7 +10,7 @@ import { logger } from "../config/logger";
 
 const studentService = {
   // Get list of students with related data
-  async getList() {
+  async getListStudent() {
     try {
       const students = await Student.findAll({
         attributes: {
@@ -100,50 +100,9 @@ const studentService = {
       throw new Error("Error fetching students list: " + error.message);
     }
   },
-  // Get list of faculties
-  async getFaculties() {
-    try {
-      const faculties = await Faculty.findAll();
-      console.log("faculty: ", faculties);
-      return faculties;
-    } catch (error) {
-      logger.error("Error fetching faculties list");
-      throw new Error("Error fetching faculties list");
-    }
-  },
-
-  // Get list of status
-  async getStatus() {
-    try {
-      const status = await Status.findAll();
-      return status;
-    } catch (error) {
-      throw new Error("Error fetching status list");
-    }
-  },
-
   // Add a new student
-  /*
   async addStudent(data: any) {
     try {
-      const newStudent = await Student.create(data);
-      const faculty = await Faculty.findOne({
-        where: { faculty_id: newStudent.faculty_id },
-      });
-      return {
-        ...newStudent.toJSON(),
-        facultyName: faculty ? faculty.name : null,
-      };
-    } catch (error) {
-      logger.error("Error adding new student" + error);
-      console.log("Error adding new student:", error);  
-      throw new Error("Error adding new student" + error);
-    }
-  },
-  */
-  async addStudent(data: any) {
-    try {
-      console.log(data);
       // Tạo promises để thêm địa chỉ thường trú, tạm trú, nhận thư
       const permanentAddressPromise = addressService.addAddress(data.permanent);
       const temporaryAddressPromise = addressService.addAddress(data.temporary);
@@ -160,23 +119,6 @@ const studentService = {
         has_chip: data.has_chip || false,
         notes: data.notes || "",
       });
-      console.log(
-        data.type,
-        data.number,
-        "issue_date",
-        data.issue_date,
-        "expiry_date",
-        data.expiry_date,
-        "place_of_issue",
-        data.place_of_issue,
-        "country_of_issue",
-        data.country_of_issue,
-        "has_chip",
-        data.has_chip || false,
-        "notes",
-        data.notes || ""
-      );
-
       // Chạy tất cả promises cùng lúc
       const [
         permanentAddress,
@@ -218,7 +160,7 @@ const studentService = {
   },
 
   // Delete a student by ID
-  async delete(studentId: number) {
+  async deleteStudent(studentId: number) {
     try {
       const result = await Student.destroy({
         where: { student_id: studentId },
@@ -233,7 +175,7 @@ const studentService = {
   },
 
   // Update a student by ID
-  async update(studentId: number, studentData: any) {
+  async updateStudent(studentId: number, studentData: any) {
     try {
       const student = Student.build(studentData);
       await student.validate();
@@ -362,114 +304,10 @@ const studentService = {
       throw new Error("Error adding student from Excel: " + error.message);
     }
   },
-
-  async addFaculty(data: any) {
-    try {
-      const newFaculty = await Faculty.create(data);
-
-      return {
-        ...newFaculty.toJSON(),
-      };
-    } catch (error) {
-      throw new Error("Error adding new faculty" + error);
-    }
-  },
-
-  async updateFaculty(facultyId: number, facultyData: any) {
-    try {
-      const [updated] = await Faculty.update(facultyData, {
-        where: { faculty_id: facultyId },
-      });
-
-      if (updated === 0) {
-        throw new Error("Faculty not found");
-      }
-      const updatedFaculty = await Faculty.findOne({
-        where: { faculty_id: facultyId },
-      });
-      return updatedFaculty ? updatedFaculty.get() : null;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
   async getFacultyName(faculty_id: string) {
     const faculty = await Faculty.findOne({ where: { faculty_id } });
     return faculty;
   },
-
-  async addStatus(data: any) {
-    try {
-      const newStatus = await Status.create(data);
-
-      return {
-        ...newStatus.toJSON(),
-      };
-    } catch (error) {
-      throw new Error("Error adding new status" + error);
-    }
-  },
-
-  async updateStatus(statusId: number, statusData: any) {
-    try {
-      const [updated] = await Status.update(statusData, {
-        where: { status_id: statusId },
-      });
-
-      if (updated === 0) {
-        throw new Error("Status not found");
-      }
-      const updatedStatus = await Status.findOne({
-        where: { status_id: statusId },
-      });
-      return updatedStatus ? updatedStatus.get() : null;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
-
-  //add course
-  async addCourse(data: any) {
-    try {
-      const newCourse = await Course.create(data);
-
-      return {
-        ...newCourse.toJSON(),
-      };
-    } catch (error) {
-      throw new Error("Error adding new course" + error);
-    }
-  },
-
-  //update course
-  async updateCourse(courseId: number, courseData: any) {
-    try {
-      const [updated] = await Course.update(courseData, {
-        where: { course_id: courseId },
-      });
-
-      if (updated === 0) {
-        throw new Error("Course not found");
-      }
-      const updatedCourse = await Course.findOne({
-        where: { course_id: courseId },
-      });
-      return updatedCourse ? updatedCourse.get() : null;
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
-
-  //getCourses
-  async getCourses() {
-    try {
-      const courses = await Course.findAll();
-      return courses;
-    } catch (error) {
-      throw new Error("Error fetching courses list");
-    }
-  },
-
-  //getStudentById
   async getStudentById(studentId: number) {
     try {
       const student = await Student.findOne({
@@ -568,6 +406,30 @@ const studentService = {
       throw new Error(error.message);
     }
   },
+  async getStudentStatus(studentId: number) {
+    try {
+      const student = await Student.findOne({
+        where: { student_id: studentId },
+        include: [
+          {
+            model: Status,
+            as: "status",
+            attributes: ["name"],
+          },
+        ],
+      });
+
+      if (!student) {
+        throw new Error("Student not found");
+      }
+
+      return student.dataValues.status.name;
+    } catch (error) {
+      logger.error("Error fetching student status: " + error.message);
+      console.log("Error fetching student status:", error);
+      throw new Error("Error fetching student status: " + error.message);
+    }
+  }
 };
 
 export default studentService;

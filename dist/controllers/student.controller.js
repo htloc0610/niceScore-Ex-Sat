@@ -13,11 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_service_1 = __importDefault(require("../services/student.service"));
+const configurations_service_1 = __importDefault(require("../services/configurations.service"));
+const status_transitions_model_1 = __importDefault(require("../models/status_transitions.model"));
 const logger_1 = require("../config/logger");
 const studentController = {
     getStudentHome: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const students = yield student_service_1.default.getList();
+            const students = yield student_service_1.default.getListStudent();
             logger_1.logger.info("Successfully fetched students list");
             res.send({ message: "Welcome to the Student Home Page", students });
         }
@@ -29,48 +31,119 @@ const studentController = {
                 .send({ message: "An error occurred while fetching students." });
         }
     }),
-    getListFaculties: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const faculties = yield student_service_1.default.getFaculties();
-            logger_1.logger.info("Successfully fetched faculties list");
-            res.send({ message: "List of faculties", faculties });
+            const { id } = req.params;
+            const student = yield student_service_1.default.getStudentById(parseInt(id, 10));
+            if (!student) {
+                logger_1.logger.error(`Student with ID ${id} not found`);
+                res.status(404).send({ message: "Student not found" });
+            }
+            else {
+                logger_1.logger.info(`Student with ID ${id} found`);
+                res.status(200).send({ message: "Student found", student });
+            }
         }
         catch (error) {
-            logger_1.logger.error("Error fetching faculties list");
-            console.log("Error fetching faculties list:", error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while fetching faculties." });
-        }
-    }),
-    getListStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const status = yield student_service_1.default.getStatus();
-            res.send({ message: "List of status", status });
-        }
-        catch (error) {
+            logger_1.logger.error("Error fetching student: " + error.message);
             console.error(error);
             res
                 .status(500)
-                .send({ message: "An error occurred while fetching status." });
+                .send({ message: "An error occurred while fetching the student." });
         }
     }),
-    getListCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    updateStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const courses = yield student_service_1.default.getCourses();
-            res.send({ message: "List of courses", courses });
+            const { id } = req.params;
+            const updatedData = req.body;
+            const email = updatedData.email;
+            const phone_number = updatedData.phone_number;
+            // Check if the email domain is allowed
+            const emailConfig = yield configurations_service_1.default.getConfiguration("allowed_email_domain");
+            const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+            if (email && !emailRegex.test(email)) {
+                logger_1.logger.error("Invalid email domain");
+                res
+                    .status(400)
+                    .send({
+                    message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+                });
+                return;
+            }
+            // Check if the phone number is valid
+            const phoneConfig = yield configurations_service_1.default.getConfiguration("phone_country_code");
+            const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+            if (phone_number && !phoneRegex.test(phone_number)) {
+                logger_1.logger.error("Invalid phone number");
+                res
+                    .status(400)
+                    .send({
+                    message: "Invalid phone number. Please use a valid phone number.",
+                });
+                return;
+            }
+            // Check if the status transition is allowed
+            const currentStatus = yield student_service_1.default.getStudentStatus(parseInt(id, 10));
+            const newStatus = updatedData.status;
+            const statusTransition = yield status_transitions_model_1.default.findOne({
+                where: { current_status: currentStatus, new_status: newStatus },
+            });
+            if (!statusTransition) {
+                logger_1.logger.error("Invalid status transition");
+                res.status(400).send({ message: "Invalid status transition." });
+            }
+            const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
+            if (!updatedStudent) {
+                logger_1.logger.error(`Student with ID ${id} not found or no changes made.`);
+                res
+                    .status(404)
+                    .send({ message: "Student not found or no changes made." });
+            }
+            else {
+                logger_1.logger.info(`Student with ID ${id} updated successfully`);
+                res.status(200).send({
+                    message: "Student updated successfully",
+                    updatedStudent,
+                });
+            }
         }
         catch (error) {
+            logger_1.logger.error("Error updating student: " + error.message);
             console.error(error);
             res
                 .status(500)
-                .send({ message: "An error occurred while fetching courses." });
+                .send({ message: "An error occurred while updating the student." });
         }
     }),
     addStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
-            const newStudent = yield student_service_1.default.addStudent(data);
+            // Check if the email domain is allowed
+            const emailConfig = yield configurations_service_1.default.getConfiguration("allowed_email_domain");
+            const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+            if (!emailRegex.test(data.email)) {
+                logger_1.logger.error("Invalid email domain");
+                res
+                    .status(400)
+                    .send({
+                    message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+                });
+                return;
+            }
+            // Check if the phone number is valid
+            const phoneConfig = yield configurations_service_1.default.getConfiguration("phone_country_code");
+            const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+            if (!phoneRegex.test(data.phone_number)) {
+                logger_1.logger.error("Invalid phone number");
+                res
+                    .status(400)
+                    .send({
+                    message: "Invalid phone number. Please use a valid phone number.",
+                });
+                return;
+            }
+            // const newStudent = await studentService.addStudent(data);
+            const newStudent = "ok";
             logger_1.logger.info("Student added successfully");
             res
                 .status(201)
@@ -89,7 +162,42 @@ const studentController = {
             const { student_id, full_name, date_of_birth, gender, faculty_id, course, program, address, email, phone_number, status, } = req.body;
             const updatedData = req.body;
             const studentId = parseInt(student_id, 10);
-            const updatedStudent = yield student_service_1.default.update(studentId, updatedData);
+            // Check if the email domain is allowed
+            const emailConfig = yield configurations_service_1.default.getConfiguration("allowed_email_domain");
+            const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
+            if (email && !emailRegex.test(email)) {
+                logger_1.logger.error("Invalid email domain");
+                res
+                    .status(400)
+                    .send({
+                    message: `Invalid email domain. Please use a ${emailConfig.config_value} email.`,
+                });
+                return;
+            }
+            // Check if the phone number is valid
+            const phoneConfig = yield configurations_service_1.default.getConfiguration("phone_country_code");
+            const phoneRegex = new RegExp(phoneConfig.config_value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+            if (phone_number && !phoneRegex.test(phone_number)) {
+                logger_1.logger.error("Invalid phone number");
+                res
+                    .status(400)
+                    .send({
+                    message: "Invalid phone number. Please use a valid phone number.",
+                });
+                return;
+            }
+            // Check if the status transition is allowed
+            const currentStatus = yield student_service_1.default.getStudentStatus(studentId);
+            const newStatus = status;
+            const statusTransition = yield status_transitions_model_1.default.findOne({
+                where: { current_status: currentStatus, new_status: newStatus },
+            });
+            if (!statusTransition) {
+                logger_1.logger.error("Invalid status transition");
+                res.status(400).send({ message: "Invalid status transition." });
+                return;
+            }
+            const updatedStudent = yield student_service_1.default.updateStudent(studentId, updatedData);
             if (!updatedStudent) {
                 res
                     .status(404)
@@ -99,7 +207,6 @@ const studentController = {
                 //before sending the response, we need to get Faculty name
                 const faculty = yield student_service_1.default.getFacultyName(faculty_id);
                 updatedStudent.faculty_id = faculty.name;
-                console.log(updatedStudent);
                 logger_1.logger.info("Student updated successfully");
                 res.status(200).send({
                     message: "Student updated successfully",
@@ -119,7 +226,7 @@ const studentController = {
         try {
             const { student_id } = req.body; // Extract the student ID from the request body
             // Call the delete function in your service
-            const result = yield student_service_1.default.delete(student_id);
+            const result = yield student_service_1.default.deleteStudent(student_id);
             // If the student was successfully deleted, return a success response
             if (result === 0) {
                 logger_1.logger.error("Student not found");
@@ -136,172 +243,6 @@ const studentController = {
             res
                 .status(500)
                 .send({ message: "An error occurred while deleting the student." });
-        }
-    }),
-    addFaculty: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const data = req.body;
-            const newFaculty = yield student_service_1.default.addFaculty(data);
-            res
-                .status(201)
-                .send({ message: "Faculty added successfully", newFaculty });
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while adding the faculty." });
-        }
-    }),
-    updateFaculty: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { faculty_id, name } = req.body;
-            const updatedData = req.body;
-            console.log(updatedData, "id", faculty_id);
-            const updatedFaculty = yield student_service_1.default.updateFaculty(faculty_id, updatedData);
-            if (!updatedFaculty) {
-                res
-                    .status(404)
-                    .send({ message: "Faculty not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Faculty updated successfully",
-                    updatedFaculty,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the faculty." });
-        }
-    }),
-    addStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const data = req.body;
-            const newStatus = yield student_service_1.default.addStatus(data);
-            res
-                .status(201)
-                .send({ message: "Status added successfully", newStatus });
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while adding the status." });
-        }
-    }),
-    updateStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { status_id, name } = req.body;
-            const updatedData = req.body;
-            const updatedStatus = yield student_service_1.default.updateStatus(status_id, updatedData);
-            if (!updatedStatus) {
-                res
-                    .status(404)
-                    .send({ message: "Status not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Status updated successfully",
-                    updatedStatus,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the status." });
-        }
-    }),
-    //add course
-    addCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const data = req.body;
-            const newCourse = yield student_service_1.default.addCourse(data);
-            res
-                .status(201)
-                .send({ message: "Course added successfully", newCourse });
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while adding the course." });
-        }
-    }),
-    //update course
-    updateCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { course_id, name } = req.body;
-            const updatedData = req.body;
-            const updatedCourse = yield student_service_1.default.updateCourse(course_id, updatedData);
-            if (!updatedCourse) {
-                res
-                    .status(404)
-                    .send({ message: "Course not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Course updated successfully",
-                    updatedCourse,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the course." });
-        }
-    }),
-    //getStudentById
-    getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { id } = req.params;
-            console.log(id);
-            const student = yield student_service_1.default.getStudentById(parseInt(id, 10));
-            if (!student) {
-                res.status(404).send({ message: "Student not found" });
-            }
-            else {
-                res.status(200).send({ message: "Student found", student });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while fetching the student." });
-        }
-    }),
-    //updateStudentById
-    updateStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            const { id } = req.params;
-            const updatedData = req.body;
-            console.log(updatedData, "id", id);
-            const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
-            if (!updatedStudent) {
-                res
-                    .status(404)
-                    .send({ message: "Student not found or no changes made." });
-            }
-            else {
-                res.status(200).send({
-                    message: "Student updated successfully",
-                    updatedStudent,
-                });
-            }
-        }
-        catch (error) {
-            console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the student." });
         }
     }),
 };
