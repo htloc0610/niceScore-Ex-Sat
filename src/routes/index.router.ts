@@ -7,6 +7,7 @@ import facultyRouter from "./faculty.router";
 import statusRouter from "./status.router";
 import courseRouter from "./course.router";
 import statusTransitionsRouter from "./status_transitions.router";
+import configurationsRouter from "./configurations.router";
 
 const setupRoutes = (app: Application): void => {
   app.use("/api/student", studentRouter);
@@ -18,6 +19,8 @@ const setupRoutes = (app: Application): void => {
   app.use("/api/course", courseRouter);
 
   app.use("/api/status_transition", statusTransitionsRouter);
+
+  app.use("/api/configurations", configurationsRouter);
 
   app.use("/export", exportRoutes);
 
