@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "../src/public")));
 // Set Handlebars as the view engine
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "../src/public/views"));
+app.set("views", path.join(__dirname, "../src/views"));
 
 setupRoutes(app);
 

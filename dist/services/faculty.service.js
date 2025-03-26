@@ -20,7 +20,6 @@ const facultyService = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const faculties = yield faculty_model_1.default.findAll();
-                console.log("faculty: ", faculties);
                 return faculties;
             }
             catch (error) {
