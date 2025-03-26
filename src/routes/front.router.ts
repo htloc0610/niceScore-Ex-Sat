@@ -1,4 +1,5 @@
 import { Router } from "express";
+import configurationService from "../services/configurations.service";
 
 const router = Router();
 
@@ -11,6 +12,13 @@ router.get("/more", (req, res) => {
 router.get("/add", (req, res) => {
   res.render("add"); // Render the "add" Handlebars template
 });
+
+// [GET] /
+router.get("/configurations", async (req, res) => {
+  const configurations = await configurationService.getAllConfiguration(); // Get the configurations from the service
+  res.render("configurations", {configurations: configurations}); // Render the "configurations" Handlebars template
+});
+
 
 // [GET] /
 router.get("/", (req, res) => {
