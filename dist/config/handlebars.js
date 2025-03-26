@@ -8,8 +8,8 @@ const path_1 = __importDefault(require("path"));
 const hbs = (0, express_handlebars_1.create)({
     extname: ".hbs",
     defaultLayout: "main",
-    layoutsDir: path_1.default.join(__dirname, "../views/layouts"),
-    partialsDir: path_1.default.join(__dirname, "../views/partials"),
+    layoutsDir: path_1.default.join(__dirname, "../public/views/layouts"),
+    partialsDir: path_1.default.join(__dirname, "../public/views/partials"),
 });
 exports.default = hbs;
 //# sourceMappingURL=handlebars.js.map

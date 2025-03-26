@@ -115,7 +115,7 @@
     "phone_number": "0123456789",
     "nationality": "VN",
     "faculty": {
-      "name": "Hóa học"
+      "name": "Hoa hoc"
     },
     "course": {
       "course_name": "K23"
@@ -262,59 +262,6 @@
       "country_of_issue": "",
       "has_chip": false,
       "notes": ""
-    }
-  },
-  {
-    "student_id": 2210,
-    "full_name": "Nguyễn Văn X",
-    "date_of_birth": "2025-03-07",
-    "gender": "Nữ",
-    "program": "Cử nhân",
-    "email": "dangdiennguyen2222@gmail.com",
-    "phone_number": "0912345678",
-    "nationality": "Việt Nam",
-    "faculty": {
-      "name": "Vật lý học"
-    },
-    "course": {
-      "course_name": "K23"
-    },
-    "status": {
-      "name": "Đang nhập học"
-    },
-    "permanentAddress": {
-      "house_number": "12",
-      "street_name": null,
-      "ward": "6",
-      "district": "7",
-      "city": "TP. HCM",
-      "country": "Việt Nam"
-    },
-    "temporaryAddress": {
-      "house_number": "12",
-      "street_name": null,
-      "ward": "7",
-      "district": "7",
-      "city": "TP. HCM",
-      "country": "Việt Nam"
-    },
-    "mailingAddress": {
-      "house_number": "12",
-      "street_name": null,
-      "ward": "6",
-      "district": "7",
-      "city": "TP. HCM",
-      "country": "Việt Nam"
-    },
-    "identification": {
-      "type": "Passport",
-      "number": "00112233",
-      "issue_date": "2025-03-07",
-      "expiry_date": "2025-03-08",
-      "place_of_issue": "USA",
-      "country_of_issue": "Hoa Kỳ",
-      "has_chip": false,
-      "notes": "Không có"
     }
   }
 ]
