@@ -1,10 +1,13 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/db";
+import Status from "./status.model";
 
 class StatusTransition extends Model {
-  public current_status!: string;
-  public new_status!: string;
+  public id!: number;
+  public current_status!: number;
+  public new_status!: number;
 }
+
 
 StatusTransition.init(
   {
@@ -14,12 +17,20 @@ StatusTransition.init(
       primaryKey: true,
     },
     current_status: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: Status,
+        key: "status_id",
+      },
     },
     new_status: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.INTEGER,
       allowNull: false,
+      references: {
+        model: Status,
+        key: "status_id",
+      },
     },
   },
   {

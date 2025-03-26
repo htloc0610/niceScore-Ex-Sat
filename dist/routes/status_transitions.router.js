@@ -10,7 +10,9 @@ const statusTransitionsRouter = (0, express_1.Router)();
 statusTransitionsRouter.get("/", status_transitions_controller_1.default.getStatusTransitions);
 // [POST] /api/status_transition
 statusTransitionsRouter.post("/", status_transitions_controller_1.default.addStatusTransitions);
-// [PATCH] /api/status_transition
+// [PUT] /api/status_transition
 statusTransitionsRouter.put("/", status_transitions_controller_1.default.updateStatusTransitions);
+// [DELETE] /api/status_transition
+statusTransitionsRouter.delete("/:id", status_transitions_controller_1.default.deleteStatusTransitions);
 exports.default = statusTransitionsRouter;
 //# sourceMappingURL=status_transitions.router.js.map

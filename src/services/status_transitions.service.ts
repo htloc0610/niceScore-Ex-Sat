@@ -1,8 +1,9 @@
 import StatusTransition from "../models/status_transitions.model";
+import Status from "../models/status.model";
 import { logger } from "../config/logger";
 
 const statusTransitionService = {
-  checkStatusTransition: async (currentStatus: string, newStatus: string) => {
+  checkStatusTransition: async (currentStatus: number, newStatus: number) => {
     try {
       const statusTransition = await StatusTransition.findOne({
         where: { current_status: currentStatus, new_status: newStatus },
@@ -16,7 +17,20 @@ const statusTransitionService = {
   },
   getStatusTransitions: async () => {
     try {
-      const statusTransitions = await StatusTransition.findAll();
+      const statusTransitions = await StatusTransition.findAll({
+        include: [
+          {
+            model: Status,
+            as: "currentStatus", // Dùng alias đã định nghĩa trong belongsTo
+            attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
+          },
+          {
+            model: Status,
+            as: "newStatus", // Dùng alias đã định nghĩa trong belongsTo
+            attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id'
+          },
+        ],
+      });
       return statusTransitions;
     } catch (error) {
       logger.error("Error getting status transitions: " + error.message);
@@ -24,7 +38,7 @@ const statusTransitionService = {
       throw error;
     }
   },
-  addStatusTransitions: async (current_status: string, new_status: string) => {
+  addStatusTransitions: async (current_status: number, new_status: number) => {
     try {
       const existingTransition = await StatusTransition.findOne({
         where: { current_status, new_status },
@@ -45,21 +59,35 @@ const statusTransitionService = {
   },
   updateStatusTransitions: async (
     id: number,
-    current_status: string,
-    new_status: string
+    current_status: number,
+    new_status: number
   ) => {
     try {
       const statusTransition = await StatusTransition.findByPk(id);
       if (!statusTransition) {
         throw new Error("Status transition not found");
       }
-      statusTransition.current_status = current_status;
-      statusTransition.new_status = new_status;
+      statusTransition.current_status = parseInt(current_status.toString(), 10);
+      statusTransition.new_status = parseInt(new_status.toString(), 10);
       await statusTransition.save();
       return statusTransition;
     } catch (error) {
       logger.error("Error updating status transition: " + error.message);
       console.error("Error updating status transition:", error);
+      throw error;
+    }
+  },
+  deleteStatusTransitions: async (id: number) => {
+    try {
+      const statusTransition = await StatusTransition.findByPk(id);
+      if (!statusTransition) {
+        throw new Error("Status transition not found");
+      }
+      await statusTransition.destroy();
+      return { message: "Status transition deleted successfully" };
+    } catch (error) {
+      logger.error("Error deleting status transition: " + error.message);
+      console.error("Error deleting status transition:", error);
       throw error;
     }
   },

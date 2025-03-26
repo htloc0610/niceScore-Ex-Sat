@@ -15,10 +15,16 @@ statusTransitionsRouter.post(
   statusTransitionController.addStatusTransitions
 );
 
-// [PATCH] /api/status_transition
+// [PUT] /api/status_transition
 statusTransitionsRouter.put(
   "/",
   statusTransitionController.updateStatusTransitions
+);
+
+// [DELETE] /api/status_transition
+statusTransitionsRouter.delete(
+  "/:id",
+  statusTransitionController.deleteStatusTransitions
 );
 
 export default statusTransitionsRouter;

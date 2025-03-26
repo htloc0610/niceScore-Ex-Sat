@@ -47,19 +47,6 @@ const statusService = {
       throw new Error(error.message);
     }
   },
-  async isAvailable(new_status: string) {
-    try {
-      const status = await Status.findOne({
-        where: { name: new_status },
-      });
-      return status !== null;
-    } catch (error) {
-      logger.error(
-        `Error checking availability of status ${new_status}: ${error.message}`
-      );
-      throw new Error("Error checking status availability");
-    }
-  },
 };
 
 export default statusService;
