@@ -4,12 +4,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const studentId = url.substring(url.lastIndexOf('/') + 1);
     console.log(studentId);
 
-    const apiUrl = `/api/student/${studentId}`;
-
     // Function to fetch data from the API and populate the form fields
     async function fetchAndPopulateData() {
         try {
-            const response = await fetch(apiUrl);
+            const response = await fetch(`/api/student/${studentId}`);
             const data = await response.json();
             
 
@@ -138,6 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             faculty_id: document.getElementById('faculty').value,
             course_id: document.getElementById('course').value,
             status_id: document.getElementById('status').value,
+            status: document.getElementById('status').options[document.getElementById('status').selectedIndex].text,
 
             temporaryAddress: {
                 temporary_address_id: document.getElementById('tempAddress').value,
@@ -182,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         try {
-            const response = await fetch(apiUrl, {
+            const response = await fetch(`/api/student/${studentId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -190,14 +189,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: JSON.stringify(updatedData),
             });
 
+            const responseData = await response.json(); // Get the JSON data from the response
+
             if (response.ok) {
                 console.log('Student data updated successfully');
             } else {
+                alert(responseData.message);
                 console.error('Failed to update student data');
                 fetchAndPopulateData();
             }
         } catch (error) {
             console.error('Error updating student data:', error);
+            alert(error.message)
         }
     }
 
