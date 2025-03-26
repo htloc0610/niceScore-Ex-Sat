@@ -84,7 +84,13 @@ const studentController = {
       const currentStatus = await studentService.getStudentStatus(
         parseInt(id, 10)
       );
-      const newStatus = updatedData.status;
+
+      console.log("updatedData.status_id", updatedData.status_id);
+      const newStatus = updatedData.status_id;
+
+      console.log("currentStatus:", currentStatus);
+      console.log("newStatus:", newStatus);
+
       const statusTransition = await StatusTransition.findOne({
         where: { current_status: currentStatus, new_status: newStatus },
       });
@@ -92,6 +98,8 @@ const studentController = {
         logger.error("Invalid status transition");
         res.status(400).send({ message: "Invalid status transition." });
       }
+
+      console.log("updatedData", updatedData);
 
       const updatedStudent = await studentService.updateStudentById(
         parseInt(id, 10),

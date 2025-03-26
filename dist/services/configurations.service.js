@@ -54,6 +54,7 @@ const configurationService = {
     }),
     addConfiguration: (configData) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            console.log("configData", configData);
             const newConfig = yield configurations_model_1.default.create(configData);
             return newConfig;
         }

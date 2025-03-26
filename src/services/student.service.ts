@@ -388,6 +388,9 @@ const studentService = {
       delete studentData.mailingAddress;
       delete studentData.identification;
 
+      studentData.status_id = parseInt(studentData.status_id, 10);
+      console.log("studentData", studentData);
+
       // Update the student
       const [updated] = await Student.update(studentData, {
         where: { student_id: studentId },
@@ -414,7 +417,7 @@ const studentService = {
           {
             model: Status,
             as: "status",
-            attributes: ["name"],
+            attributes: ["status_id"],
           },
         ],
       });
@@ -423,7 +426,7 @@ const studentService = {
         throw new Error("Student not found");
       }
 
-      return student.dataValues.status.name;
+      return student.dataValues.status.status_id;
     } catch (error) {
       logger.error("Error fetching student status: " + error.message);
       console.log("Error fetching student status:", error);

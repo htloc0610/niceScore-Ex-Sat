@@ -32,7 +32,7 @@ const sequelize = new Sequelize(
       //   require: true,
       //   rejectUnauthorized: false, // Nếu cần kết nối với SSL
       // },
-      ssl: false,
+      ssl: true,
     },
   }
 );

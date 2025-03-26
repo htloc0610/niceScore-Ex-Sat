@@ -12,6 +12,7 @@ const port: string | number = process.env.PORT || 8080;
 
 // Middleware để xử lý JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 

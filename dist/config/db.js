@@ -32,7 +32,7 @@ process.env.DB_PASSWORD, // Mật khẩu
         //   require: true,
         //   rejectUnauthorized: false, // Nếu cần kết nối với SSL
         // },
-        ssl: false,
+        ssl: true,
     },
 });
 exports.default = sequelize;

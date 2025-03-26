@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
             faculty_id: document.getElementById('faculty').value,
             course_id: document.getElementById('course').value,
             status_id: document.getElementById('status').value,
-            status: document.getElementById('status').options[document.getElementById('status').selectedIndex].text,
+            // status_string: document.getElementById('status').options[document.getElementById('status').selectedIndex].text,
 
             temporaryAddress: {
                 temporary_address_id: document.getElementById('tempAddress').value,
@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (response.ok) {
                 console.log('Student data updated successfully');
+                alert('Updated student data successfully');
             } else {
                 alert(responseData.message);
                 console.error('Failed to update student data');

@@ -84,7 +84,10 @@ const studentController = {
             }
             // Check if the status transition is allowed
             const currentStatus = yield student_service_1.default.getStudentStatus(parseInt(id, 10));
-            const newStatus = updatedData.status;
+            console.log("updatedData.status_id", updatedData.status_id);
+            const newStatus = updatedData.status_id;
+            console.log("currentStatus:", currentStatus);
+            console.log("newStatus:", newStatus);
             const statusTransition = yield status_transitions_model_1.default.findOne({
                 where: { current_status: currentStatus, new_status: newStatus },
             });
@@ -92,6 +95,7 @@ const studentController = {
                 logger_1.logger.error("Invalid status transition");
                 res.status(400).send({ message: "Invalid status transition." });
             }
+            console.log("updatedData", updatedData);
             const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
             if (!updatedStudent) {
                 logger_1.logger.error(`Student with ID ${id} not found or no changes made.`);
