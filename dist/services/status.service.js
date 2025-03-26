@@ -64,20 +64,6 @@ const statusService = {
             }
         });
     },
-    isAvailable(new_status) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const status = yield status_model_1.default.findOne({
-                    where: { name: new_status },
-                });
-                return status !== null;
-            }
-            catch (error) {
-                logger_1.logger.error(`Error checking availability of status ${new_status}: ${error.message}`);
-                throw new Error("Error checking status availability");
-            }
-        });
-    },
 };
 exports.default = statusService;
 //# sourceMappingURL=status.service.js.map

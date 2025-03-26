@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const status_transitions_model_1 = __importDefault(require("../models/status_transitions.model"));
+const status_model_1 = __importDefault(require("../models/status.model"));
 const logger_1 = require("../config/logger");
 const statusTransitionService = {
     checkStatusTransition: (currentStatus, newStatus) => __awaiter(void 0, void 0, void 0, function* () {
@@ -30,7 +31,20 @@ const statusTransitionService = {
     }),
     getStatusTransitions: () => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const statusTransitions = yield status_transitions_model_1.default.findAll();
+            const statusTransitions = yield status_transitions_model_1.default.findAll({
+                include: [
+                    {
+                        model: status_model_1.default,
+                        as: "currentStatus", // Dùng alias đã định nghĩa trong belongsTo
+                        attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
+                    },
+                    {
+                        model: status_model_1.default,
+                        as: "newStatus", // Dùng alias đã định nghĩa trong belongsTo
+                        attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id'
+                    },
+                ],
+            });
             return statusTransitions;
         }
         catch (error) {
@@ -65,14 +79,29 @@ const statusTransitionService = {
             if (!statusTransition) {
                 throw new Error("Status transition not found");
             }
-            statusTransition.current_status = current_status;
-            statusTransition.new_status = new_status;
+            statusTransition.current_status = parseInt(current_status.toString(), 10);
+            statusTransition.new_status = parseInt(new_status.toString(), 10);
             yield statusTransition.save();
             return statusTransition;
         }
         catch (error) {
             logger_1.logger.error("Error updating status transition: " + error.message);
             console.error("Error updating status transition:", error);
+            throw error;
+        }
+    }),
+    deleteStatusTransitions: (id) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const statusTransition = yield status_transitions_model_1.default.findByPk(id);
+            if (!statusTransition) {
+                throw new Error("Status transition not found");
+            }
+            yield statusTransition.destroy();
+            return { message: "Status transition deleted successfully" };
+        }
+        catch (error) {
+            logger_1.logger.error("Error deleting status transition: " + error.message);
+            console.error("Error deleting status transition:", error);
             throw error;
         }
     }),

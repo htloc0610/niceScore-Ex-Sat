@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import statusTransitionService from "../services/status_transitions.service";
-import statusService from "../services/status.service";
 import { logger } from "../config/logger";
 
 const statusTransitionController = {
@@ -33,16 +32,6 @@ const statusTransitionController = {
   addStatusTransitions: async (req: Request, res: Response) => {
     const { current_status, new_status } = req.body;
     try {
-      const isCurrentStatusAvailable = await statusService.isAvailable(
-        current_status
-      );
-      const isNewStatusAvailable = await statusService.isAvailable(new_status);
-
-      if (!isCurrentStatusAvailable || !isNewStatusAvailable) {
-        res.status(400).json({ error: "Invalid status provided" });
-        return;
-      }
-
       const result = await statusTransitionService.addStatusTransitions(
         current_status,
         new_status
@@ -57,21 +46,13 @@ const statusTransitionController = {
   updateStatusTransitions: async (req: Request, res: Response) => {
     const { id, current_status, new_status } = req.body;
     try {
-      const isCurrentStatusAvailable = await statusService.isAvailable(
-        current_status
-      );
-      const isNewStatusAvailable = await statusService.isAvailable(new_status);
-
-      if (!isCurrentStatusAvailable || !isNewStatusAvailable) {
-        res.status(400).json({ error: "Invalid status provided" });
-        return;
-      }
-
+    
       const result = await statusTransitionService.updateStatusTransitions(
         id,
         current_status,
         new_status
       );
+      
       logger.info(`Updating status transition with id ${id}`);
       res.status(200).json(result);
     } catch (error) {
@@ -79,6 +60,21 @@ const statusTransitionController = {
       res.status(500).json({ error: error.message });
     }
   },
+  deleteStatusTransitions: async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+      const result = await statusTransitionService.deleteStatusTransitions(parseInt(id, 10));
+      if (!result) {
+      res.status(404).json({ error: "Status transition not found" });
+      return;
+      }
+      logger.info(`Deleted status transition with id ${id}`);
+      res.status(200).json({ message: "Status transition deleted successfully" });
+    } catch (error) {
+      logger.error(`Error deleting status transition: ${error.message}`);
+      res.status(500).json({ error: error.message });
+    }
+    }
 };
 
 export default statusTransitionController;

@@ -56,8 +56,24 @@ function setupRelation() {
     // Student - Course
     student_model_1.default.belongsTo(course_model_1.default, { foreignKey: "course_id", as: "course" });
     course_model_1.default.hasMany(student_model_1.default, { foreignKey: "course_id", as: "students" });
+    // Status - StatusTransition (current_status and new_status)
+    status_model_1.default.hasMany(status_transitions_model_1.default, {
+        foreignKey: "current_status",
+        as: "currentStatusTransitions",
+    });
+    status_model_1.default.hasMany(status_transitions_model_1.default, {
+        foreignKey: "new_status",
+        as: "newStatusTransitions",
+    });
+    status_transitions_model_1.default.belongsTo(status_model_1.default, {
+        foreignKey: "current_status",
+        as: "currentStatus",
+    });
+    status_transitions_model_1.default.belongsTo(status_model_1.default, {
+        foreignKey: "new_status",
+        as: "newStatus",
+    });
     configurations_model_1.default.sync();
-    status_transitions_model_1.default.sync();
     console.log("Database relation set up successfully!");
 }
 //# sourceMappingURL=realation.js.map
