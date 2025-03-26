@@ -6,7 +6,6 @@ const facultyService = {
   async getFaculties() {
     try {
       const faculties = await Faculty.findAll();
-      console.log("faculty: ", faculties);
       return faculties;
     } catch (error) {
       logger.error("Error fetching faculties list");
