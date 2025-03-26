@@ -16,8 +16,8 @@ async function deleteStudent(studentId) {
   try {
     const studentIndex = currentStudents.findIndex(student => String(student.student_id) === studentId);
 
-    const response = await fetch('/api/delete_student', {
-      method: 'POST',
+    const response = await fetch('/api/student', {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },

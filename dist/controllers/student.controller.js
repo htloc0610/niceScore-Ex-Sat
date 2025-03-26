@@ -146,8 +146,8 @@ const studentController = {
                 });
                 return;
             }
-            // const newStudent = await studentService.addStudent(data);
-            const newStudent = "ok";
+            const newStudent = yield student_service_1.default.addStudent(data);
+            //const newStudent = "ok";
             logger_1.logger.info("Student added successfully");
             res
                 .status(201)

@@ -15,6 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const course_model_1 = __importDefault(require("../models/course.model"));
 const logger_1 = require("../config/logger");
 const studentService = {
+    //get Courses
+    getAllCourses() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const courses = yield course_model_1.default.findAll({
+                    order: [["course_id", "ASC"]],
+                });
+                return courses.map(course => course.dataValues);
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching courses list", error);
+                throw new Error("Error fetching courses list");
+            }
+        });
+    },
     //getCourses
     getCourses() {
         return __awaiter(this, void 0, void 0, function* () {

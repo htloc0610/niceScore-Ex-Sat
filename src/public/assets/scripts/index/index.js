@@ -76,7 +76,8 @@ const slugify = (text) => {
 function RefreshTable(id) {
   tableBody.innerHTML = ``;
   currentStudents = [];
-  const selectedText = facultySelect.options[facultySelect.selectedIndex].text;
+  const selectedText = facultySelect.options[facultySelect.selectedIndex]? 
+  facultySelect.options[facultySelect.selectedIndex].text: "";
 
   students.forEach((student) => {
     if (

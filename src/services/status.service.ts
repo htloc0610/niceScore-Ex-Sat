@@ -2,6 +2,18 @@ import Status from "../models/status.model";
 import { logger } from "../config/logger";
 
 const statusService = {
+  async getAllStatuses() {
+    try {
+      const statuses = await Status.findAll({
+        order: [["status_id", "ASC"]], 
+      });
+      logger.info("Fetched status list successfully");
+      return statuses.map(status => status.dataValues);
+    } catch (error) {
+      logger.error("Error fetching status list: " + error.message);
+      throw new Error("Error fetching status list");
+    }
+  },
   // Get list of status
   async getStatus() {
     try {

@@ -15,6 +15,28 @@ const statusTransitionService = {
       throw error;
     }
   },
+  getValidNextStatusById: async (id: number) => {
+    try {
+        // Find all transitions where current_status = id
+        const transitions = await StatusTransition.findAll({
+            where: { current_status: id },
+            attributes: ["id", "new_status"], // Include id and new_status
+        });
+
+        const newStatusIds = transitions.map(t => t.new_status);
+
+        const statusIds = new Set([id, ...newStatusIds]);
+
+        const statuses = await Status.findAll({
+            where: { status_id: Array.from(statusIds) },
+        });
+
+        return statuses.map(status => status.dataValues);
+    } catch (error) {
+        console.error("Error fetching status transitions:", error);
+        throw error;
+    }
+},
   getStatusTransitions: async () => {
     try {
       const statusTransitions = await StatusTransition.findAll({

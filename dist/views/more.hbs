@@ -44,134 +44,167 @@
         </div>
       </header>
       <main class="h-full overflow-y-auto">
-        <div class="px-10 mx-auto grid flex">
-          <!-- Search input -->
-          <div class="flex justify-start w-full lg:mr-32 py-4 my-4 bg-blue-100">
-            <button onclick="history.back()"
-              class="text-gray-700 hover:text-gray-900 self-start text-sm font-medium leading-5 text-white">
-              <div class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" class="w-10 h-10">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                </svg> QUAY LẠI
-              </div>
+      <div class="flex">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-white dark:bg-gray-800 shadow-md h-screen">
+          <div class="py-4 text-gray-500 dark:text-gray-400 h-full flex flex-col justify-between">
+        <ul class="mt-6">
+          <li class="relative px-6 py-3">
+            <a href="/" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          <span class="ml-4">Quay lại</span>
+            </a>
+          </li>
+          <div class="relative px-6 py-3" >
+            <button onclick='changeTo("Faculty")' class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+          </svg>
+          <span class="ml-4">Khoa</span>
             </button>
-            <div class="flex flex-grow justify-evenly">
-              <div>
-
-
-                <button
-                  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                  type="submit" name="add_faculty">
-                  Thêm khoa mới
-                </button>
-              </div>
-              <div>
-                <button
-                  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                  type="submit" name="add_status">
-                  Thêm tình trạng mới
-                </button>
-              </div>
-              <div>
-                <button
-                  class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                  type="submit" name="add_course">
-                  Thêm khóa học mới
-                </button>
-              </div>
-            </div>
-            <div class="w-20"></div>
-
-
+          </div>
+          <div class="relative px-6 py-3" >
+            <button onclick='changeTo("Status")' class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="ml-4">Tình trạng</span>
+            </button>
+          </div>
+          <div class="relative px-6 py-3" >
+            <button onclick='changeTo("Course")' class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+          </svg>
+          <span class="ml-4">Khóa học</span>
+            </button>
+          </div>
+        </ul>
+          </div>
+        </aside>
+        <!-- Main Content -->
+        <div class="flex-1">
+          <!-- Faculty table -->
+          <div id="faculty_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6">
+            <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khoa</h2>
+            <table class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên Khoa</th>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="faculty-table-body" class="text-gray-600 dark:text-gray-400">
+                {{#each faculties}}
+                <tr>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.faculty_id}}</td>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.name}}</td>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                    <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                    onclick='editMore({{this.faculty_id}}, "Faculty")'>
+                      Chỉnh sửa
+                    </button>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+            <button class="px-2 py-1 text-sm font-medium m-5 justify-self-end text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+              onclick='addMore("Faculty")'>Thêm Khoa</button>
           </div>
 
-          <div class="w-full overflow-hidden rounded-lg shadow-xs dark:from-gray-800 dark:to-gray-900 p-6">
-            <div class="w-full overflow-x-auto">
-              <div class="flex gap-6">
-                <!-- Faculty Table -->
-                <div class="flex-1 min-w-[300px] bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <table id="faculty-table" class="w-full whitespace-no-wrap">
-                    <thead>
-                      <tr class="text-xs font-semibold tracking-wide text-left text-white uppercase bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 rounded-t-2xl">
-                        <th class="px-6 py-4">ID</th>
-                        <th class="px-6 py-4">Khoa</th>
-                        <th class="px-6 py-4">Hành động</th>
-                      </tr>
-                    </thead>
-                    <tbody id="faculty-table-body" class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                      <!-- Example Row -->
-                      <tr class="text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        <td class="px-6 py-4">1</td>
-                        <td class="px-6 py-4">Đang tải...</td>
-                        <td class="px-6 py-4">
-                          <button class="px-3 py-1 text-sm font-medium text-white bg-purple-500 rounded-md hover:bg-purple-600 transition-colors duration-200">Sửa</button>
-                          <button class="px-3 py-1 ml-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors duration-200">Xóa</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-          
-                <!-- Status Table -->
-                <div class="flex-1 min-w-[300px] bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <table id="status-table" class="w-full whitespace-no-wrap">
-                    <thead>
-                      <tr class="text-xs font-semibold tracking-wide text-left text-white uppercase bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 rounded-t-2xl">
-                        <th class="px-6 py-4">ID</th>
-                        <th class="px-6 py-4">Tình trạng</th>
-                        <th class="px-6 py-4">Hành động</th>
-                      </tr>
-                    </thead>
-                    <tbody id="status-table-body" class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                      <!-- Example Row -->
-                      <tr class="text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        <td class="px-6 py-4">1</td>
-                        <td class="px-6 py-4">Đang tải...</td>
-                        <td class="px-6 py-4">
-                          <button class="px-3 py-1 text-sm font-medium text-white bg-purple-500 rounded-md hover:bg-purple-600 transition-colors duration-200">Sửa</button>
-                          <button class="px-3 py-1 ml-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors duration-200">Xóa</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-          
-                <!-- Course Table -->
-                <div class="flex-1 min-w-[300px] bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <table id="course-table" class="w-full whitespace-no-wrap">
-                    <thead>
-                      <tr class="text-xs font-semibold tracking-wide text-left text-white uppercase bg-gradient-to-r from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 rounded-t-2xl">
-                        <th class="px-6 py-4">ID</th>
-                        <th class="px-6 py-4">Khóa học</th>
-                        <th class="px-6 py-4">Hành động</th>
-                      </tr>
-                    </thead>
-                    <tbody id="course-table-body" class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                      <!-- Example Row -->
-                      <tr class="text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                        <td class="px-6 py-4">1</td>
-                        <td class="px-6 py-4">Đang tải...</td>
-                        <td class="px-6 py-4">
-                          <button class="px-3 py-1 text-sm font-medium text-white bg-purple-500 rounded-md hover:bg-purple-600 transition-colors duration-200">Sửa</button>
-                          <button class="px-3 py-1 ml-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors duration-200">Xóa</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+          <!-- Status table -->
+          <div id="status_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6 hidden">
+            <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin tình trạng</h2>
+            <table class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên tình trạng</th>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="status-table-body" class="text-gray-600 dark:text-gray-400">
+                {{#each statuses}}
+                <tr>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.status_id}}</td>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.name}}</td>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                    <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                    onclick='editMore({{this.status_id}}, "Status")'>
+                      Chỉnh sửa
+                    </button>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+            <button class="px-2 py-1 text-sm font-medium m-5 justify-self-end text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+              onclick='addMore("Status")'>Thêm tình trạng</button>
           </div>
 
-          
+          <!-- Course table -->
+          <div id="course_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6 hidden">
+            <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khóa</h2>
+            <table class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên Khóa</th>
+                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="course-table-body" class="text-gray-600 dark:text-gray-400">
+                {{#each courses}}
+                <tr>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.course_id}}</td>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.course_name}}</td>
+                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                    <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                    onclick='editMore({{this.course_id}}, "Course")'>
+                      Chỉnh sửa
+                    </button>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+            <button class="px-2 py-1 text-sm font-medium m-5 justify-self-end text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+              onclick='addMore("course")'>Thêm Khóa</button>
+          </div>
+        </div>
+      </div>
       </main>
     </div>
   </div>
-  <script src="./assets/scripts/edit_faculty.js"></script>
-  <script src="./assets/scripts/edit_status.js"></script>
-  <script src="./assets/scripts/more.js"></script>
-  <script src="./assets/scripts/add_faculty.js"></script>
-  <script src="./assets/scripts/add_status.js"></script>
+  <script>
+    const facultyDiv = document.getElementById("faculty_div");
+    const statusDiv = document.getElementById("status_div");
+    const courseDiv = document.getElementById("course_div");
+
+    function changeTo(name)
+    {
+      facultyDiv.classList.add("hidden");  
+      statusDiv.classList.add("hidden");  
+      courseDiv.classList.add("hidden");
+
+      switch(name)
+      {
+        case "Faculty":
+          facultyDiv.classList.remove("hidden");
+          break;
+        case "Status":
+          statusDiv.classList.remove("hidden");
+          break;
+        default:
+          courseDiv.classList.remove("hidden");
+      }
+    }
+  </script>
+  <script src="./assets/scripts/more/edit_more.js"></script>
+  <script src="./assets/scripts/more/add_more.js"></script>
 
 </body>

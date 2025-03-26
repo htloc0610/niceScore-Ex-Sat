@@ -165,8 +165,8 @@ const studentController = {
         return;
       }
 
-      // const newStudent = await studentService.addStudent(data);
-      const newStudent = "ok";
+      const newStudent = await studentService.addStudent(data);
+      //const newStudent = "ok";
       logger.info("Student added successfully");
       res
         .status(201)

@@ -3,6 +3,18 @@ import { logger } from "../config/logger";
 
 const facultyService = {
   // Get list of faculties
+  async getAllFaculties() {
+    try {
+      const faculties = await Faculty.findAll({
+        order: [["faculty_id", "ASC"]], 
+      });
+      return faculties.map(faculty => faculty.dataValues);
+    } catch (error) {
+      logger.error("Error fetching all faculties");
+      throw new Error("Error fetching all faculties");
+    }
+  },
+  // Get list of faculties
   async getFaculties() {
     try {
       const faculties = await Faculty.findAll();

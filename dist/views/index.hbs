@@ -51,7 +51,7 @@
             <select id="faculty_search" name="faculty_search"
               class="w-30 text-black bg-white block self-start py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:text-gray-400 dark:bg-gray-800"></select>
 
-            <div class="relative w-full max-w-sm focus-within:text-purple-500">
+            <div class="relative flex w-full max-w-sm focus-within:text-purple-500">
               <div class="absolute inset-y-0 flex items-center pl-2">
                 <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd"
@@ -65,43 +65,74 @@
                 type="text" placeholder="Nhập vào tên hoặc MSSV để tìm kiếm" aria-label="Search" id="searchInput" />
             </div>
 
-            <div>
-              <button
-                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                type="submit" name="add_student">
+            
+            <a href="/add">
+              <div
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                 Thêm sinh viên mới
-              </button>
-            </div>
+              </div>
+            </a>
 
-            <div>
+            <a href="/more">
+              <div
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                name="add_student">
+                Quản lý thông tin
+              </div>
+            </a>
+            <a href="/configurations">
+              <div
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                Cấu hình database
+              </div>
+            </a>
+
+            <!-- Import dropdown-->
+            <div class="relative inline-block">
+
+              <button id="importButton" class="flex px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                Import sinh viên
+                <svg id="importIcon" class="w-5 h-5 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+
+              <div id="importMenu" class="hidden absolute mt-2 w-36 bg-white rounded-lg shadow-lg border p-2 space-y-2">
+                <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                onclick="handleImport('json')">
+                  Import JSON
+                </button>
+                <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                onclick="handleImport('excel')">
+                Import Excel
+                </button>
+              </div>
+            </div>
+            
+            <!-- Export dropdown-->
+            <div class="relative inline-block">
+   
+            <button id="exportButton" class="flex px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+              Export sinh viên
+              <svg id="exportIcon" class="w-5 h-5 transition-transform duration-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <div id="exportMenu" class="hidden absolute mt-2 w-36 bg-white rounded-lg shadow-lg border p-2 space-y-2">
               <button
                 class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                name="add_student" onclick="window.location.href='/more'">
-                Quản lý thông tin
+                onclick="handleExport('json')">
+                Export JSON
+              </button>
+              <button
+                class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                onclick="handleExport('excel')">
+                Export Excel
               </button>
             </div>
-            <button
-              class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-              onclick="handleImport('json')">
-              Import JSON
-            </button>
-            <button
-              class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-              onclick="handleImport('excel')">
-              Import Excel
-            </button>
-            <input type="file" id="importFile" style="display: none" onchange="uploadFile()" />
-
-            <button
-              class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-              onclick="handleExport('json')">
-              Export JSON
-            </button>
-            <button
-              class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-              onclick="handleExport('excel')">
-              Export Excel
-            </button>
           </div>
         </div>
 
@@ -209,14 +240,6 @@
   <script src="/assets/scripts/index/delete_student.js"></script>
   <script src="/assets/scripts/index/edit_student.js"></script>
   <script src="/assets/scripts/index/index.js"></script>
-  <!--script src="./assets/scripts/add_student.js"></!--script-->
-  <script>
-    document
-      .querySelector('button[name="add_student"]')
-      .addEventListener("click", function () {
-        window.location.href = "/add";
-      });
-  </script>
   <script>
     let selectedType = "";
 
@@ -247,5 +270,36 @@
       const endpoint = type === "json" ? "/export/json" : "/export/excel";
       window.location.href = endpoint; // Download file
     }
+
+    const importButton = document.getElementById("importButton");
+    const importMenu = document.getElementById("importMenu");
+    const importIcon = document.getElementById("importIcon");
+
+    importButton.addEventListener("click", () => {
+      importMenu.classList.toggle("hidden");
+      importIcon.classList.toggle("rotate-90");
+    });
+    
+
+    const exportButton = document.getElementById("exportButton");
+    const exportMenu = document.getElementById("exportMenu");
+    const exportIcon = document.getElementById("exportIcon");
+
+    exportButton.addEventListener("click", () => {
+        exportMenu.classList.toggle("hidden");
+        exportIcon.classList.toggle("rotate-90");
+    });
+
+     document.addEventListener("click", (event) => {
+        if (!importButton.contains(event.target) && !importMenu.contains(event.target)) {
+            importMenu.classList.add("hidden");
+            importIcon.classList.remove("rotate-180");
+        }
+    
+    if (!exportButton.contains(event.target) && !exportMenu.contains(event.target)) {
+            exportMenu.classList.add("hidden");
+            exportIcon.classList.remove("rotate-180");
+        }
+    });
   </script>
 </body>
