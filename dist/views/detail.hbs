@@ -95,11 +95,11 @@
           <div class="flex gap-4">
             <div class="w-1/2">
               <label>Khoa</label>
-              <select id="faculty" class="input-field" readonly disabled></select>
+              <select id="faculty" class="input-field" disabled></select>
             </div>
             <div class="w-1/2">
               <label>Khóa học</label>
-              <select id="course" class="input-field" readonly disabled></select>
+              <select id="course" class="input-field" disabled></select>
             </div>
           </div>
 
@@ -110,7 +110,7 @@
             </div>
             <div class="w-1/2">
               <label>Tình trạng sinh viên</label>
-              <select id="status" class="input-field" readonly disabled></select>
+              <select id="status" class="input-field" disabled></select>
             </div>
           </div>
 
@@ -189,20 +189,27 @@
         </div>
 
         <!-- Cột phải -->
-        <div class="space-y-6 pl-6">
+        <div class=" pl-6">
           <div class="section-title">Thông Tin Liên Hệ</div>
-          <div class="flex gap-4">
-            <div class="w-1/2">
-              <label>Email</label>
-              <input type="email" id="email" class="input-field" readonly />
-            </div>
-            <div class="w-1/2">
-              <label>Điện thoại</label>
-              <input type="text" id="phone" class="input-field" readonly />
-            </div>
+          <div class="">
+            <label>Email
+              <p class="text-sm text-red-500">
+                Chỉ chấp nhận email: @hcmus.edu.vn
+              </p>
+            </label>
+            <input type="email" id="email" class="input-field" readonly />
+          </div>
+          <div class="mt-2">
+            <label>Điện thoại
+              <p class="text-sm text-red-500">
+                Chỉ chấp nhận SĐT +84
+              </p>
+            </label>
+            <input type="text" id="phone" class="input-field" readonly />
           </div>
 
-          <div class="section-title">Thông Tin Giấy Tờ</div>
+
+          <div class="pt-6 section-title">Thông Tin Giấy Tờ</div>
           <input type="hidden" name="documentId" id="documentId" />
 
           <div class="flex gap-4">
@@ -306,23 +313,50 @@
   </main>
 
   <script>
-    const editBtn = document.getElementById("editBtn");
-    const inputs = document.querySelectorAll(".input-field, select");
+    document.addEventListener("DOMContentLoaded", function () {
+      const editBtn = document.getElementById("editBtn");
+      const inputs = document.querySelectorAll(".input-field, select");
 
-    editBtn.addEventListener("click", () => {
-      inputs.forEach((input) => {
-        if (input.id !== "studentId") {
-          if (input.tagName === "SELECT") {
-            input.toggleAttribute("disabled");
+      function applyReadonlyStyles() {
+        inputs.forEach(input => {
+          if (input.hasAttribute("readonly") || input.hasAttribute("disabled")) {
+            input.style.backgroundColor = "#f3f4f6"; // Xám nhạt
+            input.style.color = "#000"; // Màu chữ xám
+            input.style.cursor = "not-allowed";
           } else {
-            input.toggleAttribute("readonly");
+            input.style.backgroundColor = "#fff"; // Trắng khi được chỉnh sửa
+            input.style.color = "#000"; // Màu chữ đen
+            input.style.cursor = "text";
           }
-        }
+        });
+      }
+
+      // Áp dụng màu mặc định khi tải trang
+      applyReadonlyStyles();
+
+      editBtn.addEventListener("click", () => {
+        inputs.forEach(input => {
+          if (input.id !== "studentId" && input.id !== "documentId" && input.id !== "documentNumber"
+            && input.id !== "documentType" && input.id !== "issueDate" && input.id !== "expiryDate"
+            && input.id !== "issuePlace" && input.id !== "issueCountry" && input.id !== "notes"
+            && input.id !== "hasChip")
+          //documentNumber, issueDate, expiryDate, issuePlace, issueCountry, notes, hasChip
+          {
+            if (input.tagName === "SELECT") {
+              input.toggleAttribute("disabled");
+            } else {
+              input.toggleAttribute("readonly");
+            }
+            console.log(input);
+          }
+        });
+        applyReadonlyStyles(); // Cập nhật CSS sau khi thay đổi trạng thái
       });
     });
   </script>
 
+
   <!-- link script -->
-  <script src="./assets/scripts/detail/politic.js"></script>
-  <script src="./assets/scripts/detail/detail.js"></script>
+  <script src="/assets/scripts/detail/politic.js"></script>
+  <script src="/assets/scripts/detail/detail.js"></script>
 </body>
