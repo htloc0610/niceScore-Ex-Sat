@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const db_1 = __importDefault(require("../config/db"));
+const status_model_1 = __importDefault(require("./status.model"));
 class StatusTransition extends sequelize_1.Model {
 }
 StatusTransition.init({
@@ -14,12 +15,20 @@ StatusTransition.init({
         primaryKey: true,
     },
     current_status: {
-        type: sequelize_1.DataTypes.STRING(50),
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: status_model_1.default,
+            key: "status_id",
+        },
     },
     new_status: {
-        type: sequelize_1.DataTypes.STRING(50),
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: status_model_1.default,
+            key: "status_id",
+        },
     },
 }, {
     sequelize: db_1.default,

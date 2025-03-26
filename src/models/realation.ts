@@ -57,9 +57,25 @@ export default function setupRelation() {
   Student.belongsTo(Course, { foreignKey: "course_id", as: "course" });
   Course.hasMany(Student, { foreignKey: "course_id", as: "students" });
 
+  // Status - StatusTransition (current_status and new_status)
+  Status.hasMany(StatusTransition, {
+    foreignKey: "current_status",
+    as: "currentStatusTransitions",
+  });
+  Status.hasMany(StatusTransition, {
+    foreignKey: "new_status",
+    as: "newStatusTransitions",
+  });
+  StatusTransition.belongsTo(Status, {
+    foreignKey: "current_status",
+    as: "currentStatus",
+  });
+  StatusTransition.belongsTo(Status, {
+    foreignKey: "new_status",
+    as: "newStatus",
+  });
 
   Configuration.sync();
-  StatusTransition.sync();
 
   console.log("Database relation set up successfully!");
 }
