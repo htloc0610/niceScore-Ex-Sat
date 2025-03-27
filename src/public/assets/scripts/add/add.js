@@ -2,6 +2,26 @@ const addStudentForm = document.getElementById("addStudentForm");
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    //configurations for mailwarning and phone warning
+    fetch("/api/configurations")
+    .then((response) => response.json())
+    .then((data) => {
+        const configurations = data.configurations;
+
+        // Chuyển danh sách cấu hình thành object để dễ truy xuất
+        const configMap = configurations.reduce((acc, item) => {
+            acc[item.config_key] = item.config_value;
+            return acc;
+        }, {});
+
+        // Gán giá trị vào các thẻ HTML
+        document.getElementById("emailWarning").textContent =
+            "Chỉ chấp nhận email: @" + (configMap.allowed_email_domain || "example.com");
+
+        document.getElementById("phoneWarning").textContent =
+            "Chỉ chấp nhận SĐT " + (configMap.phone_country_code || "+00");
+    })
+
     fetch("/api/faculty")
         .then((response) => response.json())
         .then((data) => {

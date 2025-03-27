@@ -6,26 +6,25 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Function to fetch status at begin and after update 
-    async function fetchStudentStatus(id)
-    {
+    async function fetchStudentStatus(id) {
         fetch(`/api/status`)
             .then((response) => response.json())
             .then((data) => {
-            const statusSelect = document.getElementById("status");
-            statusSelect.innerHTML = ``;
-            data = data.status;
+                const statusSelect = document.getElementById("status");
+                statusSelect.innerHTML = ``;
+                data = data.status;
 
-            data.forEach((status) => {
-            const option = document.createElement("option");
-            option.value = status.status_id; // Set status_id as value
-            option.textContent = status.name; // Set name as text
-            if (status.status_id === id)
-                option.setAttribute("selected", "selected");
-            statusSelect.appendChild(option);
-            });
+                data.forEach((status) => {
+                    const option = document.createElement("option");
+                    option.value = status.status_id; // Set status_id as value
+                    option.textContent = status.name; // Set name as text
+                    if (status.status_id === id)
+                        option.setAttribute("selected", "selected");
+                    statusSelect.appendChild(option);
+                });
             })
             .catch((error) => console.error("Error fetching faculties:", error));
-                
+
     }
 
     // Function to fetch data from the API and populate the form fields
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             const response = await fetch(`/api/student/${studentId}`);
             const data = await response.json();
-            
+
 
             if (data.message === "Student found") {
                 const student = data.student;
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('email').value = student.email || '';
                 document.getElementById('phone').value = student.phone_number || '';
                 document.getElementById('documentType').value = student.identification.type || '';
-                document.getElementById('documentType').dispatchEvent(new Event("change")); 
+                document.getElementById('documentType').dispatchEvent(new Event("change"));
                 document.getElementById('documentNumber').value = student.identification.number || '';
                 document.getElementById('issueDate').value = student.identification.issue_date || '';
                 document.getElementById('expiryDate').value = student.identification.expiry_date || '';
@@ -85,46 +84,66 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.getElementById('permAddress').value = student.permanent_address_id || '';
                 document.getElementById('tempAddress').value = student.temporary_address_id || '';
                 document.getElementById('mailAddress').value = student.mailing_address_id || '';
-                
 
-                
+
+
                 fetch("/api/faculty")
-                .then((response) => response.json())
-                .then((data) => {
-                const facultySelect = document.getElementById("faculty");
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const facultySelect = document.getElementById("faculty");
 
-                data.faculties.forEach((faculty) => {
-                const option = document.createElement("option");
-                option.value = faculty.faculty_id; 
-                option.textContent = faculty.name; 
-                if (faculty.name === student.faculty.faculty_name)
-                    option.setAttribute("selected", "selected");
-                facultySelect.appendChild(option);
-                });
-                })
-                .catch((error) => console.error("Error fetching faculties:", error));
-                
+                        data.faculties.forEach((faculty) => {
+                            const option = document.createElement("option");
+                            option.value = faculty.faculty_id;
+                            option.textContent = faculty.name;
+                            if (faculty.name === student.faculty.faculty_name)
+                                option.setAttribute("selected", "selected");
+                            facultySelect.appendChild(option);
+                        });
+                    })
+                    .catch((error) => console.error("Error fetching faculties:", error));
+
                 fetch("/api/course")
-                .then((response) => response.json())
-                .then((data) => {
-                const courseSelect = document.getElementById("course");
-      
-                data.courses.forEach((course) => {
-                    const option = document.createElement("option");
-                    option.value = course.course_id; 
-                    option.textContent = course.course_name; 
-                    courseSelect.appendChild(option); 
-                    if (course.course_name === student.course.course_name)
-                        option.setAttribute("selected", "selected");
-                });
-                })
-                .catch((error) => console.error("Error fetching faculties:", error));
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const courseSelect = document.getElementById("course");
+
+                        data.courses.forEach((course) => {
+                            const option = document.createElement("option");
+                            option.value = course.course_id;
+                            option.textContent = course.course_name;
+                            courseSelect.appendChild(option);
+                            if (course.course_name === student.course.course_name)
+                                option.setAttribute("selected", "selected");
+                        });
+                    })
+                    .catch((error) => console.error("Error fetching faculties:", error));
 
                 fetchStudentStatus(student.status_id);
                 // Handle has_chip field (if applicable)
                 if (student.identification.has_chip !== undefined) {
                     document.getElementById('hasChip').value = student.identification.has_chip ? 'Có' : 'Không';
                 }
+
+                //configurations for mailwarning and phone warning
+                fetch("/api/configurations")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        const configurations = data.configurations;
+
+                        // Chuyển danh sách cấu hình thành object để dễ truy xuất
+                        const configMap = configurations.reduce((acc, item) => {
+                            acc[item.config_key] = item.config_value;
+                            return acc;
+                        }, {});
+
+                        // Gán giá trị vào các thẻ HTML
+                        document.getElementById("emailWarning").textContent =
+                            "Chỉ chấp nhận email: @" + (configMap.allowed_email_domain || "example.com");
+
+                        document.getElementById("phoneWarning").textContent =
+                            "Chỉ chấp nhận SĐT " + (configMap.phone_country_code || "+00");
+                    })
             } else {
                 console.error('Student not found');
             }
