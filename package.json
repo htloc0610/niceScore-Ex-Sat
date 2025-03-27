@@ -5,6 +5,7 @@
   "pre-commit": [
     "ts.check",
     "build",
+    "postbuild",
     "add-build"
   ],
   "scripts": {
