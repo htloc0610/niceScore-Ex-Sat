@@ -32,7 +32,8 @@ const facultyController = {
     addFaculty: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
-            const newFaculty = yield faculty_service_1.default.addFaculty(data);
+            console.log(data.name, "data name");
+            const newFaculty = yield faculty_service_1.default.addFaculty(data.name);
             res
                 .status(201)
                 .send({ message: "Faculty added successfully", newFaculty });

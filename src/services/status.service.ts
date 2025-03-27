@@ -25,16 +25,15 @@ const statusService = {
       throw new Error("Error fetching status list");
     }
   },
-  async addStatus(data: any) {
+  async addStatus(name: string) {
+    console.log("Adding a new status", name);
     try {
-      const newStatus = await Status.create(data);
-      logger.info("Added new status successfully");
-      return {
-        ...newStatus.toJSON(),
-      };
+        const newStatus = await Status.create({ name });
+        logger.info("Added new status successfully");
+        return newStatus.toJSON();
     } catch (error) {
-      logger.error("Error adding new status: " + error.message);
-      throw new Error("Error adding new status: " + error.message);
+        logger.error("Error adding new status: " + error.message);
+        throw new Error("Error adding new status: " + error.message);
     }
   },
   async updateStatus(statusId: number, statusData: any) {

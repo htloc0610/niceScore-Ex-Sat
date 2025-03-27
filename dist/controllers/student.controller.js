@@ -94,6 +94,7 @@ const studentController = {
             if (!statusTransition) {
                 logger_1.logger.error("Invalid status transition");
                 res.status(400).send({ message: "Invalid status transition." });
+                return;
             }
             console.log("updatedData", updatedData);
             const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
@@ -102,6 +103,7 @@ const studentController = {
                 res
                     .status(404)
                     .send({ message: "Student not found or no changes made." });
+                return;
             }
             else {
                 logger_1.logger.info(`Student with ID ${id} updated successfully`);

@@ -6,7 +6,7 @@ const facultyService = {
   async getAllFaculties() {
     try {
       const faculties = await Faculty.findAll({
-        order: [["faculty_id", "ASC"]], 
+        order: [["faculty_id", "ASC"]],
       });
       return faculties.map(faculty => faculty.dataValues);
     } catch (error) {
@@ -25,15 +25,15 @@ const facultyService = {
     }
   },
 
-  async addFaculty(data: any) {
+  async addFaculty(name: string) {
+    console.log("Adding a new faculty", name);
     try {
-      const newFaculty = await Faculty.create(data);
-
-      return {
-        ...newFaculty.toJSON(),
-      };
+      const newFaculty = await Faculty.create({ name });
+      logger.info("Added new faculty successfully");
+      return newFaculty.toJSON();
     } catch (error) {
-      throw new Error("Error adding new faculty" + error);
+      logger.error("Error adding new faculty: " + error.message);
+      throw new Error("Error adding new faculty: " + error.message);
     }
   },
 

@@ -2,11 +2,11 @@ import Course from "../models/course.model";
 import { logger } from "../config/logger";
 
 const studentService = {
-   //get Courses
-   async getAllCourses() {
+  //get Courses
+  async getAllCourses() {
     try {
       const courses = await Course.findAll({
-        order: [["course_id", "ASC"]], 
+        order: [["course_id", "ASC"]],
       });
       return courses.map(course => course.dataValues);
     } catch (error) {
@@ -25,20 +25,18 @@ const studentService = {
       throw new Error("Error fetching courses list");
     }
   },
-  //add course
-  async addCourse(data: any) {
+  async addCourse(course_name: string) {
     try {
-      logger.info("Adding a new course");
-      const newCourse = await Course.create(data);
+      logger.info("Adding a new course", course_name);
 
-      return {
-        ...newCourse.toJSON(),
-      };
+      const newCourse = await Course.create({ course_name });
+
+      return newCourse.toJSON();
     } catch (error) {
-      logger.error("Error adding new course", error);
-      throw new Error("Error adding new course" + error);
+      logger.error("Error adding new course: " + error.message);
+      throw new Error("Error adding new course: " + error.message);
     }
-  },
+  }, 
 
   //update course
   async updateCourse(courseId: number, courseData: any) {

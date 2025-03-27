@@ -19,7 +19,8 @@ const facultyController = {
   addFaculty: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
-      const newFaculty = await facultyService.addFaculty(data);
+      console.log(data.name, "data name");
+      const newFaculty = await facultyService.addFaculty(data.name);
       res
         .status(201)
         .send({ message: "Faculty added successfully", newFaculty });

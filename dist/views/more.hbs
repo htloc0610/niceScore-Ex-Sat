@@ -44,139 +44,165 @@
         </div>
       </header>
       <main class="h-full overflow-y-auto">
-      <div class="flex">
-        <!-- Sidebar -->
-        <aside class="w-64 bg-white dark:bg-gray-800 shadow-md h-screen">
-          <div class="py-4 text-gray-500 dark:text-gray-400 h-full flex flex-col justify-between">
-        <ul class="mt-6">
-          <li class="relative px-6 py-3">
-            <a href="/" class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
-          </svg>
-          <span class="ml-4">Quay lại</span>
-            </a>
-          </li>
-          <div class="relative px-6 py-3" >
-            <button onclick='changeTo("Faculty")' class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
-          </svg>
-          <span class="ml-4">Khoa</span>
-            </button>
-          </div>
-          <div class="relative px-6 py-3" >
-            <button onclick='changeTo("Status")' class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-          </svg>
-          <span class="ml-4">Tình trạng</span>
-            </button>
-          </div>
-          <div class="relative px-6 py-3" >
-            <button onclick='changeTo("Course")' class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-          <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
-          </svg>
-          <span class="ml-4">Khóa học</span>
-            </button>
-          </div>
-        </ul>
-          </div>
-        </aside>
-        <!-- Main Content -->
-        <div class="flex-1">
-          <!-- Faculty table -->
-          <div id="faculty_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6">
-            <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khoa</h2>
-            <table class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên Khoa</th>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
-                </tr>
-              </thead>
-              <tbody id="faculty-table-body" class="text-gray-600 dark:text-gray-400">
-                {{#each faculties}}
-                <tr>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.faculty_id}}</td>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.name}}</td>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                    <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-                    onclick='editMore({{this.faculty_id}}, "Faculty")'>
-                      Chỉnh sửa
-                    </button>
-                  </td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
-            <button class="px-2 py-1 text-sm font-medium m-5 justify-self-end text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-              onclick='addMore("Faculty")'>Thêm Khoa</button>
-          </div>
+        <div class="flex">
+          <!-- Sidebar -->
+          <aside class="w-64 bg-white dark:bg-gray-800 shadow-md h-screen">
+            <div class="py-4 text-gray-500 dark:text-gray-400 h-full flex flex-col justify-between">
+              <ul class="mt-6">
+                <li class="relative px-6 py-3">
+                  <a href="/"
+                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span class="ml-4">Quay lại</span>
+                  </a>
+                </li>
+                <div class="relative px-6 py-3">
+                  <button onclick='changeTo("Faculty")'
+                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    <span class="ml-4">Khoa</span>
+                  </button>
+                </div>
+                <div class="relative px-6 py-3">
+                  <button onclick='changeTo("Status")'
+                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="ml-4">Tình trạng</span>
+                  </button>
+                </div>
+                <div class="relative px-6 py-3">
+                  <button onclick='changeTo("Course")'
+                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
+                      viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span class="ml-4">Khóa học</span>
+                  </button>
+                </div>
+              </ul>
+            </div>
+          </aside>
+          <!-- Main Content -->
+          <div class="flex-1">
+            <!-- Faculty table -->
+            <div id="faculty_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6">
+              <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khoa</h2>
+              <table
+                class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                <thead>
+                  <tr>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên Khoa</th>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="faculty-table-body" class="text-gray-600 dark:text-gray-400">
+                  {{#each faculties}}
+                  <tr>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.faculty_id}}</td>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.name}}</td>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                      <button
+                        class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                        onclick='editMore({{this.faculty_id}}, "Faculty")'>
+                        Chỉnh sửa
+                      </button>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <div class="flex justify-center px-4 pt-4 pb-2 mt-4">
+                <button
+                  class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                  onclick='addMore("Faculty")'>Thêm Khoa</button>
+              </div>
 
-          <!-- Status table -->
-          <div id="status_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6 hidden">
-            <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin tình trạng</h2>
-            <table class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên tình trạng</th>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
-                </tr>
-              </thead>
-              <tbody id="status-table-body" class="text-gray-600 dark:text-gray-400">
-                {{#each statuses}}
-                <tr>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.status_id}}</td>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.name}}</td>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                    <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-                    onclick='editMore({{this.status_id}}, "Status")'>
-                      Chỉnh sửa
-                    </button>
-                  </td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
-            <button class="px-2 py-1 text-sm font-medium m-5 justify-self-end text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-              onclick='addMore("Status")'>Thêm tình trạng</button>
-          </div>
+            </div>
 
-          <!-- Course table -->
-          <div id="course_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6 hidden">
-            <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khóa</h2>
-            <table class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-              <thead>
-                <tr>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên Khóa</th>
-                  <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
-                </tr>
-              </thead>
-              <tbody id="course-table-body" class="text-gray-600 dark:text-gray-400">
-                {{#each courses}}
-                <tr>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.course_id}}</td>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.course_name}}</td>
-                  <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                    <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-                    onclick='editMore({{this.course_id}}, "Course")'>
-                      Chỉnh sửa
-                    </button>
-                  </td>
-                </tr>
-                {{/each}}
-              </tbody>
-            </table>
-            <button class="px-2 py-1 text-sm font-medium m-5 justify-self-end text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-              onclick='addMore("course")'>Thêm Khóa</button>
+            <!-- Status table -->
+            <div id="status_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6 hidden">
+              <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin tình trạng</h2>
+              <table
+                class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                <thead>
+                  <tr>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên tình trạng</th>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="status-table-body" class="text-gray-600 dark:text-gray-400">
+                  {{#each statuses}}
+                  <tr>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.status_id}}</td>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.name}}</td>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                      <button
+                        class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                        onclick='editMore({{this.status_id}}, "Status")'>
+                        Chỉnh sửa
+                      </button>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <div class="flex justify-center pt-4 mt-4">
+                <button
+                  class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                  onclick='addMore("Status")'>Thêm tình trạng</button>
+              </div>
+
+            </div>
+
+            <!-- Course table -->
+            <div id="course_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6 hidden">
+              <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khóa</h2>
+              <table
+                class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                <thead>
+                  <tr>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên Khóa</th>
+                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="course-table-body" class="text-gray-600 dark:text-gray-400">
+                  {{#each courses}}
+                  <tr>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.course_id}}</td>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.course_name}}</td>
+                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                      <button
+                        class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                        onclick='editMore({{this.course_id}}, "Course")'>
+                        Chỉnh sửa
+                      </button>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <div class="flex justify-center pt-4 mt-4">
+                <button
+                  class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
+                  onclick='addMore("course")'>Thêm Khóa</button>
+              </div>
+
+            </div>
           </div>
         </div>
-      </div>
       </main>
     </div>
   </div>
@@ -185,14 +211,12 @@
     const statusDiv = document.getElementById("status_div");
     const courseDiv = document.getElementById("course_div");
 
-    function changeTo(name)
-    {
-      facultyDiv.classList.add("hidden");  
-      statusDiv.classList.add("hidden");  
+    function changeTo(name) {
+      facultyDiv.classList.add("hidden");
+      statusDiv.classList.add("hidden");
       courseDiv.classList.add("hidden");
 
-      switch(name)
-      {
+      switch (name) {
         case "Faculty":
           facultyDiv.classList.remove("hidden");
           break;

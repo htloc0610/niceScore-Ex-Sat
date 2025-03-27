@@ -44,12 +44,13 @@ const statusService = {
             }
         });
     },
-    addStatus(data) {
+    addStatus(name) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Adding a new status", name);
             try {
-                const newStatus = yield status_model_1.default.create(data);
+                const newStatus = yield status_model_1.default.create({ name });
                 logger_1.logger.info("Added new status successfully");
-                return Object.assign({}, newStatus.toJSON());
+                return newStatus.toJSON();
             }
             catch (error) {
                 logger_1.logger.error("Error adding new status: " + error.message);
