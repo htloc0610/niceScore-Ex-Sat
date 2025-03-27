@@ -8,11 +8,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Function to fetch status at begin and after update 
     async function fetchStudentStatus(id)
     {
-        fetch(`/api/status_transition/${id}`)
+        fetch(`/api/status`)
             .then((response) => response.json())
             .then((data) => {
             const statusSelect = document.getElementById("status");
             statusSelect.innerHTML = ``;
+            data = data.status;
 
             data.forEach((status) => {
             const option = document.createElement("option");

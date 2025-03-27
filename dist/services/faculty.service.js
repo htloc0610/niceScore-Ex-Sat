@@ -43,14 +43,17 @@ const facultyService = {
             }
         });
     },
-    addFaculty(data) {
+    addFaculty(name) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Adding a new faculty", name);
             try {
-                const newFaculty = yield faculty_model_1.default.create(data);
-                return Object.assign({}, newFaculty.toJSON());
+                const newFaculty = yield faculty_model_1.default.create({ name });
+                logger_1.logger.info("Added new faculty successfully");
+                return newFaculty.toJSON();
             }
             catch (error) {
-                throw new Error("Error adding new faculty" + error);
+                logger_1.logger.error("Error adding new faculty: " + error.message);
+                throw new Error("Error adding new faculty: " + error.message);
             }
         });
     },

@@ -18,7 +18,8 @@ const statusController = {
   addStatus: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
-      const newStatus = await statusService.addStatus(data);
+      console.log(data, "data: ");
+      const newStatus = await statusService.addStatus(data.name);
       logger.info("Status added successfully");
       res.status(201).send({ message: "Status added successfully", newStatus });
     } catch (error) {

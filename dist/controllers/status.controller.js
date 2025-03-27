@@ -31,7 +31,8 @@ const statusController = {
     addStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
-            const newStatus = yield status_service_1.default.addStatus(data);
+            console.log(data, "data: ");
+            const newStatus = yield status_service_1.default.addStatus(data.name);
             logger_1.logger.info("Status added successfully");
             res.status(201).send({ message: "Status added successfully", newStatus });
         }

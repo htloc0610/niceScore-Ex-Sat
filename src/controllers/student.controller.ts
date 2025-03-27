@@ -97,6 +97,7 @@ const studentController = {
       if (!statusTransition) {
         logger.error("Invalid status transition");
         res.status(400).send({ message: "Invalid status transition." });
+        return;
       }
 
       console.log("updatedData", updatedData);
@@ -111,6 +112,7 @@ const studentController = {
         res
           .status(404)
           .send({ message: "Student not found or no changes made." });
+        return;
       } else {
         logger.info(`Student with ID ${id} updated successfully`);
         res.status(200).send({

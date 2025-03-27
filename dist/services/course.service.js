@@ -44,17 +44,16 @@ const studentService = {
             }
         });
     },
-    //add course
-    addCourse(data) {
+    addCourse(course_name) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                logger_1.logger.info("Adding a new course");
-                const newCourse = yield course_model_1.default.create(data);
-                return Object.assign({}, newCourse.toJSON());
+                logger_1.logger.info("Adding a new course", course_name);
+                const newCourse = yield course_model_1.default.create({ course_name });
+                return newCourse.toJSON();
             }
             catch (error) {
-                logger_1.logger.error("Error adding new course", error);
-                throw new Error("Error adding new course" + error);
+                logger_1.logger.error("Error adding new course: " + error.message);
+                throw new Error("Error adding new course: " + error.message);
             }
         });
     },
