@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Tiêu đề modal
             const title = document.createElement("h2");
             title.className = "text-2xl font-bold mb-6 text-gray-700";
-            title.textContent = `Edit: ${configKey}`;
+            title.textContent = `Chỉnh sửa: ${configKey}`;
 
             // Input
             const input = document.createElement("input");
@@ -32,13 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Nút Save
             const saveButton = document.createElement("button");
-            saveButton.textContent = "Save";
+            saveButton.textContent = "Lưu";
             saveButton.className =
                 "bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition";
 
             // Nút Cancel
             const cancelButton = document.createElement("button");
-            cancelButton.textContent = "Cancel";
+            cancelButton.textContent = "Hủy";
             cancelButton.className =
                 "bg-gray-300 text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-400 transition";
 
