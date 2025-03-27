@@ -4,6 +4,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const studentId = url.substring(url.lastIndexOf('/') + 1);
     console.log(studentId);
 
+
+    // Function to fetch status at begin and after update 
+    async function fetchStudentStatus(id)
+    {
+        fetch(`/api/status_transition/${id}`)
+            .then((response) => response.json())
+            .then((data) => {
+            const statusSelect = document.getElementById("status");
+            statusSelect.innerHTML = ``;
+
+            data.forEach((status) => {
+            const option = document.createElement("option");
+            option.value = status.status_id; // Set status_id as value
+            option.textContent = status.name; // Set name as text
+            if (status.status_id === id)
+                option.setAttribute("selected", "selected");
+            statusSelect.appendChild(option);
+            });
+            })
+            .catch((error) => console.error("Error fetching faculties:", error));
+                
+    }
+
     // Function to fetch data from the API and populate the form fields
     async function fetchAndPopulateData() {
         try {
@@ -96,22 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .catch((error) => console.error("Error fetching faculties:", error));
 
-                fetch("/api/status")
-                .then((response) => response.json())
-                .then((data) => {
-                const statusSelect = document.getElementById("status");
-
-                data.status.forEach((status) => {
-                const option = document.createElement("option");
-                option.value = status.status_id; // Set status_id as value
-                option.textContent = status.name; // Set name as text
-                if (status.name === student.status.name)
-                    option.setAttribute("selected", "selected");
-                statusSelect.appendChild(option);
-                });
-                })
-                .catch((error) => console.error("Error fetching faculties:", error));
-                
+                fetchStudentStatus(student.status_id);
                 // Handle has_chip field (if applicable)
                 if (student.identification.has_chip !== undefined) {
                     document.getElementById('hasChip').value = student.identification.has_chip ? 'Có' : 'Không';
@@ -136,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function () {
             faculty_id: document.getElementById('faculty').value,
             course_id: document.getElementById('course').value,
             status_id: document.getElementById('status').value,
-            status: document.getElementById('status').options[document.getElementById('status').selectedIndex].text,
+            // status_string: document.getElementById('status').options[document.getElementById('status').selectedIndex].text,
 
             temporaryAddress: {
                 temporary_address_id: document.getElementById('tempAddress').value,
@@ -193,6 +201,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (response.ok) {
                 console.log('Student data updated successfully');
+                fetchStudentStatus(updatedData.status_id);
+                alert('Updated student data successfully');
             } else {
                 alert(responseData.message);
                 console.error('Failed to update student data');

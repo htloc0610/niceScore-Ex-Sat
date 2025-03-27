@@ -2,6 +2,18 @@ import Course from "../models/course.model";
 import { logger } from "../config/logger";
 
 const studentService = {
+   //get Courses
+   async getAllCourses() {
+    try {
+      const courses = await Course.findAll({
+        order: [["course_id", "ASC"]], 
+      });
+      return courses.map(course => course.dataValues);
+    } catch (error) {
+      logger.error("Error fetching courses list", error);
+      throw new Error("Error fetching courses list");
+    }
+  },
   //getCourses
   async getCourses() {
     try {

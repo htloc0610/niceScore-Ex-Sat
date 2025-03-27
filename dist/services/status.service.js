@@ -15,6 +15,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const status_model_1 = __importDefault(require("../models/status.model"));
 const logger_1 = require("../config/logger");
 const statusService = {
+    getAllStatuses() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const statuses = yield status_model_1.default.findAll({
+                    order: [["status_id", "ASC"]],
+                });
+                logger_1.logger.info("Fetched status list successfully");
+                return statuses.map(status => status.dataValues);
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching status list: " + error.message);
+                throw new Error("Error fetching status list");
+            }
+        });
+    },
     // Get list of status
     getStatus() {
         return __awaiter(this, void 0, void 0, function* () {

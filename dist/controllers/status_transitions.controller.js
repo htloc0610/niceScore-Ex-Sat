@@ -38,6 +38,19 @@ const statusTransitionController = {
             res.status(500).json({ error: error.message });
         }
     }),
+    getValidNextStatusById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        logger_1.logger.info(`Getting valid next status by id`);
+        try {
+            const { id } = req.params;
+            const statusId = parseInt(id, 10);
+            const status = yield status_transitions_service_1.default.getValidNextStatusById(statusId);
+            res.status(200).json(status);
+        }
+        catch (error) {
+            logger_1.logger.error(`Error getting status transitions: ${error.message}`);
+            res.status(500).json({ error: error.message });
+        }
+    }),
     addStatusTransitions: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const { current_status, new_status } = req.body;
         try {

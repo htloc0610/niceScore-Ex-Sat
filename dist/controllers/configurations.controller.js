@@ -48,20 +48,22 @@ const statusController = {
                 .status(500)
                 .send({ message: "An error occurred while updating the configuration." });
         }
-    })
-    // addConfiguration: async (req: Request, res: Response): Promise<void> => {
-    //   try {
-    //     const data = req.body;
-    //     const newStatus = await configurationService.addConfiguration(data);
-    //     logger.info("Status added successfully");
-    //     res.status(201).send({ message: "Status added successfully", newStatus });
-    //   } catch (error) {
-    //     logger.error("An error occurred while adding the status", error);
-    //     res
-    //       .status(500)
-    //       .send({ message: "An error occurred while adding the status." });
-    //   }
-    // },
+    }),
+    addConfiguration: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const data = req.body;
+            console.log("data controller", data);
+            const newStatus = yield configurations_service_1.default.addConfiguration(data);
+            logger_1.logger.info("Status added successfully");
+            res.status(201).send({ message: "Status added successfully", newStatus });
+        }
+        catch (error) {
+            logger_1.logger.error("An error occurred while adding the status", error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while adding the status." });
+        }
+    }),
 };
 exports.default = statusController;
 //# sourceMappingURL=configurations.controller.js.map

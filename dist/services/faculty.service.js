@@ -16,6 +16,21 @@ const faculty_model_1 = __importDefault(require("../models/faculty.model"));
 const logger_1 = require("../config/logger");
 const facultyService = {
     // Get list of faculties
+    getAllFaculties() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const faculties = yield faculty_model_1.default.findAll({
+                    order: [["faculty_id", "ASC"]],
+                });
+                return faculties.map(faculty => faculty.dataValues);
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching all faculties");
+                throw new Error("Error fetching all faculties");
+            }
+        });
+    },
+    // Get list of faculties
     getFaculties() {
         return __awaiter(this, void 0, void 0, function* () {
             try {

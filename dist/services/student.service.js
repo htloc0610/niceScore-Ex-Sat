@@ -366,6 +366,8 @@ const studentService = {
                 delete studentData.temporaryAddress;
                 delete studentData.mailingAddress;
                 delete studentData.identification;
+                studentData.status_id = parseInt(studentData.status_id, 10);
+                console.log("studentData", studentData);
                 // Update the student
                 const [updated] = yield student_model_1.default.update(studentData, {
                     where: { student_id: studentId },
@@ -394,14 +396,14 @@ const studentService = {
                         {
                             model: status_model_1.default,
                             as: "status",
-                            attributes: ["name"],
+                            attributes: ["status_id"],
                         },
                     ],
                 });
                 if (!student) {
                     throw new Error("Student not found");
                 }
-                return student.dataValues.status.name;
+                return student.dataValues.status.status_id;
             }
             catch (error) {
                 logger_1.logger.error("Error fetching student status: " + error.message);

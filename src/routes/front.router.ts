@@ -1,11 +1,17 @@
 import { Router } from "express";
 import configurationService from "../services/configurations.service";
-
+import facultyService from "../services/faculty.service";
+import statusService from "../services/status.service";
+import courseService from "../services/course.service";
 const router = Router();
 
 // [GET] /more
-router.get("/more", (req, res) => {
-  res.render("more"); // Render the "more" Handlebars template
+router.get("/more", async (req, res) => {
+  const faculties = await facultyService.getAllFaculties(); 
+  const statuses = await statusService.getAllStatuses();
+  const courses = await courseService.getAllCourses();
+  console.log("Faculties list: ", courses, statuses);
+  res.render("more", {faculties: faculties, statuses: statuses, courses: courses}); // Render the "more" Handlebars template
 });
 
 // [GET] /add

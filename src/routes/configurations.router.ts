@@ -7,7 +7,7 @@ const configurations = Router();
 configurations.get("/", configurationsController.getListConfigurations);
 
 // // [POST] /api/configurations
-// configurations.post("/", configurationsController.addConfiguration);
+configurations.post("/", configurationsController.addConfiguration);
 
 // [PUT] /api/configurations
 configurations.put("/", configurationsController.updateConfiguration);

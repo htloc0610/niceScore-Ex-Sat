@@ -42,6 +42,8 @@ const configurationService = {
     value: string;
   }) => {
     try {
+      console.log("configData", configData);
+      
       const newConfig = await Configuration.create(configData);
       return newConfig;
     } catch (error) {

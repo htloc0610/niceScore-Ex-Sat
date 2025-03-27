@@ -29,6 +29,25 @@ const statusTransitionService = {
             throw error;
         }
     }),
+    getValidNextStatusById: (id) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            // Find all transitions where current_status = id
+            const transitions = yield status_transitions_model_1.default.findAll({
+                where: { current_status: id },
+                attributes: ["id", "new_status"], // Include id and new_status
+            });
+            const newStatusIds = transitions.map(t => t.new_status);
+            const statusIds = new Set([id, ...newStatusIds]);
+            const statuses = yield status_model_1.default.findAll({
+                where: { status_id: Array.from(statusIds) },
+            });
+            return statuses.map(status => status.dataValues);
+        }
+        catch (error) {
+            console.error("Error fetching status transitions:", error);
+            throw error;
+        }
+    }),
     getStatusTransitions: () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const statusTransitions = yield status_transitions_model_1.default.findAll({

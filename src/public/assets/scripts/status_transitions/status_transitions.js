@@ -20,9 +20,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (tableHead) {
                         tableHead.innerHTML = `
                             <tr>
-                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Current status</th>
-                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Next status</th>
-                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Action</th>
+                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Trạng thái hiện tại</th>
+                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Trạng thái tiếp theo</th>
+                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
                             </tr>
                         `;
                     }
@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${config.newStatus.name}</td>
                             <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
                                 <button class="edit-button px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" data-id="${config.id}">
-                                    Edit
+                                    Sửa
                                 </button>
                                 <button class="delete-button px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-red" data-id="${config.id}">
-                                    Delete
+                                    Xóa
                                 </button>
                             </td>
                         `;
@@ -48,10 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     });
 
                     // Add "Add" button below the table
-                    const addButton = document.createElement("button");
-                    addButton.textContent = "Add";
-                    addButton.className =
-                        "mt-4 bg-green-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-green-700 transition";
+                    let addButton = document.querySelector(".add-button");
+                    if (!addButton) {
+                        addButton = document.createElement("button");
+                        addButton.textContent = "Thêm";
+                        addButton.className =
+                            "add-button mt-4 bg-green-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-green-700 transition";
+                    }
 
                     // Add button event
                     addButton.addEventListener("click", () => {
@@ -66,12 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Modal title
                         const title = document.createElement("h2");
                         title.className = "text-2xl font-bold mb-6 text-gray-700";
-                        title.textContent = `Add New Status Transition`;
+                        title.textContent = `Thêm trạng thái`;
 
                         // Dropdown for current status
                         const currentStatusInput = document.createElement("select");
                         currentStatusInput.className = "w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
-                        currentStatusInput.placeholder = "Current Status";
+                        currentStatusInput.placeholder = "Trạng thái hiện tại";
 
                         // Populate current status dropdown
                         status.forEach((option) => {
@@ -84,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         // Dropdown for next status
                         const nextStatusInput = document.createElement("select");
                         nextStatusInput.className = "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
-                        nextStatusInput.placeholder = "Next Status";
+                        nextStatusInput.placeholder = "Trạng thái tiếp theo";
 
                         // Populate next status dropdown
                         status.forEach((option) => {
@@ -100,13 +103,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         // Save button
                         const saveButton = document.createElement("button");
-                        saveButton.textContent = "Save";
+                        saveButton.textContent = "Lưu";
                         saveButton.className =
                             "bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition";
 
                         // Cancel button
                         const cancelButton = document.createElement("button");
-                        cancelButton.textContent = "Cancel";
+                        cancelButton.textContent = "Hủy";
                         cancelButton.className =
                             "bg-gray-300 text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-400 transition";
 
@@ -170,7 +173,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     // Append the "Add" button to the container below the table
                     const table = document.querySelector("table");
                     
-                    if (table) {
+                    if (table && !document.querySelector(".mt-4.flex.justify-end")) {
                         const addButtonContainer = document.createElement("div");
                         addButtonContainer.className = "mt-4 flex justify-end";
                         addButtonContainer.appendChild(addButton);
@@ -237,12 +240,12 @@ document.addEventListener("DOMContentLoaded", () => {
                             // Modal title
                             const title = document.createElement("h2");
                             title.className = "text-2xl font-bold mb-6 text-gray-700";
-                            title.textContent = `Edit Status Transition`;
+                            title.textContent = `Chỉnh sửa`;
 
                             // Dropdown for current status
                             const currentStatusInput = document.createElement("select");
                             currentStatusInput.className = "w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
-                            currentStatusInput.placeholder = "Current Status";
+                            currentStatusInput.placeholder = "Trạng thái hiện tại";
 
                             // Populate current status dropdown
                             status.forEach((option) => {

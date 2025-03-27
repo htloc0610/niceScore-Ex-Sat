@@ -33,20 +33,22 @@ const statusController = {
           .status(500)
           .send({ message: "An error occurred while updating the configuration." });
       }
+    },
+  addConfiguration: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const data = req.body;
+      console.log("data controller", data);
+
+      const newStatus = await configurationService.addConfiguration(data);
+      logger.info("Status added successfully");
+      res.status(201).send({ message: "Status added successfully", newStatus });
+    } catch (error) {
+      logger.error("An error occurred while adding the status", error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while adding the status." });
     }
-  // addConfiguration: async (req: Request, res: Response): Promise<void> => {
-  //   try {
-  //     const data = req.body;
-  //     const newStatus = await configurationService.addConfiguration(data);
-  //     logger.info("Status added successfully");
-  //     res.status(201).send({ message: "Status added successfully", newStatus });
-  //   } catch (error) {
-  //     logger.error("An error occurred while adding the status", error);
-  //     res
-  //       .status(500)
-  //       .send({ message: "An error occurred while adding the status." });
-  //   }
-  // },
+  },
 };
 
 export default statusController;

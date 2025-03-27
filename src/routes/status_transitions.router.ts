@@ -9,6 +9,12 @@ statusTransitionsRouter.get(
   statusTransitionController.getStatusTransitions
 );
 
+// [GET] /api/status_transition/:id
+statusTransitionsRouter.get(
+  "/:id",
+  statusTransitionController.getValidNextStatusById
+);
+
 // [POST] /api/status_transition
 statusTransitionsRouter.post(
   "/",

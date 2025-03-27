@@ -8,6 +8,8 @@ const status_transitions_controller_1 = __importDefault(require("../controllers/
 const statusTransitionsRouter = (0, express_1.Router)();
 // [GET] /api/status_transition
 statusTransitionsRouter.get("/", status_transitions_controller_1.default.getStatusTransitions);
+// [GET] /api/status_transition/:id
+statusTransitionsRouter.get("/:id", status_transitions_controller_1.default.getValidNextStatusById);
 // [POST] /api/status_transition
 statusTransitionsRouter.post("/", status_transitions_controller_1.default.addStatusTransitions);
 // [PUT] /api/status_transition
