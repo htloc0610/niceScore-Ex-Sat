@@ -22,35 +22,36 @@ const realation_1 = __importDefault(require("./models/realation"));
 const handlebars_1 = __importDefault(require("./config/handlebars"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
-// Middleware để xử lý JSON
+// Middleware to handle JSON
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)());
 // Serve static files from the "public" directory
 app.use(express_1.default.static(path_1.default.join(__dirname, "../src/public")));
-// Set Handlebars as the view engine
+// Configure Handlebars
 app.engine("hbs", handlebars_1.default.engine);
 app.set("view engine", "hbs");
 app.set("views", path_1.default.join(__dirname, "../src/views"));
-(0, index_router_1.default)(app);
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
-});
+// Connect to the database before starting the server
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("Check database connection...");
+    console.log("Checking database connection...");
     try {
         yield db_1.default.authenticate();
         (0, realation_1.default)();
-        // Đồng bộ các models
         yield db_1.default.sync({ force: false });
-        console.log("Database connection established");
+        console.log("Database connection established!");
+        // Start the server only when the database is successfully connected
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+        // Set up routes after the database is ready
+        (0, index_router_1.default)(app);
     }
-    catch (e) {
-        console.log("Database connection failed", e);
+    catch (error) {
+        console.error("Database connection failed:", error);
+        process.exit(1); // Exit the application if database connection fails
     }
 });
-// Sync models
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield connectDB();
-}))();
+// Execute the database connection
+connectDB();
 //# sourceMappingURL=index.js.map

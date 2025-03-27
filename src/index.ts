@@ -10,40 +10,40 @@ import hbs from "./config/handlebars";
 const app = express();
 const port: string | number = process.env.PORT || 8080;
 
-// Middleware để xử lý JSON
+// Middleware to handle JSON
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cors());
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, "../src/public")));
 
-// Set Handlebars as the view engine
+// Configure Handlebars
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../src/views"));
 
-setupRoutes(app);
-
-app.listen(port, (): void => {
-  console.log(`Server is listening on port ${port}`);
-});
-
+// Connect to the database before starting the server
 const connectDB = async () => {
-  console.log("Check database connection...");
+  console.log("Checking database connection...");
   try {
     await sequelize.authenticate();
     setupRelation();
-    // Đồng bộ các models
     await sequelize.sync({ force: false });
-    console.log("Database connection established");
-  } catch (e) {
-    console.log("Database connection failed", e);
+    console.log("Database connection established!");
+
+    // Start the server only when the database is successfully connected
+    app.listen(port, () => {
+      console.log(`Server is running on port ${port}`);
+    });
+
+    // Set up routes after the database is ready
+    setupRoutes(app);
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    process.exit(1); // Exit the application if database connection fails
   }
 };
 
-// Sync models
-(async () => {
-  await connectDB();
-})();
+// Execute the database connection
+connectDB();

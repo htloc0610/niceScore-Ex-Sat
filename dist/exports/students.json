@@ -1,0 +1,267 @@
+[
+  {
+    "student_id": 120,
+    "full_name": "Nguyễn Văn A",
+    "date_of_birth": "2025-03-09",
+    "gender": "Nam",
+    "program": "Cử nhân",
+    "email": "dangdiennguyen22@gmail.com",
+    "phone_number": "0192984211",
+    "nationality": "VNam",
+    "faculty": {
+      "name": "CNTT"
+    },
+    "course": {
+      "course_name": "K22"
+    },
+    "status": {
+      "name": "Đã tốt nghiệp"
+    },
+    "permanentAddress": {
+      "house_number": "1234",
+      "street_name": "1234",
+      "ward": "3",
+      "district": "4",
+      "city": "Bình Định",
+      "country": "61"
+    },
+    "temporaryAddress": {
+      "house_number": "123443",
+      "street_name": "1234",
+      "ward": "4",
+      "district": "Bình Định",
+      "city": "Bình Định",
+      "country": "87"
+    },
+    "mailingAddress": {
+      "house_number": "",
+      "street_name": "1231",
+      "ward": "7",
+      "district": "i",
+      "city": "7",
+      "country": "6"
+    },
+    "identification": {
+      "type": "Passport",
+      "number": "00112233576",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "US",
+      "has_chip": false,
+      "notes": "No comment"
+    }
+  },
+  {
+    "student_id": 122,
+    "full_name": "Nguyễn Văn B",
+    "date_of_birth": "2025-03-09",
+    "gender": "Nam",
+    "program": "Cử nhân",
+    "email": "dangdiennguyen112@gmail.com",
+    "phone_number": "0375375375",
+    "nationality": "VN",
+    "faculty": {
+      "name": "CNTT"
+    },
+    "course": {
+      "course_name": "K23"
+    },
+    "status": {
+      "name": "Đã nghỉ học"
+    },
+    "permanentAddress": {
+      "house_number": "1",
+      "street_name": "123",
+      "ward": "3",
+      "district": "4",
+      "city": "HCM",
+      "country": "61"
+    },
+    "temporaryAddress": {
+      "house_number": "1",
+      "street_name": "",
+      "ward": "4",
+      "district": "5",
+      "city": "6",
+      "country": "87"
+    },
+    "mailingAddress": {
+      "house_number": "1",
+      "street_name": "",
+      "ward": "7",
+      "district": "i",
+      "city": "7",
+      "country": "6"
+    },
+    "identification": {
+      "type": "CMND",
+      "number": "00112238576",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "",
+      "has_chip": false,
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 199,
+    "full_name": "Trần Lượng",
+    "date_of_birth": "2004-03-18",
+    "gender": "Nam",
+    "program": "CLC",
+    "email": "luong@gmail.com",
+    "phone_number": "0123456789",
+    "nationality": "VN",
+    "faculty": {
+      "name": "Hoa hoc"
+    },
+    "course": {
+      "course_name": "K23"
+    },
+    "status": {
+      "name": "Đang học"
+    },
+    "permanentAddress": {
+      "house_number": "123",
+      "street_name": "null",
+      "ward": "4",
+      "district": "5",
+      "city": "HCM",
+      "country": "VN"
+    },
+    "temporaryAddress": {
+      "house_number": "124",
+      "street_name": "null",
+      "ward": "4",
+      "district": "5",
+      "city": "HCM",
+      "country": "VN"
+    },
+    "mailingAddress": {
+      "house_number": "125",
+      "street_name": "null",
+      "ward": "4",
+      "district": "5",
+      "city": "HCM",
+      "country": "VN"
+    },
+    "identification": {
+      "type": "CCCD",
+      "number": "10001000",
+      "issue_date": "2024-03-18",
+      "expiry_date": "2025-03-18",
+      "place_of_issue": "VN",
+      "country_of_issue": "",
+      "has_chip": false,
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 200,
+    "full_name": "Trịnh Văn G",
+    "date_of_birth": "2025-03-09",
+    "gender": "Nam",
+    "program": "Cử nhân",
+    "email": "test@gmail.com",
+    "phone_number": "0192984211",
+    "nationality": "VNam",
+    "faculty": {
+      "name": "CNTT"
+    },
+    "course": {
+      "course_name": "K22"
+    },
+    "status": {
+      "name": "Đã tốt nghiệp"
+    },
+    "permanentAddress": {
+      "house_number": "1234",
+      "street_name": "1234",
+      "ward": "3",
+      "district": "4",
+      "city": "Bình Định",
+      "country": "61"
+    },
+    "temporaryAddress": {
+      "house_number": "123443",
+      "street_name": "1234",
+      "ward": "4",
+      "district": "Bình Định",
+      "city": "Bình Định",
+      "country": "87"
+    },
+    "mailingAddress": {
+      "house_number": "",
+      "street_name": "1231",
+      "ward": "7",
+      "district": "i",
+      "city": "7",
+      "country": "6"
+    },
+    "identification": {
+      "type": "Passport",
+      "number": "4215454512454157815",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "US",
+      "has_chip": false,
+      "notes": "No comment"
+    }
+  },
+  {
+    "student_id": 400,
+    "full_name": "Trịnh Văn H",
+    "date_of_birth": "2025-03-09",
+    "gender": "Nam",
+    "program": "Cử nhân",
+    "email": "luong@123.com",
+    "phone_number": "123412001",
+    "nationality": "VN",
+    "faculty": {
+      "name": "CNTT"
+    },
+    "course": {
+      "course_name": "K23"
+    },
+    "status": {
+      "name": "Đã nghỉ học"
+    },
+    "permanentAddress": {
+      "house_number": "1",
+      "street_name": "123",
+      "ward": "3",
+      "district": "4",
+      "city": "HCM",
+      "country": "61"
+    },
+    "temporaryAddress": {
+      "house_number": "1",
+      "street_name": "",
+      "ward": "4",
+      "district": "5",
+      "city": "6",
+      "country": "87"
+    },
+    "mailingAddress": {
+      "house_number": "1",
+      "street_name": "",
+      "ward": "7",
+      "district": "i",
+      "city": "7",
+      "country": "6"
+    },
+    "identification": {
+      "type": "CMND",
+      "number": "44541121200",
+      "issue_date": "2025-03-13",
+      "expiry_date": "2025-03-08",
+      "place_of_issue": "SA",
+      "country_of_issue": "",
+      "has_chip": false,
+      "notes": ""
+    }
+  }
+]
