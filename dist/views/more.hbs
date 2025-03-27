@@ -64,7 +64,8 @@
                     class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
                       viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" 
+                          d="M12 4l8 4-8 4-8-4 8-4zM4 8v4c0 4 4 6 8 6s8-2 8-6V8"></path>
                     </svg>
                     <span class="ml-4">Khoa</span>
                   </button>
@@ -74,7 +75,8 @@
                     class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
                       viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                      <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"></circle>
+                      <path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span class="ml-4">Tình trạng</span>
                   </button>
@@ -84,7 +86,8 @@
                     class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"
                       viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                      <rect x="3" y="4" width="18" height="16" rx="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+                      <path d="M16 2v4M8 2v4M3 10h18" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span class="ml-4">Khóa học</span>
                   </button>
@@ -99,7 +102,7 @@
               <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khoa</h2>
               <table
                 class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                <thead>
+                <thead class=>
                   <tr>
                     <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
                     <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên Khoa</th>
@@ -122,7 +125,7 @@
                   {{/each}}
                 </tbody>
               </table>
-              <div class="flex justify-center px-4 pt-4 pb-2 mt-4">
+              <div class="flex justify-end px-4 pt-4 pb-2 mt-4">
                 <button
                   class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                   onclick='addMore("Faculty")'>Thêm Khoa</button>
@@ -158,7 +161,7 @@
                   {{/each}}
                 </tbody>
               </table>
-              <div class="flex justify-center pt-4 mt-4">
+              <div class="flex justify-end pt-4 mt-4">
                 <button
                   class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                   onclick='addMore("Status")'>Thêm tình trạng</button>
@@ -194,7 +197,7 @@
                   {{/each}}
                 </tbody>
               </table>
-              <div class="flex justify-center pt-4 mt-4">
+              <div class="flex justify-end pt-4 mt-4">
                 <button
                   class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                   onclick='addMore("course")'>Thêm Khóa</button>

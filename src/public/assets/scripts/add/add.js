@@ -142,15 +142,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (i === keys.length - 1) {
                     current[keys[i]] = value; // Assign value
                 } else {
-                    current[keys[i]] = current[keys[i]] || {}; // Create object if not exists
-                    current = current[keys[i]]; // Move deeper
+                    current[keys[i]] = current[keys[i]] || {}; 
+                    current = current[keys[i]]; 
                 }
             }
         });
 
         console.log("Form Data JSON:", data);
 
-        // Send data to the backend (Replace with your actual API endpoint)
         fetch("/api/student", {
             method: "POST",
             headers: {
@@ -158,16 +157,21 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             body: JSON.stringify(data)
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    // If response is not OK (e.g., 400 Bad Request), throw an error
+                    return response.json().then(err => { throw new Error(err.message); });
+                }
+                return response.json();
+            })
             .then(result => {
                 alert("Thêm sinh viên thành công!");
-
                 console.log("Server response:", result);
             })
             .catch(error => {
                 console.error("Error submitting form:", error);
-                alert("Đã xảy ra lỗi khi thêm sinh viên!");
+                alert("Đã xảy ra lỗi: " + error.message);
             });
-    });
 
-});
+    });
+})
