@@ -19,7 +19,6 @@ const facultyController = {
   addFaculty: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
-      console.log(data.name, "data name");
       const newFaculty = await facultyService.addFaculty(data.name);
       res
         .status(201)
@@ -35,7 +34,6 @@ const facultyController = {
     try {
       const { faculty_id, name } = req.body;
       const updatedData = req.body;
-      console.log(updatedData, "id", faculty_id);
       const updatedFaculty = await facultyService.updateFaculty(
         faculty_id,
         updatedData
