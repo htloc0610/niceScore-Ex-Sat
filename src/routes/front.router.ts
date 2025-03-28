@@ -10,7 +10,6 @@ router.get("/more", async (req, res) => {
   const faculties = await facultyService.getAllFaculties(); 
   const statuses = await statusService.getAllStatuses();
   const courses = await courseService.getAllCourses();
-  console.log("Faculties list: ", courses, statuses);
   res.render("more", {faculties: faculties, statuses: statuses, courses: courses}); // Render the "more" Handlebars template
 });
 

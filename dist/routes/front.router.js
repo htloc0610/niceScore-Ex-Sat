@@ -23,7 +23,6 @@ router.get("/more", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const faculties = yield faculty_service_1.default.getAllFaculties();
     const statuses = yield status_service_1.default.getAllStatuses();
     const courses = yield course_service_1.default.getAllCourses();
-    console.log("Faculties list: ", courses, statuses);
     res.render("more", { faculties: faculties, statuses: statuses, courses: courses }); // Render the "more" Handlebars template
 }));
 // [GET] /add
