@@ -15,3 +15,7 @@
 {"level":"info","message":"Added new module successfully","timestamp":"2025-03-31T02:40:02.610Z"}
 {"level":"error","message":"Error updating module: Module not found","timestamp":"2025-03-31T02:41:46.421Z"}
 {"level":"info","message":"Added new module successfully","timestamp":"2025-03-31T02:42:08.561Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:51:15.806Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:52:16.959Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:53:06.661Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:54:02.337Z"}

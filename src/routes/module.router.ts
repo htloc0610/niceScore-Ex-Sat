@@ -15,4 +15,7 @@ moduleRouter.get("/:id", moduleController.getModule);
 // [PUT] /api/module/:id
 moduleRouter.put("/:id", moduleController.updateModule);
 
+// [DELETE] /api/module/:id
+moduleRouter.delete("/:id", moduleController.deleteModule);
+
 export default moduleRouter;

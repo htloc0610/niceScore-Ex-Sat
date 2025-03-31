@@ -79,6 +79,43 @@ const facultyService = {
             }
         });
     },
+    deleteModule(moduleId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const deleted = yield modules_model_1.default.destroy({
+                    where: { module_id: moduleId },
+                });
+                if (deleted === 0) {
+                    throw new Error("Module not found");
+                }
+                logger_1.logger.info("Deleted module successfully");
+                return { message: "Module deleted successfully" };
+            }
+            catch (error) {
+                logger_1.logger.error("Error deleting module: " + error.message);
+                throw new Error("Error deleting module: " + error.message);
+            }
+        });
+    },
+    isModuleOlderThan30Minutes(moduleId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const module = yield modules_model_1.default.findOne({
+                    where: { module_id: moduleId },
+                });
+                if (!module) {
+                    throw new Error("Module not found");
+                }
+                const createdAt = module.getDataValue("createdAt");
+                const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+                return createdAt < thirtyMinutesAgo;
+            }
+            catch (error) {
+                logger_1.logger.error("Error checking module age: " + error.message);
+                throw new Error("Error checking module age: " + error.message);
+            }
+        });
+    }
 };
 exports.default = facultyService;
 //# sourceMappingURL=module.service.js.map

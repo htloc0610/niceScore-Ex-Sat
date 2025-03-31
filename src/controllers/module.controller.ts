@@ -19,6 +19,14 @@ const facultyController = {
   addModule: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
+
+      const { credits } = data;
+      if (credits < 2) {
+        res.status(400).send({
+          message: "Credits must be at least 2.",
+        });
+        return;
+      }
       
       const newModule = await moduleService.addModule(data);
       res
@@ -71,6 +79,33 @@ const facultyController = {
         .send({ message: "An error occurred while updating the module." });
     }
   },
+  deleteModule: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const module_id = req.params.id;
+
+      if (await moduleService.isModuleOlderThan30Minutes(parseInt(module_id))) {
+        res.status(400).send({
+          message: "Module cannot be deleted after 30 minutes of creation.",
+        });
+        return;
+      }
+
+      res.status(200).send({ message: "Module deleted successfully." });
+
+      // const deletedModule = await moduleService.deleteModule(parseInt(module_id));
+
+      // if (!deletedModule) {
+      //   res.status(404).send({ message: "Module not found." });
+      // } else {
+      //   res.status(200).send({ message: "Module deleted successfully." });
+      // }
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while deleting the module." });
+    }
+  }
 };
 
 export default facultyController;

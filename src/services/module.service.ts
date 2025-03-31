@@ -60,6 +60,42 @@ const facultyService = {
       throw new Error("Error updating module: " + error.message);
     }
   },
+  async deleteModule(moduleId: number) {
+    try {
+      const deleted = await Modules.destroy({
+        where: { module_id: moduleId },
+      });
+
+      if (deleted === 0) {
+        throw new Error("Module not found");
+      }
+
+      logger.info("Deleted module successfully");
+      return { message: "Module deleted successfully" };
+    } catch (error) {
+      logger.error("Error deleting module: " + error.message);
+      throw new Error("Error deleting module: " + error.message);
+    }
+  },
+  async isModuleOlderThan30Minutes(moduleId: number) {
+    try {
+      const module = await Modules.findOne({
+        where: { module_id: moduleId },
+      });
+
+      if (!module) {
+        throw new Error("Module not found");
+      }
+
+      const createdAt = module.getDataValue("createdAt");
+      const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+
+      return createdAt < thirtyMinutesAgo;
+    } catch (error) {
+      logger.error("Error checking module age: " + error.message);
+      throw new Error("Error checking module age: " + error.message);
+    }
+  }
 };
 
 export default facultyService;

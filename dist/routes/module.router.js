@@ -14,5 +14,7 @@ moduleRouter.post("/", module_controller_1.default.addModule);
 moduleRouter.get("/:id", module_controller_1.default.getModule);
 // [PUT] /api/module/:id
 moduleRouter.put("/:id", module_controller_1.default.updateModule);
+// [DELETE] /api/module/:id
+moduleRouter.delete("/:id", module_controller_1.default.deleteModule);
 exports.default = moduleRouter;
 //# sourceMappingURL=module.router.js.map
