@@ -3,6 +3,9 @@ import Faculty from "../models/faculty.model";
 import Course from "../models/course.model";
 import Address from "../models/address.model";
 import Status from "../models/status.model";
+import Transcript from "../models/transcripts.model";
+import Module from "../models/modules.model";
+import Class from "../models/classes.model";
 import Identification from "../models/identification.model";
 import addressService from "./address.service";
 import identificationService from "./identification.service";
@@ -432,7 +435,39 @@ const studentService = {
       console.log("Error fetching student status:", error);
       throw new Error("Error fetching student status: " + error.message);
     }
-  }
+  },
+
+  async getStudentGrades(studentId: number) {
+    try {
+      const grades = await Transcript.findAll({
+        where: { student_id: studentId },
+        include: [
+          {
+            model: Class,
+            as: "class",
+            include: [
+              {
+                model: Module,
+                as: "module",
+                attributes: ["module_name", "credits"],
+              },
+            ],
+            attributes: ["class_name"],
+          },
+        ],
+        attributes: ["grade"],
+      });
+
+      if (!grades || grades.length === 0) {
+        throw new Error("No grades found for the student");
+      }
+      return grades;
+    } catch (error) {
+      logger.error("Error fetching student grades: " + error.message);
+      console.log("Error fetching student grades:", error);
+      throw new Error("Error fetching student grades: " + error.message);
+    }
+  },
 };
 
 export default studentService;

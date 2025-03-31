@@ -17,6 +17,9 @@ const faculty_model_1 = __importDefault(require("../models/faculty.model"));
 const course_model_1 = __importDefault(require("../models/course.model"));
 const address_model_1 = __importDefault(require("../models/address.model"));
 const status_model_1 = __importDefault(require("../models/status.model"));
+const transcripts_model_1 = __importDefault(require("../models/transcripts.model"));
+const modules_model_1 = __importDefault(require("../models/modules.model"));
+const classes_model_1 = __importDefault(require("../models/classes.model"));
 const identification_model_1 = __importDefault(require("../models/identification.model"));
 const address_service_1 = __importDefault(require("./address.service"));
 const identification_service_1 = __importDefault(require("./identification.service"));
@@ -411,7 +414,40 @@ const studentService = {
                 throw new Error("Error fetching student status: " + error.message);
             }
         });
-    }
+    },
+    getStudentGrades(studentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const grades = yield transcripts_model_1.default.findAll({
+                    where: { student_id: studentId },
+                    include: [
+                        {
+                            model: classes_model_1.default,
+                            as: "class",
+                            include: [
+                                {
+                                    model: modules_model_1.default,
+                                    as: "module",
+                                    attributes: ["module_name", "credits"],
+                                },
+                            ],
+                            attributes: ["class_name"],
+                        },
+                    ],
+                    attributes: ["grade"],
+                });
+                if (!grades || grades.length === 0) {
+                    throw new Error("No grades found for the student");
+                }
+                return grades;
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching student grades: " + error.message);
+                console.log("Error fetching student grades:", error);
+                throw new Error("Error fetching student grades: " + error.message);
+            }
+        });
+    },
 };
 exports.default = studentService;
 //# sourceMappingURL=student.service.js.map

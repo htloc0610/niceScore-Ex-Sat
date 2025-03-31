@@ -106,3 +106,15 @@
 {"level":"info","message":"Module has registered students","timestamp":"2025-03-31T07:49:15.680Z"}
 {"level":"info","message":"Module has no registered students","timestamp":"2025-03-31T07:49:25.198Z"}
 {"level":"info","message":"Module has no registered students","timestamp":"2025-03-31T07:49:29.262Z"}
+{"level":"error","message":"Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:14:28.774Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:14:28.790Z"}
+{"level":"error","message":"Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:15:25.683Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:15:25.696Z"}
+{"level":"error","message":"Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:16:00.193Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:16:00.206Z"}
+{"level":"error","message":"Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:16:27.611Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column \"nan\" does not exist","timestamp":"2025-03-31T08:16:27.626Z"}
+{"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:32.361Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:32.365Z"}
+{"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:58.735Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:58.743Z"}
