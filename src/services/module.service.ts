@@ -5,7 +5,6 @@ const facultyService = {
   async getAllModules() {
     try {
       const modules = await Modules.findAll({
-        attributes: ["module_id", "module_name"],
         order: [["module_id", "ASC"]],
       });
       return modules.map(module => module.dataValues);
@@ -15,7 +14,7 @@ const facultyService = {
     }
   },
 
-  async addModule(data: { module_id: number; module_name: string }) {
+  async addModule(data: any) {
     try {
       const newModule = await Modules.create(data);
       logger.info("Added new module successfully");
@@ -30,7 +29,6 @@ const facultyService = {
     try {
       const module = await Modules.findOne({
       where: { module_id: moduleId },
-      attributes: ["module_id", "module_name"],
       });
 
       if (!module) {

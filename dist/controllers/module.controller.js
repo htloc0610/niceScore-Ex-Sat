@@ -64,7 +64,7 @@ const facultyController = {
     }),
     updateModule: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const module_id = req.params.id; // Extract module ID from URL params
+            const module_id = req.params.id;
             const updatedData = req.body;
             const updatedModule = yield module_service_1.default.updateModule(parseInt(module_id), updatedData);
             if (!updatedModule) {

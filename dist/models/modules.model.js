@@ -13,6 +13,10 @@ Module.init({
     module_id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
+    },
+    course_code: {
+        type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
     },
     module_name: {

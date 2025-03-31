@@ -8,6 +8,10 @@ Module.init(
         module_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
+            autoIncrement: true,
+        },
+        course_code: {
+            type: DataTypes.STRING(50),
             allowNull: false,
         },
         module_name: {

@@ -19,6 +19,7 @@ const facultyController = {
   addModule: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
+      
       const newModule = await moduleService.addModule(data);
       res
         .status(201)
@@ -49,7 +50,7 @@ const facultyController = {
     },
   updateModule: async (req: Request, res: Response): Promise<void> => {
     try {
-      const module_id = req.params.id; // Extract module ID from URL params
+      const module_id = req.params.id;
       const updatedData = req.body;
       const updatedModule = await moduleService.updateModule(parseInt(module_id), updatedData);
 

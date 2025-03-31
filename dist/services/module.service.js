@@ -19,7 +19,6 @@ const facultyService = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const modules = yield modules_model_1.default.findAll({
-                    attributes: ["module_id", "module_name"],
                     order: [["module_id", "ASC"]],
                 });
                 return modules.map(module => module.dataValues);
@@ -48,7 +47,6 @@ const facultyService = {
             try {
                 const module = yield modules_model_1.default.findOne({
                     where: { module_id: moduleId },
-                    attributes: ["module_id", "module_name"],
                 });
                 if (!module) {
                     throw new Error("Module not found");
