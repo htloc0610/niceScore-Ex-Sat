@@ -1,7 +1,9 @@
 import Modules from "../models/modules.model";
+import Class from "../models/classes.model";
+import ClassRegistration from "../models/class_registrations.model";
 import { logger } from "../config/logger";
 
-const facultyService = {
+const moduleService = {
   async getAllModules() {
     try {
       const modules = await Modules.findAll({
@@ -40,7 +42,33 @@ const facultyService = {
       logger.error("Error fetching module by ID: " + error.message);
       throw new Error("Error fetching module by ID: " + error.message);
     }
-    },
+  },
+
+  async hasRegisterStudent(moduleId: number) {
+    try {
+      const registeredStudent = await Class.findOne({
+        where: { module_id: moduleId },
+        include: [
+          {
+            model: ClassRegistration,
+            as: "registrations",
+            required: true,
+          },
+        ],
+      });
+
+      if (registeredStudent) {
+        logger.info("Module has registered students");
+        return true;
+      } else {
+        logger.info("Module has no registered students");
+        return false;
+      }
+    } catch (error) {
+      logger.error("Error checking registered students: " + error.message);
+      throw new Error("Error checking registered students: " + error.message);
+    }
+  },
 
   async updateModule(moduleId: number, updatedData: any) {
     try {
@@ -95,7 +123,25 @@ const facultyService = {
       logger.error("Error checking module age: " + error.message);
       throw new Error("Error checking module age: " + error.message);
     }
+  },
+  async hasLinkedClasses(moduleId: number) {
+    try {
+      const linkedClass = await Class.findOne({
+        where: { module_id: moduleId },
+      });
+
+      if (linkedClass) {
+        logger.info("Module has linked classes");
+        return true;
+      } else {
+        logger.info("Module has no linked classes");
+        return false;
+      }
+    } catch (error) {
+      logger.error("Error checking linked classes: " + error.message);
+      throw new Error("Error checking linked classes: " + error.message);
+    }
   }
 };
 
-export default facultyService;
+export default moduleService;

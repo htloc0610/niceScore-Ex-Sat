@@ -15,7 +15,7 @@ Module.init({
         primaryKey: true,
         autoIncrement: true,
     },
-    course_code: {
+    module_code: {
         type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
     },

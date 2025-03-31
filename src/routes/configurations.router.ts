@@ -1,15 +1,15 @@
 import { Router } from "express";
 import configurationsController from "../controllers/configurations.controller";
 
-const configurations = Router();
+const configurationsRouter = Router();
 
 // [GET] /api/configurations
-configurations.get("/", configurationsController.getListConfigurations);
+configurationsRouter.get("/", configurationsController.getListConfigurations);
 
 // // [POST] /api/configurations
-configurations.post("/", configurationsController.addConfiguration);
+configurationsRouter.post("/", configurationsController.addConfiguration);
 
 // [PUT] /api/configurations
-configurations.put("/", configurationsController.updateConfiguration);
+configurationsRouter.put("/", configurationsController.updateConfiguration);
 
-export default configurations;
+export default configurationsRouter;

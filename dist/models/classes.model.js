@@ -15,6 +15,10 @@ Class.init({
         autoIncrement: true,
         primaryKey: true,
     },
+    class_name: {
+        type: sequelize_1.DataTypes.STRING(255),
+        allowNull: false,
+    },
     module_id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
