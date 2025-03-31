@@ -1,7 +1,7 @@
 import Course from "../models/course.model";
 import { logger } from "../config/logger";
 
-const studentService = {
+const courseService = {
   //get Courses
   async getAllCourses() {
     try {
@@ -62,4 +62,4 @@ const studentService = {
   },
 };
 
-export default studentService;
+export default courseService;

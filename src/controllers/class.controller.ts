@@ -27,6 +27,13 @@ const classController = {
       return;
       }
 
+      if (!await classService.isActive(newClassData.module_id)) {
+        res.status(400).send({
+          message: "The module is deactivated.",
+        });
+        return;
+      }
+
       const createdClass = await classService.createClass(newClassData);
 
       res.status(201).send({

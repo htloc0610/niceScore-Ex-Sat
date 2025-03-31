@@ -1,4 +1,5 @@
 import Class from "../models/classes.model";
+import Module from "../models/modules.model";
 import { logger } from "../config/logger";
 
 const classService = {
@@ -13,6 +14,22 @@ const classService = {
       throw new Error("Error fetching all classes");
     }
   },
+
+  async isActive(moduleId: number) {
+    try {
+      const activeClass = await Module.findOne({
+      where: { module_id: moduleId, is_active: true },
+      });
+
+     if(activeClass) {
+      return true;
+      }
+      return false;
+    } catch (error) {
+      logger.error("Error checking if class is active: " + error.message);
+      throw new Error("Error checking if class is active: " + error.message);
+    }
+    },
 
   async createClass(newClassData: any) {
     try {

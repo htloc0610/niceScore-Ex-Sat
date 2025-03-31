@@ -38,6 +38,12 @@ const classController = {
                 });
                 return;
             }
+            if (!(yield class_service_1.default.isActive(newClassData.module_id))) {
+                res.status(400).send({
+                    message: "The module is deactivated.",
+                });
+                return;
+            }
             const createdClass = yield class_service_1.default.createClass(newClassData);
             res.status(201).send({
                 message: "Class created successfully",

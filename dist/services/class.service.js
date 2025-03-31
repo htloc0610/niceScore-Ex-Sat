@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const classes_model_1 = __importDefault(require("../models/classes.model"));
+const modules_model_1 = __importDefault(require("../models/modules.model"));
 const logger_1 = require("../config/logger");
 const classService = {
     getAllClasses() {
@@ -26,6 +27,23 @@ const classService = {
             catch (error) {
                 logger_1.logger.error("Error fetching all classes");
                 throw new Error("Error fetching all classes");
+            }
+        });
+    },
+    isActive(moduleId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const activeClass = yield modules_model_1.default.findOne({
+                    where: { module_id: moduleId, is_active: true },
+                });
+                if (activeClass) {
+                    return true;
+                }
+                return false;
+            }
+            catch (error) {
+                logger_1.logger.error("Error checking if class is active: " + error.message);
+                throw new Error("Error checking if class is active: " + error.message);
             }
         });
     },

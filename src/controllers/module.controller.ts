@@ -68,6 +68,13 @@ const facultyController = {
         return;
       }
 
+      if(updatedData.credits && await moduleService.hasRegisterStudent(parseInt(module_id))) {
+        res.status(400).send({
+          message: "Module cannot be updated because it has registered students.",
+        });
+        return;
+      }
+
       const updatedModule = await moduleService.updateModule(parseInt(module_id), updatedData);
 
       if (!updatedModule) {

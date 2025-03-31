@@ -98,3 +98,11 @@
 {"level":"info","message":"Deleted registration with ID: 29","timestamp":"2025-03-31T06:49:53.171Z"}
 {"level":"info","message":"Created new registration successfully","timestamp":"2025-03-31T06:53:47.368Z"}
 {"level":"info","message":"Deleted registration with ID: 30 and saved cancellation reason","timestamp":"2025-03-31T06:54:16.561Z"}
+{"level":"info","message":"Successfully fetched classes list","timestamp":"2025-03-31T07:35:47.921Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-03-31T07:36:58.313Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T07:45:56.509Z"}
+{"level":"error","message":"Error checking registered students: ClassRegistration is associated to Class using an alias. You must use the 'as' keyword to specify the alias within your include statement.","timestamp":"2025-03-31T07:46:19.815Z"}
+{"level":"info","message":"Module has no registered students","timestamp":"2025-03-31T07:47:47.181Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-03-31T07:49:15.680Z"}
+{"level":"info","message":"Module has no registered students","timestamp":"2025-03-31T07:49:25.198Z"}
+{"level":"info","message":"Module has no registered students","timestamp":"2025-03-31T07:49:29.262Z"}
