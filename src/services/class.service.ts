@@ -1,8 +1,7 @@
-import Modules from "../models/modules.model";
 import Class from "../models/classes.model";
 import { logger } from "../config/logger";
 
-const facultyService = {
+const classService = {
   async getAllClasses() {
     try {
       const classes = await Class.findAll({
@@ -81,4 +80,4 @@ const facultyService = {
     }
 };
 
-export default facultyService;
+export default classService;

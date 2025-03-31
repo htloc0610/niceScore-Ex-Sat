@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const classes_model_1 = __importDefault(require("../models/classes.model"));
 const logger_1 = require("../config/logger");
-const facultyService = {
+const classService = {
     getAllClasses() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -98,5 +98,5 @@ const facultyService = {
         });
     }
 };
-exports.default = facultyService;
+exports.default = classService;
 //# sourceMappingURL=class.service.js.map

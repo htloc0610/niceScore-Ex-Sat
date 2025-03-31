@@ -8,6 +8,9 @@ import Configuration from "./configurations.model";
 import StatusTransition from "./status_transitions.model";
 import Module from "./modules.model";
 import Class from "./classes.model";
+import ClassRegistration from "./class_registrations.model";
+import RegistrationCancellation from "./registration_cancellations.model"; 
+import Transcript from "./transcripts.model";
 
 export default function setupRelation() {
   // Student - Faculty
@@ -88,6 +91,27 @@ export default function setupRelation() {
   // Class - Module
   Class.belongsTo(Module, { foreignKey: "module_id", as: "module" });
   Module.hasMany(Class, { foreignKey: "module_id", as: "classes" });
+
+  // ClassRegistration - Student - Class
+  ClassRegistration.belongsTo(Student, { foreignKey: "student_id", as: "student" });
+  Student.hasMany(ClassRegistration, { foreignKey: "student_id", as: "classRegistrations" });
+
+  ClassRegistration.belongsTo(Class, { foreignKey: "class_id", as: "class" });
+  Class.hasMany(ClassRegistration, { foreignKey: "class_id", as: "registrations" });
+
+  // RegistrationCancellation - Student - Class
+  RegistrationCancellation.belongsTo(Student, { foreignKey: "student_id", as: "student" });
+  Student.hasMany(RegistrationCancellation, { foreignKey: "student_id", as: "registrationCancellations" });
+
+  RegistrationCancellation.belongsTo(Class, { foreignKey: "class_id", as: "class" });
+  Class.hasMany(RegistrationCancellation, { foreignKey: "class_id", as: "cancellations" });
+
+  // Transcript - Student - Class
+  Transcript.belongsTo(Student, { foreignKey: "student_id", as: "student" });
+  Student.hasMany(Transcript, { foreignKey: "student_id", as: "transcripts" });
+
+  Transcript.belongsTo(Class, { foreignKey: "class_id", as: "class" });
+  Class.hasMany(Transcript, { foreignKey: "class_id", as: "transcripts" });
 
   Configuration.sync();
 
