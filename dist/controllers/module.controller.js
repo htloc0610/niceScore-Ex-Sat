@@ -73,6 +73,12 @@ const facultyController = {
         try {
             const module_id = req.params.id;
             const updatedData = req.body;
+            if (updatedData.module_code) {
+                res.status(400).send({
+                    message: "Cannot change course code after creation.",
+                });
+                return;
+            }
             const updatedModule = yield module_service_1.default.updateModule(parseInt(module_id), updatedData);
             if (!updatedModule) {
                 res
@@ -108,13 +114,13 @@ const facultyController = {
                 });
                 return;
             }
-            res.status(200).send({ message: "Module deleted successfully." });
-            // const deletedModule = await moduleService.deleteModule(parseInt(module_id));
-            // if (!deletedModule) {
-            //   res.status(404).send({ message: "Module not found." });
-            // } else {
-            //   res.status(200).send({ message: "Module deleted successfully." });
-            // }
+            const deletedModule = yield module_service_1.default.deleteModule(parseInt(module_id));
+            if (!deletedModule) {
+                res.status(404).send({ message: "Module not found." });
+            }
+            else {
+                res.status(200).send({ message: "Module deleted successfully." });
+            }
         }
         catch (error) {
             console.error(error);
