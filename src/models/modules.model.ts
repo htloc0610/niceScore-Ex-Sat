@@ -3,7 +3,7 @@ import sequelize from "../config/db";
 
 export class Module extends Model {
     public module_id!: number;
-    public course_code!: string;
+    public module_code!: string;
     public module_name!: string;
     public credits!: number;
     public faculty_id!: number;
@@ -22,7 +22,7 @@ Module.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        course_code: {
+        module_code: {
             type: DataTypes.STRING(50),
             allowNull: false,
         },

@@ -42,3 +42,7 @@
 {"level":"error","message":"Error updating module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T03:27:35.751Z"}
 {"level":"info","message":"Module has no linked classes","timestamp":"2025-03-31T03:42:47.877Z"}
 {"level":"info","message":"Module has linked classes","timestamp":"2025-03-31T03:42:54.490Z"}
+{"level":"info","message":"Module has no linked classes","timestamp":"2025-03-31T03:46:15.195Z"}
+{"level":"info","message":"Deleted module successfully","timestamp":"2025-03-31T03:46:15.201Z"}
+{"level":"error","message":"Error fetching module by ID: Module not found","timestamp":"2025-03-31T03:46:19.561Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T03:46:22.392Z"}
