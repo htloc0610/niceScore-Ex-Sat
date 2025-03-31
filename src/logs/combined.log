@@ -1,0 +1,21 @@
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T02:07:25.430Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T02:18:19.384Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T02:19:07.674Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T02:25:07.011Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:31:04.178Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:31:53.940Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:33:48.340Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:34:01.968Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:37:10.004Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:38:16.523Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:39:46.839Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:39:52.588Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:39:55.817Z"}
+{"level":"error","message":"Error adding new module: Validation error","timestamp":"2025-03-31T02:39:59.207Z"}
+{"level":"info","message":"Added new module successfully","timestamp":"2025-03-31T02:40:02.610Z"}
+{"level":"error","message":"Error updating module: Module not found","timestamp":"2025-03-31T02:41:46.421Z"}
+{"level":"info","message":"Added new module successfully","timestamp":"2025-03-31T02:42:08.561Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:51:15.806Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:52:16.959Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:53:06.661Z"}
+{"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:54:02.337Z"}

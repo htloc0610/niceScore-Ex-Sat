@@ -6,6 +6,8 @@ import Course from "./course.model";
 import Student from "./student.model";
 import Configuration from "./configurations.model";
 import StatusTransition from "./status_transitions.model";
+import Module from "./modules.model";
+import Class from "./classes.model";
 
 export default function setupRelation() {
   // Student - Faculty
@@ -74,6 +76,18 @@ export default function setupRelation() {
     foreignKey: "new_status",
     as: "newStatus",
   });
+
+  // Module - Faculty
+  Module.belongsTo(Faculty, { foreignKey: "faculty_id", as: "faculty" });
+  Faculty.hasMany(Module, { foreignKey: "faculty_id", as: "modules" });
+
+  // Module - Prerequisite
+  Module.belongsTo(Module, { foreignKey: "prerequisite_id", as: "prerequisite" });
+  Module.hasMany(Module, { foreignKey: "prerequisite_id", as: "dependentModules" });
+
+  // Class - Module
+  Class.belongsTo(Module, { foreignKey: "module_id", as: "module" });
+  Module.hasMany(Class, { foreignKey: "module_id", as: "classes" });
 
   Configuration.sync();
 

@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 // Xác định thư mục log
-const logDir = process.env.VERCEL ? "/tmp" : "src/logs";
+const logDir = process.env.VERCEL === "true" ? "/tmp" : "src/logs";
 
 // Tạo thư mục nếu chưa tồn tại (chỉ khi không chạy trên Vercel)
 if (!process.env.VERCEL && !fs.existsSync(logDir)) {
