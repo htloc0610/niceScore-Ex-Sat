@@ -118,3 +118,5 @@
 {"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:32.365Z"}
 {"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:58.735Z"}
 {"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:58.743Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-31T09:36:59.500Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-31T09:36:59.756Z"}
