@@ -19,3 +19,26 @@
 {"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:52:16.959Z"}
 {"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:53:06.661Z"}
 {"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:54:02.337Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-31T03:09:43.737Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-31T03:09:43.744Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-31T03:18:41.722Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-31T03:18:41.731Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-03-31T03:18:44.419Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-03-31T03:18:48.068Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-03-31T03:18:48.071Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-31T03:18:48.073Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-03-31T03:18:48.075Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-03-31T03:18:48.078Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-03-31T03:18:48.079Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-31T03:20:58.340Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-31T03:20:58.349Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-03-31T03:20:58.923Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-31T03:21:03.841Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-31T03:21:03.845Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-03-31T03:21:07.438Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-03-31T03:21:07.448Z"}
+{"level":"error","message":"Error checking module age: Module not found","timestamp":"2025-03-31T03:24:50.406Z"}
+{"level":"error","message":"Error updating module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T03:27:29.470Z"}
+{"level":"error","message":"Error updating module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T03:27:35.751Z"}
+{"level":"info","message":"Module has no linked classes","timestamp":"2025-03-31T03:42:47.877Z"}
+{"level":"info","message":"Module has linked classes","timestamp":"2025-03-31T03:42:54.490Z"}

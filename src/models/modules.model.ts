@@ -1,7 +1,19 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../config/db";
 
-export class Module extends Model {}
+export class Module extends Model {
+    public module_id!: number;
+    public course_code!: string;
+    public module_name!: string;
+    public credits!: number;
+    public faculty_id!: number;
+    public description?: string;
+    public prerequisite_id?: number;
+    public is_active!: boolean;
+
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
+}
 
 Module.init(
     {

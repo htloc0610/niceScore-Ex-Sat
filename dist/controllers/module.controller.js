@@ -102,6 +102,12 @@ const facultyController = {
                 });
                 return;
             }
+            if (yield module_service_1.default.hasLinkedClasses(parseInt(module_id))) {
+                res.status(400).send({
+                    message: "Module cannot be deleted because it has linked classes.",
+                });
+                return;
+            }
             res.status(200).send({ message: "Module deleted successfully." });
             // const deletedModule = await moduleService.deleteModule(parseInt(module_id));
             // if (!deletedModule) {
