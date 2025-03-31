@@ -79,6 +79,12 @@ const facultyController = {
                 });
                 return;
             }
+            if (updatedData.credits && (yield module_service_1.default.hasRegisterStudent(parseInt(module_id)))) {
+                res.status(400).send({
+                    message: "Module cannot be updated because it has registered students.",
+                });
+                return;
+            }
             const updatedModule = yield module_service_1.default.updateModule(parseInt(module_id), updatedData);
             if (!updatedModule) {
                 res

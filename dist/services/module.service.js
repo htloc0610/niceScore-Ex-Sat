@@ -14,8 +14,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const modules_model_1 = __importDefault(require("../models/modules.model"));
 const classes_model_1 = __importDefault(require("../models/classes.model"));
+const class_registrations_model_1 = __importDefault(require("../models/class_registrations.model"));
 const logger_1 = require("../config/logger");
-const facultyService = {
+const moduleService = {
     getAllModules() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -57,6 +58,34 @@ const facultyService = {
             catch (error) {
                 logger_1.logger.error("Error fetching module by ID: " + error.message);
                 throw new Error("Error fetching module by ID: " + error.message);
+            }
+        });
+    },
+    hasRegisterStudent(moduleId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const registeredStudent = yield classes_model_1.default.findOne({
+                    where: { module_id: moduleId },
+                    include: [
+                        {
+                            model: class_registrations_model_1.default,
+                            as: "registrations",
+                            required: true,
+                        },
+                    ],
+                });
+                if (registeredStudent) {
+                    logger_1.logger.info("Module has registered students");
+                    return true;
+                }
+                else {
+                    logger_1.logger.info("Module has no registered students");
+                    return false;
+                }
+            }
+            catch (error) {
+                logger_1.logger.error("Error checking registered students: " + error.message);
+                throw new Error("Error checking registered students: " + error.message);
             }
         });
     },
@@ -139,5 +168,5 @@ const facultyService = {
         });
     }
 };
-exports.default = facultyService;
+exports.default = moduleService;
 //# sourceMappingURL=module.service.js.map

@@ -33,3 +33,4 @@
 {"level":"error","message":"Error creating new registration: Validation error","timestamp":"2025-03-31T06:30:40.054Z"}
 {"level":"error","message":"Error creating new registration: Validation error","timestamp":"2025-03-31T06:30:40.827Z"}
 {"level":"error","message":"Error creating new registration: Validation error","timestamp":"2025-03-31T06:30:41.364Z"}
+{"level":"error","message":"Error checking registered students: ClassRegistration is associated to Class using an alias. You must use the 'as' keyword to specify the alias within your include statement.","timestamp":"2025-03-31T07:46:19.815Z"}
