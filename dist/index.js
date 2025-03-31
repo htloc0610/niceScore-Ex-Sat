@@ -38,7 +38,7 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield db_1.default.authenticate();
         (0, realation_1.default)();
-        yield db_1.default.sync({ force: true });
+        yield db_1.default.sync({ force: false });
         console.log("Database connection established!");
         // Start the server only when the database is successfully connected
         app.listen(port, () => {

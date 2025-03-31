@@ -46,3 +46,5 @@
 {"level":"info","message":"Deleted module successfully","timestamp":"2025-03-31T03:46:15.201Z"}
 {"level":"error","message":"Error fetching module by ID: Module not found","timestamp":"2025-03-31T03:46:19.561Z"}
 {"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T03:46:22.392Z"}
+{"level":"info","message":"Successfully fetched classes list","timestamp":"2025-03-31T04:05:37.583Z"}
+{"level":"info","message":"Successfully fetched classes list","timestamp":"2025-03-31T04:06:40.119Z"}
