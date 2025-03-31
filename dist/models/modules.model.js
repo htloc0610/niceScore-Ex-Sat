@@ -13,7 +13,7 @@ Module.init({
     module_id: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true,
+        allowNull: false,
     },
     module_name: {
         type: sequelize_1.DataTypes.STRING(255),

@@ -8,7 +8,7 @@ Module.init(
         module_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true,
+            allowNull: false,
         },
         module_name: {
             type: DataTypes.STRING(255),

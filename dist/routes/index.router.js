@@ -12,11 +12,13 @@ const status_router_1 = __importDefault(require("./status.router"));
 const course_router_1 = __importDefault(require("./course.router"));
 const status_transitions_router_1 = __importDefault(require("./status_transitions.router"));
 const configurations_router_1 = __importDefault(require("./configurations.router"));
+const module_router_1 = __importDefault(require("./module.router"));
 const setupRoutes = (app) => {
     app.use("/api/student", student_router_1.default);
     app.use("/api/faculty", faculty_router_1.default);
     app.use("/api/status", status_router_1.default);
     app.use("/api/course", course_router_1.default);
+    app.use("/api/module", module_router_1.default);
     app.use("/api/status_transition", status_transitions_router_1.default);
     app.use("/api/configurations", configurations_router_1.default);
     app.use("/export", export_routes_1.default);
