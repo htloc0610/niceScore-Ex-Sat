@@ -91,7 +91,7 @@ npm start
 
 ## 6. Deployment  
 The application is deployed on Vercel. Access it at:  
-[https://student-management-oary.vercel.app/](https://student-management-oary.vercel.app/)
+[nice-score-ex-sat.vercel.app/)
 
 ## 7. License  
 This project is licensed under the MIT License.
