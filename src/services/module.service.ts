@@ -1,4 +1,5 @@
 import Modules from "../models/modules.model";
+import Class from "../models/classes.model";
 import { logger } from "../config/logger";
 
 const facultyService = {
@@ -94,6 +95,24 @@ const facultyService = {
     } catch (error) {
       logger.error("Error checking module age: " + error.message);
       throw new Error("Error checking module age: " + error.message);
+    }
+  },
+  async hasLinkedClasses(moduleId: number) {
+    try {
+      const linkedClass = await Class.findOne({
+        where: { module_id: moduleId },
+      });
+
+      if (linkedClass) {
+        logger.info("Module has linked classes");
+        return true;
+      } else {
+        logger.info("Module has no linked classes");
+        return false;
+      }
+    } catch (error) {
+      logger.error("Error checking linked classes: " + error.message);
+      throw new Error("Error checking linked classes: " + error.message);
     }
   }
 };

@@ -13,3 +13,6 @@
 {"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:52:16.959Z"}
 {"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:53:06.661Z"}
 {"level":"error","message":"Error adding new module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T02:54:02.337Z"}
+{"level":"error","message":"Error checking module age: Module not found","timestamp":"2025-03-31T03:24:50.406Z"}
+{"level":"error","message":"Error updating module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T03:27:29.470Z"}
+{"level":"error","message":"Error updating module: Validation error: Validation min on credits failed","timestamp":"2025-03-31T03:27:35.751Z"}

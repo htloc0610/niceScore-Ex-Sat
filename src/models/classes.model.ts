@@ -3,6 +3,7 @@ import sequelize from "../config/db";
 
 export class Class extends Model {
     public class_id!: number;
+    public class_name!: string;
     public module_id!: number;
     public academic_year!: string;
     public semester!: string;
@@ -18,6 +19,10 @@ Class.init(
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
+        },
+        class_name: {
+            type: DataTypes.STRING(255),
+            allowNull: false,
         },
         module_id: {
             type: DataTypes.INTEGER,
