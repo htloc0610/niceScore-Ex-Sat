@@ -12,6 +12,8 @@ const course_model_1 = __importDefault(require("./course.model"));
 const student_model_1 = __importDefault(require("./student.model"));
 const configurations_model_1 = __importDefault(require("./configurations.model"));
 const status_transitions_model_1 = __importDefault(require("./status_transitions.model"));
+const modules_model_1 = __importDefault(require("./modules.model"));
+const classes_model_1 = __importDefault(require("./classes.model"));
 function setupRelation() {
     // Student - Faculty
     student_model_1.default.belongsTo(faculty_model_1.default, { foreignKey: "faculty_id", as: "faculty" });
@@ -73,6 +75,15 @@ function setupRelation() {
         foreignKey: "new_status",
         as: "newStatus",
     });
+    // Module - Faculty
+    modules_model_1.default.belongsTo(faculty_model_1.default, { foreignKey: "faculty_id", as: "faculty" });
+    faculty_model_1.default.hasMany(modules_model_1.default, { foreignKey: "faculty_id", as: "modules" });
+    // Module - Prerequisite
+    modules_model_1.default.belongsTo(modules_model_1.default, { foreignKey: "prerequisite_id", as: "prerequisite" });
+    modules_model_1.default.hasMany(modules_model_1.default, { foreignKey: "prerequisite_id", as: "dependentModules" });
+    // Class - Module
+    classes_model_1.default.belongsTo(modules_model_1.default, { foreignKey: "module_id", as: "module" });
+    modules_model_1.default.hasMany(classes_model_1.default, { foreignKey: "module_id", as: "classes" });
     configurations_model_1.default.sync();
     console.log("Database relation set up successfully!");
 }
