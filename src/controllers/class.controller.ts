@@ -20,9 +20,9 @@ const classController = {
     try {
       const newClassData = req.body;
 
-      if (!newClassData.name || !newClassData.teacher) {
+      if (!newClassData.class_name || !newClassData.instructor) {
       res.status(400).send({
-        message: "Class name and teacher are required.",
+        message: "Class name and instructor are required.",
       });
       return;
       }
@@ -99,7 +99,6 @@ const classController = {
       } else {
         res.status(200).send({
           message: "Class deleted successfully",
-          deletedClass,
         });
       }
     } catch (error) {
