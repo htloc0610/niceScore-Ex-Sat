@@ -48,3 +48,6 @@
 {"level":"info","message":"Successfully fetched modules list","timestamp":"2025-03-31T03:46:22.392Z"}
 {"level":"info","message":"Successfully fetched classes list","timestamp":"2025-03-31T04:05:37.583Z"}
 {"level":"info","message":"Successfully fetched classes list","timestamp":"2025-03-31T04:06:40.119Z"}
+{"level":"info","message":"Successfully fetched classes list","timestamp":"2025-03-31T04:17:02.966Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-03-31T04:18:07.998Z"}
+{"level":"info","message":"Deleted class with ID: 6","timestamp":"2025-03-31T04:18:28.057Z"}
