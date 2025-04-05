@@ -49,7 +49,11 @@
           <!-- Search input -->
           <div class="flex justify-evenly w-full lg:mr-32 py-4 my-4 bg-blue-100 dark:bg-gray-700">
             <select id="faculty_search" name="faculty_search"
-              class="w-30 text-black bg-white block self-start py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:text-gray-400 dark:bg-gray-800"></select>
+              class="w-30 text-black bg-white block self-start py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:text-gray-400 dark:bg-gray-800">
+              {{#each faculties}}
+                <option value={{faculty_id}} textContent={{name}} >{{name}} </option>
+              {{/each}}
+              </select>
 
             <div class="relative flex w-full max-w-sm focus-within:text-purple-500">
               <div class="absolute inset-y-0 flex items-center pl-2">
@@ -232,6 +236,44 @@
                 </tr>
               </thead>
               <tbody id="student-table-body" class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                {{#each students}}
+                  <tr class="text-gray-700 dark:text-gray-400">
+                    <td class="px-2 py-3">
+                      <div class="flex items-center text-sm">
+                        <div>
+                          <p class="font-semibold">{{full_name}}</p>
+                          <p class="text-xs text-gray-600 dark:text-gray-400">{{student_id}}</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-2 py-3 text-sm">{{date_of_birth}}</td>
+                    <td class="px-2 py-3 text-sm">{{gender}}</td>
+                    <td class="px-2 py-3 text-sm">{{faculty.name}}</td>
+                    <td class="px-2 py-3 text-sm">{{course.course_name}}</td>
+                    <td class="px-2 py-3 text-sm">{{program}}</td>
+                    <td class="px-2 py-3 text-sm">{{permanentAddress.city}}</td>
+                    <td class="px-2 py-3 text-sm max-w-[150px] truncate hover:overflow-visible hover:whitespace-normal">
+                      <span class="relative group">
+                        <span class="cursor-pointer">{{email}}</span>
+                        <span class="absolute left-0 z-10 hidden w-auto p-2 text-xs text-white bg-gray-800 rounded-md group-hover:block">
+                          {{email}}
+                        </span>
+                      </span>
+                    </td>
+                    <td class="px-2 py-3 text-sm">{{phone_number}}</td>
+                    <td class="px-2 py-3 text-xs">
+                      <span class="{{statusClass status.name}}">
+                        {{status.name}}
+                      </span>
+                    </td>
+                    <td class="px-2 py-3 text-sm">
+                      <button class="p-1 text-sm font-medium leading-5 text-white bg-purple-600 rounded-md hover:bg-purple-700"
+                        onclick="window.location.href='/{{student_id}}'">Chi tiết</button>
+                      <button class="p-1 text-sm font-medium leading-5 text-white bg-red-600 rounded-md hover:bg-red-700"
+                        onclick="deleteStudent('{{student_id}}')">Xóa</button>
+                    </td>
+                  </tr>
+                {{/each}}
               </tbody>
             </table>
           </div>
@@ -239,10 +281,10 @@
       </main>
     </div>
   </div>
-  <script src="/assets/scripts/index/delete_student.js"></script>
-  <script src="/assets/scripts/index/edit_student.js"></script>
-  <script src="/assets/scripts/index/index.js"></script>
   <script>
+    const students = {{{json students}}};
+    console.log("Im here", students)
+
     let selectedType = "";
 
     function handleImport(type) {
@@ -304,4 +346,7 @@
         }
     });
   </script>
+  <script src="/assets/scripts/index/delete_student.js"></script>
+  <script src="/assets/scripts/index/edit_student.js"></script>
+  <script src="/assets/scripts/index/index.js"></script>
 </body>

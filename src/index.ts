@@ -29,7 +29,7 @@ const connectDB = async () => {
   try {
     await sequelize.authenticate();
     setupRelation();
-    await sequelize.sync({ force: false });
+    await sequelize.sync({ alter: true });
     console.log("Database connection established!");
 
     // Start the server only when the database is successfully connected
