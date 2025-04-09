@@ -27,6 +27,17 @@ router.get("/configurations", async (req, res) => {
   res.render("configurations", {configurations: configurations}); // Render the "configurations" Handlebars template
 });
 
+// [GET] /module
+router.get("/module", async (req, res) => {
+  const modules = await moduleService.getAllModules(); // Get the modules from the service
+  res.render("module", {modules: modules}); // Render the "class" Handlebars template
+});
+
+// [GET] /class_detail
+router.get("/class_detail", async (req, res) => {
+  res.render("class_detail"); // Render the "class_detail" Handlebars template
+});
+
 // [GET] /:id
 router.get("/:id", (req, res) => {
   res.render("detail", { id: req.params.id }); // Render the "detail" Handlebars template with the id parameter
@@ -41,6 +52,5 @@ router.get("/", async (req, res) => {
   console.log(students);
   res.render("index", {faculties: faculties, students: students}); // Render the "index" Handlebars template
 });
-
 
 export default router;

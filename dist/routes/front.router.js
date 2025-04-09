@@ -37,6 +37,15 @@ router.get("/configurations", (req, res) => __awaiter(void 0, void 0, void 0, fu
     const configurations = yield configurations_service_1.default.getAllConfiguration(); // Get the configurations from the service
     res.render("configurations", { configurations: configurations }); // Render the "configurations" Handlebars template
 }));
+// [GET] /module
+router.get("/module", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const modules = yield module_service_1.default.getAllModules(); // Get the modules from the service
+    res.render("module", { modules: modules }); // Render the "class" Handlebars template
+}));
+// [GET] /class_detail
+router.get("/class_detail", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.render("class_detail"); // Render the "class_detail" Handlebars template
+}));
 // [GET] /:id
 router.get("/:id", (req, res) => {
     res.render("detail", { id: req.params.id }); // Render the "detail" Handlebars template with the id parameter

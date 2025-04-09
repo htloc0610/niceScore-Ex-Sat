@@ -94,7 +94,21 @@ const classService = {
       logger.error("Error deleting class: " + error.message);
       throw new Error("Error deleting class: " + error.message);
     }
-    }
+    },
+
+    //getClassByModuleId
+    async getClassByModuleId(moduleId: number) {
+      try {
+        const classes = await Class.findAll({
+          where: { module_id: moduleId },
+          order: [["class_id", "ASC"]],
+        });
+        return classes.map(cls => cls.dataValues);
+      } catch (error) {
+        logger.error("Error fetching classes by module ID: " + error.message);
+        throw new Error("Error fetching classes by module ID: " + error.message);
+      }
+    },
 };
 
 export default classService;

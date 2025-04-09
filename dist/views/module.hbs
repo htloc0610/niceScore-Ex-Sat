@@ -1,0 +1,120 @@
+<body>
+  <div class="flex h-screen bg-gray-100 dark:bg-gray-900">
+    <div class="flex flex-col flex-1 w-full">
+      <!-- Header -->
+      <header class="z-10 py-4 bg-white shadow-lg dark:bg-gray-800">
+        <div class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
+          <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
+            @click="toggleSideMenu" aria-label="Menu">
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+          <ul class="flex items-center mx-auto gap-6 flex-shrink-0 space-x-6">
+            <li class="relative">
+              <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+                Hệ thống quản lý môn học FIT@HCMUS
+              </h2>
+            </li>
+            <li class="flex">
+              <button class="rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleTheme"
+                aria-label="Toggle color mode">
+                <template x-if="!dark">
+                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                  </svg>
+                </template>
+                <template x-if="dark">
+                  <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                      d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </template>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="flex-1 overflow-y-auto p-6">
+        <div class="flex flex-row h-full gap-6">
+          <!-- Bên trái: Danh sách môn học -->
+          <div class="w-1/3 bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Danh sách môn học</h3>
+              <a href="/modules/add" class="px-3 py-1.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors">
+                + Thêm môn học
+              </a>
+            </div>
+            <div class="relative mb-4">
+              <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+              </svg>
+              <input
+                class="w-full pl-10 pr-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder-gray-500"
+                type="text" placeholder="Tìm kiếm môn học" id="moduleSearch" />
+            </div>
+            <div class="overflow-y-auto max-h-[calc(100vh-250px)] pr-2">
+              <ul id="module-list" class="space-y-3">
+                {{#each modules}}
+                  <li class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      onclick="loadClasses('{{module_id}}')">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <p class="font-medium text-gray-800 dark:text-gray-100">{{module_name}}</p>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">{{module_code}} - {{credits}} tín chỉ</p>
+                      </div>
+                      <span class="text-xs px-2 py-1 rounded-full {{#if is_active}}bg-green-100 text-green-800{{else}}bg-red-100 text-red-800{{/if}}">
+                        {{#if is_active}}Hoạt động{{else}}Không hoạt động{{/if}}
+                      </span>
+                    </div>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+
+          <!-- Bên phải: Danh sách lớp học -->
+          <div class="w-2/3 bg-white dark:bg-gray-800 rounded-xl shadow-md p-4">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">Danh sách lớp học</h3>
+              <div class="flex items-center gap-2">
+                <span id="class-count" class="text-sm text-gray-600 dark:text-gray-400"></span>
+                <a href="#" id="add-class-btn" class="px-3 py-1.5 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700 transition-colors hidden">
+                  + Thêm lớp học
+                </a>
+              </div>
+            </div>
+            <div id="class-container" class="overflow-x-auto">
+              <table id="class-table" class="w-full whitespace-no-wrap hidden">
+                <thead>
+                  <tr class="text-xs font-semibold tracking-wide text-left text-gray-600 uppercase border-b dark:border-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
+                    <th class="px-4 py-3">Mã lớp</th>
+                    <th class="px-4 py-3">Tên lớp</th>
+                    <th class="px-4 py-3">Giảng viên</th>
+                    <th class="px-4 py-3">Sĩ số</th>
+                    <th class="px-4 py-3">Hiện có</th>
+                    <th class="px-4 py-3">Năm học</th>
+                    <th class="px-4 py-3">Học kỳ</th>
+                    <th class="px-4 py-3">Hành động</th>
+                  </tr>
+                </thead>
+                <tbody id="class-table-body" class="divide-y dark:divide-gray-700">
+                </tbody>
+              </table>
+              <div id="no-classes" class="text-center py-8 text-gray-500 dark:text-gray-400">
+                Chọn một môn học để xem danh sách lớp học
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="/assets/scripts/module/module.js"></script>
+</body>

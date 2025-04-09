@@ -294,3 +294,9 @@
 {"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-05T23:35:08.283Z"}
 {"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-05T23:35:08.308Z"}
 {"level":"info","message":"Module has no registered students","timestamp":"2025-04-05T23:35:11.879Z"}
+{"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-04-09T04:08:17.383Z"}
+{"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-04-09T04:09:47.550Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-04-09T04:11:25.442Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-09T04:13:25.354Z"}
+{"level":"info","message":"Successfully fetched classes list","timestamp":"2025-04-09T04:21:52.003Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-04-09T04:36:33.514Z"}
