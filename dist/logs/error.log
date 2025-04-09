@@ -48,3 +48,10 @@
 {"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:58.743Z"}
 {"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-04-09T04:08:17.383Z"}
 {"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-04-09T04:09:47.550Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:19:53.855Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:22:18.103Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:22:53.681Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:28:37.565Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:31:33.488Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:02.572Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:13.095Z"}

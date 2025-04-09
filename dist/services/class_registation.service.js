@@ -179,6 +179,33 @@ const classRegistationService = {
                 throw new Error("Error deleting registration: " + error.message);
             }
         });
+    },
+    //getRegistrationsByClassId
+    getRegistrationsByClassId(classId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const registrations = yield class_registrations_model_1.default.findAll({
+                    where: { class_id: classId },
+                    include: [
+                        {
+                            model: student_model_1.default,
+                            as: "student",
+                            attributes: ["student_id", "full_name", "email", "phone_number"],
+                        },
+                        {
+                            model: classes_model_1.default,
+                            as: "class",
+                        },
+                    ],
+                });
+                // Return plain objects
+                return registrations.map(reg => reg.toJSON());
+            }
+            catch (error) {
+                logger_1.logger.error(`Error fetching registrations by class ID ${classId}: ${error.message}`);
+                throw new Error(`Error fetching registrations by class ID: ${error.message}`);
+            }
+        });
     }
 };
 exports.default = classRegistationService;

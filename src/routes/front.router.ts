@@ -5,6 +5,9 @@ import statusService from "../services/status.service";
 import courseService from "../services/course.service";
 import studentService from "../services/student.service";
 import moduleService from "../services/module.service";
+import classService from "../services/class.service";
+import class_registationService from "../services/class_registation.service";
+
 const router = Router();
 
 // [GET] /more
@@ -33,9 +36,28 @@ router.get("/module", async (req, res) => {
   res.render("module", {modules: modules}); // Render the "class" Handlebars template
 });
 
-// [GET] /class_detail
-router.get("/class_detail", async (req, res) => {
-  res.render("class_detail"); // Render the "class_detail" Handlebars template
+// [GET] /class
+router.get("/class/:id", async (req, res) => {
+  const idInt = parseInt( req.params.id, 10); // Convert the ID to an integer
+  if (isNaN(idInt)) {
+    return res.status(400).render("error", { message: "Invalid class ID" });
+  }
+
+  // Get class details
+  const classData = await classService.getClassById(idInt);
+  if (!classData) {
+    return res.status(404).render("error", { message: "Class not found" });
+  }
+
+  // Get students in class
+  const students = await class_registationService.getRegistrationsByClassId(idInt);
+
+  console.log(students);
+
+  res.render("class", {
+    classes: classData, // Ensure this matches the template variable
+    students: students || [], // Ensure students is always an array
+  });
 });
 
 // [GET] /:id

@@ -300,3 +300,15 @@
 {"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-09T04:13:25.354Z"}
 {"level":"info","message":"Successfully fetched classes list","timestamp":"2025-04-09T04:21:52.003Z"}
 {"level":"info","message":"Created new class successfully","timestamp":"2025-04-09T04:36:33.514Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:19:53.855Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:22:18.103Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:22:53.681Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:28:37.565Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:31:33.488Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-04-09T17:44:52.639Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-09T17:46:38.665Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:02.572Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-09T17:47:07.387Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:13.095Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-09T17:53:21.171Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-09T18:01:59.167Z"}

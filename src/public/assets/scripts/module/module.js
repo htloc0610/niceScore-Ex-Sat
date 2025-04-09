@@ -32,7 +32,7 @@ async function loadClasses(moduleId) {
           <td class="px-4 py-3 text-sm">${classItem.semester}</td>
           <td class="px-4 py-3 text-sm">
             <button class="px-2 py-1 text-sm font-medium text-white bg-purple-600 rounded-md hover:bg-purple-700 transition-colors"
-              onclick="window.location.href='/classes/${classItem.class_id}'">Chi tiết</button>
+              onclick="window.location.href='/class/${classItem.class_id}'">Chi tiết</button>
           </td>
         `;
         classTableBody.appendChild(row);
@@ -70,4 +70,40 @@ moduleSearch.addEventListener('input', function(e) {
     const moduleName = item.querySelector('p.font-medium').textContent.toLowerCase();
     item.style.display = moduleName.includes(searchTerm) ? '' : 'none';
   });
+});
+
+// Xử lý modal thêm môn học
+const addModuleBtn = document.querySelector('a[href="/modules/add"]');
+const addModuleModal = document.getElementById('add-module-modal');
+
+addModuleBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  addModuleModal.classList.remove('hidden');
+});
+
+function closeAddModuleModal() {
+  addModuleModal.classList.add('hidden');
+}
+
+// Xử lý modal thêm lớp học
+const addClassBtn = document.getElementById('add-class-btn');
+const addClassModal = document.getElementById('add-class-modal');
+
+addClassBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  addClassModal.classList.remove('hidden');
+});
+
+function closeAddClassModal() {
+  addClassModal.classList.add('hidden');
+}
+
+// Đóng modal khi click ra ngoài
+document.addEventListener('click', (e) => {
+  if (e.target === addModuleModal) {
+    closeAddModuleModal();
+  }
+  if (e.target === addClassModal) {
+    closeAddClassModal();
+  }
 });

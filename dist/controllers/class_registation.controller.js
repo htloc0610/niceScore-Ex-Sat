@@ -135,7 +135,26 @@ const classRegistationController = {
                 .status(500)
                 .send({ message: "An error occurred while deleting the registration." });
         }
-    })
+    }),
+    //getClassRegistationByClassId
+    getClassRegistationByClassId: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const classId = req.params.classId; // Extract class ID from URL params
+            const registrations = yield class_registation_service_1.default.getRegistrationsByClassId(parseInt(classId));
+            if (!registrations) {
+                res.status(404).send({ message: "No registrations found for this class." });
+            }
+            else {
+                res.status(200).send({ message: "Registrations fetched successfully", registrations });
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching the registrations." });
+        }
+    }),
 };
 exports.default = classRegistationController;
 //# sourceMappingURL=class_registation.controller.js.map
