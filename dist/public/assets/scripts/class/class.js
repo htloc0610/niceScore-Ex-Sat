@@ -76,7 +76,7 @@ addStudentForm.addEventListener("submit", async (e) => {
   const classId = window.location.pathname.split("/").pop();
 
   try {
-    const response = await fetch("/api/class-registrations", {
+    const response = await fetch("/api/class_registation", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
