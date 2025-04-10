@@ -3,6 +3,9 @@ import classController from "../controllers/class.controller";
 
 const classRouter = Router();
 
+// [GET] /api/class/module/:id
+classRouter.get("/module/:id", classController.getClassByModuleId);
+
 // [GET] /api/class
 classRouter.get("/", classController.getListClasses);
 

@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const class_registation_controller_1 = __importDefault(require("../controllers/class_registation.controller"));
 const classRegistationRouter = (0, express_1.Router)();
+// [GET] /api/class_registation/${classId}
+classRegistationRouter.get("/:classId", class_registation_controller_1.default.getClassRegistationByClassId);
 // [GET] /api/class_registation
 classRegistationRouter.get("/", class_registation_controller_1.default.getClassRegistationList);
 // [POST] /api/class_registation

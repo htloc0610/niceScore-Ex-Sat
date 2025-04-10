@@ -3,6 +3,7 @@ import RegistrationCancellation from "../models/registration_cancellations.model
 import Student from "../models/student.model";
 import Class from "../models/classes.model";
 import { logger } from "../config/logger";
+import { get } from "http";
 
 const classRegistationService = {
   async getAllRegistrations() {
@@ -160,6 +161,32 @@ const classRegistationService = {
     } catch (error) {
       logger.error("Error deleting registration: " + error.message);
       throw new Error("Error deleting registration: " + error.message);
+    }
+  },
+
+  //getRegistrationsByClassId
+  async getRegistrationsByClassId(classId: number) {
+    try {
+      const registrations = await ClassRegistration.findAll({
+        where: { class_id: classId },
+        include: [
+          {
+            model: Student,
+            as: "student",
+            attributes: ["student_id", "full_name", "email", "phone_number"],
+          },
+          {
+            model: Class,
+            as: "class", 
+          },
+        ],
+      });
+  
+      // Return plain objects
+      return registrations.map(reg => reg.toJSON());
+    } catch (error) {
+      logger.error(`Error fetching registrations by class ID ${classId}: ${error.message}`);
+      throw new Error(`Error fetching registrations by class ID: ${error.message}`);
     }
   }
 };

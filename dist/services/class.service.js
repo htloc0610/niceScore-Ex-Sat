@@ -114,7 +114,23 @@ const classService = {
                 throw new Error("Error deleting class: " + error.message);
             }
         });
-    }
+    },
+    //getClassByModuleId
+    getClassByModuleId(moduleId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const classes = yield classes_model_1.default.findAll({
+                    where: { module_id: moduleId },
+                    order: [["class_id", "ASC"]],
+                });
+                return classes.map(cls => cls.dataValues);
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching classes by module ID: " + error.message);
+                throw new Error("Error fetching classes by module ID: " + error.message);
+            }
+        });
+    },
 };
 exports.default = classService;
 //# sourceMappingURL=class.service.js.map
