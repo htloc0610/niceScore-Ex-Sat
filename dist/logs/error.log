@@ -55,3 +55,5 @@
 {"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:31:33.488Z"}
 {"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:02.572Z"}
 {"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:13.095Z"}
+{"level":"error","message":"Error adding new module: notNull Violation: Module.faculty_id cannot be null","timestamp":"2025-04-10T02:53:30.832Z"}
+{"level":"error","message":"Error creating new class: notNull Violation: Class.schedule cannot be null,\nnotNull Violation: Class.classroom cannot be null","timestamp":"2025-04-10T03:02:59.389Z"}

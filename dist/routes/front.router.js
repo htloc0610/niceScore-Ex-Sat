@@ -57,7 +57,7 @@ router.get("/class/:id", (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
     // Get students in class
     const students = yield class_registation_service_1.default.getRegistrationsByClassId(idInt);
-    console.log(students);
+    // console.log(students);
     res.render("class", {
         classes: classData, // Ensure this matches the template variable
         students: students || [], // Ensure students is always an array
@@ -73,7 +73,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     faculties.unshift({ faculty_id: "", name: "Tất cả khoa" });
     const studentsDataValue = yield student_service_1.default.getListStudent();
     const students = studentsDataValue.map(student => student.get({ plain: true }));
-    console.log(students);
+    // console.log(students);
     res.render("index", { faculties: faculties, students: students }); // Render the "index" Handlebars template
 }));
 exports.default = router;

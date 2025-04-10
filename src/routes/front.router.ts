@@ -52,7 +52,7 @@ router.get("/class/:id", async (req, res) => {
   // Get students in class
   const students = await class_registationService.getRegistrationsByClassId(idInt);
 
-  console.log(students);
+  // console.log(students);
 
   res.render("class", {
     classes: classData, // Ensure this matches the template variable
@@ -71,7 +71,7 @@ router.get("/", async (req, res) => {
   faculties.unshift({ faculty_id: "", name: "Tất cả khoa" });
   const studentsDataValue = await studentService.getListStudent();
   const students = studentsDataValue.map(student => student.get({plain: true}));
-  console.log(students);
+  // console.log(students);
   res.render("index", {faculties: faculties, students: students}); // Render the "index" Handlebars template
 });
 
