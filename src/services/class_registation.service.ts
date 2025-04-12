@@ -2,7 +2,9 @@ import ClassRegistration from "../models/class_registrations.model";
 import RegistrationCancellation from "../models/registration_cancellations.model";
 import Student from "../models/student.model";
 import Class from "../models/classes.model";
+import Transcript from "../models/transcripts.model";
 import { logger } from "../config/logger";
+import { get } from "http";
 
 const classRegistationService = {
   async getAllRegistrations() {
@@ -160,6 +162,53 @@ const classRegistationService = {
     } catch (error) {
       logger.error("Error deleting registration: " + error.message);
       throw new Error("Error deleting registration: " + error.message);
+    }
+  },
+
+  //getRegistrationsByClassId
+  async getRegistrationsByClassId(classId: number) {
+    try {
+      const registrations = await ClassRegistration.findAll({
+        where: { class_id: classId },
+        include: [
+          {
+            model: Student,
+            as: "student",
+            attributes: ["student_id", "full_name", "email", "phone_number"],
+            include: [
+              {
+                model: Transcript,
+                as: "transcripts",
+                where: { class_id: classId }, // only get the grade for this class
+                required: false, // allows students with no grade yet
+                attributes: ["grade"],
+              },
+            ],
+          },
+
+          /*{
+            model: Class,
+            as: "class", 
+          },*/
+        ],
+      });
+  
+      // Return plain objects
+      return registrations.map(reg => {
+        let plain = reg.toJSON();
+        const grade = plain.student.transcripts?.[0]?.grade ?? null; // Access the first grade
+        return {
+          ...plain,
+          student: {
+            ...plain.student,
+            grade: grade, // Flattened grade field
+          },
+        };
+      });
+      
+    } catch (error) {
+      logger.error(`Error fetching registrations by class ID ${classId}: ${error.message}`);
+      throw new Error(`Error fetching registrations by class ID: ${error.message}`);
     }
   }
 };

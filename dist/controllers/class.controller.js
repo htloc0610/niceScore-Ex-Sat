@@ -124,7 +124,25 @@ const classController = {
                 .status(500)
                 .send({ message: "An error occurred while deleting the class." });
         }
-    })
+    }),
+    getClassByModuleId: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const module_id = req.params.id; // Extract module ID from URL params
+            const classes = yield class_service_1.default.getClassByModuleId(parseInt(module_id));
+            if (!classes) {
+                res.status(404).send({ message: "Classes not found." });
+            }
+            else {
+                res.status(200).send({ message: "Classes fetched successfully", classes });
+            }
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching the classes." });
+        }
+    }),
 };
 exports.default = classController;
 //# sourceMappingURL=class.controller.js.map

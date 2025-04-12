@@ -10,6 +10,7 @@ import statusTransitionsRouter from "./status_transitions.router";
 import configurationsRouter from "./configurations.router";
 import moduleRouter from "./module.router";
 import classRouter from "./class.router";
+import transcriptRouter from "./transcript.router";
 import classRegistationRouter from "./class_registation.router";
 
 const setupRoutes = (app: Application): void => {
@@ -24,6 +25,8 @@ const setupRoutes = (app: Application): void => {
   app.use("/api/module", moduleRouter);
 
   app.use("/api/class", classRouter);
+
+  app.use("/api/transcript", transcriptRouter);
 
   app.use("/api/class_registation", classRegistationRouter);
 

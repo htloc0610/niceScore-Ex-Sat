@@ -16,6 +16,7 @@ const class_registrations_model_1 = __importDefault(require("../models/class_reg
 const registration_cancellations_model_1 = __importDefault(require("../models/registration_cancellations.model"));
 const student_model_1 = __importDefault(require("../models/student.model"));
 const classes_model_1 = __importDefault(require("../models/classes.model"));
+const transcripts_model_1 = __importDefault(require("../models/transcripts.model"));
 const logger_1 = require("../config/logger");
 const classRegistationService = {
     getAllRegistrations() {
@@ -177,6 +178,47 @@ const classRegistationService = {
             catch (error) {
                 logger_1.logger.error("Error deleting registration: " + error.message);
                 throw new Error("Error deleting registration: " + error.message);
+            }
+        });
+    },
+    //getRegistrationsByClassId
+    getRegistrationsByClassId(classId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const registrations = yield class_registrations_model_1.default.findAll({
+                    where: { class_id: classId },
+                    include: [
+                        {
+                            model: student_model_1.default,
+                            as: "student",
+                            attributes: ["student_id", "full_name", "email", "phone_number"],
+                            include: [
+                                {
+                                    model: transcripts_model_1.default,
+                                    as: "transcripts",
+                                    where: { class_id: classId }, // only get the grade for this class
+                                    required: false, // allows students with no grade yet
+                                    attributes: ["grade"],
+                                },
+                            ],
+                        },
+                        /*{
+                          model: Class,
+                          as: "class",
+                        },*/
+                    ],
+                });
+                // Return plain objects
+                return registrations.map(reg => {
+                    var _a, _b, _c;
+                    let plain = reg.toJSON();
+                    const grade = (_c = (_b = (_a = plain.student.transcripts) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.grade) !== null && _c !== void 0 ? _c : null; // Access the first grade
+                    return Object.assign(Object.assign({}, plain), { student: Object.assign(Object.assign({}, plain.student), { grade: grade }) });
+                });
+            }
+            catch (error) {
+                logger_1.logger.error(`Error fetching registrations by class ID ${classId}: ${error.message}`);
+                throw new Error(`Error fetching registrations by class ID: ${error.message}`);
             }
         });
     }

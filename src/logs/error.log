@@ -46,3 +46,43 @@
 {"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:32.365Z"}
 {"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:58.735Z"}
 {"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-03-31T08:19:58.743Z"}
+{"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-04-09T04:08:17.383Z"}
+{"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-04-09T04:09:47.550Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:19:53.855Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:22:18.103Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:22:53.681Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:28:37.565Z"}
+{"level":"error","message":"Error fetching students in class: Class is not associated to Student!","timestamp":"2025-04-09T17:31:33.488Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:02.572Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-09T17:47:13.095Z"}
+{"level":"error","message":"Error adding new module: notNull Violation: Module.faculty_id cannot be null","timestamp":"2025-04-10T02:53:30.832Z"}
+{"level":"error","message":"Error creating new class: notNull Violation: Class.schedule cannot be null,\nnotNull Violation: Class.classroom cannot be null","timestamp":"2025-04-10T03:02:59.389Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-11T21:06:32.439Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-11T21:06:37.421Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:30:39.002Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:33:53.458Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:35:05.956Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:36:31.442Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:42:54.723Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:48:40.833Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:50:17.125Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:50:17.397Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:53:02.363Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:54:26.051Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:56:26.330Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:57:00.751Z"}
+{"level":"error","message":"Error fetching registrations by class ID 1: Cannot convert undefined or null to object","timestamp":"2025-04-12T01:18:53.638Z"}
+{"level":"error","message":"Error fetching registrations by class ID 1: Cannot convert undefined or null to object","timestamp":"2025-04-12T01:19:33.250Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:11:22.530Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:13:59.763Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:14:07.647Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:17:35.651Z"}
+{"level":"error","message":"Error exporting grades: ENOENT: no such file or directory, open 'C:\\Users\\Dien\\Desktop\\new_module\\niceScore-Ex-Sat\\src\\template\\grade.docx'","timestamp":"2025-04-12T03:21:35.056Z"}
+{"level":"error","message":"Error exporting grades: ENOENT: no such file or directory, open 'C:\\Users\\Dien\\Desktop\\new_module\\niceScore-Ex-Sat\\src\\template\\grade.docx'","timestamp":"2025-04-12T03:21:43.668Z"}
+{"level":"error","message":"Error exporting grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:42:05.493Z"}
+{"level":"error","message":"Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:51:40.303Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:51:40.315Z"}
+{"level":"error","message":"Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:54:00.044Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:54:00.055Z"}
+{"level":"error","message":"Error fetching student grades: Cannot read properties of undefined (reading 'module_code')","timestamp":"2025-04-12T03:57:04.124Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module_code')","timestamp":"2025-04-12T03:57:04.140Z"}

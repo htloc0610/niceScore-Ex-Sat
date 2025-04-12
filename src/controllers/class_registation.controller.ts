@@ -136,7 +136,25 @@ const classRegistationController = {
         .status(500)
         .send({ message: "An error occurred while deleting the registration." });
     }
-  }
+  },
+  //getClassRegistationByClassId
+  getClassRegistationByClassId: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const classId = req.params.classId; // Extract class ID from URL params
+      const registrations = await classRegistationService.getRegistrationsByClassId(parseInt(classId));
+
+      if (!registrations) {
+        res.status(404).send({ message: "No registrations found for this class." });
+      } else {
+        res.status(200).send({ message: "Registrations fetched successfully", registrations });
+      }
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while fetching the registrations." });
+    }
+  },
 };
 
 export default classRegistationController;
