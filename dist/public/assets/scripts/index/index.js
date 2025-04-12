@@ -1,59 +1,26 @@
-var students;
 var currentStudents;
 const tableBody = document.getElementById("student-table-body");
 const facultySelect = document.getElementById("faculty_search");
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/api/faculty")
-    .then((response) => response.json())
-    .then((data) => {
-      // Clear any existing options
-      facultySelect.innerHTML = "";
+  currentStudents = students;
+  document.getElementById("studentCount").innerHTML = students.length;
 
-      // Add a default option
-      const defaultOption = document.createElement("option");
-      defaultOption.value = "";
-      defaultOption.textContent = "Tất cả khoa";
-      facultySelect.appendChild(defaultOption);
+  graduatedCount = students.filter(
+    (student) => student.status.name === "Đã tốt nghiệp"
+    ).length;
+  document.getElementById("graduatedCount").innerHTML = graduatedCount;
 
-      // Add the fetched faculties to the select list
-      data.faculties.forEach((faculty) => {
-        const option = document.createElement("option");
-        option.value = faculty.faculty_id; // Set faculty_id as value
-        option.textContent = faculty.name; // Set name as text
-        facultySelect.appendChild(option);
-      });
-    })
-    .catch((error) => console.error("Error fetching faculties:", error));
+  studyingCount = students.filter(
+    (student) => student.status.name === "Đang học"
+    ).length;
+  document.getElementById("studyingCount").innerHTML = studyingCount;
 
-  fetch("/api/student")
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      students = data.students;
-      currentStudents = students;
-      document.getElementById("studentCount").innerHTML = students.length;
+    pauseCount = students.filter(
+    (student) => student.status.name === "Tạm dừng học"
+    ).length;
+    document.getElementById("pauseCount").innerHTML = pauseCount;
 
-      graduatedCount = students.filter(
-        (student) => student.status.name === "Đã tốt nghiệp"
-      ).length;
-      document.getElementById("graduatedCount").innerHTML = graduatedCount;
-
-      studyingCount = students.filter(
-        (student) => student.status.name === "Đang học"
-      ).length;
-      document.getElementById("studyingCount").innerHTML = studyingCount;
-
-      pauseCount = students.filter(
-        (student) => student.status.name === "Tạm dừng học"
-      ).length;
-      document.getElementById("pauseCount").innerHTML = pauseCount;
-
-      RefreshTable("");
-    })
-    .catch((error) => {
-      console.error("Error fetching student data:", error);
-    });
   const inputField = document.getElementById("searchInput");
   facultySelect.addEventListener("change", function () {
     tableBody.innerHTML = "";
@@ -91,8 +58,6 @@ function RefreshTable(id) {
 
       let statusClass = "";
       let statusText = "";
-
-      console.log(student.status.name, "status");
 
       switch (student.status.name) {
         case "Đang học":
