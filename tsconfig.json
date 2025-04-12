@@ -11,8 +11,6 @@
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*", "src/types/*"],
-      "src/*": ["node_modules/easy-template-x/src/*"]
-
     }
   },
   "include": ["./src/**/*"]
