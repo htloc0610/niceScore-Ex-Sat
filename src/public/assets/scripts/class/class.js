@@ -32,9 +32,18 @@ async function loadStudents(classId) {
           <td class="px-4 py-2 text-sm truncate" title="${student.email || "N/A"}">${student.email || "N/A"}</td>
           <td class="px-4 py-2 text-sm">
             <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full 
-              ${registration.grade ? "bg-green-100 text-green-800" : "bg-gray-200 text-gray-700"}">
-              ${registration.grade || "Chưa có"}
+              ${student.grade ? "bg-green-100 text-green-800" : "bg-gray-200 text-gray-700"}">
+              ${student.grade || "Chưa có"}
             </span>
+          </td>
+          <td class="px-4 py-2 text-sm ${student.grade? "hidden" : ""}">
+            <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="addGrade(${student.student_id || "N/A"}, ${classId})">Thêm điểm</button>            
+            <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700" onclick="cancel(${registration.registration_id || "N/A"}, ${student.student_id || "N/A"})">Hủy đăng ký</button>
+          </td>
+          <td class="px-4 py-2 text-sm ${student.grade? "": "hidden"}">
+            <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="editGrade(${student.student_id || "N/A"}, ${classId})"
+            >Sửa điểm</button>            
+
           </td>
         `;
       studentTableBody.appendChild(row);

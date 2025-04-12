@@ -1,5 +1,6 @@
 // module.js
 document.addEventListener("DOMContentLoaded", () => {
+  var credits = null;
   loadModules();
 
   const searchInput = document.getElementById("moduleSearch");
@@ -136,6 +137,7 @@ async function editModule(moduleId) {
     });
     const data = await response.json();
     const module = data.module;
+    credits = module.credits;
 
     // Điền dữ liệu vào form
     document.getElementById("edit-module-id").value = module.module_id;
@@ -160,7 +162,7 @@ async function editModule(moduleId) {
 document.getElementById("edit-module-form")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const moduleId = document.getElementById("edit-module-id").value;
-  const formData = {
+  var formData = {
     module_name: document.getElementById("edit-module-name").value,
     credits: parseInt(document.getElementById("edit-credits").value),
     faculty_id: parseInt(document.getElementById("edit-faculty-id").value),
@@ -168,6 +170,11 @@ document.getElementById("edit-module-form")?.addEventListener("submit", async (e
     is_active: document.getElementById("edit-module-status").value === "1",
     description: document.getElementById("edit-description").value || null,
   };
+
+  if (formData.credits === credits)
+  {
+    delete formData.credits;
+  }
 
   try {
     const response = await fetch(`/api/module/${moduleId}`, {

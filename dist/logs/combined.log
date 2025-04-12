@@ -554,3 +554,129 @@
 {"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-10T05:48:07.443Z"}
 {"level":"info","message":"Successfully fetched students list","timestamp":"2025-04-10T05:58:31.652Z"}
 {"level":"info","message":"Created new registration successfully","timestamp":"2025-04-10T05:58:49.612Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-04-11T20:55:37.040Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:55:53.173Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:57:42.479Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:57:43.605Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:57:52.411Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:57:52.414Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:57:58.657Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:57:58.666Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:58:03.066Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:58:03.072Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:58:45.352Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:58:45.356Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:58:53.948Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:58:53.950Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:58:58.052Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:58:58.055Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:59:04.399Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:59:04.402Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:59:09.150Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:59:09.152Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-11T20:59:14.407Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-11T20:59:21.063Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:59:26.312Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:59:26.488Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:59:30.927Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:59:30.930Z"}
+{"level":"info","message":"Module has no registered students","timestamp":"2025-04-11T20:59:32.412Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:59:35.018Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:59:36.658Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:59:36.661Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T20:59:45.667Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T20:59:45.670Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:01:19.773Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:01:19.978Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:01:43.474Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:01:43.653Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:01:43.831Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:01:44.008Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:01:44.435Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:01:45.917Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:01:45.919Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:01:56.686Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:01:56.861Z"}
+{"level":"info","message":"Added new module successfully","timestamp":"2025-04-11T21:02:56.953Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:02:59.265Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:03:35.647Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-04-11T21:05:50.212Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-11T21:06:22.367Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-11T21:06:32.439Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-11T21:06:37.421Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:06:59.235Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-11T21:07:15.208Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:08:40.002Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:08:40.202Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:08:40.618Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:08:40.796Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-11T21:08:42.145Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:08:51.259Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:08:51.260Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-11T21:08:52.488Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:10:24.749Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:10:24.958Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T21:10:30.074Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T21:10:30.075Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:22:04.098Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T23:22:34.091Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:22:34.296Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T23:26:05.139Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:26:05.346Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:33:12.459Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T23:33:15.839Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:33:16.047Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-11T23:33:19.935Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:34:39.698Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T23:34:43.903Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:34:44.110Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-11T23:34:45.542Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:35:08.273Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T23:35:10.731Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:35:10.936Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-11T23:35:12.986Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:35:29.062Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:35:32.339Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T23:35:32.340Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:35:36.885Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-11T23:35:49.748Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-11T23:35:49.957Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-12T00:29:44.903Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:30:39.002Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:33:53.458Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:35:05.956Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:36:31.442Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:42:54.723Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:48:40.833Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:50:17.125Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:50:17.397Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:53:02.363Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:54:26.051Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:56:26.330Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-12T00:57:00.751Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-12T00:59:14.244Z"}
+{"level":"error","message":"Error fetching registrations by class ID 1: Cannot convert undefined or null to object","timestamp":"2025-04-12T01:18:53.638Z"}
+{"level":"error","message":"Error fetching registrations by class ID 1: Cannot convert undefined or null to object","timestamp":"2025-04-12T01:19:33.250Z"}
+{"level":"info","message":"Deleted registration with ID: 5 and saved cancellation reason","timestamp":"2025-04-12T01:53:17.833Z"}
+{"level":"info","message":"Deleted registration with ID: 7 and saved cancellation reason","timestamp":"2025-04-12T01:54:54.806Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-12T01:56:44.477Z"}
+{"level":"info","message":"Deleted registration with ID: 12 and saved cancellation reason","timestamp":"2025-04-12T01:57:09.469Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-12T02:00:51.059Z"}
+{"level":"info","message":"Deleted registration with ID: 13 and saved cancellation reason","timestamp":"2025-04-12T02:01:10.310Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-12T02:02:55.585Z"}
+{"level":"info","message":"Deleted registration with ID: 14 and saved cancellation reason","timestamp":"2025-04-12T02:03:34.774Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-12T02:06:09.424Z"}
+{"level":"info","message":"Deleted registration with ID: 15 and saved cancellation reason","timestamp":"2025-04-12T02:06:25.782Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:11:22.530Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:13:59.763Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:14:07.647Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student by id","timestamp":"2025-04-12T03:17:35.651Z"}
+{"level":"error","message":"Error exporting grades: ENOENT: no such file or directory, open 'C:\\Users\\Dien\\Desktop\\new_module\\niceScore-Ex-Sat\\src\\template\\grade.docx'","timestamp":"2025-04-12T03:21:35.056Z"}
+{"level":"error","message":"Error exporting grades: ENOENT: no such file or directory, open 'C:\\Users\\Dien\\Desktop\\new_module\\niceScore-Ex-Sat\\src\\template\\grade.docx'","timestamp":"2025-04-12T03:21:43.668Z"}
+{"level":"error","message":"Error exporting grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:42:05.493Z"}
+{"level":"error","message":"Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:51:40.303Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:51:40.315Z"}
+{"level":"error","message":"Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:54:00.044Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:54:00.055Z"}
+{"level":"error","message":"Error fetching student grades: Cannot read properties of undefined (reading 'module_code')","timestamp":"2025-04-12T03:57:04.124Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module_code')","timestamp":"2025-04-12T03:57:04.140Z"}
