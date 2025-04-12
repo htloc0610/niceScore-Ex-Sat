@@ -24,9 +24,9 @@ const classRegistationController = {
         catch (error) {
             logger_1.logger.error("Error fetching class registration list");
             console.error("Error fetching class registration list:", error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while fetching class registrations." });
+            res.status(500).send({
+                message: "An error occurred while fetching class registrations.",
+            });
         }
     }),
     addClassRegistation: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -35,6 +35,12 @@ const classRegistationController = {
             if (!registrationData.student_id || !registrationData.class_id) {
                 res.status(400).send({
                     message: "Student ID and Class ID are required.",
+                });
+                return;
+            }
+            if (!(yield class_registation_service_1.default.hasPrerequisiteCompleted(registrationData.class_id, registrationData.student_id))) {
+                res.status(400).send({
+                    message: "Student has not completed the prerequisite for this class.",
                 });
                 return;
             }
@@ -58,9 +64,9 @@ const classRegistationController = {
         }
         catch (error) {
             console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while creating the class registration." });
+            res.status(500).send({
+                message: "An error occurred while creating the class registration.",
+            });
         }
     }),
     getClassRegistation: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -71,14 +77,17 @@ const classRegistationController = {
                 res.status(404).send({ message: "Registration not found." });
             }
             else {
-                res.status(200).send({ message: "Registration fetched successfully", registrationData });
+                res.status(200).send({
+                    message: "Registration fetched successfully",
+                    registrationData,
+                });
             }
         }
         catch (error) {
             console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while fetching the registration." });
+            res.status(500).send({
+                message: "An error occurred while fetching the registration.",
+            });
         }
     }),
     updateClassRegistation: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -106,9 +115,9 @@ const classRegistationController = {
         }
         catch (error) {
             console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while updating the registration." });
+            res.status(500).send({
+                message: "An error occurred while updating the registration.",
+            });
         }
     }),
     deleteClassRegistation: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -131,9 +140,9 @@ const classRegistationController = {
         }
         catch (error) {
             console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while deleting the registration." });
+            res.status(500).send({
+                message: "An error occurred while deleting the registration.",
+            });
         }
     }),
     //getClassRegistationByClassId
@@ -142,17 +151,22 @@ const classRegistationController = {
             const classId = req.params.classId; // Extract class ID from URL params
             const registrations = yield class_registation_service_1.default.getRegistrationsByClassId(parseInt(classId));
             if (!registrations) {
-                res.status(404).send({ message: "No registrations found for this class." });
+                res
+                    .status(404)
+                    .send({ message: "No registrations found for this class." });
             }
             else {
-                res.status(200).send({ message: "Registrations fetched successfully", registrations });
+                res.status(200).send({
+                    message: "Registrations fetched successfully",
+                    registrations,
+                });
             }
         }
         catch (error) {
             console.error(error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while fetching the registrations." });
+            res.status(500).send({
+                message: "An error occurred while fetching the registrations.",
+            });
         }
     }),
 };
