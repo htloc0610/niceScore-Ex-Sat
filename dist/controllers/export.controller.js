@@ -17,7 +17,7 @@ const path_1 = __importDefault(require("path"));
 const exceljs_1 = __importDefault(require("exceljs"));
 const student_service_1 = __importDefault(require("../services/student.service"));
 const logger_1 = require("../config/logger");
-//import { TemplateHandler } from 'easy-template-x';
+const easy_template_x_1 = require("easy-template-x");
 const exportController = {
     // Hàm export dữ liệu ra JSON
     exportToJson: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -146,47 +146,41 @@ const exportController = {
       }
     }*/
     exportGrade: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        /*try {
-          const { id } = req.params;
-    
-          // Fetch grades and student details
-          const grades = await studentService.getStudentGrades(parseInt(id));
-          const student = await studentService.getStudentById(parseInt(id));
-          
-          console.log("Grade: ", grades, "End grade")
-    
-          // Prepare the data to be merged into the template
-          const data = {
-            student_name: student.full_name,
-            student_id: student.student_id,
-            program: student.program,
-            grades,
-          };
-
-    
-          // Path to the Word template
-          const templateFilePath = path.join(__dirname, '../templates/grade.docx');
-          const templateFile = fs.readFileSync(templateFilePath);
-    
-          // Initialize TemplateHandler and process the template with data
-          const handler = new TemplateHandler();
-          const doc = await handler.process(templateFile, data); // Ensure process returns a promise and is awaited
-    
-          // Send the generated document as a response
-          const buffer = await doc;  // Ensure you're correctly awaiting the promise for doc
-    
-          // Set headers for downloading the document
-          res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-          res.setHeader('Content-Disposition', 'attachment; filename=student_report.docx');
-          res.send(buffer);
-    
-        } catch (error) {
-          // Handle error and log it
-          console.error("Error exporting grade:", error);
-          logger.error("Error exporting grades: " + error.message);
-          res.status(500).json({ message: "Error exporting grades", error: error.message });
-        }*/
-    })
+        try {
+            const { id } = req.params;
+            // Fetch grades and student details
+            const grades = yield student_service_1.default.getStudentGrades(parseInt(id));
+            const student = yield student_service_1.default.getStudentById(parseInt(id));
+            console.log("Grade: ", grades, "End grade");
+            // Prepare the data to be merged into the template
+            const data = {
+                student_name: student.full_name,
+                student_id: student.student_id,
+                program: student.program,
+                grades,
+            };
+            // Path to the Word template
+            const templateFilePath = path_1.default.join(__dirname, "../templates/grade.docx");
+            const templateFile = fs_1.default.readFileSync(templateFilePath);
+            // Initialize TemplateHandler and process the template with data
+            const handler = new easy_template_x_1.TemplateHandler();
+            const doc = yield handler.process(templateFile, data); // Ensure process returns a promise and is awaited
+            // Send the generated document as a response
+            const buffer = yield doc; // Ensure you're correctly awaiting the promise for doc
+            // Set headers for downloading the document
+            res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+            res.setHeader("Content-Disposition", "attachment; filename=student_report.docx");
+            res.send(buffer);
+        }
+        catch (error) {
+            // Handle error and log it
+            console.error("Error exporting grade:", error);
+            logger_1.logger.error("Error exporting grades: " + error.message);
+            res
+                .status(500)
+                .json({ message: "Error exporting grades", error: error.message });
+        }
+    }),
 };
 exports.default = exportController;
 //# sourceMappingURL=export.controller.js.map

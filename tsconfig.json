@@ -11,8 +11,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"],
-      "src/*": ["node_modules/easy-template-x/src/*"]
+      "*": ["node_modules/*", "src/types/*"]
     }
   },
   "include": ["./src/**/*"]
