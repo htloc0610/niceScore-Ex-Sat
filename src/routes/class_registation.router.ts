@@ -3,6 +3,9 @@ import classRegistationController from "../controllers/class_registation.control
 
 const classRegistationRouter = Router();
 
+// [GET] /api/class_registation/${classId}
+classRegistationRouter.get("/:classId", classRegistationController.getClassRegistationByClassId);
+
 // [GET] /api/class_registation
 classRegistationRouter.get("/", classRegistationController.getClassRegistationList);
 

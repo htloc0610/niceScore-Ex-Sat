@@ -1,4 +1,5 @@
 import Modules from "../models/modules.model";
+import Faculty from "../models/faculty.model";
 import Class from "../models/classes.model";
 import ClassRegistration from "../models/class_registrations.model";
 import { logger } from "../config/logger";
@@ -7,14 +8,26 @@ const moduleService = {
   async getAllModules() {
     try {
       const modules = await Modules.findAll({
-        order: [["module_id", "ASC"]],
+        include: [
+          {
+            model: Faculty,
+            as: "faculty",
+            attributes: ["name"],
+          },
+          {
+            model: Modules,
+            as: "prerequisite",
+            attributes: ["module_code"], 
+          },
+        ],
       });
-      return modules.map(module => module.dataValues);
+  
+      return modules.map((module) => module.get({ plain: true }));
     } catch (error) {
-      logger.error("Error fetching all modules");
-      throw new Error("Error fetching all modules");
+      console.error("Error fetching modules:", error);
+      throw error;
     }
-  },
+  },  
 
   async addModule(data: any) {
     try {

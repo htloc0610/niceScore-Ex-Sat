@@ -423,12 +423,12 @@ const studentService = {
                     include: [
                         {
                             model: classes_model_1.default,
-                            as: "class",
+                            as: "class", // Ensure this matches the alias set in the association
                             include: [
                                 {
                                     model: modules_model_1.default,
-                                    as: "module",
-                                    attributes: ["module_name", "credits"],
+                                    as: "module", // Ensure 'module' alias is correct
+                                    attributes: ["module_code", "module_name", "credits"],
                                 },
                             ],
                             attributes: ["class_name"],
@@ -439,7 +439,20 @@ const studentService = {
                 if (!grades || grades.length === 0) {
                     throw new Error("No grades found for the student");
                 }
-                return grades;
+                // Map the result to return the desired format
+                const formattedGrades = grades.map((item) => {
+                    const plainItem = item.get({ plain: true }); // Convert Sequelize instance to plain object
+                    console.log(plainItem);
+                    return {
+                        grade: plainItem.grade,
+                        //class_name: plainItem.class.class_name, // Accessing class_name from the related Class model
+                        module_name: plainItem.class.module.module_name, // Accessing module_name from the related Module model
+                        module_code: plainItem.class.module.module_code, // Accessing module_code from the related Module model
+                        credits: plainItem.class.module.credits, // Accessing credits from the related Module model
+                    };
+                });
+                console.log(formattedGrades); // You can log the formatted result if needed
+                return formattedGrades; // Return the formatted grades array
             }
             catch (error) {
                 logger_1.logger.error("Error fetching student grades: " + error.message);
@@ -447,7 +460,7 @@ const studentService = {
                 throw new Error("Error fetching student grades: " + error.message);
             }
         });
-    },
+    }
 };
 exports.default = studentService;
 //# sourceMappingURL=student.service.js.map

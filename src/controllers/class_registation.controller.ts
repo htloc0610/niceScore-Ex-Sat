@@ -4,7 +4,10 @@ import { logger } from "../config/logger";
 import { log } from "winston";
 
 const classRegistationController = {
-  getClassRegistationList: async (req: Request, res: Response): Promise<void> => {
+  getClassRegistationList: async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     try {
       const registrations = await classRegistationService.getAllRegistrations();
       logger.info("Successfully fetched class registration list");
@@ -12,9 +15,9 @@ const classRegistationController = {
     } catch (error) {
       logger.error("Error fetching class registration list");
       console.error("Error fetching class registration list:", error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while fetching class registrations." });
+      res.status(500).send({
+        message: "An error occurred while fetching class registrations.",
+      });
     }
   },
 
@@ -28,22 +31,42 @@ const classRegistationController = {
         });
         return;
       }
-      
-      if (await classRegistationService.availableRegistration(registrationData)) {
+
+      if (
+        !(await classRegistationService.hasPrerequisiteCompleted(
+          registrationData.class_id,
+          registrationData.student_id
+        ))
+      ) {
+        res.status(400).send({
+          message: "Student has not completed the prerequisite for this class.",
+        });
+        return;
+      }
+
+      if (
+        await classRegistationService.availableRegistration(registrationData)
+      ) {
         res.status(409).send({
           message: "This student is already registered for this class.",
         });
         return;
       }
 
-      if(await classRegistationService.fullOfStudent(parseInt(registrationData.class_id))) {
+      if (
+        await classRegistationService.fullOfStudent(
+          parseInt(registrationData.class_id)
+        )
+      ) {
         res.status(409).send({
           message: "This class is already full.",
         });
         return;
       }
 
-      const createdRegistration = await classRegistationService.addRegistration(registrationData);
+      const createdRegistration = await classRegistationService.addRegistration(
+        registrationData
+      );
 
       res.status(201).send({
         message: "Class registration created successfully",
@@ -51,46 +74,57 @@ const classRegistationController = {
       });
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while creating the class registration." });
+      res.status(500).send({
+        message: "An error occurred while creating the class registration.",
+      });
     }
   },
-  
+
   getClassRegistation: async (req: Request, res: Response): Promise<void> => {
     try {
       const registration_id = req.params.id; // Extract registration ID from URL params
-      const registrationData = await classRegistationService.getRegistrationById(parseInt(registration_id));
+      const registrationData =
+        await classRegistationService.getRegistrationById(
+          parseInt(registration_id)
+        );
 
       if (!registrationData) {
         res.status(404).send({ message: "Registration not found." });
       } else {
-        res.status(200).send({ message: "Registration fetched successfully", registrationData });
+        res.status(200).send({
+          message: "Registration fetched successfully",
+          registrationData,
+        });
       }
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while fetching the registration." });
+      res.status(500).send({
+        message: "An error occurred while fetching the registration.",
+      });
     }
   },
-  
-  updateClassRegistation: async (req: Request, res: Response): Promise<void> => {
+
+  updateClassRegistation: async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     try {
       const registration_id = req.params.id;
       const updatedData = req.body;
 
       if (!updatedData.student_id && !updatedData.class_id) {
         res.status(400).send({
-          message: "At least one of Student ID or Class ID must be provided to update.",
+          message:
+            "At least one of Student ID or Class ID must be provided to update.",
         });
         return;
       }
 
-      const updatedRegistration = await classRegistationService.updateRegistration(
-        parseInt(registration_id),
-        updatedData
-      );
+      const updatedRegistration =
+        await classRegistationService.updateRegistration(
+          parseInt(registration_id),
+          updatedData
+        );
 
       if (!updatedRegistration) {
         res
@@ -104,13 +138,16 @@ const classRegistationController = {
       }
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while updating the registration." });
+      res.status(500).send({
+        message: "An error occurred while updating the registration.",
+      });
     }
   },
-  
-  deleteClassRegistation: async (req: Request, res: Response): Promise<void> => {
+
+  deleteClassRegistation: async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
     try {
       const registration_id = req.params.id;
 
@@ -123,7 +160,10 @@ const classRegistationController = {
         return;
       }
 
-      const deleted = await classRegistationService.deleteRegistration(parseInt(registration_id), reason);
+      const deleted = await classRegistationService.deleteRegistration(
+        parseInt(registration_id),
+        reason
+      );
 
       if (!deleted) {
         res.status(404).send({ message: "Registration not found." });
@@ -132,11 +172,40 @@ const classRegistationController = {
       }
     } catch (error) {
       console.error(error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while deleting the registration." });
+      res.status(500).send({
+        message: "An error occurred while deleting the registration.",
+      });
     }
-  }
+  },
+  //getClassRegistationByClassId
+  getClassRegistationByClassId: async (
+    req: Request,
+    res: Response
+  ): Promise<void> => {
+    try {
+      const classId = req.params.classId; // Extract class ID from URL params
+      const registrations =
+        await classRegistationService.getRegistrationsByClassId(
+          parseInt(classId)
+        );
+
+      if (!registrations) {
+        res
+          .status(404)
+          .send({ message: "No registrations found for this class." });
+      } else {
+        res.status(200).send({
+          message: "Registrations fetched successfully",
+          registrations,
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send({
+        message: "An error occurred while fetching the registrations.",
+      });
+    }
+  },
 };
 
 export default classRegistationController;

@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const modules_model_1 = __importDefault(require("../models/modules.model"));
+const faculty_model_1 = __importDefault(require("../models/faculty.model"));
 const classes_model_1 = __importDefault(require("../models/classes.model"));
 const class_registrations_model_1 = __importDefault(require("../models/class_registrations.model"));
 const logger_1 = require("../config/logger");
@@ -21,13 +22,24 @@ const moduleService = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const modules = yield modules_model_1.default.findAll({
-                    order: [["module_id", "ASC"]],
+                    include: [
+                        {
+                            model: faculty_model_1.default,
+                            as: "faculty",
+                            attributes: ["name"],
+                        },
+                        {
+                            model: modules_model_1.default,
+                            as: "prerequisite",
+                            attributes: ["module_code"],
+                        },
+                    ],
                 });
-                return modules.map(module => module.dataValues);
+                return modules.map((module) => module.get({ plain: true }));
             }
             catch (error) {
-                logger_1.logger.error("Error fetching all modules");
-                throw new Error("Error fetching all modules");
+                console.error("Error fetching modules:", error);
+                throw error;
             }
         });
     },

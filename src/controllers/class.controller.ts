@@ -114,7 +114,25 @@ const classController = {
         .status(500)
         .send({ message: "An error occurred while deleting the class." });
     }
-  }
+  },
+
+  getClassByModuleId: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const module_id = req.params.id; // Extract module ID from URL params
+      const classes = await classService.getClassByModuleId(parseInt(module_id));
+
+      if (!classes) {
+        res.status(404).send({ message: "Classes not found." });
+      } else {
+        res.status(200).send({ message: "Classes fetched successfully", classes });
+      }
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while fetching the classes." });
+    }
+  },
 };
 
 export default classController;
