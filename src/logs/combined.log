@@ -689,3 +689,8 @@
 {"error":{},"level":"error","message":"Error fetching class cancellation list","timestamp":"2025-04-12T06:31:01.342Z"}
 {"level":"info","message":"Successfully fetched class cancellation list","timestamp":"2025-04-12T06:32:04.815Z"}
 {"level":"info","message":"Successfully fetched class cancellation list","timestamp":"2025-04-12T06:32:48.632Z"}
+{"level":"info","message":"Successfully fetched cancellation details for moduleID: 1","timestamp":"2025-04-12T06:38:37.513Z"}
+{"level":"info","message":"Successfully fetched cancellation details for moduleID: 2","timestamp":"2025-04-12T06:38:53.788Z"}
+{"level":"info","message":"Successfully fetched cancellation details for moduleID: 3","timestamp":"2025-04-12T06:38:59.834Z"}
+{"level":"info","message":"Successfully fetched cancellation details for moduleID: 1","timestamp":"2025-04-12T06:39:02.800Z"}
+{"level":"info","message":"Successfully fetched cancellation details for moduleID: 3","timestamp":"2025-04-12T06:41:03.427Z"}

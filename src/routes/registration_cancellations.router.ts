@@ -9,4 +9,10 @@ classCancellationRouter.get(
   classCancellationController.getClassCancellationList
 );
 
+// [GET] /api/class_cancellation/{moduleID}
+classCancellationRouter.get(
+  "/:moduleID",
+  classCancellationController.getClassCancellationDetails
+);
+
 export default classCancellationRouter;

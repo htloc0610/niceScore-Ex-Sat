@@ -8,5 +8,7 @@ const class_cancellation_controller_1 = __importDefault(require("../controllers/
 const classCancellationRouter = (0, express_1.Router)();
 // [GET] /api/class_cancellation
 classCancellationRouter.get("/", class_cancellation_controller_1.default.getClassCancellationList);
+// [GET] /api/class_cancellation/{moduleID}
+classCancellationRouter.get("/:moduleID", class_cancellation_controller_1.default.getClassCancellationDetails);
 exports.default = classCancellationRouter;
 //# sourceMappingURL=registration_cancellations.router.js.map

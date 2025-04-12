@@ -28,6 +28,30 @@ const classRegistationController = {
             });
         }
     }),
+    getClassCancellationDetails: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { moduleID } = req.params;
+            const cancellationDetails = yield class_cancellation_service_1.default.getCancellationDetails(moduleID);
+            if (!cancellationDetails) {
+                logger_1.logger.warn(`No cancellation details found for moduleID: ${moduleID}`);
+                res.status(404).send({
+                    message: `No cancellation details found for moduleID: ${moduleID}`,
+                });
+                return;
+            }
+            logger_1.logger.info(`Successfully fetched cancellation details for moduleID: ${moduleID}`);
+            res.send({
+                message: `Cancellation details for moduleID: ${moduleID}`,
+                cancellationDetails,
+            });
+        }
+        catch (error) {
+            logger_1.logger.error("Error fetching class cancellation details", { error });
+            res.status(500).send({
+                message: "An error occurred while fetching class cancellation details.",
+            });
+        }
+    }),
 };
 exports.default = classRegistationController;
 //# sourceMappingURL=class_cancellation.controller.js.map
