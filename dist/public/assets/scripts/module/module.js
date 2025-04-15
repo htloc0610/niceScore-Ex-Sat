@@ -62,6 +62,7 @@ function renderModuleList(modules) {
                 ${m.is_active ? 'Active' : 'Inactive'}
               </span>
               <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="editModule('${m.module_id}')">Sửa</button>
+              <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700" onclick="deleteModule('${m.module_id}')">Xóa</button>
             </div>
           </div>
         </li>
@@ -198,4 +199,28 @@ document.getElementById("edit-module-form")?.addEventListener("submit", async (e
 
 function closeEditModuleModal() {
   document.getElementById("edit-module-modal").classList.add("hidden");
+}
+
+async function deleteModule(moduleId) {
+  if (!confirm("Bạn có chắc chắn muốn xóa môn học này?")) {
+    return;
+  }
+
+  try {
+    const response = await fetch(`/api/module/${moduleId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (response.ok) {
+      alert("Xóa môn học thành công!");
+      loadModules(); 
+    } else {
+      const data = await response.json();
+      alert("Xóa môn học thất bại: " + (data.message || "Lỗi không xác định"));
+    }
+  } catch (error) {
+    console.error("Error deleting module:", error);
+    alert("Lỗi kết nối server.");
+  }
 }

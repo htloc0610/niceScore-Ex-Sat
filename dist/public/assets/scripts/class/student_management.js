@@ -200,3 +200,68 @@ async function cancel(registrationId, studentId) {
     }
   }
   
+  function editGrade(transcriptId, currentGrade) {
+    const overlay = document.createElement("div");
+    overlay.classList.add("fixed", "top-0", "left-0", "w-full", "h-full", "bg-gray-50", "bg-opacity-50");
+  
+    const modal = document.createElement("div");
+    modal.classList.add("fixed", "top-1/2", "left-1/2", "transform", "-translate-x-1/2", "-translate-y-1/2", "bg-white", "p-5", "shadow-lg", "rounded-lg");
+  
+    let form = document.createElement("form");
+    form.innerHTML = `
+      <h2 class="text-xl font-bold mb-4 mx-20">Cập nhật điểm</h2>
+      <label for="grade" class="block text-sm font-medium text-gray-700">Điểm số mới:</label>
+      <input type="text" id="grade" name="grade" required value="${currentGrade}"
+        class="mt-1 mb-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      <div class="mt-4 flex justify-end">
+        <button type="button" id="closeModal" class="ml-2 inline-flex justify-center py-2 px-4 text-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700">Đóng</button>
+        <button type="submit" class="ml-2 inline-flex justify-center py-2 px-4 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700">Lưu</button>
+      </div>`;
+  
+    form.querySelector("#closeModal").addEventListener("click", () => document.body.removeChild(overlay));
+  
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const newGrade = form.grade.value;
+  
+      try {
+        const response = await fetch(`/api/transcript/${transcriptId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ grade: newGrade }),
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          alert("Cập nhật điểm thành công!");
+          document.body.removeChild(overlay);
+
+          const updatedtranscript = data.updatedtranscript;
+  
+          const row = document.getElementById(`grade-${updatedtranscript.student_id}`);
+          if (row) {
+            row.textContent = updatedtranscript.grade;
+            row.className = `inline-flex px-2 py-1 text-xs font-medium rounded-full ${
+              updatedtranscript.grade && parseFloat(updatedtranscript.grade) < 5
+                ? "bg-red-100 text-red-800"
+                : "bg-green-100 text-green-800"
+            }`;
+          }
+  
+        } else {
+          alert(data.message || "Cập nhật thất bại.");
+        }
+      } catch (err) {
+        console.error("Error updating grade:", err);
+        alert("Có lỗi xảy ra khi cập nhật điểm.");
+      }
+    });
+  
+    modal.appendChild(form);
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+  }
+  

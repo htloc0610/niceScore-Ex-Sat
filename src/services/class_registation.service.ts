@@ -181,7 +181,7 @@ const classRegistationService = {
                 as: "transcripts",
                 where: { class_id: classId }, // only get the grade for this class
                 required: false, // allows students with no grade yet
-                attributes: ["grade"],
+                attributes: ["grade", "transcript_id"],
               },
             ],
           },

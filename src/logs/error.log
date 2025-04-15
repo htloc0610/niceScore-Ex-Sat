@@ -86,3 +86,12 @@
 {"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module')","timestamp":"2025-04-12T03:54:00.055Z"}
 {"level":"error","message":"Error fetching student grades: Cannot read properties of undefined (reading 'module_code')","timestamp":"2025-04-12T03:57:04.124Z"}
 {"level":"error","message":"Error exporting grades: Error fetching student grades: Cannot read properties of undefined (reading 'module_code')","timestamp":"2025-04-12T03:57:04.140Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-15T14:41:21.099Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-15T14:41:29.081Z"}
+{"level":"error","message":"Error updating transcript: transcript not found","timestamp":"2025-04-15T15:09:44.220Z"}
+{"level":"error","message":"Error updating transcript: transcript not found","timestamp":"2025-04-15T15:09:53.037Z"}
+{"level":"error","message":"Error updating transcript: transcript not found","timestamp":"2025-04-15T15:15:23.729Z"}
+{"level":"error","message":"Error updating transcript: transcript not found","timestamp":"2025-04-15T15:21:39.941Z"}
+{"level":"error","message":"Error updating transcript: transcript not found","timestamp":"2025-04-15T15:21:48.413Z"}
+{"level":"error","message":"Error updating transcript: transcript not found","timestamp":"2025-04-15T15:23:16.528Z"}
+{"level":"error","message":"Error fetching registrations by class ID 3: column student->transcripts.transcripts_id does not exist","timestamp":"2025-04-15T15:27:22.062Z"}
