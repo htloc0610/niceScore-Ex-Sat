@@ -52,6 +52,31 @@ const classRegistationController = {
             });
         }
     }),
+    getRegistrationCancellationsByStudentId: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { studentId } = req.params;
+            const student_number = parseInt(studentId, 10);
+            const cancellations = yield class_cancellation_service_1.default.getCancellationsByStudentId(student_number);
+            if (!cancellations) {
+                logger_1.logger.warn(`No cancellation details found for studentId: ${studentId}`);
+                res.status(404).send({
+                    message: `No cancellation details found for studentId: ${studentId}`,
+                });
+                return;
+            }
+            logger_1.logger.info(`Successfully fetched cancellation details for studentId: ${studentId}`);
+            res.send({
+                message: `Cancellation details for studentId: ${studentId}`,
+                cancellations,
+            });
+        }
+        catch (error) {
+            logger_1.logger.error("Error fetching class cancellation details", { error });
+            res.status(500).send({
+                message: "An error occurred while fetching class cancellation details by student ID.",
+            });
+        }
+    }),
 };
 exports.default = classRegistationController;
 //# sourceMappingURL=class_cancellation.controller.js.map

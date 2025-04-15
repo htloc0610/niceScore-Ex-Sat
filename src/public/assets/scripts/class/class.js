@@ -43,7 +43,7 @@ async function loadStudents(classId) {
             </span>
           </td>
 
-          <td class="px-4 py-2 text-sm ${student.grade? "hidden" : ""}">
+          <td class="px-4 flex gap-2 py-2 text-sm ${student.grade? "hidden" : ""}">
             <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="addGrade(${student.student_id || "N/A"}, ${classId})">Thêm điểm</button>            
             <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700" onclick="cancel(${registration.registration_id || "N/A"}, ${student.student_id || "N/A"})">Hủy đăng ký</button>
           </td>

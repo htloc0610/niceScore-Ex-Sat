@@ -15,4 +15,10 @@ classCancellationRouter.get(
   classCancellationController.getClassCancellationDetails
 );
 
+// [GET] /api/class_cancellation/student/{studentID}
+classCancellationRouter.get(
+  "/student/:studentId",
+  classCancellationController.getRegistrationCancellationsByStudentId
+);
+
 export default classCancellationRouter;

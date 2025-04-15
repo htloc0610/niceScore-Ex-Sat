@@ -74,6 +74,47 @@ const classRegistationService = {
       );
     }
   },
+
+  //getCancellationsByStudentId
+  async getCancellationsByStudentId(studentId: number) {
+    try {
+      const cancellations = await RegistrationCancellation.findAll({
+        include: [
+          {
+            model: Student,
+            as: "student",
+            attributes: ["student_id", "full_name", "email"],
+            where: { student_id: studentId },
+          },
+          {
+            model: Class,
+            as: "class",
+            attributes: [
+              "class_id",
+              "class_name",
+              "academic_year",
+              "module_id",
+              "instructor",
+              "schedule",
+              "classroom",
+            ],
+          },
+        ],
+        order: [["cancellation_id", "ASC"]],
+      });
+      return cancellations.map((cancellation) =>
+        cancellation.get({ plain: true })
+      );
+    } catch (error) {
+      logger.error(
+        `Error fetching cancellations for student ID: ${studentId}`,
+        error
+      );
+      throw new Error(
+        "Error fetching cancellations for the specified student ID"
+      );
+    }
+  },
 };
 
 export default classRegistationService;

@@ -86,6 +86,42 @@ const classRegistationService = {
             }
         });
     },
+    //getCancellationsByStudentId
+    getCancellationsByStudentId(studentId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const cancellations = yield registration_cancellations_model_1.default.findAll({
+                    include: [
+                        {
+                            model: student_model_1.default,
+                            as: "student",
+                            attributes: ["student_id", "full_name", "email"],
+                            where: { student_id: studentId },
+                        },
+                        {
+                            model: classes_model_1.default,
+                            as: "class",
+                            attributes: [
+                                "class_id",
+                                "class_name",
+                                "academic_year",
+                                "module_id",
+                                "instructor",
+                                "schedule",
+                                "classroom",
+                            ],
+                        },
+                    ],
+                    order: [["cancellation_id", "ASC"]],
+                });
+                return cancellations.map((cancellation) => cancellation.get({ plain: true }));
+            }
+            catch (error) {
+                logger_1.logger.error(`Error fetching cancellations for student ID: ${studentId}`, error);
+                throw new Error("Error fetching cancellations for the specified student ID");
+            }
+        });
+    },
 };
 exports.default = classRegistationService;
 //# sourceMappingURL=class_cancellation.service.js.map

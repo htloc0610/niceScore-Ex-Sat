@@ -10,5 +10,7 @@ const classCancellationRouter = (0, express_1.Router)();
 classCancellationRouter.get("/", class_cancellation_controller_1.default.getClassCancellationList);
 // [GET] /api/class_cancellation/{moduleID}
 classCancellationRouter.get("/:moduleID", class_cancellation_controller_1.default.getClassCancellationDetails);
+// [GET] /api/class_cancellation/student/{studentID}
+classCancellationRouter.get("/student/:studentId", class_cancellation_controller_1.default.getRegistrationCancellationsByStudentId);
 exports.default = classCancellationRouter;
 //# sourceMappingURL=registration_cancellations.router.js.map
