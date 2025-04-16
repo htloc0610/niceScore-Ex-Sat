@@ -1,6 +1,5 @@
 import Address from "../models/address.model"; // Adjust the import path as necessary
 import { logger } from "../config/logger";
-import { log } from "console";
 
 const addressService = {
   addAddress: async (addressData: {

@@ -1,19 +1,20 @@
 {
   "compilerOptions": {
+    "target": "es6",
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es6",
-    "noImplicitAny": true,
     "moduleResolution": "node",
+    "noImplicitAny": true,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*", "src/types/*"],
-      "src/*": ["node_modules/easy-template-x/src/*"]
-
-    }
+      "src/*": ["src/*"]
+    },
+    "types": ["node", "jest"]
   },
-  "include": ["./src/**/*"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
