@@ -14,7 +14,7 @@
     "postbuild": "rimraf dist/config dist/logs dist/public dist/views dist/exports && copyfiles -u 1 src/config/**/* src/logs/**/* src/public/**/* src/views/**/* src/exports/**/* dist/",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
