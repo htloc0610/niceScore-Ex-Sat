@@ -4,7 +4,8 @@ import path from "path";
 import ExcelJS from "exceljs";
 import studentService from "../services/student.service";
 import { logger } from "../config/logger";
-//import { TemplateHandler } from 'easy-template-x';
+import { TemplateHandler } from 'easy-template-x';
+const { convert } = require('docx2pdf-converter'); // npm package
 
 const exportController = {
   // Hàm export dữ liệu ra JSON
@@ -138,20 +139,45 @@ const exportController = {
   }*/
     
     exportGrade: async (req: Request, res: Response) => {
-        /*try {
+        try {
           const { id } = req.params;
     
           // Fetch grades and student details
-          const grades = await studentService.getStudentGrades(parseInt(id));
-          const student = await studentService.getStudentById(parseInt(id));
+          const rawGrades = (await studentService.getStudentGrades(parseInt(id)));
+          const grades = rawGrades.map((grade: any, index: number) => ({
+            idx: index + 1,
+            credits: grade.credits,
+            module_code: grade.module_code,
+            module_name: grade.module_name,
+            grade: parseFloat(grade.grade),
+            GPA: (parseFloat(grade.grade) *0.4).toFixed(2),
+          }));
+
+          const student = await studentService.getStudentById(parseInt(id)) as any;
           
-          console.log("Grade: ", grades, "End grade")
-    
-          // Prepare the data to be merged into the template
+          const safeGrades = Array.isArray(grades)
+          ? grades.filter(g => g && g.grade >= 5)
+          : [];
+
+          const total_credits = safeGrades.reduce((sum, g) => sum + (g.credits || 0), 0);
+
+          const average_grade = safeGrades.length
+          ? (safeGrades.reduce((sum, g) => sum + g.grade, 0) / safeGrades.length).toFixed(2)
+          : "N/A";
+
+          const average_gpa = total_credits
+          ? (safeGrades.reduce((sum, g) => sum + g.grade * g.credits*0.4, 0) / total_credits).toFixed(2)
+          : "N/A";
+
           const data = {
             student_name: student.full_name,
-            student_id: student.student_id,
-            program: student.program,
+            s_id: student.student_id,
+            s_birthday: student.date_of_birth,
+            course_name: student.course?.course_name,
+            program_name: student.program || "Không có",
+            total_credits: total_credits,
+            average_grade: average_grade,
+            average_gpa: average_gpa,
             grades,
           };
 
@@ -159,25 +185,25 @@ const exportController = {
           // Path to the Word template
           const templateFilePath = path.join(__dirname, '../templates/grade.docx');
           const templateFile = fs.readFileSync(templateFilePath);
-    
-          // Initialize TemplateHandler and process the template with data
           const handler = new TemplateHandler();
-          const doc = await handler.process(templateFile, data); // Ensure process returns a promise and is awaited
-    
-          // Send the generated document as a response
-          const buffer = await doc;  // Ensure you're correctly awaiting the promise for doc
-    
-          // Set headers for downloading the document
-          res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-          res.setHeader('Content-Disposition', 'attachment; filename=student_report.docx');
-          res.send(buffer);
-    
-        } catch (error) {
+          const doc = await handler.process(templateFile, data);
+          const docxPath = path.join(__dirname, `temp-${id}.docx`);
+          const pdfPath = path.join(__dirname, `temp-${id}.pdf`);
+
+          fs.writeFileSync(docxPath, doc);          
+          await convert(docxPath, pdfPath);
+          res.setHeader('Content-Type', 'application/pdf');
+          res.setHeader('Content-Disposition', `attachment; filename=${id}.pdf`);
+          const pdfBuffer = fs.readFileSync(pdfPath);
+          res.send(pdfBuffer);
+          if (fs.existsSync(docxPath)) fs.unlinkSync(docxPath);
+          if (fs.existsSync(pdfPath)) fs.unlinkSync(pdfPath);
+          } catch (error) {
           // Handle error and log it
           console.error("Error exporting grade:", error);
           logger.error("Error exporting grades: " + error.message);
           res.status(500).json({ message: "Error exporting grades", error: error.message });
-        }*/
+        }
       }
     };    
 

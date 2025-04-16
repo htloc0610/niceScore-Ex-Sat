@@ -20,7 +20,6 @@ const studentController = {
   addCourse: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
-      console.log(data.course_name, "data course name");
       const newCourse = await courseService.addCourse(data.course_name);
       logger.info("Course added successfully");
       res.status(201).send({ message: "Course added successfully", newCourse });
