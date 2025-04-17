@@ -893,3 +893,42 @@
 {"level":"info","message":"Fetched status list successfully","timestamp":"2025-04-16T21:16:52.055Z"}
 {"level":"info","message":"Fetched status list successfully","timestamp":"2025-04-16T21:16:52.857Z"}
 {"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-16T21:17:39.148Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 1","timestamp":"2025-04-17T10:32:34.737Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 21","timestamp":"2025-04-17T10:32:37.033Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 10","timestamp":"2025-04-17T10:32:38.553Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 120","timestamp":"2025-04-17T10:32:39.988Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 10","timestamp":"2025-04-17T10:32:42.811Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 21","timestamp":"2025-04-17T10:32:44.057Z"}
+{"level":"info","message":"Student with ID 1 found","timestamp":"2025-04-17T10:32:59.070Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-04-17T10:32:59.086Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-04-17T10:32:59.273Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-04-17T10:32:59.273Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:32:59.455Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-04-17T10:32:59.637Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-04-17T10:32:59.820Z"}
+{"level":"info","message":"Student with ID 1 updated successfully","timestamp":"2025-04-17T10:33:03.429Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-04-17T10:33:03.621Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-04-17T10:33:03.622Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:33:19.831Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-04-17T10:34:06.601Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:34:36.944Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:34:37.124Z"}
+{"level":"info","message":"Module has registered students","timestamp":"2025-04-17T10:34:41.541Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:34:49.068Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:34:49.251Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:37:40.583Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:37:56.987Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:37:57.054Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:38:04.786Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:38:04.802Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:38:17.593Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:38:17.721Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:38:17.915Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:38:18.485Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:38:22.482Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T10:38:22.483Z"}
+{"level":"info","message":"Added new module successfully","timestamp":"2025-04-17T10:38:28.912Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:38:29.172Z"}
+{"level":"info","message":"Module has no linked classes","timestamp":"2025-04-17T10:38:34.015Z"}
+{"level":"info","message":"Deleted module successfully","timestamp":"2025-04-17T10:38:34.215Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T10:38:34.543Z"}

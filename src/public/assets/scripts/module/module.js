@@ -250,7 +250,18 @@ function closeEditModuleModal() {
 }
 
 async function deleteModule(moduleId) {
-  if (!confirm("Bạn có chắc chắn muốn xóa môn học này?")) {
+  const result = await Swal.fire({
+    title: 'Bạn có chắc chắn?',
+    text: 'Hành động này sẽ xóa môn học khỏi danh sách!',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    confirmButtonText: 'Xóa',
+    cancelButtonText: 'Hủy'
+  });
+
+  if (!result.isConfirmed) {
     return;
   }
 
