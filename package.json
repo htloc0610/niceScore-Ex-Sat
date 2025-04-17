@@ -11,7 +11,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "build": "rimraf dist && tsc",
-    "postbuild": "rimraf dist/config dist/logs dist/public dist/views dist/exports && copyfiles -u 1 src/config/**/* src/logs/**/* src/public/**/* src/views/**/* src/exports/**/* dist/",
+    "postbuild": "rimraf dist/config dist/src/logs dist/src/public dist/src/views dist/src/exports && copyfiles -u 1 src/config/**/* src/logs/**/* src/public/**/* src/views/**/* src/exports/**/* dist/src/",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
     "test": "jest"
