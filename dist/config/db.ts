@@ -28,10 +28,10 @@ const sequelize = new Sequelize(
       idle: 10000, // Thời gian tối đa (ms) kết nối không sử dụng sẽ bị đóng
     },
     dialectOptions: {
-       ssl: {
+      ssl: {
          require: true,
       //   rejectUnauthorized: false, // Nếu cần kết nối với SSL
-       },
+      },
       //ssl: false,
     },
   }

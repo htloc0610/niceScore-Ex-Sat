@@ -278,89 +278,107 @@ async function cancel(registrationId, studentId) {
     }
   }
   
-  function editGrade(transcriptId, currentGrade) {
-    const overlay = document.createElement("div");
-    overlay.classList.add("fixed", "top-0", "left-0", "w-full", "h-full", "bg-gray-50", "bg-opacity-50");
-  
-    const modal = document.createElement("div");
-    modal.classList.add("fixed", "top-1/2", "left-1/2", "transform", "-translate-x-1/2", "-translate-y-1/2", "bg-white", "p-5", "shadow-lg", "rounded-lg");
-  
-    let form = document.createElement("form");
-    form.innerHTML = `
-      <h2 class="text-xl font-bold mb-4 mx-20">Cập nhật điểm</h2>
-      <label for="grade" class="block text-sm font-medium text-gray-700">Điểm số mới:</label>
-      <input type="text" id="grade" name="grade" required value="${currentGrade}"
-        class="mt-1 mb-4 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      <div class="mt-4 flex justify-end">
-        <button type="button" id="closeModal" class="ml-2 inline-flex justify-center py-2 px-4 text-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700">Đóng</button>
-        <button type="submit" class="ml-2 inline-flex justify-center py-2 px-4 text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700">Lưu</button>
-      </div>`;
-  
-    form.querySelector("#closeModal").addEventListener("click", () => document.body.removeChild(overlay));
-  
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const newGrade = form.grade.value;
-  
-      try {
-        const response = await fetch(`/api/transcript/${transcriptId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ grade: newGrade }),
-        });
-  
-        const data = await response.json();
-  
-        if (response.ok) {
-          // alert("Cập nhật điểm thành công!");
-          Swal.fire({
-            icon: 'success',
-            title: 'Thành công!',
-            text: 'Cập nhật điểm thành công!',
-            confirmButtonText: 'OK',
-            timer: 2000,
-            timerProgressBar: true,
-            showConfirmButton: false
-          });
-          document.body.removeChild(overlay);
+async function editGrade(studentId, transcriptId, grade) {
+  const overlay = document.createElement("div");
+    overlay.classList.add(
+        "fixed", "top-0", "left-0", "w-full","h-full", "bg-gray-50", "bg-opacity-50", "flex", "items-center", "justify-center"  
+    );
 
-          const updatedtranscript = data.updatedtranscript;
-  
-          const row = document.getElementById(`grade-${updatedtranscript.student_id}`);
-          if (row) {
-            row.textContent = updatedtranscript.grade;
-            row.className = `inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-              updatedtranscript.grade && parseFloat(updatedtranscript.grade) < 5
-                ? "bg-red-100 text-red-800"
-                : "bg-green-100 text-green-800"
-            }`;
-          }
-  
-        } else {
-          // alert(data.message || "Cập nhật thất bại.");
-          Swal.fire({
-            icon: 'error',
-            title: 'Lỗi!',
-            text: data.message || "Cập nhật thất bại.",
-            confirmButtonText: 'Đóng'
-          });
-        }
-      } catch (err) {
-        console.error("Error updating grade:", err);
-        // alert("Có lỗi xảy ra khi cập nhật điểm.");
-        Swal.fire({
-          icon: 'error',
-          title: 'Lỗi!',
-          text: 'Có lỗi xảy ra khi cập nhật điểm.',
-          confirmButtonText: 'Đóng'
+    const modal = document.createElement("div");
+    modal.classList.add(
+        "bg-white", "p-5", "shadow-lg", "rounded-lg", "max-w-md"
+    );
+
+    const form = document.createElement("form");
+    form.innerHTML = `
+      <h2 class="text-xl font-bold mb-4 mx-20">Chỉnh sửa điểm</h2>
+      <div class="grid gap-4">
+        <div>
+          <label for="grade" class="block text-sm font-medium text-gray-700">Số điểm:</label>
+          <input type="text" id="grade" name="grade" value="${grade}" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+      </div>
+      <div class="mt-4 flex justify-end">
+        <button type="button" id="closeModal" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Đóng</button>
+        <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Lưu</button>
+      </div>
+    `;
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let formData = new FormData(form);
+        let entityData = {};
+        formData.forEach((value, key) => {
+            entityData[key] = value;
         });
-      }
+        let transcript_id = parseInt(transcriptId, 10);
+        fetch(`/api/transcript/${transcript_id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(entityData)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message.includes("successfully")) {
+                    // alert(`Điểm đã được cập nhật!`);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: 'Điểm đã được cập nhật!',
+                        confirmButtonText: 'OK',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
+                    document.body.removeChild(overlay);
+                    const studentTableBody = document.getElementById("student-table-body");
+                    const row = [...studentTableBody.children].find(row => row.children[0].textContent == studentId);
+                            if (row) {
+                              row.children[3].innerHTML = 
+                              `<span class="inline-flex px-2 py-1 text-xs font-medium rounded-full 
+                                  ${data.updatedtranscript.grade != null 
+                                    ? data.updatedtranscript.grade >= 5 
+                                      ? "bg-green-100 text-green-800" 
+                                      : "bg-red-100 text-red-800" 
+                                    : "bg-gray-200 text-gray-700"}">
+                                  ${data.updatedtranscript.grade ?? "N/A"}
+                               </span>`;
+                            
+
+                                row.children[4].innerHTML =
+                                  `<button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="editGrade(${transcriptId},  ${grade})" >Sửa điểm
+                                  </button>`
+
+                            } else {
+                                alert("Chỉnh sửa thất bại.");
+                                }
+                } else {
+                    // alert(`Lỗi khi cập nhật ${config.name}.`);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: `Lỗi khi cập nhật điểm.`,
+                        confirmButtonText: 'Đóng'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error updating entity:", error);
+                // alert("Đã xảy ra lỗi khi cập nhật.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Đã xảy ra lỗi khi cập nhật điểm.',
+                    confirmButtonText: 'Đóng'
+                });
+            });
     });
-  
+
+    form.querySelector("#closeModal").addEventListener("click", function () {
+        document.body.removeChild(overlay);
+    });
+
     modal.appendChild(form);
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-  }
-  
+}
