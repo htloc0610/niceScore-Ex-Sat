@@ -459,10 +459,7 @@ const studentService = {
     });
 
     if (!grades || grades.length === 0) {
-      throw new Error("No grades found for the student");
-    }
-
-    // Map the result to return the desired format
+    
     const formattedGrades = grades.map((item) => {
       const plainItem = item.get({ plain: true }); // Convert Sequelize instance to plain object
       console.log(plainItem )
@@ -474,9 +471,10 @@ const studentService = {
         credits: plainItem.class.module.credits, // Accessing credits from the related Module model
       };
     });
-
-    console.log(formattedGrades); // You can log the formatted result if needed
+    
     return formattedGrades; // Return the formatted grades array
+    };
+    return grades;
   } catch (error) {
     logger.error("Error fetching student grades: " + error.message);
     console.log("Error fetching student grades:", error);

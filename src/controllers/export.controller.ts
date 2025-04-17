@@ -151,12 +151,14 @@ const exportController = {
             module_name: grade.module_name,
             grade: parseFloat(grade.grade),
             GPA: (parseFloat(grade.grade) *0.4).toFixed(2),
+            classPass: parseFloat(grade.grade) >= 5 ? true : false,
+            classNotPass: parseFloat(grade.grade) >= 5 ? false : true,
           }));
 
           const student = await studentService.getStudentById(parseInt(id)) as any;
           
           const safeGrades = Array.isArray(grades)
-          ? grades.filter(g => g && g.grade >= 5)
+          ? grades.filter(g => g && g.classPass == true)
           : [];
 
           const total_credits = safeGrades.reduce((sum, g) => sum + (g.credits || 0), 0);
