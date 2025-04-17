@@ -265,7 +265,7 @@ const classRegistationService = {
                                     as: "transcripts",
                                     where: { class_id: classId }, // only get the grade for this class
                                     required: false, // allows students with no grade yet
-                                    attributes: ["grade", "transcript_id"],
+                                    attributes: ["transcript_id", "grade"],
                                 },
                             ],
                         },
@@ -277,10 +277,11 @@ const classRegistationService = {
                 });
                 // Return plain objects
                 return registrations.map((reg) => {
-                    var _a, _b, _c;
+                    var _a, _b, _c, _d, _e, _f;
                     let plain = reg.toJSON();
-                    const grade = (_c = (_b = (_a = plain.student.transcripts) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.grade) !== null && _c !== void 0 ? _c : null; // Access the first grade
-                    return Object.assign(Object.assign({}, plain), { student: Object.assign(Object.assign({}, plain.student), { grade: grade }) });
+                    const grade = (_c = (_b = (_a = plain.student.transcripts) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.grade) !== null && _c !== void 0 ? _c : null;
+                    const transcript_id = (_f = (_e = (_d = plain.student.transcripts) === null || _d === void 0 ? void 0 : _d[0]) === null || _e === void 0 ? void 0 : _e.transcript_id) !== null && _f !== void 0 ? _f : null;
+                    return Object.assign(Object.assign({}, plain), { student: Object.assign(Object.assign({}, plain.student), { grade: grade, transcript_id: transcript_id }) });
                 });
             }
             catch (error) {

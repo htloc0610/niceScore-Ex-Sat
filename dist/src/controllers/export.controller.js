@@ -17,7 +17,8 @@ const path_1 = __importDefault(require("path"));
 const exceljs_1 = __importDefault(require("exceljs"));
 const student_service_1 = __importDefault(require("../services/student.service"));
 const logger_1 = require("../config/logger");
-//import { TemplateHandler } from 'easy-template-x';
+const easy_template_x_1 = require("easy-template-x");
+const { convert } = require('docx2pdf-converter'); // npm package
 const exportController = {
     // Hàm export dữ liệu ra JSON
     exportToJson: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -146,46 +147,65 @@ const exportController = {
       }
     }*/
     exportGrade: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        /*try {
-          const { id } = req.params;
-    
-          // Fetch grades and student details
-          const grades = await studentService.getStudentGrades(parseInt(id));
-          const student = await studentService.getStudentById(parseInt(id));
-          
-          console.log("Grade: ", grades, "End grade")
-    
-          // Prepare the data to be merged into the template
-          const data = {
-            student_name: student.full_name,
-            student_id: student.student_id,
-            program: student.program,
-            grades,
-          };
-
-    
-          // Path to the Word template
-          const templateFilePath = path.join(__dirname, '../templates/grade.docx');
-          const templateFile = fs.readFileSync(templateFilePath);
-    
-          // Initialize TemplateHandler and process the template with data
-          const handler = new TemplateHandler();
-          const doc = await handler.process(templateFile, data); // Ensure process returns a promise and is awaited
-    
-          // Send the generated document as a response
-          const buffer = await doc;  // Ensure you're correctly awaiting the promise for doc
-    
-          // Set headers for downloading the document
-          res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-          res.setHeader('Content-Disposition', 'attachment; filename=student_report.docx');
-          res.send(buffer);
-    
-        } catch (error) {
-          // Handle error and log it
-          console.error("Error exporting grade:", error);
-          logger.error("Error exporting grades: " + error.message);
-          res.status(500).json({ message: "Error exporting grades", error: error.message });
-        }*/
+        var _a;
+        try {
+            const { id } = req.params;
+            // Fetch grades and student details
+            const rawGrades = (yield student_service_1.default.getStudentGrades(parseInt(id)));
+            const grades = rawGrades.map((grade, index) => ({
+                idx: index + 1,
+                credits: grade.credits,
+                module_code: grade.module_code,
+                module_name: grade.module_name,
+                grade: parseFloat(grade.grade),
+                GPA: (parseFloat(grade.grade) * 0.4).toFixed(2),
+            }));
+            const student = yield student_service_1.default.getStudentById(parseInt(id));
+            const safeGrades = Array.isArray(grades)
+                ? grades.filter(g => g && g.grade >= 5)
+                : [];
+            const total_credits = safeGrades.reduce((sum, g) => sum + (g.credits || 0), 0);
+            const average_grade = safeGrades.length
+                ? (safeGrades.reduce((sum, g) => sum + g.grade, 0) / safeGrades.length).toFixed(2)
+                : "N/A";
+            const average_gpa = total_credits
+                ? (safeGrades.reduce((sum, g) => sum + g.grade * g.credits * 0.4, 0) / total_credits).toFixed(2)
+                : "N/A";
+            const data = {
+                student_name: student.full_name,
+                s_id: student.student_id,
+                s_birthday: student.date_of_birth,
+                course_name: (_a = student.course) === null || _a === void 0 ? void 0 : _a.course_name,
+                program_name: student.program || "Không có",
+                total_credits: total_credits,
+                average_grade: average_grade,
+                average_gpa: average_gpa,
+                grades,
+            };
+            // Path to the Word template
+            const templateFilePath = path_1.default.join(__dirname, '../templates/grade.docx');
+            const templateFile = fs_1.default.readFileSync(templateFilePath);
+            const handler = new easy_template_x_1.TemplateHandler();
+            const doc = yield handler.process(templateFile, data);
+            const docxPath = path_1.default.join(__dirname, `temp-${id}.docx`);
+            const pdfPath = path_1.default.join(__dirname, `temp-${id}.pdf`);
+            fs_1.default.writeFileSync(docxPath, doc);
+            yield convert(docxPath, pdfPath);
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', `attachment; filename=${id}.pdf`);
+            const pdfBuffer = fs_1.default.readFileSync(pdfPath);
+            res.send(pdfBuffer);
+            if (fs_1.default.existsSync(docxPath))
+                fs_1.default.unlinkSync(docxPath);
+            if (fs_1.default.existsSync(pdfPath))
+                fs_1.default.unlinkSync(pdfPath);
+        }
+        catch (error) {
+            // Handle error and log it
+            console.error("Error exporting grade:", error);
+            logger_1.logger.error("Error exporting grades: " + error.message);
+            res.status(500).json({ message: "Error exporting grades", error: error.message });
+        }
     })
 };
 exports.default = exportController;

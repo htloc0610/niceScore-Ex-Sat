@@ -52,7 +52,6 @@ const statusController = {
     addConfiguration: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
-            console.log("data controller", data);
             const newStatus = yield configurations_service_1.default.addConfiguration(data);
             logger_1.logger.info("Status added successfully");
             res.status(201).send({ message: "Status added successfully", newStatus });

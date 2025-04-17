@@ -445,7 +445,7 @@ const studentService = {
                     console.log(plainItem);
                     return {
                         grade: plainItem.grade,
-                        //class_name: plainItem.class.class_name, // Accessing class_name from the related Class model
+                        transcript_id: plainItem.transcript_id, // Accessing class_name from the related Class model
                         module_name: plainItem.class.module.module_name, // Accessing module_name from the related Module model
                         module_code: plainItem.class.module.module_code, // Accessing module_code from the related Module model
                         credits: plainItem.class.module.credits, // Accessing credits from the related Module model

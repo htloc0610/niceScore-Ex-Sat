@@ -33,7 +33,6 @@ const studentController = {
     addCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
-            console.log(data.course_name, "data course name");
             const newCourse = yield course_service_1.default.addCourse(data.course_name);
             logger_1.logger.info("Course added successfully");
             res.status(201).send({ message: "Course added successfully", newCourse });
