@@ -116,7 +116,12 @@ function RefreshTable(id) {
           </span>
         </td>
         <td class="px-2 py-3 text-sm">
+          <button onclick="fetchCancellationData(${student.student_id})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded">
+                          Lịch sử
+                      </button>
           <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="window.location.href='/${student.student_id}'">Chi tiết</button>
+          <button class="p-1 text-sm font-medium leading-5 text-white bg-purple-600 rounded-md hover:bg-purple-700"
+                      onclick="downloadAndPrint('${student.student_id})">In bảng điểm</button>
           <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="deleteStudent('${student.student_id}')">Xóa</button>
         </td>
       `;

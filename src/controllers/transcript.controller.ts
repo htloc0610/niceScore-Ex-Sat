@@ -6,8 +6,9 @@ const transcriptController = {
   addTranscript: async (req: Request, res: Response): Promise<void> => {
     try {
       const newTranscriptData = req.body;
-      if (!newTranscriptData.grade || isNaN(newTranscriptData.grade)) {
-          res.status(400).send({ message: "Invalid grade value" });
+      if (!newTranscriptData.grade || isNaN(newTranscriptData.grade) || newTranscriptData.grade < 0 || newTranscriptData.grade > 10) {
+        res.status(400).send({ message: "Điểm phải trong khoảng từ 0 đến 10!" });
+        return;
     }
 
     // Parse and format the grade to fit DECIMAL(4, 2)
@@ -32,7 +33,11 @@ const transcriptController = {
     try {
       const transcript_id = req.params.id;
       const updatedData = req.body;
-
+      if (!updatedData.grade || isNaN(updatedData.grade) || updatedData.grade < 0 || updatedData.grade > 10) {
+        res.status(400).send({ message: "Điểm phải trong khoảng từ 0 đến 10!" });
+        return;
+      }
+      // Parse and format the grade to fit DECIMAL(4, 2)
       const updatedtranscript = await transcriptService.updateTranscript(parseInt(transcript_id), updatedData);
       if (!updatedtranscript) {
         res

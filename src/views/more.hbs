@@ -92,16 +92,6 @@
                     <span class="ml-4">Niên khóa</span>
                   </button>
                 </div>
-                <div class="relative px-6 py-3">
-                  <button onclick='changeTo("Module")'
-                    class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M12 20H6a2 2 0 01-2-2V6a2 2 0 012-2h6m0 0h6a2 2 0 012 2v12a2 2 0 01-2 2h-6m0-16v16" />
-                    </svg>
-                    <span class="ml-4">Khóa học</span>
-                  </button>
-                </div>
               </ul>
             </div>
           </aside>
@@ -213,67 +203,6 @@
                   onclick='addMore("course")'>Thêm Khóa</button>
               </div>
             </div>
-
-              <!-- Module table -->
-            <div id="module_div" class="p-6 bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 mx-6 hidden">
-              <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Thông tin Khóa học</h2>
-              <table
-                class="min-w-full mt-4 bg-white border border-gray-200 rounded-lg dark:bg-gray-800 dark:border-gray-700">
-                <thead>
-                  <tr>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">ID</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Mã khóa học</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tên khóa học</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Số tín chỉ</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Khoa phụ trách</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Môn tiên quyết</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Tình trạng</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Mô tả</th>
-                    <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
-
-                  </tr>
-                </thead>
-                <tbody id="module-table-body" class="text-gray-600 dark:text-gray-400">
-                  {{#each modules}}
-                  <tr>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.module_id}}</td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.module_code}}</td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.module_name}}</td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.credits}}</td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.faculty.name}}</td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                      {{prerequisiteDisplay this.prerequisite}}
-                    </td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                      <span class="{{isActiveClass this.is_active}}">
-                        {{isActiveText this.is_active}}
-                      </span>
-                    </td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">{{this.description}}</td>
-                    <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                      <button
-                        class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-                        onclick='editModule({{this.module_id}})'>
-                        Chỉnh sửa
-                      </button>
-                      {{#ifEqual this.is_active true}}
-                        <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-red"
-                          onclick='deleteModule({{this.module_id}})'>
-                          Ngừng hoạt động
-                        </button>
-                      {{/ifEqual}}
-                    </td>
-                  </tr>
-                  {{/each}}
-                </tbody>
-              </table>
-              <div class="flex justify-end pt-4 mt-4">
-                <button
-                  class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
-                  onclick="addModule()">Thêm Khóa học</button>
-              </div>
-
-            </div>
           </div>
         </div>
       </main>
@@ -283,14 +212,11 @@
     const facultyDiv = document.getElementById("faculty_div");
     const statusDiv = document.getElementById("status_div");
     const courseDiv = document.getElementById("course_div");
-    const moduleDiv = document.getElementById("module_div");
 
     function changeTo(name) {
       facultyDiv.classList.add("hidden");
       statusDiv.classList.add("hidden");
       courseDiv.classList.add("hidden");      
-      moduleDiv.classList.add("hidden");
-
 
       switch (name) {
         case "Faculty":
@@ -302,14 +228,9 @@
         case "Course":
           courseDiv.classList.remove("hidden");
           break;
-        default:
-          moduleDiv.classList.remove("hidden");
       }
     }
   </script>
-  <script src="./assets/scripts/more/edit_module.js"></script>
-  <script src="./assets/scripts/more/delete_module.js"></script>
-  <script src="./assets/scripts/more/add_module.js"></script>
   <script src="./assets/scripts/more/edit_more.js"></script>
   <script src="./assets/scripts/more/add_more.js"></script>
 

@@ -150,3 +150,10 @@
 {"level":"error","message":"Error updating address: Address not found","timestamp":"2025-04-16T21:06:40.864Z"}
 {"level":"error","message":"Error updating address: Update failed","timestamp":"2025-04-16T21:06:40.870Z"}
 >>>>>>> dev
+{"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-04-17T15:49:47.197Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-04-17T15:49:47.210Z"}
+{"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-04-17T15:50:03.787Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-04-17T15:50:03.788Z"}
+{"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-04-17T15:50:12.162Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-04-17T15:50:12.163Z"}
+{"level":"error","message":"Error updating transcript: Validation error: Invalid validator function: validate","timestamp":"2025-04-17T16:11:00.593Z"}
