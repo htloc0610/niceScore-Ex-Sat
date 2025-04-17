@@ -146,7 +146,17 @@ function editStudent(id) {
           .then((response) => response.json())
           .then((data) => {
             if (data.message === "Student updated successfully") {
-              alert("Cập nhật sinh viên thành công! ");
+              // alert("Cập nhật sinh viên thành công! ");
+              Swal.fire({
+                icon: 'success',
+                title: 'Thành công!',
+                text: 'Cập nhật sinh viên thành công!',
+                confirmButtonText: 'OK',
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false
+              });
+
               const tableBody = document.getElementById("student-table-body");
               const row = tableBody.children[studentIndex];
               
@@ -211,12 +221,24 @@ function editStudent(id) {
     
               
             } else {
-              alert("Đã xảy ra lỗi khi chỉnh sinh viên.");
+              // alert("Đã xảy ra lỗi khi chỉnh sinh viên.");
+              Swal.fire({
+                icon: 'error',
+                title: 'Lỗi!',
+                text: data.message,
+                confirmButtonText: 'Đóng'
+              });
             }
           })
           .catch((error) => {
             console.error("Error updating student:", error);
-            alert("An error occurred while updating the student.");
+            // alert("An error occurred while updating the student.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Lỗi!',
+              text: 'Đã xảy ra lỗi khi cập nhật sinh viên.',
+              confirmButtonText: 'Đóng'
+            });
           });
 
         closeModal();  // Close the modal after submission

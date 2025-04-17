@@ -56,12 +56,27 @@ document.addEventListener("DOMContentLoaded", () => {
                             return response.json();
                         })
                         .then(() => {
-                            alert("Configuration updated successfully!");
+                            // alert("Configuration updated successfully!");
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: 'Cập nhật cấu hình thành công!',
+                                confirmButtonText: 'OK',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                showConfirmButton: false
+                            });
                             row.querySelector("td:nth-child(2)").textContent = newValue;
                         })
                         .catch((error) => {
                             console.error(error);
-                            alert("An error occurred while updating the configuration.");
+                            // alert("An error occurred while updating the configuration.");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: 'Đã xảy ra lỗi: ' + error.message,
+                                confirmButtonText: 'Đóng'
+                            });
                         });
                 }
                 document.body.removeChild(overlay);

@@ -45,39 +45,74 @@ function addGrade(studentId, classId) {
         };
     
         // Send data to the server
-        fetch(`/api/transcript`, {
+        fetch("/api/transcript", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(entityData),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.message.includes("successfully")) {
-                    alert(`Điểm đã được thêm!`);
-                    document.body.removeChild(overlay);
-                
-                    const newData = data.transcript;
-                    const tableBody = document.getElementById("student-table-body");
-                    const row = [...tableBody.children].find(row => row.children[0].textContent == studentId);
-                            if (row) {
-                                row.children[2].innerHTML = 
-                                    `<span class="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-gray-200 text-gray-700">
-                                    ${transcript.grade}
-                              </span>`
-                            } else {
-                                alert("Chỉnh sửa thất bại.");
-                                }
-                    tableBody.appendChild(row);
-                } else {
-                  alert(`Đã xảy ra lỗi khi thêm điểm.`);
-                }
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Server response:", data);
+        
+            // Kiểm tra phản hồi thành công và có transcript mới
+            if (data.message.includes("successfully") && data.createdtranscript) {
+              Swal.fire({
+                icon: "success",
+                title: "Thành công!",
+                text: "Thêm điểm thành công!",
+                timer: 2000,
+                timerProgressBar: true,
+                showConfirmButton: false,
+              });
+        
+              // Xóa overlay sau khi thêm thành công
+              document.body.removeChild(overlay);
+        
+              const newData = data.createdtranscript;
+              const tableBody = document.getElementById("student-table-body");
+        
+              // Tìm dòng sinh viên trong bảng để cập nhật
+              const row = [...tableBody.children].find(
+                (row) => row.children[0].textContent == newData.student_id.toString()
+              );
+        
+              if (row) {
+                row.children[3].innerHTML = `
+                  <span class="inline-flex px-2 py-1 text-xs font-medium rounded-full bg-gray-200 text-gray-700">
+                    ${newData.grade}
+                  </span>
+                `;
+              } else {
+                // Không tìm thấy sinh viên trong bảng
+                Swal.fire({
+                  icon: "error",
+                  title: "Lỗi!",
+                  text: "Không tìm thấy sinh viên để cập nhật điểm.",
+                  confirmButtonText: "Đóng",
+                });
+              }
+            } else {
+              // Phản hồi không hợp lệ
+              Swal.fire({
+                icon: "error",
+                title: "Lỗi!",
+                text: "Đã xảy ra lỗi khi thêm điểm.",
+                confirmButtonText: "Đóng",
+              });
+            }
           })
           .catch((error) => {
-            console.error(`Error adding grade:`, error);
-            alert(`Đã xảy ra lỗi khi thêm điểm.`);
+            console.error("Error adding grade:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Lỗi!",
+              text: "Đã xảy ra lỗi khi thêm điểm: " + error.message,
+              confirmButtonText: "Đóng",
+            });
           });
+        
       });
     
       modal.appendChild(form);
@@ -112,7 +147,17 @@ async function deleteStudent(studentId) {
 
     if (response.ok) {
       const data = await response.json();
-      alert(data.message);
+      // alert(data.message);
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: 'Thêm sinh viên thành công!' + data.message,
+        confirmButtonText: 'OK',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+      
       const tableBody = document.getElementById("student-table-body");
       const row = tableBody.children[studentIndex];
       tableBody.removeChild(row);
@@ -126,11 +171,23 @@ async function deleteStudent(studentId) {
     } else {
       const errorData = await response.json();
       console.error(errorData.message);
-      alert(errorData.message);
+      // alert(errorData.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: errorData.message,
+        confirmButtonText: 'Đóng'
+      });
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('Đã xảy ra lỗi khi xóa sinh viên.');
+    // alert('Đã xảy ra lỗi khi xóa sinh viên.');
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Đã xảy ra lỗi khi xóa sinh viên.',
+      confirmButtonText: 'Đóng'
+    });
   }
 }
 
@@ -177,7 +234,16 @@ async function cancel(registrationId, studentId) {
   
       if (response.ok) {
         const data = await response.json();
-        alert(data.message); // Show success message
+        // alert(data.message); // Show success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Thành công!',
+          text: data.message,
+          confirmButtonText: 'OK',
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        });
         
         // Find the row in the table and remove it
         const tableBody = document.getElementById("student-table-body");
@@ -192,11 +258,23 @@ async function cancel(registrationId, studentId) {
       } else {
         const errorData = await response.json();
         console.error(errorData.message);
-        alert(errorData.message); // Show error message
+        // alert(errorData.message); // Show error message
+        Swal.fire({
+          icon: 'error',
+          title: 'Lỗi!',
+          text: errorData.message,
+          confirmButtonText: 'Đóng'
+        });
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Đã xảy ra lỗi khi xóa sinh viên.'); // Show error alert if something goes wrong
+      // alert('Đã xảy ra lỗi khi xóa sinh viên.'); // Show error alert if something goes wrong
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Đã xảy ra lỗi khi xóa sinh viên.',
+        confirmButtonText: 'Đóng'
+      });
     }
   }
   
@@ -236,7 +314,16 @@ async function cancel(registrationId, studentId) {
         const data = await response.json();
   
         if (response.ok) {
-          alert("Cập nhật điểm thành công!");
+          // alert("Cập nhật điểm thành công!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Thành công!',
+            text: 'Cập nhật điểm thành công!',
+            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+          });
           document.body.removeChild(overlay);
 
           const updatedtranscript = data.updatedtranscript;
@@ -252,11 +339,23 @@ async function cancel(registrationId, studentId) {
           }
   
         } else {
-          alert(data.message || "Cập nhật thất bại.");
+          // alert(data.message || "Cập nhật thất bại.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: data.message || "Cập nhật thất bại.",
+            confirmButtonText: 'Đóng'
+          });
         }
       } catch (err) {
         console.error("Error updating grade:", err);
-        alert("Có lỗi xảy ra khi cập nhật điểm.");
+        // alert("Có lỗi xảy ra khi cập nhật điểm.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Lỗi!',
+          text: 'Có lỗi xảy ra khi cập nhật điểm.',
+          confirmButtonText: 'Đóng'
+        });
       }
     });
   

@@ -795,3 +795,45 @@
 {"level":"info","message":"Successfully fetched cancellation details for studentId: 120","timestamp":"2025-04-15T17:33:55.902Z"}
 {"level":"info","message":"Successfully fetched cancellation details for studentId: 120","timestamp":"2025-04-15T17:33:56.082Z"}
 {"level":"info","message":"Successfully fetched cancellation details for studentId: 130","timestamp":"2025-04-15T17:33:58.063Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 1","timestamp":"2025-04-15T17:36:30.120Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 120","timestamp":"2025-04-15T17:36:32.119Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 21","timestamp":"2025-04-15T17:36:34.594Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-15T17:36:45.953Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-15T17:36:56.092Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-15T17:36:56.266Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T08:57:55.956Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T08:58:08.902Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T08:59:27.721Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-04-17T09:00:02.499Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:00:44.087Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:00:57.927Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:01:19.698Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:01:22.225Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:01:41.299Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:02:18.974Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:03:30.545Z"}
+{"level":"info","message":"Created new class successfully","timestamp":"2025-04-17T09:04:04.862Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-17T09:06:47.879Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:07:02.970Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T09:07:03.157Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T09:10:48.400Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-17T09:11:13.194Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T09:11:35.519Z"}
+{"level":"error","message":"Error creating new transcript: Validation error","timestamp":"2025-04-17T09:11:41.399Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T09:18:14.068Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-17T09:18:49.592Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T09:18:55.877Z"}
+{"level":"error","message":"Error creating new registration: insert or update on table \"class_registrations\" violates foreign key constraint \"class_registrations_student_id_fkey\"","timestamp":"2025-04-17T09:19:51.760Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-17T09:20:02.567Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-17T09:20:25.023Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T09:20:32.053Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T09:20:45.224Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-04-17T09:21:13.480Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-04-17T09:21:19.005Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T09:44:09.688Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:44:09.870Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:44:17.955Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:44:18.362Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-04-17T09:44:20.610Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:44:20.611Z"}
+{"level":"info","message":"Successfully fetched modules list","timestamp":"2025-04-17T09:44:22.927Z"}

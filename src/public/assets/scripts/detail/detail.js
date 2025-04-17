@@ -222,15 +222,36 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 console.log('Student data updated successfully');
                 fetchStudentStatus(updatedData.status_id);
-                alert('Updated student data successfully');
+                // alert('Updated student data successfully');
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công!',
+                    text: 'Cập nhật thông tin sinh viên thành công!',
+                    confirmButtonText: 'OK',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
             } else {
-                alert(responseData.message);
+                // alert(responseData.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: responseData.message,
+                    confirmButtonText: 'Đóng'
+                });
                 console.error('Failed to update student data');
                 fetchAndPopulateData();
             }
         } catch (error) {
             console.error('Error updating student data:', error);
-            alert(error.message)
+            // alert(error.message)
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi!',
+                text: error.message,
+                confirmButtonText: 'Đóng'
+            });
         }
     }
 

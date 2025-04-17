@@ -100,15 +100,38 @@ document.getElementById("add-class-form")?.addEventListener("submit", async (e) 
     });
     const data = await response.json();
     if (data.message?.includes("success") || response.ok) {
-      alert("Thêm lớp học thành công!");
+      // alert("Thêm lớp học thành công!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: 'Thêm lớp học thành công!',
+        confirmButtonText: 'OK',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
+
+      
       document.getElementById("add-class-modal").classList.add("hidden");
       loadClasses(selectedModuleId);
     } else {
-      alert("Thêm lớp học thất bại: " + (data.message || "Lỗi không xác định"));
+      // alert("Thêm lớp học thất bại: " + (data.message || "Lỗi không xác định"));
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Thêm lớp học thất bại: ' + (data.message || "Lỗi không xác định"),
+        confirmButtonText: 'Đóng'
+      });
     }
   } catch (error) {
     console.error("Error adding class:", error);
-    alert("Lỗi kết nối server.");
+    // alert("Lỗi kết nối server.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Lỗi kết nối server.',
+      confirmButtonText: 'Đóng'
+    });
   }
 });
 
@@ -133,7 +156,13 @@ async function editClass(classId) {
     document.getElementById("edit-class-modal").classList.remove("hidden");
   } catch (error) {
     console.error("Error fetching class:", error);
-    alert("Lỗi tải dữ liệu lớp học.");
+    // alert("Lỗi tải dữ liệu lớp học.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Lỗi tải dữ liệu lớp học.',
+      confirmButtonText: 'Đóng'
+    });
   }
 }
 
@@ -159,15 +188,37 @@ document.getElementById("edit-class-form")?.addEventListener("submit", async (e)
     });
     const data = await response.json();
     if (data.message?.includes("success") || response.ok) {
-      alert("Chỉnh sửa lớp học thành công!");
+      // alert("Chỉnh sửa lớp học thành công!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: 'Chỉnh sửa lớp học thành công!',
+        confirmButtonText: 'OK',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
       document.getElementById("edit-class-modal").classList.add("hidden");
       loadClasses(selectedModuleId);
     } else {
-      alert("Chỉnh sửa lớp học thất bại: " + (data.message || "Lỗi không xác định"));
+      // alert("Chỉnh sửa lớp học thất bại: " + (data.message || "Lỗi không xác định"));
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Chỉnh sửa lớp học thất bại: ' + (data.message || "Lỗi không xác định"),
+        confirmButtonText: 'Đóng'
+      });
+
     }
   } catch (error) {
     console.error("Error editing class:", error);
-    alert("Lỗi kết nối server.");
+    // alert("Lỗi kết nối server.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Lỗi kết nối server.',
+      confirmButtonText: 'Đóng'
+    });
   }
 });
 

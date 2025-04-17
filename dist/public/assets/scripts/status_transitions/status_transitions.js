@@ -130,7 +130,16 @@ document.addEventListener("DOMContentLoaded", () => {
                                     .then((newConfig) => {
                                         console.log(newConfig);
                                         
-                                        alert("Status transition added successfully!");
+                                        // alert("Status transition added successfully!");
+                                        Swal.fire({
+                                            icon: 'success',
+                                            title: 'Thành công!',
+                                            text: 'Thêm trạng thái thành công!',
+                                            confirmButtonText: 'OK',
+                                            timer: 2000,
+                                            timerProgressBar: true,
+                                            showConfirmButton: false
+                                        });
                                         const row = document.createElement("tr");
                                         row.innerHTML = `
                                             <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${status.find(option => option.status_id == newConfig.current_status)?.name || newConfig.current_status}</td>
@@ -148,7 +157,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                     })
                                     .catch((error) => {
                                         console.error(error);
-                                        alert("An error occurred while adding the status transition.");
+                                        // alert("An error occurred while adding the status transition.");
+                                        Swal.fire({
+                                            icon: 'error',
+                                            title: 'Lỗi!',
+                                            text: 'Đã xảy ra lỗi: ' + error.message,
+                                            confirmButtonText: 'Đóng'
+                                        });
                                     });
                             }
                             document.body.removeChild(overlay);
@@ -194,11 +209,26 @@ document.addEventListener("DOMContentLoaded", () => {
                                     if (!response.ok) {
                                         throw new Error("Failed to delete item");
                                     }
-                                    alert("Item deleted successfully");
+                                    // alert("Item deleted successfully");
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Thành công!',
+                                        text: 'Xóa trạng thái thành công!',
+                                        confirmButtonText: 'OK',
+                                        timer: 2000,
+                                        timerProgressBar: true,
+                                        showConfirmButton: false
+                                    });
                                     event.target.closest("tr").remove();
                                 } catch (error) {
                                     console.error("Error deleting item:", error);
-                                    alert("Failed to delete item");
+                                    // alert("Failed to delete item");
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Lỗi!',
+                                        text: 'Đã xảy ra lỗi khi xóa trạng thái.',
+                                        confirmButtonText: 'Đóng'
+                                    });
                                 }
                             }
                         });
@@ -306,7 +336,16 @@ document.addEventListener("DOMContentLoaded", () => {
                                             return response.json();
                                         })
                                         .then(() => {
-                                            alert("Status transition updated successfully!");
+                                            // alert("Status transition updated successfully!");
+                                            Swal.fire({
+                                                icon: 'success',
+                                                title: 'Thành công!',
+                                                text: 'Cập nhật trạng thái thành công!',
+                                                confirmButtonText: 'OK',
+                                                timer: 2000,
+                                                timerProgressBar: true,
+                                                showConfirmButton: false
+                                            });
                                             const newCurrentStatusName = status.find(option => option.status_id == newCurrentStatus)?.name || newCurrentStatus;
                                             const newNextStatusName = status.find(option => option.status_id == newNextStatus)?.name || newNextStatus;
 
@@ -315,7 +354,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                         })
                                         .catch((error) => {
                                             console.error(error);
-                                            alert("An error occurred while updating the status transition.");
+                                            // alert("An error occurred while updating the status transition.");
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Lỗi!',
+                                                text: 'Đã xảy ra lỗi: ' + error.message,
+                                                confirmButtonText: 'Đóng'
+                                            });
                                         });
                                 }
                                 document.body.removeChild(overlay);

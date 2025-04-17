@@ -116,10 +116,27 @@ addStudentForm.addEventListener("submit", async (e) => {
 
     closeAddStudentModal();
     loadStudents(classId);
-    alert("Đã thêm học sinh thành công!");
+    // alert("Đã thêm học sinh thành công!");
+    Swal.fire({
+      icon: 'success',
+      title: 'Thành công!',
+      text: 'Thêm sinh viên thành công!',
+      confirmButtonText: 'OK',
+      timer: 2000,
+      timerProgressBar: true,
+      showConfirmButton: false
+    });
+    
   } catch (error) {
     console.error("Error registering student:", error);
-    alert("Có lỗi khi thêm học sinh: " + error.message);
+    // alert("Có lỗi khi thêm sinh viên: " + error.message);
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Đã xảy ra lỗi: ' + error.message,
+      confirmButtonText: 'Đóng'
+    });
+    
   }
 });
 

@@ -65,7 +65,16 @@ function openModal(entityName, entityType, entityIdField, entityNameField, apiEn
       .then((response) => response.json())
       .then((data) => {
         if (data.message.includes("successfully")) {
-          alert(`${entityName} đã được thêm!`);
+          // alert(`${entityName} đã được thêm!`);
+          Swal.fire({
+            icon: 'success',
+            title: 'Thành công!',
+            text: `${entityName} đã được thêm!`,
+            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+          });
           document.body.removeChild(overlay);
 
           const newData = data[`new${entityType}`];
@@ -85,12 +94,24 @@ function openModal(entityName, entityType, entityIdField, entityNameField, apiEn
 
           tableBody.appendChild(row);
         } else {
-          alert(`Đã xảy ra lỗi khi thêm ${entityName}.`);
+          // alert(`Đã xảy ra lỗi khi thêm ${entityName}.`);
+          Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: `Đã xảy ra lỗi khi thêm ${entityName}.`,
+            confirmButtonText: 'Đóng'
+          });
         }
       })
       .catch((error) => {
         console.error(`Error adding ${entityType}:`, error);
-        alert(`Đã xảy ra lỗi khi thêm ${entityName}.`);
+        // alert(`Đã xảy ra lỗi khi thêm ${entityName}.`);
+        Swal.fire({
+          icon: 'error',
+          title: 'Lỗi!',
+          text: `Đã xảy ra lỗi khi thêm ${entityName}.`,
+          confirmButtonText: 'Đóng'
+        });
       });
   });
 

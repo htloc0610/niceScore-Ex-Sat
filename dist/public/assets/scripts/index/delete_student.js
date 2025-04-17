@@ -26,7 +26,16 @@ async function deleteStudent(studentId) {
 
     if (response.ok) {
       const data = await response.json();
-      alert(data.message);
+      // alert(data.message);
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: data.message,
+        confirmButtonText: 'OK',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
       const tableBody = document.getElementById("student-table-body");
       const row = tableBody.children[studentIndex];
       tableBody.removeChild(row);
@@ -40,10 +49,22 @@ async function deleteStudent(studentId) {
     } else {
       const errorData = await response.json();
       console.error(errorData.message);
-      alert(errorData.message);
+      // alert(errorData.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: errorData.message,
+        confirmButtonText: 'Đóng'
+      });
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('Đã xảy ra lỗi khi xóa sinh viên.');
+    // alert('Đã xảy ra lỗi khi xóa sinh viên.');
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Đã xảy ra lỗi khi xóa sinh viên.',
+      confirmButtonText: 'Đóng'
+    });
   }
 }

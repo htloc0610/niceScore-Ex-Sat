@@ -165,12 +165,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 return response.json();
             })
             .then(result => {
-                alert("Thêm sinh viên thành công!");
+                // alert("Thêm sinh viên thành công!");
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công!',
+                    text: 'Thêm sinh viên thành công!',
+                    confirmButtonText: 'OK',
+                    timer: 2000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                  });
+
+                  
                 console.log("Server response:", result);
             })
             .catch(error => {
                 console.error("Error submitting form:", error);
-                alert("Đã xảy ra lỗi: " + error.message);
+                // alert("Đã xảy ra lỗi: " + error.message);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Đã xảy ra lỗi: ' + error.message,
+                    confirmButtonText: 'Đóng'
+                  });
+                  
             });
 
     });

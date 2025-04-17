@@ -12,7 +12,13 @@ function editMore(id, entityType) {
     const row = [...tableBody.children].find(row => row.children[0].textContent == id);
     if (!row) {
         console.error("Error updating entity:", error);
-        alert("Đã xảy ra lỗi khi cập nhật.");
+        // alert("Đã xảy ra lỗi khi cập nhật.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: 'Đã xảy ra lỗi khi cập nhật.',
+            confirmButtonText: 'Đóng'
+        });
     }
     const name = row.children[1].textContent;
 
@@ -82,17 +88,38 @@ function editMore(id, entityType) {
             .then(response => response.json())
             .then(data => {
                 if (data.message.includes("successfully")) {
-                    alert(`${config.name} đã được cập nhật!`);
+                    // alert(`${config.name} đã được cập nhật!`);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: `${config.name} đã được cập nhật!`,
+                        confirmButtonText: 'OK',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false
+                    });
                     document.body.removeChild(overlay);
 
                     row.children[1].textContent = entityData[config.nameField];
                 } else {
-                    alert(`Lỗi khi cập nhật ${config.name}.`);
+                    // alert(`Lỗi khi cập nhật ${config.name}.`);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: `Lỗi khi cập nhật ${config.name}.`,
+                        confirmButtonText: 'Đóng'
+                    });
                 }
             })
             .catch(error => {
                 console.error("Error updating entity:", error);
-                alert("Đã xảy ra lỗi khi cập nhật.");
+                // alert("Đã xảy ra lỗi khi cập nhật.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Đã xảy ra lỗi khi cập nhật.',
+                    confirmButtonText: 'Đóng'
+                });
             });
     });
 

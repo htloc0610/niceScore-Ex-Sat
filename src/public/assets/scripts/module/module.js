@@ -118,15 +118,36 @@ document.getElementById("add-module-form")?.addEventListener("submit", async (e)
     });
     const data = await response.json();
     if (data.message?.includes("success") || response.ok) {
-      alert("Thêm môn học thành công!");
+      // alert("Thêm môn học thành công!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: 'Thêm môn học thành công!',
+        confirmButtonText: 'OK',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
       document.getElementById("add-module-modal").classList.add("hidden");
       loadModules();
     } else {
-      alert("Thêm môn học thất bại.");
+      // alert("Thêm môn học thất bại.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Thêm môn học thất bại.',
+        confirmButtonText: 'Đóng'
+      });
     }
   } catch (error) {
     console.error("Error adding module:", error);
-    alert("Lỗi kết nối server.");
+    // alert("Lỗi kết nối server.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Lỗi kết nối server.',
+      confirmButtonText: 'Đóng'
+    });
   }
 });
 
@@ -156,7 +177,13 @@ async function editModule(moduleId) {
     document.getElementById("edit-module-modal").classList.remove("hidden");
   } catch (error) {
     console.error("Error fetching module:", error);
-    alert("Lỗi tải dữ liệu môn học.");
+    // alert("Lỗi tải dữ liệu môn học.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Lỗi tải dữ liệu môn học.',
+      confirmButtonText: 'Đóng'
+    });
   }
 }
 
@@ -185,15 +212,36 @@ document.getElementById("edit-module-form")?.addEventListener("submit", async (e
     });
     const data = await response.json();
     if (data.message?.includes("success") || response.ok) {
-      alert("Chỉnh sửa môn học thành công!");
+      // alert("Chỉnh sửa môn học thành công!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: 'Chỉnh sửa môn học thành công!',
+        confirmButtonText: 'OK',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
       document.getElementById("edit-module-modal").classList.add("hidden");
       loadModules();
     } else {
-      alert("Chỉnh sửa môn học thất bại: " + (data.message || "Lỗi không xác định"));
+      // alert("Chỉnh sửa môn học thất bại: " + (data.message || "Lỗi không xác định"));
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Chỉnh sửa môn học thất bại: ' + (data.message || "Lỗi không xác định"),
+        confirmButtonText: 'Đóng'
+      });
     }
   } catch (error) {
     console.error("Error editing module:", error);
-    alert("Lỗi kết nối server.");
+    // alert("Lỗi kết nối server.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Lỗi kết nối server.',
+      confirmButtonText: 'Đóng'
+    });
   }
 });
 
@@ -213,14 +261,35 @@ async function deleteModule(moduleId) {
     });
 
     if (response.ok) {
-      alert("Xóa môn học thành công!");
+      // alert("Xóa môn học thành công!");
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: 'Xóa môn học thành công!',
+        confirmButtonText: 'OK',
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      });
       loadModules(); 
     } else {
       const data = await response.json();
-      alert("Xóa môn học thất bại: " + (data.message || "Lỗi không xác định"));
+      // alert("Xóa môn học thất bại: " + (data.message || "Lỗi không xác định"));
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi!',
+        text: 'Xóa môn học thất bại: ' + (data.message || "Lỗi không xác định"),
+        confirmButtonText: 'Đóng'
+      });
     }
   } catch (error) {
     console.error("Error deleting module:", error);
-    alert("Lỗi kết nối server.");
+    // alert("Lỗi kết nối server.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Lỗi!',
+      text: 'Lỗi kết nối server.',
+      confirmButtonText: 'Đóng'
+    });
   }
 }

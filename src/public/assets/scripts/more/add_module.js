@@ -87,17 +87,38 @@ function addModule() {
         const data = await res.json();
     
         if (data.message.includes("success")) {
-          alert("Add module success!");
+          // alert("Add module success!");
+          Swal.fire({
+            icon: 'success',
+            title: 'Thành công!',
+            text: 'Thêm module thành công!',
+            confirmButtonText: 'OK',
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+          });
           document.body.removeChild(overlay);  // Close the modal after success
           addRowToTable(data.newModule); // Call function to add row to the table
 
           // Optionally update table or UI
         } else {
-          alert("Thêm module thất bại.");
+          // alert("Thêm module thất bại.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Lỗi!',
+            text: 'Thêm module thất bại: ' + (data.message || "Lỗi không xác định"),
+            confirmButtonText: 'Đóng'
+          });
         }
       } catch (err) {
         console.error("Add module error:", err);
-        alert("Lỗi kết nối server.");
+        // alert("Lỗi kết nối server.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Lỗi!',
+          text: 'Lỗi kết nối server.',
+          confirmButtonText: 'Đóng'
+        });
       }
     });
   

@@ -55,7 +55,13 @@ async function fetchCancellationData(studentId) {
         modal.classList.remove('hidden');
     } catch (error) {
         console.error('Error fetching cancellation data:', error);
-        alert('Failed to load cancellation details. Please try again.');
+        // alert('Failed to load cancellation details. Please try again.');
+        Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: 'Failed to load cancellation details. Please try again.',
+            confirmButtonText: 'Close'
+        });
         modal.classList.add('hidden');
     }
 }

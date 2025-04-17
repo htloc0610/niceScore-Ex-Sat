@@ -87,7 +87,16 @@ function editModule(moduleId) {
                         const data = await res.json();
         
                         if (data.message.includes("success")) {
-                            alert("Chỉnh sửa thành công!");
+                            // alert("Chỉnh sửa thành công!");
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: 'Chỉnh sửa thành công!',
+                                confirmButtonText: 'OK',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                showConfirmButton: false
+                            });
                             document.body.removeChild(overlay);
                              // Find and update the row in the table with the new module data
                         const tableBody = document.getElementById("module-table-body");
@@ -102,11 +111,23 @@ function editModule(moduleId) {
                             row.children[7].textContent = formData.description || 'N/A';
                         }
                         } else {
-                            alert("Chỉnh sửa thất bại.");
+                            // alert("Chỉnh sửa thất bại.");
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: 'Chỉnh sửa thất bại.',
+                                confirmButtonText: 'Đóng'
+                            });
                         }
                     } catch (err) {
                         console.error("Edit module error:", err);
-                        alert("Lỗi kết nối server.");
+                        // alert("Lỗi kết nối server.");
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: 'Lỗi kết nối server.',
+                            confirmButtonText: 'Đóng'
+                        });
                     }
                 });
 
@@ -128,11 +149,23 @@ function editModule(moduleId) {
             })
             .catch(err => {
                 console.error("Error fetching faculties and modules:", err);
-                alert("Lỗi kết nối với dữ liệu.");
+                // alert("Lỗi kết nối với dữ liệu.");
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Lỗi!',
+                    text: 'Lỗi kết nối với dữ liệu.',
+                    confirmButtonText: 'Đóng'
+                });
             });
         })
         .catch(err => {
             console.error("Error fetching module data:", err);
-            alert("Lỗi kết nối với khóa học.");
+            // alert("Lỗi kết nối với khóa học.");
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi!',
+                text: 'Lỗi kết nối với khóa học.',
+                confirmButtonText: 'Đóng'
+            });
         });
 }
