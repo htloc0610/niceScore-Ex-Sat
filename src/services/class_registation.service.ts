@@ -267,7 +267,7 @@ const classRegistationService = {
                 as: "transcripts",
                 where: { class_id: classId }, // only get the grade for this class
                 required: false, // allows students with no grade yet
-                attributes: ["grade", "transcript_id"],
+                attributes: ["transcript_id", "grade"],
               },
             ],
           },
@@ -282,12 +282,14 @@ const classRegistationService = {
       // Return plain objects
       return registrations.map((reg) => {
         let plain = reg.toJSON();
-        const grade = plain.student.transcripts?.[0]?.grade ?? null; // Access the first grade
+        const grade = plain.student.transcripts?.[0]?.grade ?? null; 
+        const transcript_id = plain.student.transcripts?.[0]?.transcript_id ?? null; 
         return {
           ...plain,
           student: {
             ...plain.student,
-            grade: grade, // Flattened grade field
+            grade: grade, 
+            transcript_id: transcript_id,
           },
         };
       });

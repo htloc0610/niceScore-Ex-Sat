@@ -37,8 +37,6 @@ const statusController = {
   addConfiguration: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
-      console.log("data controller", data);
-
       const newStatus = await configurationService.addConfiguration(data);
       logger.info("Status added successfully");
       res.status(201).send({ message: "Status added successfully", newStatus });
