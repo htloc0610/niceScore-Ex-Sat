@@ -47,3 +47,5 @@ const connectDB = async () => {
 
 // Execute the database connection
 connectDB();
+
+export default app;
