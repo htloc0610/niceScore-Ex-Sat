@@ -36,7 +36,7 @@ app.set("views", path_1.default.join(__dirname, "../src/views"));
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Checking database connection...");
     try {
-        yield db_1.default.authenticate();
+        // await sequelize.authenticate();
         (0, realation_1.default)();
         yield db_1.default.sync({ alter: true });
         console.log("Database connection established!");
