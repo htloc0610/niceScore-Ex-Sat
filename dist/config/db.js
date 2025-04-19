@@ -30,7 +30,7 @@ process.env.DB_PASSWORD, // Mật khẩu
     dialectOptions: {
         ssl: {
             require: true,
-            rejectUnauthorized: false, // Nếu cần kết nối với SSL
+            rejectUnauthorized: true, // Nếu cần kết nối với SSL
         },
         //ssl: false,
     },
