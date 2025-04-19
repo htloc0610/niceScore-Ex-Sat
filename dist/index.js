@@ -53,6 +53,8 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 // Execute the database connection
-connectDB();
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield connectDB();
+}))();
 exports.default = app;
 //# sourceMappingURL=index.js.map
