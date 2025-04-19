@@ -17,7 +17,6 @@ require("dotenv/config");
 const index_router_1 = __importDefault(require("./routes/index.router"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
-const db_1 = __importDefault(require("./config/db"));
 const realation_1 = __importDefault(require("./models/realation"));
 const handlebars_1 = __importDefault(require("./config/handlebars"));
 const app = (0, express_1.default)();
@@ -38,7 +37,7 @@ const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         // await sequelize.authenticate();
         (0, realation_1.default)();
-        yield db_1.default.sync({ alter: false });
+        // await sequelize.sync({ alter: true });
         console.log("Database connection established!");
         // Start the server only when the database is successfully connected
         app.listen(port, () => {
