@@ -7,12 +7,15 @@
     "moduleResolution": "node",
     "noImplicitAny": true,
     "sourceMap": true,
-    "outDir": "dist",
     "skipLibCheck": true,
+    "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": ["node_modules/*", "src/types/*"]
-    }
+      "*": ["node_modules/*", "src/types/*"],
+      "src/*": ["src/*"]
+    },
+    "types": ["node", "jest"]
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
