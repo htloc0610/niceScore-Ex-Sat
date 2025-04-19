@@ -36,11 +36,8 @@ app.set("views", path_1.default.join(__dirname, "../src/views"));
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Checking database connection...");
     try {
-        console.log("a");
         yield db_1.default.authenticate();
-        console.log("b");
         (0, realation_1.default)();
-        console.log("c");
         yield db_1.default.sync({ alter: true });
         console.log("Database connection established!");
         // Start the server only when the database is successfully connected

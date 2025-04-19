@@ -27,11 +27,8 @@ app.set("views", path.join(__dirname, "../src/views"));
 const connectDB = async () => {
   console.log("Checking database connection...");
   try {
-    console.log("a");
     await sequelize.authenticate();
-    console.log("b");
     setupRelation();
-    console.log("c");
     await sequelize.sync({ alter: true });
     console.log("Database connection established!");
 
