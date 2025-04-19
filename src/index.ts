@@ -49,3 +49,5 @@ const connectDB = async () => {
 (async () => {
   await connectDB();
 })();
+
+export default app;
