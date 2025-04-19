@@ -29,8 +29,8 @@ const sequelize = new Sequelize(
     },
     dialectOptions: {
       ssl: {
-         require: true,
-      //   rejectUnauthorized: false, // Nếu cần kết nối với SSL
+        require: true,
+        rejectUnauthorized: false, // Nếu cần kết nối với SSL
       },
       //ssl: false,
     },
