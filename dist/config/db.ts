@@ -24,7 +24,7 @@ const sequelize = new Sequelize(
     pool: {
       max: 5, // Số lượng kết nối tối đa
       min: 0, // Số lượng kết nối tối thiểu
-      acquire: 30000, // Thời gian tối đa (ms) để kết nối
+      acquire: 60000, // Thời gian tối đa (ms) để kết nối
       idle: 10000, // Thời gian tối đa (ms) kết nối không sử dụng sẽ bị đóng
     },
     dialectOptions: {
