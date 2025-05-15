@@ -74,7 +74,8 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const studentsDataValue = yield student_service_1.default.getListStudent();
     const students = studentsDataValue.map(student => student.get({ plain: true }));
     // console.log(students);
-    res.render("index", { faculties: faculties, students: students }); // Render the "index" Handlebars template
+    const lang = ['en', 'vi'].includes(req.query.lang) ? req.query.lang : 'en';
+    res.render("index", { faculties: faculties, students: students, lang: lang }); // Render the "index" Handlebars template
 }));
 exports.default = router;
 //# sourceMappingURL=front.router.js.map

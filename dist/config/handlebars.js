@@ -5,6 +5,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_handlebars_1 = require("express-handlebars");
 const path_1 = __importDefault(require("path"));
+const fs_1 = __importDefault(require("fs"));
+const en = JSON.parse(fs_1.default.readFileSync(path_1.default.join(__dirname, '../locales/en.json'), 'utf-8'));
+const vi = JSON.parse(fs_1.default.readFileSync(path_1.default.join(__dirname, '../locales/vi.json'), 'utf-8'));
+const translationsMap = {
+    en,
+    vi
+};
+function getNested(obj, key) {
+    return key.split('.').reduce((res, k) => (res ? res[k] : undefined), obj);
+}
+const allowedLangs = ['en', 'vi']; // 'as const' keeps literal types
 const hbs = (0, express_handlebars_1.create)({
     extname: ".hbs",
     defaultLayout: "main",
@@ -12,6 +23,15 @@ const hbs = (0, express_handlebars_1.create)({
     partialsDir: path_1.default.join(__dirname, "../views/partials"),
     helpers: {
         json: (context) => JSON.stringify(context),
+        t: function (key, options) {
+            const langFromContext = options.data.root.lang;
+            const lang = allowedLangs.includes(langFromContext)
+                ? langFromContext : 'en'; // fallback
+            const translations = translationsMap[lang];
+            const translation = getNested(translations, key);
+            return translation || key;
+        },
+        eq: (a, b) => a === b,
         ifEqual: (a, b, options) => {
             if (a == b) {
                 return options.fn(this); // Render block if true

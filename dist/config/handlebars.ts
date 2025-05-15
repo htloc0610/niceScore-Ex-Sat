@@ -1,5 +1,19 @@
 import { create } from "express-handlebars";
 import path from "path";
+import fs from "fs";
+const en = JSON.parse(fs.readFileSync(path.join(__dirname, '../locales/en.json'), 'utf-8'));
+const vi = JSON.parse(fs.readFileSync(path.join(__dirname, '../locales/vi.json'), 'utf-8'));
+const translationsMap = {
+  en,
+  vi
+};
+
+function getNested(obj: any, key: string): any {
+  return key.split('.').reduce((res, k) => (res ? res[k] : undefined), obj);
+}
+type Lang = typeof allowedLangs[number];    // 2. Lang = 'en' | 'vi'
+
+const allowedLangs = ['en', 'vi'] as const; // 'as const' keeps literal types
 
 const hbs = create({
   extname: ".hbs",
@@ -8,6 +22,19 @@ const hbs = create({
   partialsDir: path.join(__dirname, "../views/partials"),
   helpers: {
     json: (context: any) => JSON.stringify(context),
+    t: function (key: any, options: any) {
+      const langFromContext = options.data.root.lang as string | undefined;
+
+      const lang: Lang = allowedLangs.includes(langFromContext as Lang)
+        ? (langFromContext as Lang) : 'en';  // fallback
+
+
+      const translations = translationsMap[lang];
+      const translation = getNested(translations, key);
+
+      return translation|| key;
+    },
+    eq: (a: any, b: any) => a === b,
     ifEqual: (a: any, b: any, options: any) => {
       if (a == b) {
         return options.fn(this); // Render block if true

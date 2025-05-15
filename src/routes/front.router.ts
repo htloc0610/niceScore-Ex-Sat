@@ -72,7 +72,8 @@ router.get("/", async (req, res) => {
   const studentsDataValue = await studentService.getListStudent();
   const students = studentsDataValue.map(student => student.get({plain: true}));
   // console.log(students);
-  res.render("index", {faculties: faculties, students: students}); // Render the "index" Handlebars template
+  const lang = ['en', 'vi'].includes(req.query.lang as string) ? req.query.lang : 'en';
+  res.render("index", {faculties: faculties, students: students, lang: lang}); // Render the "index" Handlebars template
 });
 
 export default router;
