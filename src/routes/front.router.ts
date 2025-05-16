@@ -68,7 +68,6 @@ router.get("/:id", (req, res) => {
 // [GET] /
 router.get("/", async (req, res) => {
   const faculties = await facultyService.getAllFaculties();
-  faculties.unshift({ faculty_id: "", name: "Tất cả khoa" });
   const studentsDataValue = await studentService.getListStudent();
   const students = studentsDataValue.map(student => student.get({plain: true}));
   // console.log(students);

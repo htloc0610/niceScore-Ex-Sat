@@ -70,7 +70,6 @@ router.get("/:id", (req, res) => {
 // [GET] /
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const faculties = yield faculty_service_1.default.getAllFaculties();
-    faculties.unshift({ faculty_id: "", name: "Tất cả khoa" });
     const studentsDataValue = yield student_service_1.default.getListStudent();
     const students = studentsDataValue.map(student => student.get({ plain: true }));
     // console.log(students);

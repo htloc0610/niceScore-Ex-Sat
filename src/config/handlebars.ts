@@ -1,8 +1,9 @@
 import { create } from "express-handlebars";
 import path from "path";
 import fs from "fs";
-const en = JSON.parse(fs.readFileSync(path.join(__dirname, '../locales/en.json'), 'utf-8'));
-const vi = JSON.parse(fs.readFileSync(path.join(__dirname, '../locales/vi.json'), 'utf-8'));
+const en = JSON.parse(fs.readFileSync(path.join(__dirname, "../public/assets/scripts/locales/en.json"), "utf-8"));
+const vi = JSON.parse(fs.readFileSync(path.join(__dirname, "../public/assets/scripts/locales/vi.json"), "utf-8"));
+
 const translationsMap = {
   en,
   vi

@@ -1,0 +1,83 @@
+{
+  "index":{
+    "header": {
+      "title": "FIT@HCMUS Student Management System"
+    },
+    "button": {
+      "module_management": "Manage Modules",
+      "add_student": "Add New Student",
+      "manage_info": "Manage Information",
+      "system_config": "System Configuration",
+      "import_students": "Import Students",
+      "import_json": "Import JSON",
+      "import_excel": "Import Excel",
+      "export_students": "Export Students",
+      "export_json": "Export JSON",
+      "export_excel": "Export Excel",
+      "history": "History",
+      "details": "Details",
+      "transcript": "Transcript",
+      "delete": "Delete"
+    },
+    "input": {
+      "search_placeholder": "Enter name or student ID to search"
+    },
+    "card": {
+      "total_students": "Total Students",
+      "total_graduated": "Total Graduated",
+      "total_studying": "Total Studying",
+      "total_paused": "Total Paused"
+    },
+    "table": {
+      "student": "Student",
+      "date_of_birth": "Date of Birth",
+      "gender": "Gender",
+      "faculty": "Faculty",
+      "course": "Course",
+      "program": "Program",
+      "address": "Address",
+      "email": "Email",
+      "phone_number": "Phone Number",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "modal": {
+      "cancellation_details": "Course Cancellation Details",
+      "student": "Student",
+      "email": "Email",
+      "table": {
+        "class_name": "Class Name",
+        "reason": "Reason",
+        "schedule": "Schedule",
+        "instructor": "Instructor",
+        "date": "Date"
+      },
+      "no_history": "No course cancellation history.",
+      "close": "Close"
+    },
+    "alert": {
+      "success": "Success",
+      "error": "Error"
+    },
+    "js": {
+      "studentStatus": {
+        "studying": "Studying",
+        "graduated": "Graduated",
+        "pause": "Paused",
+        "dropped": "Dropped Out"
+      },
+      "button": {
+        "details": "Details",
+        "delete": "Delete"
+      },
+      "faculty": {
+        "all": "All Faculties"
+      },
+      "alert": {
+        "error": "Error!",
+        "loadCancellationFail": "Failed to load cancellation details. Please try again.",
+        "close": "Close"
+      }
+    }
+  }
+}
