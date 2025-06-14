@@ -2,11 +2,13 @@ import { Request, Response } from "express";
 import moduleService from "../services/module.service";
 import { logger } from "../config/logger";
 
-const facultyController = {
-  getListModules: async (req: Request, res: Response): Promise<void> => {
+const facultyController = {  getListModules: async (req: Request, res: Response): Promise<void> => {
     try {
-      const modules = await moduleService.getAllModules();
-      logger.info("Successfully fetched modules list");
+      // Get language from query parameter, defaulting to English
+      const language = req.query.language as string || 'en';
+      
+      const modules = await moduleService.getAllModules(language);
+      logger.info(`Successfully fetched modules list in ${language} language`);
       res.send({ message: "List of modules", modules });
     } catch (error) {
       logger.error("Error fetching modules list");
@@ -38,24 +40,33 @@ const facultyController = {
         .status(500)
         .send({ message: "An error occurred while adding the module." });
     }
-  },
-  getModule: async (req: Request, res: Response): Promise<void> => {
+  },  getModule: async (req: Request, res: Response): Promise<void> => {
     try {
       const module_id = req.params.id; // Extract module ID from URL params
-      const module = await moduleService.getModuleById(parseInt(module_id));
+      const language = req.query.language as string || 'en';
+      
+      // Check if translations parameter is provided and true
+      const includeTranslations = req.query.translations === 'true';
+      
+      let module;
+      if (includeTranslations) {
+        module = await moduleService.getModuleWithTranslations(parseInt(module_id));
+      } else {
+        module = await moduleService.getModuleById(parseInt(module_id), language);
+      }
 
       if (!module) {
-      res.status(404).send({ message: "Module not found." });
+        res.status(404).send({ message: "Module not found." });
       } else {
-      res.status(200).send({ message: "Module fetched successfully", module });
+        res.status(200).send({ message: "Module fetched successfully", module });
       }
     } catch (error) {
       console.error(error);
       res
-      .status(500)
-      .send({ message: "An error occurred while fetching the module." });
+        .status(500)
+        .send({ message: "An error occurred while fetching the module." });
     }
-    },
+  },
   updateModule: async (req: Request, res: Response): Promise<void> => {
     try {
       const module_id = req.params.id;
@@ -125,7 +136,137 @@ const facultyController = {
         .status(500)
         .send({ message: "An error occurred while deleting the module." });
     }
-  }
+  },
+  getModuleWithTranslations: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const module_id = req.params.id; // Extract module ID from URL params
+      const module = await moduleService.getModuleWithTranslations(parseInt(module_id));
+
+      if (!module) {
+        res.status(404).send({ message: "Module not found." });
+      } else {
+        res.status(200).send({ message: "Module with translations fetched successfully", module });
+      }
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while fetching the module with translations." });
+    }
+  },
+  
+  addModuleTranslation: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const module_id = req.params.id;
+      const translationData = req.body;
+
+      if (!translationData.language || !translationData.module_name) {
+        res.status(400).send({
+          message: "Language and module name are required for translation.",
+        });
+        return;
+      }
+
+      const updatedModule = await moduleService.updateModule(parseInt(module_id), {
+        translations: [translationData]
+      });
+
+      res.status(200).send({
+        message: "Module translation added successfully",
+        module: updatedModule,
+      });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while adding the module translation." });
+    }
+  },
+  
+  deleteModuleTranslation: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const module_id = req.params.id;
+      const language = req.params.language;
+
+      if (!language) {
+        res.status(400).send({
+          message: "Language parameter is required.",
+        });
+        return;
+      }
+
+      await moduleService.deleteTranslation(parseInt(module_id), language);
+
+      res.status(200).send({
+        message: `Module translation for language '${language}' deleted successfully`,
+      });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while deleting the module translation." });
+    }
+  },
+  getModuleWithLanguage: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const module_id = req.params.id;
+      // Get the language from URL parameter, default to English if not provided
+      const language = req.params.language || 'en';
+      
+      // Use the existing getModuleById method with language parameter
+      const module = await moduleService.getModuleById(parseInt(module_id), language);
+
+      if (!module) {
+        res.status(404).send({ message: "Module not found." });
+      } else {
+        res.status(200).send({ 
+          message: `Module fetched successfully in ${language} language`, 
+          module 
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while fetching the module translation." });
+    }
+  },
+  
+  addModuleLanguageTranslation: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const module_id = req.params.id;
+      const language = req.params.language || 'en';
+      const { module_name, description } = req.body;
+
+      if (!module_name) {
+        res.status(400).send({
+          message: "Module name is required for translation.",
+        });
+        return;
+      }
+
+      // Create a translation object with the language from URL parameter
+      const translationData = {
+        language,
+        module_name,
+        description
+      };
+
+      const updatedModule = await moduleService.updateModule(parseInt(module_id), {
+        translations: [translationData]
+      });
+
+      res.status(200).send({
+        message: `Module translation for ${language} added successfully`,
+        module: updatedModule,
+      });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while adding the module translation." });
+    }
+  },
 };
 
 export default facultyController;

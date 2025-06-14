@@ -32,8 +32,8 @@ const studentController = {
     //add course
     addCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const data = req.body;
-            const newCourse = yield course_service_1.default.addCourse(data.course_name);
+            const { course_name_en, course_name_vi } = req.body;
+            const newCourse = yield course_service_1.default.addCourse(course_name_en, course_name_vi);
             logger_1.logger.info("Course added successfully");
             res.status(201).send({ message: "Course added successfully", newCourse });
         }
@@ -44,12 +44,14 @@ const studentController = {
                 .status(500)
                 .send({ message: "An error occurred while adding the course." });
         }
-    }),
-    //update course
+    }), //update course
     updateCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { course_id, name } = req.body;
-            const updatedData = req.body;
+            const { course_id, course_name_en, course_name_vi } = req.body;
+            const updatedData = {
+                course_name_en,
+                course_name_vi
+            };
             const updatedCourse = yield course_service_1.default.updateCourse(course_id, updatedData);
             if (!updatedCourse) {
                 logger_1.logger.error("Course not found or no changes made");

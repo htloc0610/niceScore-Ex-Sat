@@ -187,3 +187,7 @@
 {"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-14T07:45:00.045Z"}
 {"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-14T08:38:48.142Z"}
 {"level":"error","message":"Error fetching students list: column course.course_name does not exist","timestamp":"2025-06-14T10:28:57.964Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-14T08:41:22.733Z"}
+{"level":"error","message":"Error fetching module with translations: column translations.createdAt does not exist","timestamp":"2025-06-14T09:57:07.265Z"}
+{"level":"error","message":"Error fetching module with translations: column translations.createdAt does not exist","timestamp":"2025-06-14T10:02:00.806Z"}
+{"level":"error","message":"Error fetching module with translations: column translations.createdAt does not exist","timestamp":"2025-06-14T10:06:56.217Z"}

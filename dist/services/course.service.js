@@ -44,11 +44,14 @@ const courseService = {
             }
         });
     },
-    addCourse(course_name) {
-        return __awaiter(this, void 0, void 0, function* () {
+    addCourse(course_name_en_1) {
+        return __awaiter(this, arguments, void 0, function* (course_name_en, course_name_vi = '') {
             try {
-                logger_1.logger.info("Adding a new course", course_name);
-                const newCourse = yield course_model_1.default.create({ course_name });
+                logger_1.logger.info("Adding a new course", { course_name_en, course_name_vi });
+                const newCourse = yield course_model_1.default.create({
+                    course_name_en,
+                    course_name_vi: course_name_vi || course_name_en // Default to English name if Vietnamese is not provided
+                });
                 return newCourse.toJSON();
             }
             catch (error) {
@@ -62,7 +65,12 @@ const courseService = {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 logger_1.logger.info(`Updating course with ID: ${courseId}`);
-                const [updated] = yield course_model_1.default.update(courseData, {
+                // Make sure we're using the correct field names
+                const updateData = {
+                    course_name_en: courseData.course_name_en,
+                    course_name_vi: courseData.course_name_vi
+                };
+                const [updated] = yield course_model_1.default.update(updateData, {
                     where: { course_id: courseId },
                 });
                 if (updated === 0) {

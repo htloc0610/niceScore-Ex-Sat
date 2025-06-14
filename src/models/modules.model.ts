@@ -4,10 +4,8 @@ import sequelize from "../config/db";
 export class Module extends Model {
     public module_id!: number;
     public module_code!: string;
-    public module_name!: string;
     public credits!: number;
     public faculty_id!: number;
-    public description?: string;
     public prerequisite_id?: number;
     public is_active!: boolean;
 
@@ -26,10 +24,6 @@ Module.init(
             type: DataTypes.STRING(50),
             allowNull: false,
         },
-        module_name: {
-            type: DataTypes.STRING(255),
-            allowNull: false,
-        },
         credits: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -40,9 +34,6 @@ Module.init(
         faculty_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
-        },
-        description: {
-            type: DataTypes.TEXT,
         },
         prerequisite_id: {
             type: DataTypes.INTEGER,

@@ -25,11 +25,14 @@ const courseService = {
       throw new Error("Error fetching courses list");
     }
   },
-  async addCourse(course_name: string) {
+  async addCourse(course_name_en: string, course_name_vi: string = '') {
     try {
-      logger.info("Adding a new course", course_name);
+      logger.info("Adding a new course", { course_name_en, course_name_vi });
 
-      const newCourse = await Course.create({ course_name });
+      const newCourse = await Course.create({ 
+        course_name_en, 
+        course_name_vi: course_name_vi || course_name_en // Default to English name if Vietnamese is not provided
+      });
 
       return newCourse.toJSON();
     } catch (error) {
@@ -37,12 +40,18 @@ const courseService = {
       throw new Error("Error adding new course: " + error.message);
     }
   }, 
-
   //update course
   async updateCourse(courseId: number, courseData: any) {
     try {
       logger.info(`Updating course with ID: ${courseId}`);
-      const [updated] = await Course.update(courseData, {
+      
+      // Make sure we're using the correct field names
+      const updateData = {
+        course_name_en: courseData.course_name_en,
+        course_name_vi: courseData.course_name_vi
+      };
+      
+      const [updated] = await Course.update(updateData, {
         where: { course_id: courseId },
       });
 

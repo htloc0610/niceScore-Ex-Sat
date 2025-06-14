@@ -3,9 +3,11 @@ import Faculty from "../models/faculty.model";
 import Class from "../models/classes.model";
 import ClassRegistration from "../models/class_registrations.model";
 import { logger } from "../config/logger";
+import ModuleTranslation from "../models/module_translations.model";
+import { Op } from "sequelize";
+import sequelize from "../config/db";
 
-const moduleService = {
-  async getAllModules() {
+const moduleService = {  async getAllModules(language = "en") {
     try {
       const modules = await Modules.findAll({
         include: [
@@ -19,38 +21,161 @@ const moduleService = {
             as: "prerequisite",
             attributes: ["module_code"], 
           },
+          {
+            model: ModuleTranslation,
+            as: "translations",
+            where: { language },
+            required: false, // Left join to get modules even if they don't have a translation
+          },
         ],
       });
   
-      return modules.map((module) => module.get({ plain: true }));
+      return modules.map((module) => {
+        const plainModule = module.get({ plain: true });
+        // Extract translation data and add it to the module object
+        if (plainModule.translations && plainModule.translations.length > 0) {
+          plainModule.module_name = plainModule.translations[0].module_name;
+          plainModule.description = plainModule.translations[0].description;
+        } else {
+          // Default values if translation is not available
+          plainModule.module_name = `[${plainModule.module_code}]`;
+          plainModule.description = null;
+        }
+        
+        // Remove the translations array from the returned object
+        delete plainModule.translations;
+        
+        return plainModule;
+      });
     } catch (error) {
       console.error("Error fetching modules:", error);
       throw error;
     }
-  },  
+  },
+  
+  async getModuleWithTranslations(moduleId: number) {
+    try {
+      const module = await Modules.findOne({
+        where: { module_id: moduleId },
+        include: [
+          {
+            model: Faculty,
+            as: "faculty",
+            attributes: ["name"],
+          },
+          {
+            model: Modules,
+            as: "prerequisite",
+            attributes: ["module_code"],
+          },
+          {
+            model: ModuleTranslation,
+            as: "translations",
+          },
+        ],
+      });
 
+      if (!module) {
+        throw new Error("Module not found");
+      }
+
+      return module.get({ plain: true });
+    } catch (error) {
+      logger.error("Error fetching module with translations: " + error.message);
+      throw new Error("Error fetching module with translations: " + error.message);
+    }
+  },
   async addModule(data: any) {
     try {
-      const newModule = await Modules.create(data);
+      // Extract translation data
+      const translations = data.translations || [];
+      const { module_name, description, ...moduleData } = data;
+      
+      // Start transaction to ensure data integrity
+      const result = await sequelize.transaction(async (t) => {
+        // Create the module
+        const newModule = await Modules.create(moduleData, { transaction: t });
+        
+        // Add translations if provided
+        if (module_name) {
+          // Create a default English translation if just module_name is provided
+          await ModuleTranslation.create({
+            module_id: newModule.module_id,
+            language: 'en',
+            module_name,
+            description,
+          }, { transaction: t });
+        }
+        
+        // Add any additional translations
+        if (translations.length > 0) {
+          for (const translation of translations) {
+            await ModuleTranslation.create({
+              module_id: newModule.module_id,
+              ...translation
+            }, { transaction: t });
+          }
+        }
+        
+        // Return the newly created module
+        return newModule;
+      });
+      
       logger.info("Added new module successfully");
-      return newModule.toJSON();
+      
+      // Get the complete module with translations
+      const completeModule = await this.getModuleWithTranslations(result.module_id);
+      return completeModule;
     } catch (error) {
       logger.error("Error adding new module: " + error.message);
       throw new Error("Error adding new module: " + error.message);
     }
   },
 
-  async getModuleById(moduleId: number) {
+  async getModuleById(moduleId: number, language = "en") {
     try {
       const module = await Modules.findOne({
-      where: { module_id: moduleId },
+        where: { module_id: moduleId },
+        include: [
+          {
+            model: ModuleTranslation,
+            as: "translations",
+            where: { language },
+            required: false,
+          },
+          {
+            model: Faculty,
+            as: "faculty",
+            attributes: ["name"],
+          },
+          {
+            model: Modules,
+            as: "prerequisite",
+            attributes: ["module_code"],
+          },
+        ],
       });
 
       if (!module) {
-      throw new Error("Module not found");
+        throw new Error("Module not found");
       }
 
-      return module.dataValues;
+      const plainModule = module.get({ plain: true });
+      
+      // Extract translation data and add it to the module object
+      if (plainModule.translations && plainModule.translations.length > 0) {
+        plainModule.module_name = plainModule.translations[0].module_name;
+        plainModule.description = plainModule.translations[0].description;
+      } else {
+        // Default values if translation is not available
+        plainModule.module_name = `[${plainModule.module_code}]`;
+        plainModule.description = null;
+      }
+      
+      // Remove the translations array from the returned object
+      delete plainModule.translations;
+      
+      return plainModule;
     } catch (error) {
       logger.error("Error fetching module by ID: " + error.message);
       throw new Error("Error fetching module by ID: " + error.message);
@@ -82,20 +207,83 @@ const moduleService = {
       throw new Error("Error checking registered students: " + error.message);
     }
   },
-
   async updateModule(moduleId: number, updatedData: any) {
     try {
-      const [updated] = await Modules.update(updatedData, {
-        where: { module_id: moduleId },
+      // Extract translation data
+      const { module_name, description, language = 'en', translations, ...moduleData } = updatedData;
+      
+      await sequelize.transaction(async (t: any) => {
+        // Update the core module data
+        if (Object.keys(moduleData).length > 0) {
+          const [updated] = await Modules.update(moduleData, {
+            where: { module_id: moduleId },
+            transaction: t,
+          });
+
+          if (updated === 0) {
+            throw new Error("Module not found");
+          }
+        }
+        
+        // Update or create the translation in the specified language
+        if (module_name || description) {
+          const [translation, created] = await ModuleTranslation.findOrCreate({
+            where: { 
+              module_id: moduleId,
+              language 
+            },
+            defaults: {
+              module_id: moduleId,
+              language,
+              module_name: module_name || '',
+              description: description || null,
+            },
+            transaction: t,
+          });
+          
+          if (!created) {
+            // Update existing translation
+            await translation.update({
+              ...(module_name && { module_name }),
+              ...(description !== undefined && { description }),
+            }, { transaction: t });
+          }
+        }
+        
+        // Handle multiple translations update
+        if (translations && Array.isArray(translations)) {
+          for (const translationData of translations) {
+            const { language, module_name, description } = translationData;
+            
+            if (!language) continue;
+            
+            const [translation, created] = await ModuleTranslation.findOrCreate({
+              where: { 
+                module_id: moduleId,
+                language 
+              },
+              defaults: {
+                module_id: moduleId,
+                language,
+                module_name: module_name || '',
+                description: description || null,
+              },
+              transaction: t,
+            });
+            
+            if (!created) {
+              // Update existing translation
+              await translation.update({
+                ...(module_name && { module_name }),
+                ...(description !== undefined && { description }),
+              }, { transaction: t });
+            }
+          }
+        }
       });
 
-      if (updated === 0) {
-        throw new Error("Module not found");
-      }
-      const updatedModule = await Modules.findOne({
-        where: { module_id: moduleId },
-      });
-      return updatedModule ? updatedModule.get() : null;
+      // Get the updated module with translations
+      return await this.getModuleWithTranslations(moduleId);
     } catch (error) {
       logger.error("Error updating module: " + error.message);
       throw new Error("Error updating module: " + error.message);
@@ -154,7 +342,27 @@ const moduleService = {
       logger.error("Error checking linked classes: " + error.message);
       throw new Error("Error checking linked classes: " + error.message);
     }
-  }
+  },
+  async deleteTranslation(moduleId: number, language: string) {
+    try {
+      const deleted = await ModuleTranslation.destroy({
+        where: { 
+          module_id: moduleId,
+          language
+        },
+      });
+
+      if (deleted === 0) {
+        throw new Error("Translation not found");
+      }
+
+      logger.info(`Deleted module translation for language ${language} successfully`);
+      return { message: "Module translation deleted successfully" };
+    } catch (error) {
+      logger.error("Error deleting module translation: " + error.message);
+      throw new Error("Error deleting module translation: " + error.message);
+    }
+  },
 };
 
 export default moduleService;

@@ -13,6 +13,7 @@ const student_model_1 = __importDefault(require("./student.model"));
 const configurations_model_1 = __importDefault(require("./configurations.model"));
 const status_transitions_model_1 = __importDefault(require("./status_transitions.model"));
 const modules_model_1 = __importDefault(require("./modules.model"));
+const module_translations_model_1 = __importDefault(require("./module_translations.model"));
 const classes_model_1 = __importDefault(require("./classes.model"));
 const class_registrations_model_1 = __importDefault(require("./class_registrations.model"));
 const registration_cancellations_model_1 = __importDefault(require("./registration_cancellations.model"));
@@ -102,6 +103,9 @@ function setupRelation() {
     student_model_1.default.hasMany(transcripts_model_1.default, { foreignKey: "student_id", as: "transcripts" });
     transcripts_model_1.default.belongsTo(classes_model_1.default, { foreignKey: "class_id", as: "class" });
     classes_model_1.default.hasMany(transcripts_model_1.default, { foreignKey: "class_id", as: "transcripts" });
+    // Module - ModuleTranslation (for multilanguage support)
+    modules_model_1.default.hasMany(module_translations_model_1.default, { foreignKey: "module_id", as: "translations" });
+    module_translations_model_1.default.belongsTo(modules_model_1.default, { foreignKey: "module_id", as: "module" });
     configurations_model_1.default.sync();
     console.log("Database relation set up successfully!");
 }
