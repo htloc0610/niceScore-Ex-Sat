@@ -184,3 +184,6 @@
 {"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-05-15T15:44:43.696Z"}
 {"level":"error","message":"Error fetching student grades: No grades found for the student","timestamp":"2025-05-16T05:23:21.683Z"}
 {"level":"error","message":"Error exporting grades: Error fetching student grades: No grades found for the student","timestamp":"2025-05-16T05:23:21.694Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-14T07:45:00.045Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-14T08:38:48.142Z"}
+{"level":"error","message":"Error fetching students list: column course.course_name does not exist","timestamp":"2025-06-14T10:28:57.964Z"}

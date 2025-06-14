@@ -24,12 +24,12 @@ const hbs = (0, express_handlebars_1.create)({
     helpers: {
         json: (context) => JSON.stringify(context),
         t: function (key, options) {
-            const langFromContext = options.data.root.lang;
-            const lang = allowedLangs.includes(langFromContext)
-                ? langFromContext : 'en'; // fallback
-            const translations = translationsMap[lang];
-            const translation = getNested(translations, key);
-            return translation || key;
+            // Get language from localStorage or default to 'en'
+            const lang = (typeof window !== "undefined" && localStorage.getItem("lang")) || "en";
+            // Ensure it's a valid language
+            const selectedLang = allowedLangs.includes(lang) ? lang : "en";
+            // Retrieve translation safely
+            return getNested(translationsMap[selectedLang], key);
         },
         eq: (a, b) => a === b,
         ifEqual: (a, b, options) => {

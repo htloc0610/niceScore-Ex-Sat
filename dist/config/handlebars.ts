@@ -24,17 +24,16 @@ const hbs = create({
   helpers: {
     json: (context: any) => JSON.stringify(context),
     t: function (key: any, options: any) {
-      const langFromContext = options.data.root.lang as string | undefined;
+  // Get language from localStorage or default to 'en'
+  const lang = (typeof window !== "undefined" && localStorage.getItem("lang")) || "en";
 
-      const lang: Lang = allowedLangs.includes(langFromContext as Lang)
-        ? (langFromContext as Lang) : 'en';  // fallback
+  // Ensure it's a valid language
+  const selectedLang: Lang = allowedLangs.includes(lang as Lang) ? (lang as Lang) : "en";
 
+  // Retrieve translation safely
+  return getNested(translationsMap[selectedLang], key);
+},
 
-      const translations = translationsMap[lang];
-      const translation = getNested(translations, key);
-
-      return translation|| key;
-    },
     eq: (a: any, b: any) => a === b,
     ifEqual: (a: any, b: any, options: any) => {
       if (a == b) {
