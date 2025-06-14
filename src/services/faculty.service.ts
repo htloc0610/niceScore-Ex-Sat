@@ -24,11 +24,13 @@ const facultyService = {
       throw new Error("Error fetching faculties list");
     }
   },
-
-  async addFaculty(name: string) {
-    console.log("Adding a new faculty", name);
+  async addFaculty(nameVn: string, nameEn: string) {
+    console.log("Adding a new faculty", { nameVn, nameEn });
     try {
-      const newFaculty = await Faculty.create({ name });
+      const newFaculty = await Faculty.create({ 
+        name_vn: nameVn, 
+        name_en: nameEn 
+      });
       logger.info("Added new faculty successfully");
       return newFaculty.toJSON();
     } catch (error) {

@@ -40,6 +40,7 @@ const statusTransitionService = {
             const statusIds = new Set([id, ...newStatusIds]);
             const statuses = yield status_model_1.default.findAll({
                 where: { status_id: Array.from(statusIds) },
+                attributes: ["status_id", "name_vn", "name_en"]
             });
             return statuses.map(status => status.dataValues);
         }
@@ -47,20 +48,19 @@ const statusTransitionService = {
             console.error("Error fetching status transitions:", error);
             throw error;
         }
-    }),
-    getStatusTransitions: () => __awaiter(void 0, void 0, void 0, function* () {
+    }), getStatusTransitions: () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const statusTransitions = yield status_transitions_model_1.default.findAll({
                 include: [
                     {
                         model: status_model_1.default,
                         as: "currentStatus", // Dùng alias đã định nghĩa trong belongsTo
-                        attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
+                        attributes: ["status_id", "name_vn", "name_en"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
                     },
                     {
                         model: status_model_1.default,
                         as: "newStatus", // Dùng alias đã định nghĩa trong belongsTo
-                        attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id'
+                        attributes: ["status_id", "name_vn", "name_en"], // Sửa 'id' thành 'status_id'
                     },
                 ],
             });

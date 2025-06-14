@@ -43,12 +43,11 @@ const statusService = {
                 throw new Error("Error fetching status list");
             }
         });
-    },
-    addStatus(name) {
+    }, addStatus(name_vn, name_en) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Adding a new status", name);
+            console.log("Adding a new status", name_vn, name_en);
             try {
-                const newStatus = yield status_model_1.default.create({ name });
+                const newStatus = yield status_model_1.default.create({ name_vn, name_en });
                 logger_1.logger.info("Added new status successfully");
                 return newStatus.toJSON();
             }

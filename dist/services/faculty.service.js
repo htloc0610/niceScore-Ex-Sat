@@ -43,11 +43,14 @@ const facultyService = {
             }
         });
     },
-    addFaculty(name) {
+    addFaculty(nameVn, nameEn) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Adding a new faculty", name);
+            console.log("Adding a new faculty", { nameVn, nameEn });
             try {
-                const newFaculty = yield faculty_model_1.default.create({ name });
+                const newFaculty = yield faculty_model_1.default.create({
+                    name_vn: nameVn,
+                    name_en: nameEn
+                });
                 logger_1.logger.info("Added new faculty successfully");
                 return newFaculty.toJSON();
             }

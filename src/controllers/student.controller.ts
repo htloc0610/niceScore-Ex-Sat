@@ -259,7 +259,8 @@ const studentController = {
       } else {
         //before sending the response, we need to get Faculty name
         const faculty = await studentService.getFacultyName(faculty_id);
-        updatedStudent.faculty_id = faculty.name;
+        updatedStudent.faculty_name_en = faculty.name_en;
+        updatedStudent.faculty_name_vn = faculty.name_vi;
         logger.info("Student updated successfully");
         res.status(200).send({
           message: "Student updated successfully",

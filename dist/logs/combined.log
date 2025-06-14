@@ -1066,3 +1066,16 @@
 {"level":"error","message":"Error fetching module with translations: column translations.createdAt does not exist","timestamp":"2025-06-14T09:57:07.265Z"}
 {"level":"error","message":"Error fetching module with translations: column translations.createdAt does not exist","timestamp":"2025-06-14T10:02:00.806Z"}
 {"level":"error","message":"Error fetching module with translations: column translations.createdAt does not exist","timestamp":"2025-06-14T10:06:56.217Z"}
+{"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-06-14T11:14:00.410Z"}
+{"level":"error","message":"Error fetching student: Error fetching student by id","timestamp":"2025-06-14T11:14:17.603Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-14T11:14:21.908Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-14T11:14:42.239Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-14T11:14:42.240Z"}
+{"level":"error","message":"Error fetching students list: column course.course_name does not exist","timestamp":"2025-06-14T11:15:06.835Z"}
+{"level":"error","message":"Error fetching students list: column course.course_name does not exist","timestamp":"2025-06-14T11:16:09.984Z"}
+{"level":"error","message":"Error fetching students list: column course.course_name_vi does not exist","timestamp":"2025-06-14T11:21:23.456Z"}
+{"level":"error","message":"Error fetching students list: column course.course_name_vi does not exist","timestamp":"2025-06-14T11:21:41.101Z"}
+{"level":"error","message":"Error fetching students list: column status.name does not exist","timestamp":"2025-06-14T11:25:09.942Z"}
+{"level":"error","message":"Error fetching students list: column faculty.name_vn does not exist","timestamp":"2025-06-14T11:33:54.223Z"}
+{"level":"error","message":"Error fetching students list: column status.name does not exist","timestamp":"2025-06-14T11:35:14.133Z"}
+{"level":"error","message":"Error fetching students list: column status.name does not exist","timestamp":"2025-06-14T11:38:28.225Z"}

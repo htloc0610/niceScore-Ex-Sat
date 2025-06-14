@@ -3,7 +3,8 @@ import sequelize from "../config/db";
 
 class Faculty extends Model {
   public faculty_id!: number;
-  public name!: string;
+  public name_vi!: string;
+  public name_en!: string;
 }
 
 Faculty.init(
@@ -13,16 +14,28 @@ Faculty.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
+    name_vi: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
-  },
-  {
+    name_en: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },  {
     sequelize,
     tableName: "faculties",
     timestamps: false,
+    indexes: [
+      {
+        unique: true,
+        fields: ['name_vi'],
+      },
+      {
+        unique: true,
+        fields: ['name_en'],
+      },
+    ],
   }
 );
 

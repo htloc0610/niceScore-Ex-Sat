@@ -25,10 +25,9 @@ const statusTransitionService = {
 
         const newStatusIds = transitions.map(t => t.new_status);
 
-        const statusIds = new Set([id, ...newStatusIds]);
-
-        const statuses = await Status.findAll({
+        const statusIds = new Set([id, ...newStatusIds]);        const statuses = await Status.findAll({
             where: { status_id: Array.from(statusIds) },
+            attributes: ["status_id", "name_vn", "name_en"]
         });
 
         return statuses.map(status => status.dataValues);
@@ -36,20 +35,19 @@ const statusTransitionService = {
         console.error("Error fetching status transitions:", error);
         throw error;
     }
-},
-  getStatusTransitions: async () => {
+},  getStatusTransitions: async () => {
     try {
       const statusTransitions = await StatusTransition.findAll({
         include: [
           {
             model: Status,
             as: "currentStatus", // Dùng alias đã định nghĩa trong belongsTo
-            attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
+            attributes: ["status_id", "name_vn", "name_en"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
           },
           {
             model: Status,
             as: "newStatus", // Dùng alias đã định nghĩa trong belongsTo
-            attributes: ["status_id", "name"], // Sửa 'id' thành 'status_id'
+            attributes: ["status_id", "name_vn", "name_en"], // Sửa 'id' thành 'status_id'
           },
         ],
       });

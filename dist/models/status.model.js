@@ -13,7 +13,12 @@ Status.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
+    name_vi: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
+    name_en: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         unique: true,

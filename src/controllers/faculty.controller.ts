@@ -15,11 +15,16 @@ const facultyController = {
         .status(500)
         .send({ message: "An error occurred while fetching faculties." });
     }
-  },
-  addFaculty: async (req: Request, res: Response): Promise<void> => {
+  },  addFaculty: async (req: Request, res: Response): Promise<void> => {
     try {
-      const data = req.body;
-      const newFaculty = await facultyService.addFaculty(data.name);
+      const { name_vn, name_en } = req.body;
+      
+      if (!name_vn || !name_en) {
+        res.status(400).send({ message: "Both Vietnamese and English names are required" });
+        return;
+      }
+      
+      const newFaculty = await facultyService.addFaculty(name_vn, name_en);
       res
         .status(201)
         .send({ message: "Faculty added successfully", newFaculty });
@@ -29,10 +34,15 @@ const facultyController = {
         .status(500)
         .send({ message: "An error occurred while adding the faculty." });
     }
-  },
-  updateFaculty: async (req: Request, res: Response): Promise<void> => {
+  },  updateFaculty: async (req: Request, res: Response): Promise<void> => {
     try {
-      const { faculty_id, name } = req.body;
+      const { faculty_id } = req.body;
+      
+      if (!faculty_id) {
+        res.status(400).send({ message: "Faculty ID is required" });
+        return;
+      }
+      
       const updatedData = req.body;
       const updatedFaculty = await facultyService.updateFaculty(
         faculty_id,

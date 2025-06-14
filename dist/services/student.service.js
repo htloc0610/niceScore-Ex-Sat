@@ -41,16 +41,14 @@ const studentService = {
                             "identification_id",
                         ],
                     },
-                    include: [
-                        {
+                    include: [{
                             model: faculty_model_1.default,
                             as: "faculty",
-                            attributes: ["name"], // Lấy tên khoa
-                        },
-                        {
+                            attributes: ["name_vi", "name_en"], // Get faculty names in both languages
+                        }, {
                             model: course_model_1.default,
                             as: "course",
-                            attributes: ["course_name"], // Lấy thông tin khóa học
+                            attributes: ["course_name_en", "course_name_vi"], // Get course names in both languages
                         },
                         {
                             model: status_model_1.default,
@@ -220,13 +218,25 @@ const studentService = {
                 const studentData = studentJson;
                 // Create related entities first
                 const faculty = yield faculty_model_1.default.findOrCreate({
-                    where: { name: studentData.faculty.name },
+                    where: { name_en: studentData.faculty.name_en || studentData.faculty.name },
+                    defaults: {
+                        name_en: studentData.faculty.name_en || studentData.faculty.name,
+                        name_vi: studentData.faculty.name_vi || studentData.faculty.name
+                    }
                 });
                 const course = yield course_model_1.default.findOrCreate({
-                    where: { course_name: studentData.course.course_name },
+                    where: { course_name_en: studentData.course.course_name_en || studentData.course.course_name },
+                    defaults: {
+                        course_name_en: studentData.course.course_name_en || studentData.course.course_name,
+                        course_name_vi: studentData.course.course_name_vi || studentData.course.course_name
+                    }
                 });
                 const status = yield status_model_1.default.findOrCreate({
-                    where: { name: studentData.status.name },
+                    where: { name_vi: studentData.status.name_vi || studentData.status.name },
+                    defaults: {
+                        name_vi: studentData.status.name_vi || studentData.status.name,
+                        name_en: studentData.status.name_en || studentData.status.name
+                    },
                 });
                 const permanentAddress = yield address_service_1.default.addAddress(studentData.permanentAddress);
                 const temporaryAddress = yield address_service_1.default.addAddress(studentData.temporaryAddress);
@@ -258,13 +268,25 @@ const studentService = {
                 const studentData = studentExcel;
                 // Create related entities first
                 const faculty = yield faculty_model_1.default.findOrCreate({
-                    where: { name: studentData.faculty.name },
+                    where: { name_en: studentData.faculty.name_en },
+                    defaults: {
+                        name_en: studentData.faculty.name_en,
+                        name_vi: studentData.faculty.name_vi,
+                    }
                 });
                 const course = yield course_model_1.default.findOrCreate({
-                    where: { course_name: studentData.course.course_name },
+                    where: { course_name_en: studentData.course.course_name_en },
+                    defaults: {
+                        course_name_en: studentData.course.course_name_en,
+                        course_name_vi: studentData.course.course_name_vi,
+                    }
                 });
                 const status = yield status_model_1.default.findOrCreate({
-                    where: { name: studentData.status.name },
+                    where: { name_vi: studentData.status.name_vi },
+                    defaults: {
+                        name_vi: studentData.status.name_vi,
+                        name_en: studentData.status.name_en,
+                    },
                 });
                 const permanentAddress = yield address_service_1.default.addAddress(studentData.permanentAddress);
                 const temporaryAddress = yield address_service_1.default.addAddress(studentData.temporaryAddress);

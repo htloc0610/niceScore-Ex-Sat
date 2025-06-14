@@ -3,7 +3,8 @@ import sequelize from "../config/db";
 
 class Status extends Model {
   public status_id!: number;
-  public name!: string;
+  public name_vi!: string;
+  public name_en!: string;
 }
 
 Status.init(
@@ -13,7 +14,12 @@ Status.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    name: {
+    name_vi: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    name_en: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,

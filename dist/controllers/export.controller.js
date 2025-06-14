@@ -66,7 +66,7 @@ const exportController = {
             ];
             // Thêm dữ liệu vào bảng
             students.forEach((student) => {
-                var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4;
+                var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6;
                 worksheet.addRow({
                     student_id: student.student_id,
                     full_name: student.full_name,
@@ -75,21 +75,20 @@ const exportController = {
                     program: student.program,
                     email: student.email,
                     phone_number: student.phone_number,
-                    nationality: student.nationality,
-                    faculty_name: (_a = student.faculty) === null || _a === void 0 ? void 0 : _a.name,
-                    course_name: (_b = student.course) === null || _b === void 0 ? void 0 : _b.course_name,
-                    status_name: (_c = student.status) === null || _c === void 0 ? void 0 : _c.name,
-                    permanent_address: `${(_d = student.permanentAddress) === null || _d === void 0 ? void 0 : _d.house_number}, ${(_e = student.permanentAddress) === null || _e === void 0 ? void 0 : _e.street_name}, ${(_f = student.permanentAddress) === null || _f === void 0 ? void 0 : _f.ward}, ${(_g = student.permanentAddress) === null || _g === void 0 ? void 0 : _g.district}, ${(_h = student.permanentAddress) === null || _h === void 0 ? void 0 : _h.city}, ${(_j = student.permanentAddress) === null || _j === void 0 ? void 0 : _j.country}`,
-                    temporary_address: `${(_k = student.temporaryAddress) === null || _k === void 0 ? void 0 : _k.house_number}, ${(_l = student.temporaryAddress) === null || _l === void 0 ? void 0 : _l.street_name}, ${(_m = student.temporaryAddress) === null || _m === void 0 ? void 0 : _m.ward}, ${(_o = student.temporaryAddress) === null || _o === void 0 ? void 0 : _o.district}, ${(_p = student.temporaryAddress) === null || _p === void 0 ? void 0 : _p.city}, ${(_q = student.temporaryAddress) === null || _q === void 0 ? void 0 : _q.country}`,
-                    mailing_address: `${(_r = student.mailingAddress) === null || _r === void 0 ? void 0 : _r.house_number}, ${(_s = student.mailingAddress) === null || _s === void 0 ? void 0 : _s.street_name}, ${(_t = student.mailingAddress) === null || _t === void 0 ? void 0 : _t.ward}, ${(_u = student.mailingAddress) === null || _u === void 0 ? void 0 : _u.district}, ${(_v = student.mailingAddress) === null || _v === void 0 ? void 0 : _v.city}, ${(_w = student.mailingAddress) === null || _w === void 0 ? void 0 : _w.country}`,
-                    id_type: (_x = student.identification) === null || _x === void 0 ? void 0 : _x.type,
-                    id_number: (_y = student.identification) === null || _y === void 0 ? void 0 : _y.number,
-                    id_issue_date: (_z = student.identification) === null || _z === void 0 ? void 0 : _z.issue_date,
-                    id_expiry_date: (_0 = student.identification) === null || _0 === void 0 ? void 0 : _0.expiry_date,
-                    id_place_of_issue: (_1 = student.identification) === null || _1 === void 0 ? void 0 : _1.place_of_issue,
-                    id_country_of_issue: (_2 = student.identification) === null || _2 === void 0 ? void 0 : _2.country_of_issue,
-                    id_has_chip: ((_3 = student.identification) === null || _3 === void 0 ? void 0 : _3.has_chip) ? "Có" : "Không",
-                    id_notes: ((_4 = student.identification) === null || _4 === void 0 ? void 0 : _4.notes) || "",
+                    nationality: student.nationality, faculty_name: ((_a = student.faculty) === null || _a === void 0 ? void 0 : _a.name_vn) || ((_b = student.faculty) === null || _b === void 0 ? void 0 : _b.name_en),
+                    course_name: ((_c = student.course) === null || _c === void 0 ? void 0 : _c.course_name_vi) || ((_d = student.course) === null || _d === void 0 ? void 0 : _d.course_name_en),
+                    status_name: (_e = student.status) === null || _e === void 0 ? void 0 : _e.name_vn,
+                    permanent_address: `${(_f = student.permanentAddress) === null || _f === void 0 ? void 0 : _f.house_number}, ${(_g = student.permanentAddress) === null || _g === void 0 ? void 0 : _g.street_name}, ${(_h = student.permanentAddress) === null || _h === void 0 ? void 0 : _h.ward}, ${(_j = student.permanentAddress) === null || _j === void 0 ? void 0 : _j.district}, ${(_k = student.permanentAddress) === null || _k === void 0 ? void 0 : _k.city}, ${(_l = student.permanentAddress) === null || _l === void 0 ? void 0 : _l.country}`,
+                    temporary_address: `${(_m = student.temporaryAddress) === null || _m === void 0 ? void 0 : _m.house_number}, ${(_o = student.temporaryAddress) === null || _o === void 0 ? void 0 : _o.street_name}, ${(_p = student.temporaryAddress) === null || _p === void 0 ? void 0 : _p.ward}, ${(_q = student.temporaryAddress) === null || _q === void 0 ? void 0 : _q.district}, ${(_r = student.temporaryAddress) === null || _r === void 0 ? void 0 : _r.city}, ${(_s = student.temporaryAddress) === null || _s === void 0 ? void 0 : _s.country}`,
+                    mailing_address: `${(_t = student.mailingAddress) === null || _t === void 0 ? void 0 : _t.house_number}, ${(_u = student.mailingAddress) === null || _u === void 0 ? void 0 : _u.street_name}, ${(_v = student.mailingAddress) === null || _v === void 0 ? void 0 : _v.ward}, ${(_w = student.mailingAddress) === null || _w === void 0 ? void 0 : _w.district}, ${(_x = student.mailingAddress) === null || _x === void 0 ? void 0 : _x.city}, ${(_y = student.mailingAddress) === null || _y === void 0 ? void 0 : _y.country}`,
+                    id_type: (_z = student.identification) === null || _z === void 0 ? void 0 : _z.type,
+                    id_number: (_0 = student.identification) === null || _0 === void 0 ? void 0 : _0.number,
+                    id_issue_date: (_1 = student.identification) === null || _1 === void 0 ? void 0 : _1.issue_date,
+                    id_expiry_date: (_2 = student.identification) === null || _2 === void 0 ? void 0 : _2.expiry_date,
+                    id_place_of_issue: (_3 = student.identification) === null || _3 === void 0 ? void 0 : _3.place_of_issue,
+                    id_country_of_issue: (_4 = student.identification) === null || _4 === void 0 ? void 0 : _4.country_of_issue,
+                    id_has_chip: ((_5 = student.identification) === null || _5 === void 0 ? void 0 : _5.has_chip) ? "Có" : "Không",
+                    id_notes: ((_6 = student.identification) === null || _6 === void 0 ? void 0 : _6.notes) || "",
                 });
             });
             // Xuất file Excel
@@ -147,7 +146,7 @@ const exportController = {
       }
     }*/
     exportGrade: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
+        var _a, _b;
         try {
             const { id } = req.params;
             // Fetch grades and student details
@@ -175,7 +174,7 @@ const exportController = {
                 student_name: student.full_name,
                 s_id: student.student_id,
                 s_birthday: student.date_of_birth,
-                course_name: (_a = student.course) === null || _a === void 0 ? void 0 : _a.course_name,
+                course_name: ((_a = student.course) === null || _a === void 0 ? void 0 : _a.course_name_vi) || ((_b = student.course) === null || _b === void 0 ? void 0 : _b.course_name_en),
                 program_name: student.program || "Không có",
                 total_credits: total_credits,
                 average_grade: average_grade,

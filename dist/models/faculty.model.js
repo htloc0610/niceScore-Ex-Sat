@@ -13,15 +13,28 @@ Faculty.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    name: {
+    name_vi: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true,
+    },
+    name_en: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
     },
 }, {
     sequelize: db_1.default,
     tableName: "faculties",
     timestamps: false,
+    indexes: [
+        {
+            unique: true,
+            fields: ['name_vi'],
+        },
+        {
+            unique: true,
+            fields: ['name_en'],
+        },
+    ],
 });
 exports.default = Faculty;
 //# sourceMappingURL=faculty.model.js.map

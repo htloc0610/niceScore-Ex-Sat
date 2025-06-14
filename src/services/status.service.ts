@@ -24,11 +24,10 @@ const statusService = {
       logger.error("Error fetching status list: " + error.message);
       throw new Error("Error fetching status list");
     }
-  },
-  async addStatus(name: string) {
-    console.log("Adding a new status", name);
+  },  async addStatus(name_vn: string, name_en: string) {
+    console.log("Adding a new status", name_vn, name_en);
     try {
-        const newStatus = await Status.create({ name });
+        const newStatus = await Status.create({ name_vn, name_en });
         logger.info("Added new status successfully");
         return newStatus.toJSON();
     } catch (error) {
