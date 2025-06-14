@@ -3,7 +3,8 @@ import sequelize from "../config/db";
 
 class Course extends Model {
   public course_id!: number;
-  public course_name!: string;
+  public course_name_en!: string;
+  public course_name_vi!: string;
 }
 
 Course.init(
@@ -13,10 +14,13 @@ Course.init(
       autoIncrement: true,
       primaryKey: true,
     },
-    course_name: {
+    course_name_en: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+    },
+    course_name_vi: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
   },
   {

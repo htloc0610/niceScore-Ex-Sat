@@ -7,6 +7,7 @@ import Student from "./student.model";
 import Configuration from "./configurations.model";
 import StatusTransition from "./status_transitions.model";
 import Module from "./modules.model";
+import ModuleTranslation from "./module_translations.model";
 import Class from "./classes.model";
 import ClassRegistration from "./class_registrations.model";
 import RegistrationCancellation from "./registration_cancellations.model"; 
@@ -112,6 +113,10 @@ export default function setupRelation() {
 
   Transcript.belongsTo(Class, { foreignKey: "class_id", as: "class" });
   Class.hasMany(Transcript, { foreignKey: "class_id", as: "transcripts" });
+
+  // Module - ModuleTranslation (for multilanguage support)
+  Module.hasMany(ModuleTranslation, { foreignKey: "module_id", as: "translations" });
+  ModuleTranslation.belongsTo(Module, { foreignKey: "module_id", as: "module" });
 
   Configuration.sync();
 

@@ -19,8 +19,8 @@ const studentController = {
   //add course
   addCourse: async (req: Request, res: Response): Promise<void> => {
     try {
-      const data = req.body;
-      const newCourse = await courseService.addCourse(data.course_name);
+      const { course_name_en, course_name_vi } = req.body;
+      const newCourse = await courseService.addCourse(course_name_en, course_name_vi);
       logger.info("Course added successfully");
       res.status(201).send({ message: "Course added successfully", newCourse });
     } catch (error) {
@@ -30,12 +30,14 @@ const studentController = {
         .status(500)
         .send({ message: "An error occurred while adding the course." });
     }
-  },
-  //update course
+  },  //update course
   updateCourse: async (req: Request, res: Response): Promise<void> => {
     try {
-      const { course_id, name } = req.body;
-      const updatedData = req.body;
+      const { course_id, course_name_en, course_name_vi } = req.body;
+      const updatedData = {
+        course_name_en,
+        course_name_vi
+      };
       const updatedCourse = await courseService.updateCourse(
         course_id,
         updatedData

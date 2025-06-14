@@ -13,10 +13,13 @@ Course.init({
         autoIncrement: true,
         primaryKey: true,
     },
-    course_name: {
+    course_name_en: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true,
+    },
+    course_name_vi: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
     },
 }, {
     sequelize: db_1.default,

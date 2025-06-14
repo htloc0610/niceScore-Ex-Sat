@@ -19,10 +19,6 @@ Module.init({
         type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
     },
-    module_name: {
-        type: sequelize_1.DataTypes.STRING(255),
-        allowNull: false,
-    },
     credits: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
@@ -33,9 +29,6 @@ Module.init({
     faculty_id: {
         type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
-    },
-    description: {
-        type: sequelize_1.DataTypes.TEXT,
     },
     prerequisite_id: {
         type: sequelize_1.DataTypes.INTEGER,
