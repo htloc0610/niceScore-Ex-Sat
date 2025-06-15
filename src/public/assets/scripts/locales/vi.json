@@ -1,7 +1,8 @@
 {
   "index":{
     "header": {
-      "title": "Hệ thống quản lý sinh viên FIT@HCMUS"
+      "title": "Hệ thống quản lý sinh viên FIT@HCMUS",
+      "page_title": "Quản lý sinh viên"
     },
     "button": {
       "module_management": "Quản lí môn học",
@@ -78,6 +79,159 @@
         "loadCancellationFail": "Không thể tải chi tiết hủy lớp. Vui lòng thử lại.",
         "close": "Đóng"
       }
+    }
+  },
+  "detail": {
+    "header": {
+      "title": "Hệ thống quản lý sinh viên FIT@HCMUS"
+    },
+    "pageTitle": "Thông Tin Sinh Viên",
+    "buttons": {
+      "edit": "Chỉnh Sửa",
+      "back": "Quay Lại"
+    },
+    "personalInfo": {
+      "title": "Thông Tin Cá Nhân",
+      "studentId": "Mã số sinh viên",
+      "fullName": "Họ tên",
+      "dob": "Ngày sinh",
+      "gender": "Giới tính"
+    },
+    "academicInfo": {
+      "title": "Thông Tin Học Vấn",
+      "faculty": "Khoa",
+      "course": "Khóa học",
+      "program": "Chương trình",
+      "status": "Tình trạng sinh viên"
+    },
+    "addressInfo": {
+      "temporaryTitle": "Địa Chỉ tạm trú",
+      "mailTitle": "Địa Chỉ gửi thư",
+      "permanentTitle": "Địa Chỉ thường trú",
+      "houseNumber": "Số nhà",
+      "street": "Tên đường",
+      "ward": "Phường/Xã",
+      "district": "Quận/Huyện",
+      "city": "Thành phố",
+      "country": "Quốc gia"
+    },
+    "contactInfo": {
+      "title": "Thông Tin Liên Hệ",
+      "email": "Email",
+      "emailWarning": "Chỉ chấp nhận email: ....",
+      "phone": "Điện thoại",
+      "phoneWarning": "Chỉ chấp nhận SĐT ..."
+    },
+    "documentInfo": {
+      "title": "Thông Tin Giấy Tờ",
+      "type": "Loại giấy tờ",
+      "number": "Số giấy tờ",
+      "issueDate": "Ngày cấp",
+      "expiryDate": "Ngày hết hạn",
+      "hasChip": "Có gắn chíp điện tử",
+      "issuePlace": "Nơi cấp",
+      "issueCountry": "Quốc gia cấp",
+      "notes": "Ghi chú (nếu có)"
+    },
+    "nationalityInfo": {
+      "title": "Quốc tịch",
+      "nationality": "Quốc tịch"
+    },
+    "documentTypes": {
+      "idCard": "CMND",
+      "citizenCard": "CCCD",
+      "passport": "Hộ chiếu"
+    },
+    "options": {
+      "yes": "Có",
+      "no": "Không",
+      "male": "Nam",
+      "female": "Nữ",
+      "other": "Khác"
+    }  },
+  "modules": {
+    "list": {
+      "title": "Danh sách môn học",
+      "search": "Tìm kiếm môn học",
+      "credits": "tín chỉ",
+      "status": {
+        "active": "Hoạt động",
+        "inactive": "Dừng"
+      },
+      "buttons": {
+        "edit": "Sửa",
+        "delete": "Xóa"
+      }
+    },
+    "form": {
+      "add": {
+        "title": "Thêm Môn học",
+        "button": "Thêm Môn học"
+      },
+      "edit": {
+        "title": "Sửa Môn học",
+        "button": "Lưu thay đổi"
+      },
+      "labels": {
+        "code": "Mã môn học",
+        "name": "Tên môn học",
+        "credits": "Số tín chỉ",
+        "faculty": "Khoa",
+        "prerequisite": "Môn học tiên quyết",
+        "status": "Trạng thái",
+        "description": "Mô tả",
+        "active": "Hoạt động",
+        "inactive": "Dừng",
+        "no_prerequisite": "Không có"
+      }
+    },
+    "alerts": {
+      "success": {
+        "add": "Thêm môn học thành công!",
+        "edit": "Chỉnh sửa môn học thành công!",
+        "delete": "Xóa môn học thành công!"
+      },
+      "error": {
+        "title": "Lỗi!",
+        "add": "Thêm môn học thất bại.",
+        "edit": "Chỉnh sửa môn học thất bại: ",
+        "delete": "Xóa môn học thất bại: ",
+        "load": "Lỗi tải dữ liệu môn học.",
+        "connection": "Lỗi kết nối server."
+      },      "confirm": {
+        "delete": {
+          "title": "Bạn có chắc chắn?",
+          "text": "Hành động này sẽ xóa môn học khỏi danh sách!",
+          "confirmButton": "Xóa",
+          "cancelButton": "Hủy"
+        }
+      }
+    },    "classes": {
+      "title": "Danh sách lớp học",
+      "add": "Thêm lớp học",
+      "add_title": "Thêm Lớp Học Mới",
+      "edit_title": "Chỉnh sửa Lớp Học",
+      "classroom": "Phòng học",
+      "name": "Tên lớp",
+      "code": "Mã lớp",
+      "lecturer": "Giảng viên",
+      "max_students": "Sĩ số tối đa",
+      "academic_year": "Năm học",
+      "semester": "Học kỳ",
+      "schedule": "Lịch học",
+      "students": "Sĩ số",
+      "actions": "Hành động",
+      "edit": "Sửa",
+      "delete": "Xóa",
+      "view": "Xem",
+      "close": "Đóng",
+      "total_classes": "Tổng số lớp",
+      "no_classes": "Không có lớp học nào cho môn học này",
+      "loading_error": "Có lỗi khi tải danh sách lớp học",
+      "add_class_success": "Thêm lớp học thành công!",
+      "edit_class_success": "Chỉnh sửa lớp học thành công!",
+      "server_error": "Lỗi kết nối server",
+      "loading_error_class": "Lỗi tải dữ liệu lớp học"
     }
   }
 }

@@ -15,25 +15,38 @@ router.get("/more", async (req, res) => {
   const faculties = await facultyService.getAllFaculties(); 
   const statuses = await statusService.getAllStatuses();
   const courses = await courseService.getAllCourses();
-  const modules = await moduleService.getAllModules();
-  res.render("more", {faculties: faculties, statuses: statuses, courses: courses, modules: modules}); // Render the "more" Handlebars template
+  const lang = res.locals.lang || 'en';
+  const modules = await moduleService.getAllModules(lang);
+  res.render("more", {
+    faculties: faculties, 
+    statuses: statuses, 
+    courses: courses, 
+    modules: modules,
+    lang: lang
+  }); // Render the "more" Handlebars template with language
 });
 
 // [GET] /add
 router.get("/add", (req, res) => {
-  res.render("add"); // Render the "add" Handlebars template
+  const lang = res.locals.lang || 'en';
+  res.render("add", { lang: lang }); // Render the "add" Handlebars template with language
 });
 
 // [GET] /configuration
 router.get("/configurations", async (req, res) => {
   const configurations = await configurationService.getAllConfiguration(); // Get the configurations from the service
-  res.render("configurations", {configurations: configurations}); // Render the "configurations" Handlebars template
+  const lang = res.locals.lang || 'en';
+  res.render("configurations", {
+    configurations: configurations,
+    lang: lang
+  }); // Render the "configurations" Handlebars template with language
 });
 
 // [GET] /module
 router.get("/module", async (req, res) => {
-  const modules = await moduleService.getAllModules(); // Get the modules from the service
-  res.render("module", {modules: modules}); // Render the "class" Handlebars template
+  const lang = res.locals.lang || 'en';
+  const modules = await moduleService.getAllModules(lang); // Get the modules from the service with language
+  res.render("module", {modules: modules, lang: lang}); // Render the "class" Handlebars template with language
 });
 
 // [GET] /class
@@ -51,18 +64,51 @@ router.get("/class/:id", async (req, res) => {
 
   // Get students in class
   const students = await class_registationService.getRegistrationsByClassId(idInt);
+  const lang = res.locals.lang || 'en';
 
   // console.log(students);
 
   res.render("class", {
     classes: classData, // Ensure this matches the template variable
     students: students || [], // Ensure students is always an array
+    lang: lang // Add language
   });
 });
 
 // [GET] /:id
-router.get("/:id", (req, res) => {
-  res.render("detail", { id: req.params.id }); // Render the "detail" Handlebars template with the id parameter
+router.get("/:id", async (req, res) => {
+  try {
+    const lang = res.locals.lang || 'en';
+    const studentId = req.params.id;
+
+    console.log("Fetching details for student ID:", studentId);
+    
+    // Fetch student data from the database
+    const student = await studentService.getStudentById(parseInt(studentId, 10));
+    
+    if (!student) {
+      return res.status(404).render("error", { 
+        message: lang === 'en' ? "Student not found" : "Không tìm thấy sinh viên",
+        lang: lang 
+      });
+    }
+    
+    // Convert Sequelize model to plain object
+    const studentData = student.get({ plain: true });
+    
+    // Render the "detail" Handlebars template with the student data and language
+    res.render("detail", { 
+      id: studentId, 
+      student: studentData, 
+      lang: lang 
+    });
+  } catch (error) {
+    console.error('Error fetching student details:', error);
+    res.status(500).render("error", {
+      message: res.locals.lang === 'en' ? "An error occurred while fetching student details." : "Đã xảy ra lỗi khi lấy thông tin sinh viên.",
+      lang: res.locals.lang || 'en'
+    });
+  }
 });
 
 // [GET] /
@@ -71,7 +117,7 @@ router.get("/", async (req, res) => {
   const studentsDataValue = await studentService.getListStudent();
   const students = studentsDataValue.map(student => student.get({plain: true}));
   // console.log(students);
-  const lang = ['en', 'vi'].includes(req.query.lang as string) ? req.query.lang : 'en';
+  const lang = res.locals.lang || 'en';
   res.render("index", {faculties: faculties, students: students, lang: lang}); // Render the "index" Handlebars template
 });
 

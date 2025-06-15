@@ -1,3 +1,26 @@
+let t; // Global translations object
+
+// Load translations on page load
+document.addEventListener("DOMContentLoaded", async function() {
+  const lang = localStorage.getItem("lang") || 'en';
+  const translationUrl = `/assets/scripts/locales/${lang}.json`;
+
+  try {
+    const res = await fetch(translationUrl);
+    if (!res.ok) throw new Error("Failed to load translations");
+    t = await res.json();
+    console.log("Loaded translations for class page", t);
+    
+    // Get class ID from URL
+    const classId = window.location.pathname.split("/").pop();
+    if (classId) {
+      loadStudents(classId);
+    }
+  } catch (error) {
+    console.error("Error loading translations:", error);
+  }
+});
+
 async function loadStudents(classId) {
   const studentTableBody = document.getElementById("student-table-body");
   const studentCount = document.getElementById("student-count");

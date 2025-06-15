@@ -53,8 +53,8 @@ function addModule() {
     
         <label>Tình trạng</label>
         <select name="is_active" class="input-style" hidden>
-          <option value="true" selected>Đang hoạt động</option>
-          <option value="false">Ngưng hoạt động</option>
+          <option value="true" selected>Hoạt động</option>
+          <option value="false">Dừng</option>
         </select>
     
         <label>Mô tả</label>
@@ -154,7 +154,7 @@ function addModule() {
         </td>
         <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
             <span class="${newData.is_active ? 'px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600' : 'px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700'}">
-                ${newData.is_active ? 'Đang hoạt động' : 'Không còn được mở'}
+                ${newData.is_active ? 'Hoạt động' : 'Dừng'}
             </span>
         </td>
         <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${newData.description || ''}</td>

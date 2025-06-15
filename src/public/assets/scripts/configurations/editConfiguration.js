@@ -1,4 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
+let t; // Global translations object
+
+document.addEventListener("DOMContentLoaded", async () => {
+    // Load translations
+    const lang = localStorage.getItem("lang") || 'en';
+    const translationUrl = `/assets/scripts/locales/${lang}.json`;
+
+    try {
+        const res = await fetch(translationUrl);
+        if (!res.ok) throw new Error("Failed to load translations");
+        t = await res.json();
+        console.log("Loaded translations for configurations page", t);
+    } catch (error) {
+        console.error("Error loading translations:", error);
+    }
+
     const editButtons = document.querySelectorAll("tbody button");
 
     editButtons.forEach((button) => {

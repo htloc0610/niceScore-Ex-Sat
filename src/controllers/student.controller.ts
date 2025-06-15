@@ -22,10 +22,26 @@ const studentController = {
   getStudentById: async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
-      const student = await studentService.getStudentById(parseInt(id, 10));
+      const studentId = parseInt(id, 10);
+      
+      // Check if studentId is a valid number
+      if (isNaN(studentId)) {
+        logger.error(`Invalid student ID: ${id}`);
+        res.status(400).send({ 
+          message: "Invalid student ID", 
+          error: `The provided ID '${id}' is not a valid number`
+        });
+        return;
+      }
+      
+      const student = await studentService.getStudentById(studentId);
+      
       if (!student) {
         logger.error(`Student with ID ${id} not found`);
-        res.status(404).send({ message: "Student not found" });
+        res.status(404).send({ 
+          message: "Student not found", 
+          error: `No student found with ID ${id}`
+        });
       } else {
         logger.info(`Student with ID ${id} found`);
         res.status(200).send({ message: "Student found", student });
@@ -35,16 +51,42 @@ const studentController = {
       console.error(error);
       res
         .status(500)
-        .send({ message: "An error occurred while fetching the student." });
+        .send({ 
+          message: "An error occurred while fetching the student.",
+          error: error.message
+        });
     }
   },
 
   updateStudentById: async (req: Request, res: Response): Promise<void> => {
     try {
       const { id } = req.params;
+      const studentId = parseInt(id, 10);
+      
+      // Check if studentId is a valid number
+      if (isNaN(studentId)) {
+        logger.error(`Invalid student ID for update: ${id}`);
+        res.status(400).send({ 
+          message: "Invalid student ID", 
+          error: `The provided ID '${id}' is not a valid number`
+        });
+        return;
+      }
+      
       const updatedData = req.body;
       const email = updatedData.email;
       const phone_number = updatedData.phone_number;
+
+      // Check if the student exists before proceeding
+      const existingStudent = await studentService.getStudentById(studentId);
+      if (!existingStudent) {
+        logger.error(`Student with ID ${id} not found for update`);
+        res.status(404).send({ 
+          message: "Student not found", 
+          error: `No student found with ID ${id}`
+        });
+        return;
+      }
 
       // Check if the email domain is allowed
       const emailConfig = await configurationService.getConfiguration(
@@ -81,51 +123,41 @@ const studentController = {
       }
 
       // Check if the status transition is allowed
-      const currentStatus = await studentService.getStudentStatus(
-        parseInt(id, 10)
-      );
+      const currentStatus = await studentService.getStudentStatus(studentId);
 
-      console.log("updatedData.status_id", updatedData.status_id);
       const newStatus = updatedData.status_id;
 
       console.log("currentStatus:", currentStatus);
       console.log("newStatus:", newStatus);
 
-      const statusTransition = await StatusTransition.findOne({
-        where: { current_status: currentStatus, new_status: newStatus },
-      });
-      if (!statusTransition) {
-        logger.error("Invalid status transition");
-        res.status(400).send({ message: "Invalid status transition." });
-        return;
+      // Don't check status transition if the status hasn't changed
+      if (currentStatus != newStatus) {
+        const statusTransition = await StatusTransition.findOne({
+          where: { current_status: currentStatus, new_status: newStatus },
+        });
+        
+        if (!statusTransition) {
+          logger.error("Invalid status transition");
+          res.status(400).send({ message: "Invalid status transition." });
+          return;
+        }
       }
-
-      console.log("updatedData", updatedData);
-
-      const updatedStudent = await studentService.updateStudentById(
-        parseInt(id, 10),
+      
+      const updated = await studentService.updateStudentById(
+        studentId,
         updatedData
       );
-
-      if (!updatedStudent) {
-        logger.error(`Student with ID ${id} not found or no changes made.`);
-        res
-          .status(404)
-          .send({ message: "Student not found or no changes made." });
-        return;
-      } else {
-        logger.info(`Student with ID ${id} updated successfully`);
-        res.status(200).send({
-          message: "Student updated successfully",
-          updatedStudent,
-        });
-      }
+      
+      res.status(200).send({ message: "Student updated successfully", student: updated });
     } catch (error) {
       logger.error("Error updating student: " + error.message);
       console.error(error);
       res
         .status(500)
-        .send({ message: "An error occurred while updating the student." });
+        .send({ 
+          message: "An error occurred while updating the student.",
+          error: error.message 
+        });
     }
   },
 

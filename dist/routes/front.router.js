@@ -27,22 +27,35 @@ router.get("/more", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const faculties = yield faculty_service_1.default.getAllFaculties();
     const statuses = yield status_service_1.default.getAllStatuses();
     const courses = yield course_service_1.default.getAllCourses();
-    const modules = yield module_service_1.default.getAllModules();
-    res.render("more", { faculties: faculties, statuses: statuses, courses: courses, modules: modules }); // Render the "more" Handlebars template
+    const lang = res.locals.lang || 'en';
+    const modules = yield module_service_1.default.getAllModules(lang);
+    res.render("more", {
+        faculties: faculties,
+        statuses: statuses,
+        courses: courses,
+        modules: modules,
+        lang: lang
+    }); // Render the "more" Handlebars template with language
 }));
 // [GET] /add
 router.get("/add", (req, res) => {
-    res.render("add"); // Render the "add" Handlebars template
+    const lang = res.locals.lang || 'en';
+    res.render("add", { lang: lang }); // Render the "add" Handlebars template with language
 });
 // [GET] /configuration
 router.get("/configurations", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const configurations = yield configurations_service_1.default.getAllConfiguration(); // Get the configurations from the service
-    res.render("configurations", { configurations: configurations }); // Render the "configurations" Handlebars template
+    const lang = res.locals.lang || 'en';
+    res.render("configurations", {
+        configurations: configurations,
+        lang: lang
+    }); // Render the "configurations" Handlebars template with language
 }));
 // [GET] /module
 router.get("/module", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const modules = yield module_service_1.default.getAllModules(); // Get the modules from the service
-    res.render("module", { modules: modules }); // Render the "class" Handlebars template
+    const lang = res.locals.lang || 'en';
+    const modules = yield module_service_1.default.getAllModules(lang); // Get the modules from the service with language
+    res.render("module", { modules: modules, lang: lang }); // Render the "class" Handlebars template with language
 }));
 // [GET] /class
 router.get("/class/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -57,23 +70,52 @@ router.get("/class/:id", (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
     // Get students in class
     const students = yield class_registation_service_1.default.getRegistrationsByClassId(idInt);
+    const lang = res.locals.lang || 'en';
     // console.log(students);
     res.render("class", {
         classes: classData, // Ensure this matches the template variable
         students: students || [], // Ensure students is always an array
+        lang: lang // Add language
     });
 }));
 // [GET] /:id
-router.get("/:id", (req, res) => {
-    res.render("detail", { id: req.params.id }); // Render the "detail" Handlebars template with the id parameter
-});
+router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const lang = res.locals.lang || 'en';
+        const studentId = req.params.id;
+        console.log("Fetching details for student ID:", studentId);
+        // Fetch student data from the database
+        const student = yield student_service_1.default.getStudentById(parseInt(studentId, 10));
+        if (!student) {
+            return res.status(404).render("error", {
+                message: lang === 'en' ? "Student not found" : "Không tìm thấy sinh viên",
+                lang: lang
+            });
+        }
+        // Convert Sequelize model to plain object
+        const studentData = student.get({ plain: true });
+        // Render the "detail" Handlebars template with the student data and language
+        res.render("detail", {
+            id: studentId,
+            student: studentData,
+            lang: lang
+        });
+    }
+    catch (error) {
+        console.error('Error fetching student details:', error);
+        res.status(500).render("error", {
+            message: res.locals.lang === 'en' ? "An error occurred while fetching student details." : "Đã xảy ra lỗi khi lấy thông tin sinh viên.",
+            lang: res.locals.lang || 'en'
+        });
+    }
+}));
 // [GET] /
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const faculties = yield faculty_service_1.default.getAllFaculties();
     const studentsDataValue = yield student_service_1.default.getListStudent();
     const students = studentsDataValue.map(student => student.get({ plain: true }));
     // console.log(students);
-    const lang = ['en', 'vi'].includes(req.query.lang) ? req.query.lang : 'en';
+    const lang = res.locals.lang || 'en';
     res.render("index", { faculties: faculties, students: students, lang: lang }); // Render the "index" Handlebars template
 }));
 exports.default = router;

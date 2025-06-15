@@ -73,22 +73,18 @@
         class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
       >
         {{t "index.button.module_management"}}
-      </button>
+      </button>      
+      
       <form id="languageForm">
         <select name="lang" id="languageSelect">
           <option value="en">English</option>
           <option value="vi">Tiếng Việt</option>
-        </select>
+        </select>      
       </form>
-
+      
       <script>
-        // Load saved language from localStorage
-        document.addEventListener("DOMContentLoaded", function () { const
-        savedLang = localStorage.getItem("lang"); if (savedLang) {
-        document.getElementById("languageSelect").value = savedLang; } }); //
-        document.getElementById("languageSelect").addEventListener("change",function
-        () { const selectedLang = this.value; localStorage.setItem("lang",
-        selectedLang); location.reload(); });
+        // Thiết lập data-lang trên HTML element để LanguageHandler biết server language
+        document.documentElement.setAttribute('data-lang', '{{lang}}');
       </script>
 
     </ul>

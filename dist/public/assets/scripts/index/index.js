@@ -4,7 +4,7 @@ const facultySelect = document.getElementById("faculty_search");
 let t;
 document.addEventListener("DOMContentLoaded", async () => {
   currentStudents = students;
-  const lang = document.documentElement.lang || 'en';
+  const lang = localStorage.getItem("lang") || 'en';
     const translationUrl = `/assets/scripts/locales/${lang}.json`;
 
     async function loadTranslations() {

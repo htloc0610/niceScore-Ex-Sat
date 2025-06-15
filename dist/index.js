@@ -17,14 +17,19 @@ require("dotenv/config");
 const index_router_1 = __importDefault(require("./routes/index.router"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const realation_1 = __importDefault(require("./models/realation"));
 const handlebars_1 = __importDefault(require("./config/handlebars"));
+const i18n_1 = require("./i18n");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 8080;
 // Middleware to handle JSON
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use((0, cors_1.default)());
+app.use((0, cookie_parser_1.default)());
+// Language middleware
+app.use(i18n_1.languageMiddleware);
 // Serve static files from the "public" directory
 app.use(express_1.default.static(path_1.default.join(__dirname, "../src/public")));
 // Configure Handlebars

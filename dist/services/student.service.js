@@ -48,12 +48,11 @@ const studentService = {
                         }, {
                             model: course_model_1.default,
                             as: "course",
-                            attributes: ["course_name_en", "course_name_vi"], // Get course names in both languages
-                        },
-                        {
+                            attributes: ["course_id", "course_name_en", "course_name_vi"], // Get course names in both languages
+                        }, {
                             model: status_model_1.default,
                             as: "status",
-                            attributes: ["name"], // Lấy trạng thái sinh viên
+                            attributes: ["status_id", "name_vi", "name_en"], // Get status in both languages
                         },
                         {
                             model: address_model_1.default,

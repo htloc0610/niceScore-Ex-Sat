@@ -14,7 +14,7 @@ const moduleService = {  async getAllModules(language = "en") {
           {
             model: Faculty,
             as: "faculty",
-            attributes: ["name"],
+            attributes: ["name_en", "name_vi"],
           },
           {
             model: Modules,

@@ -53,8 +53,8 @@ function editModule(moduleId) {
                             
                         <label>Tình trạng</label>
                         <select name="is_active" class="input-style" ${module.is_active ? '' : 'disabled'}>
-                            <option value="true" ${module.is_active ? 'selected' : ''}>Đang hoạt động</option>
-                            <option value="false" ${!module.is_active ? 'selected' : ''}>Không còn được mở</option>
+                            <option value="true" ${module.is_active ? 'selected' : ''}>Hoạt động</option>
+                            <option value="false" ${!module.is_active ? 'selected' : ''}>Dừng</option>
                         </select>
         
                         <label>Mô tả</label>
@@ -107,7 +107,7 @@ function editModule(moduleId) {
                             row.children[3].textContent = formData.credits;
                             row.children[4].textContent = faculties.find(f => f.faculty_id === formData.faculty_id).name;
                             row.children[5].textContent = formData.prerequisite_id ? modules.find(m => m.module_id === formData.prerequisite_id).module_code : 'Không có';
-                            row.children[6].textContent = formData.is_active ? 'Đang hoạt động' : 'Không còn được mở';
+                            row.children[6].textContent = formData.is_active ? 'Hoạt động' : 'Dừng';
                             row.children[7].textContent = formData.description || 'N/A';
                         }
                         } else {

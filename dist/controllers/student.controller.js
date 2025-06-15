@@ -34,10 +34,23 @@ const studentController = {
     getStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { id } = req.params;
-            const student = yield student_service_1.default.getStudentById(parseInt(id, 10));
+            const studentId = parseInt(id, 10);
+            // Check if studentId is a valid number
+            if (isNaN(studentId)) {
+                logger_1.logger.error(`Invalid student ID: ${id}`);
+                res.status(400).send({
+                    message: "Invalid student ID",
+                    error: `The provided ID '${id}' is not a valid number`
+                });
+                return;
+            }
+            const student = yield student_service_1.default.getStudentById(studentId);
             if (!student) {
                 logger_1.logger.error(`Student with ID ${id} not found`);
-                res.status(404).send({ message: "Student not found" });
+                res.status(404).send({
+                    message: "Student not found",
+                    error: `No student found with ID ${id}`
+                });
             }
             else {
                 logger_1.logger.info(`Student with ID ${id} found`);
@@ -49,15 +62,38 @@ const studentController = {
             console.error(error);
             res
                 .status(500)
-                .send({ message: "An error occurred while fetching the student." });
+                .send({
+                message: "An error occurred while fetching the student.",
+                error: error.message
+            });
         }
     }),
     updateStudentById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { id } = req.params;
+            const studentId = parseInt(id, 10);
+            // Check if studentId is a valid number
+            if (isNaN(studentId)) {
+                logger_1.logger.error(`Invalid student ID for update: ${id}`);
+                res.status(400).send({
+                    message: "Invalid student ID",
+                    error: `The provided ID '${id}' is not a valid number`
+                });
+                return;
+            }
             const updatedData = req.body;
             const email = updatedData.email;
             const phone_number = updatedData.phone_number;
+            // Check if the student exists before proceeding
+            const existingStudent = yield student_service_1.default.getStudentById(studentId);
+            if (!existingStudent) {
+                logger_1.logger.error(`Student with ID ${id} not found for update`);
+                res.status(404).send({
+                    message: "Student not found",
+                    error: `No student found with ID ${id}`
+                });
+                return;
+            }
             // Check if the email domain is allowed
             const emailConfig = yield configurations_service_1.default.getConfiguration("allowed_email_domain");
             const emailRegex = new RegExp(`^[a-zA-Z0-9._%+-]+@${emailConfig.config_value}$`);
@@ -83,42 +119,33 @@ const studentController = {
                 return;
             }
             // Check if the status transition is allowed
-            const currentStatus = yield student_service_1.default.getStudentStatus(parseInt(id, 10));
-            console.log("updatedData.status_id", updatedData.status_id);
+            const currentStatus = yield student_service_1.default.getStudentStatus(studentId);
             const newStatus = updatedData.status_id;
             console.log("currentStatus:", currentStatus);
             console.log("newStatus:", newStatus);
-            const statusTransition = yield status_transitions_model_1.default.findOne({
-                where: { current_status: currentStatus, new_status: newStatus },
-            });
-            if (!statusTransition) {
-                logger_1.logger.error("Invalid status transition");
-                res.status(400).send({ message: "Invalid status transition." });
-                return;
-            }
-            console.log("updatedData", updatedData);
-            const updatedStudent = yield student_service_1.default.updateStudentById(parseInt(id, 10), updatedData);
-            if (!updatedStudent) {
-                logger_1.logger.error(`Student with ID ${id} not found or no changes made.`);
-                res
-                    .status(404)
-                    .send({ message: "Student not found or no changes made." });
-                return;
-            }
-            else {
-                logger_1.logger.info(`Student with ID ${id} updated successfully`);
-                res.status(200).send({
-                    message: "Student updated successfully",
-                    updatedStudent,
+            // Don't check status transition if the status hasn't changed
+            if (currentStatus != newStatus) {
+                const statusTransition = yield status_transitions_model_1.default.findOne({
+                    where: { current_status: currentStatus, new_status: newStatus },
                 });
+                if (!statusTransition) {
+                    logger_1.logger.error("Invalid status transition");
+                    res.status(400).send({ message: "Invalid status transition." });
+                    return;
+                }
             }
+            const updated = yield student_service_1.default.updateStudentById(studentId, updatedData);
+            res.status(200).send({ message: "Student updated successfully", student: updated });
         }
         catch (error) {
             logger_1.logger.error("Error updating student: " + error.message);
             console.error(error);
             res
                 .status(500)
-                .send({ message: "An error occurred while updating the student." });
+                .send({
+                message: "An error occurred while updating the student.",
+                error: error.message
+            });
         }
     }),
     addStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {

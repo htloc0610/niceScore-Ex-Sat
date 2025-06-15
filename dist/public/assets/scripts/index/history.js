@@ -9,7 +9,9 @@ const noHistoryMessage = document.getElementById('noHistoryMessage');
 
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  const lang = localStorage.getItem("lang") || 'en';
+  const locale = lang === 'vi' ? 'vi-VN' : 'en-US';
+  return date.toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
 function populateModal(data) {

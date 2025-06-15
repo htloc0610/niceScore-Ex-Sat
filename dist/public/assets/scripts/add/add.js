@@ -1,25 +1,46 @@
 const addStudentForm = document.getElementById("addStudentForm");
+let t; // Global translations object
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+    // Load translations
+    const lang = localStorage.getItem("lang") || 'en';
+    const translationUrl = `/assets/scripts/locales/${lang}.json`;
 
-    //configurations for mailwarning and phone warning
+    try {
+        const res = await fetch(translationUrl);
+        if (!res.ok) throw new Error("Failed to load translations");
+        t = await res.json();
+        console.log("Loaded translations for add page", t);
+    } catch (error) {
+        console.error("Error loading translations:", error);
+    }    //configurations for email warning and phone warning
     fetch("/api/configurations")
     .then((response) => response.json())
     .then((data) => {
         const configurations = data.configurations;
 
-        // Chuyển danh sách cấu hình thành object để dễ truy xuất
+        // Convert configurations to a map for easy access
         const configMap = configurations.reduce((acc, item) => {
             acc[item.config_key] = item.config_value;
             return acc;
         }, {});
 
-        // Gán giá trị vào các thẻ HTML
-        document.getElementById("emailWarning").textContent =
-            "Chỉ chấp nhận email: @" + (configMap.allowed_email_domain || "example.com");
+        // Update email warning with translation
+        const emailWarning = document.getElementById("emailWarning");
+        if (emailWarning && configMap.allowed_email_domain) {
+            const baseEmailWarning = t?.detail?.contactInfo?.emailWarningPrefix || 'Only accepts emails from:';
+            emailWarning.textContent = `${baseEmailWarning} @${configMap.allowed_email_domain}`;
+        }
 
-        document.getElementById("phoneWarning").textContent =
-            "Chỉ chấp nhận SĐT " + (configMap.phone_country_code || "+00");
+        // Update phone warning with translation
+        const phoneWarning = document.getElementById("phoneWarning");
+        if (phoneWarning && configMap.phone_country_code) {
+            const basePhoneWarning = t?.detail?.contactInfo?.phoneWarningPrefix || 'Phone number should start with:';
+            phoneWarning.textContent = `${basePhoneWarning} ${configMap.phone_country_code}`;
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching configurations:", error);
     })
 
     fetch("/api/faculty")

@@ -3,9 +3,11 @@ import "dotenv/config";
 import setupRoutes from "./routes/index.router";
 import path from "path";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import sequelize from "./config/db";
 import setupRelation from "./models/realation";
 import hbs from "./config/handlebars";
+import { languageMiddleware } from "./i18n";
 
 const app = express();
 const port: string | number = process.env.PORT || 8080;
@@ -14,6 +16,10 @@ const port: string | number = process.env.PORT || 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(cookieParser());
+
+// Language middleware
+app.use(languageMiddleware);
 
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, "../src/public")));

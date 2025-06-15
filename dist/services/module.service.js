@@ -38,7 +38,7 @@ const moduleService = { getAllModules() {
                         {
                             model: faculty_model_1.default,
                             as: "faculty",
-                            attributes: ["name"],
+                            attributes: ["name_en", "name_vi"],
                         },
                         {
                             model: modules_model_1.default,

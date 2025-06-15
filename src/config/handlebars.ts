@@ -1,39 +1,16 @@
 import { create } from "express-handlebars";
 import path from "path";
-import fs from "fs";
-const en = JSON.parse(fs.readFileSync(path.join(__dirname, "../public/assets/scripts/locales/en.json"), "utf-8"));
-const vi = JSON.parse(fs.readFileSync(path.join(__dirname, "../public/assets/scripts/locales/vi.json"), "utf-8"));
-
-const translationsMap = {
-  en,
-  vi
-};
-
-function getNested(obj: any, key: string): any {
-  return key.split('.').reduce((res, k) => (res ? res[k] : undefined), obj);
-}
-type Lang = typeof allowedLangs[number];    // 2. Lang = 'en' | 'vi'
-
-const allowedLangs = ['en', 'vi'] as const; // 'as const' keeps literal types
+import { languageHelpers } from '../i18n/helpers';
 
 const hbs = create({
   extname: ".hbs",
   defaultLayout: "main",
   layoutsDir: path.join(__dirname, "../views/layouts"),
-  partialsDir: path.join(__dirname, "../views/partials"),
-  helpers: {
-    json: (context: any) => JSON.stringify(context),
-    t: function (key: any, options: any) {
-  // Get language from localStorage or default to 'en'
-  const lang = (typeof window !== "undefined" && localStorage.getItem("lang")) || "en";
-
-  // Ensure it's a valid language
-  const selectedLang: Lang = allowedLangs.includes(lang as Lang) ? (lang as Lang) : "en";
-
-  // Retrieve translation safely
-  return getNested(translationsMap[selectedLang], key);
-},
-
+  partialsDir: path.join(__dirname, "../views/partials"),  helpers: {
+    // Import all language helpers
+    ...languageHelpers,
+    
+    // Additional helpers not related to i18n
     eq: (a: any, b: any) => a === b,
     ifEqual: (a: any, b: any, options: any) => {
       if (a == b) {
@@ -41,38 +18,9 @@ const hbs = create({
       }
       return options.inverse(this); // Render block if false
     },
-    prerequisiteDisplay: (prerequisite: any) => {
-      return prerequisite ? prerequisite.module_code : "Không";
-    },
-  
-    isActiveText: (isActive: boolean) => {
-      if (isActive) 
-        return "Đang hoạt động"
-      else 
-        return "Không còn được mở"  
-    },
-    isActiveClass: (isActive: boolean) => {
-      if (isActive) 
-        return "px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600"
-
-      else 
-        return "px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"
-
-    },
-  
-    statusClass: (statusName: string) => {
-      switch (statusName) {
-        case "Đang học":
-          return "px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600";
-        case "Đã tốt nghiệp":
-          return "px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100";
-        case "Đã thôi học":
-          return "px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700";
-        case "Tạm dừng học":
-          return "px-2 py-1 font-semibold leading-tight text-yellow-700 bg-yellow-100 rounded-full dark:text-yellow-100 dark:bg-yellow-700";
-        default:
-          return "px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700";
-      }
+    // JSON helper to stringify objects for client-side use
+    json: (context: any) => {
+      return JSON.stringify(context);
     }
   }
   

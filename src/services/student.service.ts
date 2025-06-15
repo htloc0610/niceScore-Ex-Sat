@@ -34,12 +34,11 @@ const studentService = {
           },          {
             model: Course,
             as: "course",
-            attributes: ["course_name_en", "course_name_vi"], // Get course names in both languages
-          },
-          {
+            attributes: ["course_id","course_name_en", "course_name_vi"], // Get course names in both languages
+          },          {
             model: Status,
             as: "status",
-            attributes: ["name"], // Lấy trạng thái sinh viên
+            attributes: ["status_id", "name_vi", "name_en"], // Get status in both languages
           },
           {
             model: Address,

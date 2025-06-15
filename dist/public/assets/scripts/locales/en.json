@@ -1,7 +1,8 @@
 {
   "index":{
     "header": {
-      "title": "FIT@HCMUS Student Management System"
+      "title": "FIT@HCMUS Student Management System",
+      "page_title": "Student Management"
     },
     "button": {
       "module_management": "Manage Modules",
@@ -78,6 +79,159 @@
         "loadCancellationFail": "Failed to load cancellation details. Please try again.",
         "close": "Close"
       }
+    }
+  },
+  "detail": {
+    "header": {
+      "title": "FIT@HCMUS Student Management System"
+    },
+    "pageTitle": "Student Information",
+    "buttons": {
+      "edit": "Edit",
+      "back": "Back"
+    },
+    "personalInfo": {
+      "title": "Personal Information",
+      "studentId": "Student ID",
+      "fullName": "Full Name",
+      "dob": "Date of Birth",
+      "gender": "Gender"
+    },
+    "academicInfo": {
+      "title": "Academic Information",
+      "faculty": "Faculty",
+      "course": "Course",
+      "program": "Program",
+      "status": "Student Status"
+    },
+    "addressInfo": {
+      "temporaryTitle": "Temporary Address",
+      "mailTitle": "Mailing Address",
+      "permanentTitle": "Permanent Address",
+      "houseNumber": "House Number",
+      "street": "Street Name",
+      "ward": "Ward",
+      "district": "District",
+      "city": "City",
+      "country": "Country"
+    },
+    "contactInfo": {
+      "title": "Contact Information",
+      "email": "Email",
+      "emailWarning": "Only accepts emails: ...",
+      "phone": "Phone",
+      "phoneWarning": "Only accepts phone numbers: ..."
+    },
+    "documentInfo": {
+      "title": "Document Information",
+      "type": "Document Type",
+      "number": "Document Number",
+      "issueDate": "Issue Date",
+      "expiryDate": "Expiry Date",
+      "hasChip": "Has Electronic Chip",
+      "issuePlace": "Issue Place",
+      "issueCountry": "Issue Country",
+      "notes": "Notes (if any)"
+    },
+    "nationalityInfo": {
+      "title": "Nationality",
+      "nationality": "Nationality"
+    },
+    "documentTypes": {
+      "idCard": "ID Card",
+      "citizenCard": "Citizen ID Card",
+      "passport": "Passport"
+    },
+    "options": {
+      "yes": "Yes",
+      "no": "No",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    }  },
+  "modules": {
+    "list": {
+      "title": "Modules",
+      "search": "Search modules",
+      "credits": "credits",
+      "status": {
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "buttons": {
+        "edit": "Edit",
+        "delete": "Delete"
+      }
+    },
+    "form": {
+      "add": {
+        "title": "Add Module",
+        "button": "Add Module"
+      },
+      "edit": {
+        "title": "Edit Module",
+        "button": "Save Changes"
+      },
+      "labels": {
+        "code": "Module Code",
+        "name": "Module Name",
+        "credits": "Credits",
+        "faculty": "Faculty",
+        "prerequisite": "Prerequisite Module",
+        "status": "Status",
+        "description": "Description",
+        "active": "Active",
+        "inactive": "Inactive",
+        "no_prerequisite": "None"
+      }
+    },
+    "alerts": {
+      "success": {
+        "add": "Module added successfully!",
+        "edit": "Module updated successfully!",
+        "delete": "Module deleted successfully!"
+      },
+      "error": {
+        "title": "Error!",
+        "add": "Failed to add module.",
+        "edit": "Failed to edit module: ",
+        "delete": "Failed to delete module: ",
+        "load": "Failed to load module data.",
+        "connection": "Server connection error."
+      },      "confirm": {
+        "delete": {
+          "title": "Are you sure?",
+          "text": "This action will remove the module from the list!",
+          "confirmButton": "Delete",
+          "cancelButton": "Cancel"
+        }
+      }
+    },    "classes": {
+      "title": "Class List",
+      "add": "Add Class",
+      "add_title": "Add New Class",
+      "edit_title": "Edit Class",
+      "classroom": "Classroom",
+      "name": "Class Name",
+      "code": "Class Code",
+      "lecturer": "Lecturer",
+      "max_students": "Max Students",
+      "academic_year": "Academic Year",
+      "semester": "Semester",
+      "schedule": "Schedule",
+      "students": "Students",
+      "actions": "Actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View",
+      "close": "Close",
+      "total_classes": "Total classes",
+      "no_classes": "No classes for this module",
+      "loading_error": "Error loading class list",
+      "add_class_success": "Class added successfully!",
+      "edit_class_success": "Class updated successfully!",
+      "server_error": "Server connection error",
+      "loading_error_class": "Error loading class data"
     }
   }
 }

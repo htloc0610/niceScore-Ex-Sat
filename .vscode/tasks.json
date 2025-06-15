@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Test module_class.js language support",
+			"type": "shell",
+			"command": "node -e \"console.log('Testing module_class.js language support...'); console.log('This can\\'t be automated fully, but you can follow these steps for testing:'); console.log('1. Open the module page in browser'); console.log('2. Select a module to view its classes'); console.log('3. Change language between English and Vietnamese'); console.log('4. Verify all UI elements update with proper translations')\"",
+			"group": "test",
+			"problemMatcher": []
+		}
+	]
+}
