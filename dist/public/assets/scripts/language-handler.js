@@ -56,8 +56,7 @@ window.LanguageHandler = {
    * Set a new language
    * @param {string} lang - Language code
    * @returns {boolean} Success status
-   */
-  setLanguage(lang) {
+   */  setLanguage(lang) {
     if (!this.isValidLanguage(lang)) {
       console.warn(`Unsupported language: ${lang}`);
       return false;
@@ -73,6 +72,11 @@ window.LanguageHandler = {
     
     // Update UI
     this.updateUI(lang);
+    
+    // Dispatch a custom event for other components to react to language changes
+    const event = new CustomEvent('languageChanged', { detail: { language: lang } });
+    window.dispatchEvent(event);
+    console.log('Dispatched languageChanged event:', lang);
     
     return true;
   },
@@ -109,12 +113,30 @@ window.LanguageHandler = {
   /**
    * Handle language change from selector
    * @param {Event} event - Change event
+   */  /**
+   * Handle language change from selector
+   * Ensures translations are loaded before page reload
+   * @param {Event} event - Change event
    */
-  handleLanguageChange(event) {
+  async handleLanguageChange(event) {
     const newLang = event.target.value;
+    
     if (LanguageHandler.setLanguage(newLang)) {
-      // Reload page to apply changes
-      window.location.reload();
+      // Load translations for the new language before reloading
+      try {
+        await LanguageHandler.loadTranslations();
+        console.log(`Loaded translations for ${newLang} before page reload`);
+        
+        // Small delay to allow other scripts to respond to the language change
+        setTimeout(() => {
+          // Reload page to apply changes
+          window.location.reload();
+        }, 100);
+      } catch (error) {
+        console.error('Error loading translations before page reload:', error);
+        // Reload anyway as a fallback
+        window.location.reload();
+      }
     }
   },
   
@@ -195,5 +217,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   LanguageHandler.updateUI(LanguageHandler.currentLanguage);
 });
 
-// Shorthand for translate function
-window.t = (key) => LanguageHandler.translate(key);
+// Shorthand for translate function - always use the most up-to-date translations
+window.t = (key) => {
+  // If translations aren't loaded or we're mid-language change, ensure we have them
+  if (!LanguageHandler.translations) {
+    console.warn(`Translations not loaded yet when trying to translate: ${key}`);
+    // Return the key as fallback in case translations aren't ready
+    return key;
+  }
+  return LanguageHandler.translate(key);
+};

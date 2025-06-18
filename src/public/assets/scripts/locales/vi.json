@@ -1,8 +1,52 @@
-{
-  "index":{
+{  "index": {
     "header": {
       "title": "Hệ thống quản lý sinh viên FIT@HCMUS",
       "page_title": "Quản lý sinh viên"
+    },
+    "add_page": {
+      "title": "Thêm sinh viên mới",
+      "student_id": "MSSV:",
+      "full_name": "Họ tên:",
+      "date_of_birth": "Ngày sinh:",
+      "gender": "Giới tính:",
+      "faculty": "Khoa:",
+      "course": "Khóa học:",
+      "program": "Chương trình:",
+      "status": "Trạng thái:",
+      "id_type": "Loại giấy tờ:",
+      "id_number": "Số:",
+      "issue_date": "Ngày cấp:",
+      "place_of_issue": "Nơi cấp:",
+      "expiry_date": "Ngày hết hạn:",
+      "has_chip": "Có gắn chip",
+      "country_of_issue": "Quốc gia cấp:",
+      "notes": "Ghi chú:",
+      "permanent_address": "Địa chỉ thường trú:",
+      "temporary_address": "Địa chỉ tạm trú:",
+      "mailing_address": "Địa chỉ nhận thư:",
+      "house_number": "Số nhà",
+      "street": "Tên đường",
+      "ward": "Phường/Xã",
+      "district": "Quận/Huyện",
+      "city": "Tỉnh/Thành phố",
+      "country": "Quốc gia",
+      "email": "Email:",
+      "phone_number": "Số điện thoại:",
+      "nationality": "Quốc tịch:",
+      "save_button": "Lưu",
+      "back_button": "Quay lại",
+      "id_type_options": {
+        "id_card": "CMND",
+        "citizen_card": "CCCD",
+        "passport": "Hộ chiếu"
+      },
+      "gender_options": {
+        "male": "Nam",
+        "female": "Nữ",
+        "other": "Khác"
+      },
+      "email_warning": "Chỉ chấp nhận email từ:",
+      "phone_warning": "Số điện thoại phải bắt đầu bằng:"
     },
     "button": {
       "module_management": "Quản lí môn học",
@@ -74,9 +118,38 @@
       "faculty": {
         "all": "Tất cả khoa"
       },
+      "delete": {
+        "confirm": {
+          "title": "Bạn có chắc chắn?",
+          "text": "Dữ liệu sẽ bị xóa vĩnh viễn!",
+          "confirmButton": "Xóa!",
+          "cancelButton": "Hủy"
+        },
+        "error": "Đã xảy ra lỗi khi xóa sinh viên."
+      },
+      "add": {
+        "success": {
+          "title": "Thành công!",
+          "text": "Thêm sinh viên thành công!"
+        },
+        "error": {
+          "title": "Lỗi!",
+          "text": "Đã xảy ra lỗi: "
+        },
+        "select": {
+          "faculty": "Chọn khoa",
+          "course": "Chọn khóa",
+          "status": "Chọn trạng thái"
+        },
+        "button": {
+          "close": "Đóng",
+          "ok": "OK"
+        }
+      },
       "alert": {
         "error": "Lỗi!",
         "loadCancellationFail": "Không thể tải chi tiết hủy lớp. Vui lòng thử lại.",
+        "deleteError": "Đã xảy ra lỗi khi xóa sinh viên.",
         "close": "Đóng"
       }
     }
@@ -148,7 +221,8 @@
       "male": "Nam",
       "female": "Nữ",
       "other": "Khác"
-    }  },
+    }
+  },
   "modules": {
     "list": {
       "title": "Danh sách môn học",
@@ -198,7 +272,8 @@
         "delete": "Xóa môn học thất bại: ",
         "load": "Lỗi tải dữ liệu môn học.",
         "connection": "Lỗi kết nối server."
-      },      "confirm": {
+      },
+      "confirm": {
         "delete": {
           "title": "Bạn có chắc chắn?",
           "text": "Hành động này sẽ xóa môn học khỏi danh sách!",
@@ -206,7 +281,8 @@
           "cancelButton": "Hủy"
         }
       }
-    },    "classes": {
+    },
+    "classes": {
       "title": "Danh sách lớp học",
       "add": "Thêm lớp học",
       "add_title": "Thêm Lớp Học Mới",

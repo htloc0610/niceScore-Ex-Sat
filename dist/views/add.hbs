@@ -1,251 +1,199 @@
 <body class="">
-
-    <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
-        <div
-            class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300">
-            <!-- Mobile hamburger -->
-            <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
-                @click="toggleSideMenu" aria-label="Menu">
-                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                        clip-rule="evenodd"></path>
-                </svg>
-            </button>
-
-            <ul class="flex items-center mx-auto gap-6 flex-shrink-0 space-x-6">
-                <!-- Profile menu -->
-                <li class="relative">
-                    <h2 class="text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                        Hệ thống quản lý sinh viên FIT@HCMUS
-                    </h2>
-                </li>
-
-                <!-- Theme toggler -->
-                <li class="flex">
-                    <button class="rounded-md focus:outline-none focus:shadow-outline-purple" @click="toggleTheme"
-                        aria-label="Toggle color mode">
-                        <template x-if="!dark">
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                            </svg>
-                        </template>
-                        <template x-if="dark">
-                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </template>
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </header>
-
     <main class="bg-gray-100 flex justify-center text-[17px] min-h-screen">
         <div class="w-[90%] bg-white rounded-lg shadow-lg m-auto mt-20   ">
 
             <form id="addStudentForm" class="w-full h-full mx-auto px-8 my-7">
             <div class="flex flex-col">
-                <h2 class="text-[25px] font-bold mb-4">Thêm sinh viên mới</h2>
+                <h2 class="text-[25px] font-bold mb-4">{{t "index.add_page.title"}}</h2>
                 <div class="grid grid-cols-3 gap-8">
-                    <div class="flex flex-col space-y-1">
-                        <div>
-                            <label for="student_id" class="block text-[17px] font-medium text-gray-700">MSSV:</label>
+                    <div class="flex flex-col space-y-1">                        <div>
+                            <label for="student_id" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.student_id"}}</label>
                             <input type="number" id="student_id" name="student_id" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="full_name" class="block text-[17px] font-medium text-gray-700">Họ tên:</label>
+                            <label for="full_name" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.full_name"}}</label>
                             <input type="text" id="full_name" name="full_name" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="date_of_birth" class="block text-[17px] font-medium text-gray-700">Ngày sinh:</label>
+                            <label for="date_of_birth" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.date_of_birth"}}</label>
                             <input type="date" id="date_of_birth" name="date_of_birth" required 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="gender" class="block text-[17px] font-medium text-gray-700">Giới tính:</label>
+                            <label for="gender" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.gender"}}</label>
                             <select id="gender" name="gender" required 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
-                                <option value="Nam">Nam</option>
-                                <option value="Nữ">Nữ</option>
-                                <option value="Khác">Khác</option>
+                                <option value="Nam">{{t "index.add_page.gender_options.male"}}</option>
+                                <option value="Nữ">{{t "index.add_page.gender_options.female"}}</option>
+                                <option value="Khác">{{t "index.add_page.gender_options.other"}}</option>
                             </select>
                         </div>
                         <div>
-                            <label for="faculty_id" class="block text-[17px] font-medium text-gray-700">Khoa:</label>
+                            <label for="faculty_id" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.faculty"}}</label>
                             <select id="faculty_id" name="faculty_id" required 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                                 
                         </select>
                         </div>
                         <div>
-                            <label for="course_id" class="block text-[17px] font-medium text-gray-700">Khóa học:</label>
+                            <label for="course_id" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.course"}}</label>
                             <select id="course_id" name="course_id" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                             </select>
                         </div>
                         <div>
-                            <label for="program" class="block text-[17px] font-medium text-gray-700">Chương trình:</label>
+                            <label for="program" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.program"}}</label>
                             <input type="text" id="program" name="program" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                        <label for="status_id" class="block text-[17px] font-medium text-gray-700">Trạng thái:</label>
+                        <label for="status_id" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.status"}}</label>
                         <select id="status_id" name="status_id" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </select>
                         </div> 
-                    </div>
-                    <div class="flex flex-col space-y-1">
-                        <label class="block text-[17px] font-medium text-gray-700">Loại giấy tờ:</label>
+                    </div>                    <div class="flex flex-col space-y-1">
+                        <label class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.id_type"}}</label>
                         <div class="flex justify-between">
                             <label>
-                                <input type="radio" name="type" id="CMND" value="CMND" checked> CMND
+                                <input type="radio" name="type" id="CMND" value="CMND" checked> {{t "index.add_page.id_type_options.id_card"}}
                             </label>
                             <label>
-                                <input type="radio" name="type" id="CCCD" value="CCCD"> CCCD
+                                <input type="radio" name="type" id="CCCD" value="CCCD"> {{t "index.add_page.id_type_options.citizen_card"}}
                             </label>
                             <label>
-                                <input type="radio" name="type" id="Passport" value="Passport"> Hộ chiếu
+                                <input type="radio" name="type" id="Passport" value="Passport"> {{t "index.add_page.id_type_options.passport"}}
                             </label>
                         </div>
                         <div>
-                            <label for="number" id="number-label" class="block text-[17px] font-medium text-gray-700">Số:</label>
+                            <label for="number" id="number-label" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.id_number"}}</label>
                             <input type="text" id="number" name="number" required 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="issue_date" class="block text-[17px] font-medium text-gray-700">Ngày cấp:</label>
+                            <label for="issue_date" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.issue_date"}}</label>
                             <input type="date" id="issue_date" name="issue_date" required 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div> 
                         <div>
-                            <label for="place_of_issue" class="block text-[17px] font-medium text-gray-700">Nơi cấp:</label>
+                            <label for="place_of_issue" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.place_of_issue"}}</label>
                             <input type="text" id="place_of_issue" name="place_of_issue" required 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div>
-                            <label for="expiry_date" class="block text-[17px] font-medium text-gray-700">Ngày hết hạn:</label>
+                            <label for="expiry_date" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.expiry_date"}}</label>
                             <input type="date" id="expiry_date" name="expiry_date" required 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <label id="has_chip-label" class="hidden">
-                            <input type="checkbox" name="has_chip"> Có gắn chip
+                            <input type="checkbox" name="has_chip"> {{t "index.add_page.has_chip"}}
                         </label>
                         <div id="country_of_issue-div" class="hidden">
-                            <label for="country_of_issue" class="block text-[17px] font-medium text-gray-700">Quốc gia cấp:</label>
+                            <label for="country_of_issue" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.country_of_issue"}}</label>
                             <input type="text" id="country_of_issue" name="country_of_issue" 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                         <div id="notes-div" class="hidden">
-                            <label for="notes" class="block text-[17px] font-medium text-gray-700">Ghi chú:</label>
+                            <label for="notes" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.notes"}}</label>
                             <input type="text" id="notes" name="notes" 
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                         </div>
                     
                     </div>
-                    <div class="flex flex-col space-y-1">
-                        <div id="permanent-address">
-                            <label class="block text-[17px] font-medium text-gray-700">Địa chỉ thường trú:</label>
+                    <div class="flex flex-col space-y-1">                        <div id="permanent-address">
+                            <label class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.permanent_address"}}</label>
                             <div class="flex flex-col space-y-1">
                                 <div class="flex space-x-1">
-                                <input type="text" id="permanent-house_number" name="permanent.house_number" placeholder="Số nhà"
+                                <input type="text" id="permanent-house_number" name="permanent.house_number" placeholder="{{t "index.add_page.house_number"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="permanent-street" name="permanent.street" placeholder="Tên đường"
+                                <input type="text" id="permanent-street" name="permanent.street" placeholder="{{t "index.add_page.street"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="permanent-ward" name="permanent.ward" placeholder="Phường/Xã"
+                                <input type="text" id="permanent-ward" name="permanent.ward" placeholder="{{t "index.add_page.ward"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 </div>
                                 <div class="flex space-x-1">
-                                <input type="text" id="permanent-district" name="permanent.district" placeholder="Quận/Huyện"
+                                <input type="text" id="permanent-district" name="permanent.district" placeholder="{{t "index.add_page.district"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="permanent-city" name="permanent.city" placeholder="Tỉnh/Thành phố"
+                                <input type="text" id="permanent-city" name="permanent.city" placeholder="{{t "index.add_page.city"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="permanent-country" name="permanent.country" placeholder="Quốc gia"
+                                <input type="text" id="permanent-country" name="permanent.country" placeholder="{{t "index.add_page.country"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                             </div>
                             </div>
                         </div>
-                        
-                        <div id="temporary-address">
-                            <label class="block text-[17px] font-medium text-gray-700">Địa chỉ tạm trú:</label>
+                          <div id="temporary-address">
+                            <label class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.temporary_address"}}</label>
                             <div class="flex flex-col space-y-1">
                             <div class="flex space-x-1">
-                                <input type="text" id="temporary-house_number" name="temporary.house_number" placeholder="Số nhà"
+                                <input type="text" id="temporary-house_number" name="temporary.house_number" placeholder="{{t "index.add_page.house_number"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="temporary-street" name="temporary.street" placeholder="Tên đường"
+                                <input type="text" id="temporary-street" name="temporary.street" placeholder="{{t "index.add_page.street"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="temporary-ward" name="temporary.ward" placeholder="Phường/Xã"
+                                <input type="text" id="temporary-ward" name="temporary.ward" placeholder="{{t "index.add_page.ward"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 </div>
                                 <div class="flex space-x-1">
-                                    <input type="text" id="temporary-district" name="temporary.district" placeholder="Quận/Huyện"
+                                    <input type="text" id="temporary-district" name="temporary.district" placeholder="{{t "index.add_page.district"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="temporary-city" name="temporary.city" placeholder="Tỉnh/Thành phố"
+                                <input type="text" id="temporary-city" name="temporary.city" placeholder="{{t "index.add_page.city"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="temporary-country" name="temporary.country" placeholder="Quốc gia"
+                                <input type="text" id="temporary-country" name="temporary.country" placeholder="{{t "index.add_page.country"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                             </div></div>
                         </div>
-                        
-                        <div id="mailing-address">
-                            <label class="block text-[17px] font-medium text-gray-700">Địa chỉ nhận thư:</label>
+                          <div id="mailing-address">
+                            <label class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.mailing_address"}}</label>
                             <div class="flex flex-col space-y-1">
                             <div class="flex space-x-1">
-                                <input type="text" id="mailing-house_number" name="mailing.house_number" placeholder="Số nhà"
+                                <input type="text" id="mailing-house_number" name="mailing.house_number" placeholder="{{t "index.add_page.house_number"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="mailing-street" name="mailing.street" placeholder="Tên đường"
+                                <input type="text" id="mailing-street" name="mailing.street" placeholder="{{t "index.add_page.street"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="mailing-ward" name="mailing.ward" placeholder="Phường/Xã"
+                                <input type="text" id="mailing-ward" name="mailing.ward" placeholder="{{t "index.add_page.ward"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                                 </div>
                                 <div class="flex space-x-1">
-                                    <input type="text" id="mailing-district" name="mailing.district" placeholder="Quận/Huyện"
+                                    <input type="text" id="mailing-district" name="mailing.district" placeholder="{{t "index.add_page.district"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="mailing-city" name="mailing.city" placeholder="Tỉnh/Thành phố"
+                                <input type="text" id="mailing-city" name="mailing.city" placeholder="{{t "index.add_page.city"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
-                                <input type="text" id="mailing-country" name="mailing.country" placeholder="Quốc gia"
+                                <input type="text" id="mailing-country" name="mailing.country" placeholder="{{t "index.add_page.country"}}"
                                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]"/>
                             </div>
                         </div>
                         </div>
-                        
-
-                    <div>
-                        <label for="email" class="block text-[17px] font-medium text-gray-700">Email:
+                            <div>
+                        <label for="email" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.email"}}
                             <p class="text-sm text-red-500" id="emailWarning">
-                                Chỉ chấp nhận email: ....
+                                {{t "index.add_page.email_warning"}} ....
                             </p>
                         </label>
                         <input type="email" id="email" name="email" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                     </div>
                     <div>
-                        <label for="phone_number" class="block text-[17px] font-medium text-gray-700">Số điện thoại:
+                        <label for="phone_number" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.phone_number"}}
                             <p class="text-sm text-red-500" id="phoneWarning">
-                                Chỉ chấp nhận SĐT +...
+                                {{t "index.add_page.phone_warning"}} +...
                             </p>
                         </label>
                         <input type="text" id="phone_number" name="phone_number" required 
                             class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                     </div>
                     <div>
-                        <label for="nationality" class="block text-[17px] font-medium text-gray-700">Quốc tịch:</label>
+                        <label for="nationality" class="block text-[17px] font-medium text-gray-700">{{t "index.add_page.nationality"}}</label>
                         <input type="text" id="nationality" name="nationality" required 
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-[17px]">
                     </div>
                 </div>
                 
                    
-        </div>
-                <div class="mt-4 flex justify-end">
-                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-[17px] font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Lưu</button>
+        </div>                <div class="mt-4 flex justify-end">
+                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-[17px] font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">{{t "index.add_page.save_button"}}</button>
                     <button type="button" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-[17px] font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    onclick="history.back()">Quay lại</button>
+                    onclick="history.back()">{{t "index.add_page.back_button"}}</button>
                 </div>
                 </div>
             </form>

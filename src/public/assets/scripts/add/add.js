@@ -1,8 +1,31 @@
 const addStudentForm = document.getElementById("addStudentForm");
-let t; // Global translations object
+let t; // Local reference to the global translations
 
-document.addEventListener("DOMContentLoaded", async function () {
-    // Load translations
+/**
+ * Get the latest translations from the LanguageHandler
+ * This ensures we always have the current language's translations
+ */
+function getLatestTranslations() {
+    if (window.LanguageHandler && window.LanguageHandler.translations) {
+        t = window.LanguageHandler.translations;
+        console.log("Retrieved latest translations for add student functionality");
+        return true;
+    } else {
+        console.warn("LanguageHandler translations not available");
+        return false;
+    }
+}
+
+/**
+ * Fallback function to load translations directly if LanguageHandler is not available
+ */
+async function loadTranslations() {
+    // First try to get translations from LanguageHandler
+    if (getLatestTranslations()) {
+        return true;
+    }
+    
+    // Fallback to direct loading
     const lang = localStorage.getItem("lang") || 'en';
     const translationUrl = `/assets/scripts/locales/${lang}.json`;
 
@@ -10,10 +33,60 @@ document.addEventListener("DOMContentLoaded", async function () {
         const res = await fetch(translationUrl);
         if (!res.ok) throw new Error("Failed to load translations");
         t = await res.json();
-        console.log("Loaded translations for add page", t);
+        console.log("Loaded translations directly for add student page");
+        return true;
     } catch (error) {
         console.error("Error loading translations:", error);
-    }    //configurations for email warning and phone warning
+        return false;
+    }
+}
+
+/**
+ * Update select placeholders with translated text
+ */
+function updateSelectPlaceholders() {
+    // Get translations
+    const facultyPlaceholder = window.t && typeof window.t === 'function' 
+        ? window.t('index.js.add.select.faculty') 
+        : (t?.index?.js?.add?.select?.faculty || "Select faculty");
+        
+    const coursePlaceholder = window.t && typeof window.t === 'function'
+        ? window.t('index.js.add.select.course')
+        : (t?.index?.js?.add?.select?.course || "Select course");
+        
+    const statusPlaceholder = window.t && typeof window.t === 'function'
+        ? window.t('index.js.add.select.status')
+        : (t?.index?.js?.add?.select?.status || "Select status");
+    
+    // Update faculty select if it exists
+    const facultySelect = document.getElementById("faculty_id");
+    if (facultySelect && facultySelect.options.length > 0) {
+        facultySelect.options[0].textContent = facultyPlaceholder;
+    }
+    
+    // Update course select if it exists
+    const courseSelect = document.getElementById("course_id");
+    if (courseSelect && courseSelect.options.length > 0) {
+        courseSelect.options[0].textContent = coursePlaceholder;
+    }
+    
+    // Update status select if it exists
+    const statusSelect = document.getElementById("status_id");
+    if (statusSelect && statusSelect.options.length > 0) {
+        statusSelect.options[0].textContent = statusPlaceholder;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    // Initial load
+    await loadTranslations();
+    
+    // Listen for custom language change events
+    window.addEventListener('languageChanged', async function() {
+        console.log("Language change detected in add.js");
+        await loadTranslations();
+        updateSelectPlaceholders(); // Update selection placeholders when language changes
+    });//configurations for email warning and phone warning
     fetch("/api/configurations")
     .then((response) => response.json())
     .then((data) => {
@@ -49,12 +122,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             const facultySelect = document.getElementById("faculty_id");
 
             // Clear any existing options
-            facultySelect.innerHTML = "";
-
-            // Add a default option
+            facultySelect.innerHTML = "";            // Add a default option with translation
             const defaultOption = document.createElement("option");
             defaultOption.value = "";
-            defaultOption.textContent = "Chọn khoa";
+            
+            // Use translations if available
+            const facultyPlaceholder = window.t && typeof window.t === 'function' 
+                ? window.t('index.js.add.select.faculty') 
+                : (t?.index?.js?.add?.select?.faculty || "Select faculty");
+                
+            defaultOption.textContent = facultyPlaceholder;
             facultySelect.appendChild(defaultOption);
 
             // Add the fetched faculties to the select list
@@ -73,12 +150,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             const courseSelect = document.getElementById("course_id");
             console.log(courseSelect);
             // Clear any existing options
-            courseSelect.innerHTML = "";
-
-            // Add a default option
+            courseSelect.innerHTML = "";            // Add a default option with translation
             const defaultOption = document.createElement("option");
             defaultOption.value = "";
-            defaultOption.textContent = "Chọn khóa";
+            
+            // Use translations if available
+            const coursePlaceholder = window.t && typeof window.t === 'function'
+                ? window.t('index.js.add.select.course')
+                : (t?.index?.js?.add?.select?.course || "Select course");
+                
+            defaultOption.textContent = coursePlaceholder;
             courseSelect.appendChild(defaultOption);
 
             // Add the fetched faculties to the select list
@@ -98,12 +179,16 @@ document.addEventListener("DOMContentLoaded", async function () {
             const statusSelect = document.getElementById("status_id");
 
             // Clear any existing options
-            statusSelect.innerHTML = "";
-
-            // Add a default option
+            statusSelect.innerHTML = "";            // Add a default option with translation
             const defaultOption = document.createElement("option");
             defaultOption.value = "";
-            defaultOption.textContent = "Chọn trạng thái";
+            
+            // Use translations if available
+            const statusPlaceholder = window.t && typeof window.t === 'function'
+                ? window.t('index.js.add.select.status')
+                : (t?.index?.js?.add?.select?.status || "Select status");
+                
+            defaultOption.textContent = statusPlaceholder;
             statusSelect.appendChild(defaultOption);
 
             // Add the fetched faculties to the select list
@@ -144,8 +229,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
 
     // Run initially to set correct visibility
-    updateVisibility();
-
+    updateVisibility();    // Update placeholders after all fetch requests complete
+    updateSelectPlaceholders();
+    
     addStudentForm.addEventListener("submit", function (event) {
         event.preventDefault(); // Prevent page reload
 
@@ -186,13 +272,29 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return response.json();
             })
             .then(result => {
-                // alert("Thêm sinh viên thành công!");
-
+                // alert("Thêm sinh viên thành công!");                // Always get the latest translations
+                getLatestTranslations();
+                
+                // Get translated text
+                let successTitle = 'Thành công!';
+                let successText = 'Thêm sinh viên thành công!';
+                let okButton = 'OK';
+                
+                if (window.t && typeof window.t === 'function') {
+                    successTitle = window.t('index.js.add.success.title');
+                    successText = window.t('index.js.add.success.text');
+                    okButton = window.t('index.js.add.button.ok');
+                } else if (t && t.index && t.index.js && t.index.js.add) {
+                    successTitle = t.index.js.add.success.title || successTitle;
+                    successText = t.index.js.add.success.text || successText;
+                    okButton = t.index.js.add.button.ok || okButton;
+                }
+                
                 Swal.fire({
                     icon: 'success',
-                    title: 'Thành công!',
-                    text: 'Thêm sinh viên thành công!',
-                    confirmButtonText: 'OK',
+                    title: successTitle,
+                    text: successText,
+                    confirmButtonText: okButton,
                     timer: 2000,
                     timerProgressBar: true,
                     showConfirmButton: false
@@ -203,12 +305,29 @@ document.addEventListener("DOMContentLoaded", async function () {
             })
             .catch(error => {
                 console.error("Error submitting form:", error);
-                // alert("Đã xảy ra lỗi: " + error.message);
+                // alert("Đã xảy ra lỗi: " + error.message);                // Get latest translations
+                getLatestTranslations();
+                
+                // Get translated text
+                let errorTitle = 'Lỗi!';
+                let errorPrefix = 'Đã xảy ra lỗi: ';
+                let closeButton = 'Đóng';
+                
+                if (window.t && typeof window.t === 'function') {
+                    errorTitle = window.t('index.js.add.error.title');
+                    errorPrefix = window.t('index.js.add.error.text');
+                    closeButton = window.t('index.js.add.button.close');
+                } else if (t && t.index && t.index.js && t.index.js.add) {
+                    errorTitle = t.index.js.add.error.title || errorTitle;
+                    errorPrefix = t.index.js.add.error.text || errorPrefix;
+                    closeButton = t.index.js.add.button.close || closeButton;
+                }
+                
                 Swal.fire({
                     icon: 'error',
-                    title: 'Lỗi!',
-                    text: 'Đã xảy ra lỗi: ' + error.message,
-                    confirmButtonText: 'Đóng'
+                    title: errorTitle,
+                    text: errorPrefix + error.message,
+                    confirmButtonText: closeButton
                   });
                   
             });

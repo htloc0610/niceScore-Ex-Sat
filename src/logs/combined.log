@@ -1210,3 +1210,167 @@
 {"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-15T13:51:13.185Z"}
 {"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-15T14:26:24.466Z"}
 {"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-15T14:26:26.813Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-17T03:03:45.472Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-17T03:03:57.153Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-17T03:03:59.987Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-17T10:58:03.877Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-17T10:58:10.364Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-17T10:58:16.079Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-17T10:58:24.419Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:40:39.035Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:40:39.202Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:40:39.372Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:40:39.542Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:40:39.712Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:40:39.713Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:40:44.120Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:40:44.286Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:40:44.288Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:40:44.294Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:40:44.295Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:40:44.297Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:40:46.642Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:40:46.808Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:40:46.810Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:40:46.812Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:40:46.814Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:40:46.815Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:40:49.622Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:40:49.788Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:40:49.789Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:40:49.792Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:40:49.792Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:40:49.794Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:40:51.590Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:40:51.758Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:40:51.760Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:40:51.762Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:40:51.764Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:40:51.764Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:41:47.429Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:41:47.597Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:41:47.771Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:41:47.946Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:41:47.946Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:41:48.119Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:42:37.776Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:42:39.065Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:42:39.068Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:42:39.164Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:42:39.178Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:42:39.178Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:42:47.587Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:42:47.755Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:42:47.758Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:42:47.762Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:42:47.762Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:42:47.765Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:42:50.925Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:42:51.095Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:42:51.097Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:42:51.100Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:42:51.101Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:42:51.103Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:42:54.819Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:42:54.989Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:42:54.992Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:42:54.996Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:42:55.000Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:42:55.001Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:43:01.006Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:43:01.173Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:43:01.175Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:43:01.180Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:43:01.182Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:43:01.182Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:51:00.901Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:51:02.192Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:51:02.243Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:51:02.246Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:51:02.247Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:51:02.338Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:51:05.004Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:51:05.175Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:51:05.180Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:51:05.185Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:51:05.186Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:51:05.189Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:51:07.620Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:51:07.795Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:51:07.797Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:51:07.797Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:51:07.800Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:51:07.804Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:51:10.610Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:51:10.781Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:51:10.784Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:51:10.786Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:51:10.790Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:51:10.791Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:51:30.499Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:51:31.836Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:51:31.868Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:51:31.944Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:51:31.944Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:51:31.986Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:51:40.229Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:51:40.394Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:51:40.396Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:51:40.401Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:51:40.402Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:51:40.404Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T11:51:42.261Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T11:51:42.427Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T11:51:42.432Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T11:51:42.437Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T11:51:42.438Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T11:51:42.443Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T12:07:47.936Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T12:07:48.105Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T12:07:48.277Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T12:07:48.449Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:07:48.623Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T12:07:48.623Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T12:07:54.362Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T12:07:54.532Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:07:54.534Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T12:07:54.534Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T12:07:54.536Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T12:07:54.538Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T12:08:01.030Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:08:01.202Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T12:08:01.203Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T12:08:01.205Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T12:08:01.206Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T12:08:01.210Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T12:08:05.646Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T12:08:05.816Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T12:08:05.818Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T12:08:05.819Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:08:05.821Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T12:08:05.821Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T12:08:08.800Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T12:08:08.971Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T12:08:08.975Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T12:08:08.980Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:08:08.983Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T12:08:08.984Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T12:08:12.601Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T12:08:12.773Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T12:08:12.775Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:08:12.776Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T12:08:12.776Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T12:08:12.777Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 2","timestamp":"2025-06-17T12:08:26.154Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 1","timestamp":"2025-06-17T12:08:29.919Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 3","timestamp":"2025-06-17T12:08:47.179Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-17T12:09:25.505Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-17T12:09:26.773Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-17T12:09:26.850Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:09:26.916Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-17T12:09:26.917Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-17T12:09:26.919Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:09:27.672Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:09:47.532Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:10:03.397Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:11:12.618Z"}

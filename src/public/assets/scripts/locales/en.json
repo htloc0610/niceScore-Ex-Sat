@@ -1,8 +1,52 @@
-{
-  "index":{
+{  "index":{
     "header": {
       "title": "FIT@HCMUS Student Management System",
       "page_title": "Student Management"
+    },
+    "add_page": {
+      "title": "Add New Student",
+      "student_id": "Student ID:",
+      "full_name": "Full Name:",
+      "date_of_birth": "Date of Birth:",
+      "gender": "Gender:",
+      "faculty": "Faculty:",
+      "course": "Course:",
+      "program": "Program:",
+      "status": "Status:",
+      "id_type": "ID Type:",
+      "id_number": "Number:",
+      "issue_date": "Issue Date:",
+      "place_of_issue": "Place of Issue:",
+      "expiry_date": "Expiry Date:",
+      "has_chip": "Has chip",
+      "country_of_issue": "Country of Issue:",
+      "notes": "Notes:",
+      "permanent_address": "Permanent Address:",
+      "temporary_address": "Temporary Address:",
+      "mailing_address": "Mailing Address:",
+      "house_number": "House Number",
+      "street": "Street Name",
+      "ward": "Ward",
+      "district": "District",
+      "city": "City",
+      "country": "Country",
+      "email": "Email:",
+      "phone_number": "Phone Number:",
+      "nationality": "Nationality:",
+      "save_button": "Save",
+      "back_button": "Back",
+      "id_type_options": {
+        "id_card": "ID Card",
+        "citizen_card": "Citizen ID",
+        "passport": "Passport"
+      },
+      "gender_options": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other"
+      },
+      "email_warning": "Only accepts emails from:",
+      "phone_warning": "Phone number should start with:"
     },
     "button": {
       "module_management": "Manage Modules",
@@ -59,8 +103,7 @@
     "alert": {
       "success": "Success",
       "error": "Error"
-    },
-    "js": {
+    },    "js": {
       "studentStatus": {
         "studying": "Studying",
         "graduated": "Graduated",
@@ -70,13 +113,40 @@
       "button": {
         "details": "Details",
         "delete": "Delete"
-      },
-      "faculty": {
+      },      "faculty": {
         "all": "All Faculties"
       },
-      "alert": {
+      "delete": {
+        "confirm": {
+          "title": "Are you sure?",
+          "text": "The data will be permanently deleted!",
+          "confirmButton": "Delete!",
+          "cancelButton": "Cancel"
+        },
+        "error": "An error occurred while deleting the student."
+      },
+      "add": {
+        "success": {
+          "title": "Success!",
+          "text": "Student added successfully!"
+        },
+        "error": {
+          "title": "Error!",
+          "text": "An error occurred: "
+        },
+        "select": {
+          "faculty": "Select faculty",
+          "course": "Select course",
+          "status": "Select status"
+        },
+        "button": {
+          "close": "Close",
+          "ok": "OK"
+        }
+      },"alert": {
         "error": "Error!",
         "loadCancellationFail": "Failed to load cancellation details. Please try again.",
+        "deleteError": "An error occurred while deleting the student.",
         "close": "Close"
       }
     }
