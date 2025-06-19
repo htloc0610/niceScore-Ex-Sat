@@ -1374,3 +1374,60 @@
 {"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:09:47.532Z"}
 {"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:10:03.397Z"}
 {"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-17T12:11:12.618Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-19T20:35:30.980Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-19T20:35:43.765Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-19T20:37:32.809Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T20:41:24.355Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-19T20:41:28.505Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 1","timestamp":"2025-06-19T20:41:57.440Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 1","timestamp":"2025-06-19T21:30:45.133Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-19T21:45:58.766Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-19T21:46:00.138Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-19T21:46:00.220Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-19T21:46:00.226Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:46:00.282Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-19T21:46:00.283Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-19T21:46:02.185Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-19T21:46:02.393Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-19T21:46:02.396Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:46:02.397Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-19T21:46:02.398Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-19T21:46:02.399Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:47:15.820Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:48:27.709Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:52:25.686Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:59:19.389Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:59:26.154Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T21:59:37.819Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:10:13.012Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:10:22.945Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:11:47.836Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:11:50.708Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:13:12.937Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:14:44.897Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:18:06.721Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:18:36.597Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:18:49.884Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:21:35.397Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:22:39.106Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:22:57.952Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:23:57.751Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:24:33.693Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:25:28.175Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:26:07.078Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:27:32.514Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:27:59.573Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-19T22:33:36.291Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-19T22:33:52.604Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:34:28.070Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-19T22:34:31.057Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-19T22:35:01.815Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-19T22:35:01.871Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:35:57.938Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:36:58.007Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:37:24.326Z"}
+{"0":{"createdAt":"2025-06-14T09:01:09.181Z","credits":3,"description":"Giới thiệu nguyên lý kỹ thuật xây dựng.","faculty":{"name_en":"Computer Science","name_vi":"Khoa học máy tính"},"faculty_id":1,"is_active":true,"module_code":"CE101","module_id":1,"module_name":"Kỹ thuật xây dựng 101","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"1":{"createdAt":"2025-06-14T09:01:09.181Z","credits":3,"description":"Khóa học công nghệ thông tin cơ bản.","faculty":{"name_en":"Information System","name_vi":"Hệ thống thông tin"},"faculty_id":2,"is_active":true,"module_code":"IT102","module_id":2,"module_name":"Công nghệ thông tin 102","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"2":{"createdAt":"2025-06-14T09:01:09.181Z","credits":3,"description":"Chủ đề nâng cao về khoa học máy tính.","faculty":{"name_en":"Cyber Security","name_vi":"An ninh mạng"},"faculty_id":3,"is_active":true,"module_code":"CS301","module_id":3,"module_name":"Khoa học máy tính 301","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"3":{"createdAt":"2025-06-14T09:01:09.181Z","credits":4,"description":"Giới thiệu về các khái niệm AI.","faculty":{"name_en":"AI Department","name_vi":"Khoa AI"},"faculty_id":4,"is_active":true,"module_code":"AI201","module_id":4,"module_name":"Trí tuệ nhân tạo 201","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"4":{"createdAt":"2025-06-14T09:01:09.181Z","credits":3,"description":"Quản trị kinh doanh nâng cao.","faculty":{"name_en":"Business Faculty","name_vi":"Khoa Kinh doanh"},"faculty_id":5,"is_active":true,"module_code":"BA301","module_id":5,"module_name":"Quản trị kinh doanh 301","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"5":{"createdAt":"2025-06-14T09:01:09.181Z","credits":3,"description":"Nguyên lý kinh tế cơ bản.","faculty":{"name_en":"Business Faculty","name_vi":"Khoa Kinh doanh"},"faculty_id":5,"is_active":true,"module_code":"ECO101","module_id":6,"module_name":"Kinh tế học 101","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"6":{"createdAt":"2025-06-14T09:01:09.181Z","credits":3,"description":"Các khái niệm AI trung cấp.","faculty":{"name_en":"AI Department","name_vi":"Khoa AI"},"faculty_id":4,"is_active":true,"module_code":"AI202","module_id":7,"module_name":"Trí tuệ nhân tạo 202","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"7":{"createdAt":"2025-06-14T09:01:09.181Z","credits":3,"description":"Các chủ đề công nghệ thông tin nâng cao.","faculty":{"name_en":"Information System","name_vi":"Hệ thống thông tin"},"faculty_id":2,"is_active":true,"module_code":"IT303","module_id":8,"module_name":"Công nghệ thông tin 303","prerequisite":null,"prerequisite_id":null,"updatedAt":"2025-06-14T09:01:09.181Z"},"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:38:05.786Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:38:24.036Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-19T22:38:31.094Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:38:45.971Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-06-19T22:50:41.147Z"}

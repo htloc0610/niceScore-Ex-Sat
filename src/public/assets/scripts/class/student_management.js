@@ -19,16 +19,16 @@ function addGrade(studentId, classId) {
 
     let form = document.createElement("form");
     form.innerHTML = `
-        <h2 class="text-xl font-bold mb-4 mx-20">Thêm điểm</h2>
+        <h2 class="text-xl font-bold mb-4 mx-20">${t.class.score.add_score.title}</h2>
         <input type="number" id="class_id" name="class_id" value="${classId}" hidden>
         <input type="number" id="student_id" name="student_id" value="${studentId}" hidden>
         <div class="grid gap-4">
-            <label for="grade" class="block text-sm font-medium text-gray-700">Điểm số: </label>
+            <label for="grade" class="block text-sm font-medium text-gray-700">${t.class.score.add_score.grade_label}</label>
             <input type="text" id="grade" name="grade" required
                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         <div class="mt-4 flex justify-end">
-        <button type="button" id="closeModal" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Đóng</button>
-            <button type="submit" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Lưu</button>
+        <button type="button" id="closeModal" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">${t.class.cancel_button}</button>
+            <button type="submit" class="ml-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-lg text-sm font-semibold rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">${t.class.score.add_score.save_button}</button>
         </div>`;
     form.querySelector("#closeModal").addEventListener("click", function () {
         document.body.removeChild(overlay);
@@ -60,8 +60,8 @@ function addGrade(studentId, classId) {
             if (data.message.includes("successfully") && data.createdtranscript) {
               Swal.fire({
                 icon: "success",
-                title: "Thành công!",
-                text: "Thêm điểm thành công!",
+                title: `${t.class.score.add_score.swal.success_title}`,
+                text: `${t.class.score.add_score.swal.success_text}`,
                 timer: 2000,
                 timerProgressBar: true,
                 showConfirmButton: false,
@@ -88,8 +88,8 @@ function addGrade(studentId, classId) {
                 // Không tìm thấy sinh viên trong bảng
                 Swal.fire({
                   icon: "error",
-                  title: "Lỗi!",
-                  text: "Không tìm thấy sinh viên để cập nhật điểm.",
+                  title: `${t.class.score.add_score.swal.error_title}`,
+                  text: `${t.class.score.add_score.swal.error_text}`,
                   confirmButtonText: "Đóng",
                 });
               }
@@ -97,8 +97,8 @@ function addGrade(studentId, classId) {
               // Phản hồi không hợp lệ
               Swal.fire({
                 icon: "error",
-                title: "Lỗi!",
-                text: "Đã xảy ra lỗi khi thêm điểm.",
+                title: `${t.class.score.add_score.swal.error_title}`,
+                text: `${t.class.score.add_score.swal.error_text}`,
                 confirmButtonText: "Đóng",
               });
             }
@@ -107,8 +107,8 @@ function addGrade(studentId, classId) {
             console.error("Error adding grade:", error);
             Swal.fire({
               icon: "error",
-              title: "Lỗi!",
-              text: "Đã xảy ra lỗi khi thêm điểm: " + error.message,
+              title: `${t.class.score.add_score.swal.error_title}`,
+              text: `${t.class.score.add_score.swal.error_text}` + error.message,
               confirmButtonText: "Đóng",
             });
           });
@@ -122,8 +122,8 @@ function addGrade(studentId, classId) {
 async function deleteStudent(studentId) {
   //ask for confirmation by a model
   const result = await Swal.fire({
-    title: "Bạn có chắc chắn?",
-    text: "Dữ liệu sẽ bị xóa vĩnh viễn!",
+    title: `${t.class.score.delete_student.swal.title}`,
+    text: `${t.class.score.delete_student.swal.text}`,
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#d33",
@@ -150,8 +150,8 @@ async function deleteStudent(studentId) {
       // alert(data.message);
       Swal.fire({
         icon: 'success',
-        title: 'Thành công!',
-        text: 'Thêm sinh viên thành công!' + data.message,
+        title: `${t.class.score.delete_student.swal.success_title}`,
+        text: `${t.class.score.delete_student.swal.success_text}` + data.message,
         confirmButtonText: 'OK',
         timer: 2000,
         timerProgressBar: true,
@@ -174,7 +174,7 @@ async function deleteStudent(studentId) {
       // alert(errorData.message);
       Swal.fire({
         icon: 'error',
-        title: 'Lỗi!',
+        title: `${t.class.score.delete_student.swal.error_title}`,
         text: errorData.message,
         confirmButtonText: 'Đóng'
       });
@@ -184,8 +184,8 @@ async function deleteStudent(studentId) {
     // alert('Đã xảy ra lỗi khi xóa sinh viên.');
     Swal.fire({
       icon: 'error',
-      title: 'Lỗi!',
-      text: 'Đã xảy ra lỗi khi xóa sinh viên.',
+      title: `${t.class.score.delete_student.swal.error_title}`,
+      text: `${t.class.score.delete_student.swal.error_text}`,
       confirmButtonText: 'Đóng'
     });
   }
@@ -194,16 +194,16 @@ async function deleteStudent(studentId) {
 async function cancel(registrationId, studentId) {
     // Ask for confirmation with a model
     const result = await Swal.fire({
-      title: "Hủy đăng ký",
-      text: "Bạn có chắc không? Sinh viên sẽ bị hủy học phần!",
+      title: `${t.class.score.delete_confirm.title}`,
+      text: `${t.class.score.delete_confirm.text}`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Xóa!",
-      cancelButtonText: "Hủy",
+      cancelButtonText: `${t.class.cancel_button}`,
       input: 'textarea', // Use a textarea for the reason input
-      inputPlaceholder: 'Nhập lý do hủy...',
+      inputPlaceholder: `${t.class.score.delete_confirm.reson}`,
       inputAttributes: {
         'aria-label': 'Nhập lý do hủy'
       },
@@ -291,16 +291,16 @@ async function editGrade(studentId, transcriptId, grade) {
 
     const form = document.createElement("form");
     form.innerHTML = `
-      <h2 class="text-xl font-bold mb-4 mx-20">Chỉnh sửa điểm</h2>
+      <h2 class="text-xl font-bold mb-4 mx-20">${t.class.score.edit_score.title}</h2>
       <div class="grid gap-4">
         <div>
-          <label for="grade" class="block text-sm font-medium text-gray-700">Số điểm:</label>
+          <label for="grade" class="block text-sm font-medium text-gray-700">${t.class.score.edit_score.label}</label>
           <input type="text" id="grade" name="grade" value="${grade}" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
         </div>
       </div>
       <div class="mt-4 flex justify-end">
-        <button type="button" id="closeModal" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Đóng</button>
-        <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Lưu</button>
+        <button type="button" id="closeModal" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">${t.class.score.edit_score.close_button}</button>
+        <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">${t.class.score.edit_score.save_button}</button>
       </div>
     `;
 

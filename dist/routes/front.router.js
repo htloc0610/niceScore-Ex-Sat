@@ -22,12 +22,26 @@ const module_service_1 = __importDefault(require("../services/module.service"));
 const class_service_1 = __importDefault(require("../services/class.service"));
 const class_registation_service_1 = __importDefault(require("../services/class_registation.service"));
 const router = (0, express_1.Router)();
+function getLocalizedFaculty(faculty, lang) {
+    return {
+        faculty_id: faculty.faculty_id,
+        name: lang === 'vi' ? faculty.name_vi : faculty.name_en
+    };
+}
+function getLocalizedStatus(status, lang) {
+    return {
+        status_id: status.status_id,
+        name: lang === 'vi' ? status.name_vi : status.name_en
+    };
+}
 // [GET] /more
 router.get("/more", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const faculties = yield faculty_service_1.default.getAllFaculties();
-    const statuses = yield status_service_1.default.getAllStatuses();
-    const courses = yield course_service_1.default.getAllCourses();
     const lang = res.locals.lang || 'en';
+    var faculties = yield faculty_service_1.default.getAllFaculties();
+    faculties = faculties.map(faculty => getLocalizedFaculty(faculty, lang || 'en'));
+    var statuses = yield status_service_1.default.getAllStatuses();
+    statuses = statuses.map(status => getLocalizedStatus(status, lang || 'en'));
+    const courses = yield course_service_1.default.getAllCourses();
     const modules = yield module_service_1.default.getAllModules(lang);
     res.render("more", {
         faculties: faculties,
@@ -111,11 +125,16 @@ router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 }));
 // [GET] /
 router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const faculties = yield faculty_service_1.default.getAllFaculties();
-    const studentsDataValue = yield student_service_1.default.getListStudent();
-    const students = studentsDataValue.map(student => student.get({ plain: true }));
-    // console.log(students);
     const lang = res.locals.lang || 'en';
+    var faculties = yield faculty_service_1.default.getAllFaculties();
+    faculties = faculties.map(faculty => getLocalizedFaculty(faculty, lang));
+    const studentsDataValue = yield student_service_1.default.getListStudent();
+    var students = studentsDataValue.map(student => student.get({ plain: true }));
+    students = students.map(student => {
+        return Object.assign(Object.assign({}, student), { faculty: getLocalizedFaculty(student.faculty, lang), status: getLocalizedStatus(student.status, lang) // Localize status names
+         });
+    });
+    console.log(students);
     res.render("index", { faculties: faculties, students: students, lang: lang }); // Render the "index" Handlebars template
 }));
 exports.default = router;

@@ -41,7 +41,7 @@ window.LanguageHandler = {
     const serverLang = document.documentElement.getAttribute('data-lang');
     
     // Log state for debugging
-    console.log(`Language sources - localStorage: ${localLang}, server: ${serverLang}`);
+    // console.log(`Language sources - localStorage: ${localLang}, server: ${serverLang}`);
     
     // Use the first valid language found or default
     if (localLang && this.isValidLanguage(localLang)) {
@@ -76,7 +76,7 @@ window.LanguageHandler = {
     // Dispatch a custom event for other components to react to language changes
     const event = new CustomEvent('languageChanged', { detail: { language: lang } });
     window.dispatchEvent(event);
-    console.log('Dispatched languageChanged event:', lang);
+    // console.log('Dispatched languageChanged event:', lang);
     
     return true;
   },
@@ -94,12 +94,12 @@ window.LanguageHandler = {
    * @param {string} lang - Language code
    */
   updateUI(lang) {
-    console.log(`Updating UI for language: ${lang}`);
+    // console.log(`Updating UI for language: ${lang}`);
     
     // Update language selector
     const langSelector = document.getElementById("languageSelect");
     if (langSelector) {
-      console.log(`Found language selector, setting to: ${lang}`);
+      // console.log(`Found language selector, setting to: ${lang}`);
       langSelector.value = lang;
     } else {
       console.warn("Language selector not found in DOM");
@@ -125,7 +125,7 @@ window.LanguageHandler = {
       // Load translations for the new language before reloading
       try {
         await LanguageHandler.loadTranslations();
-        console.log(`Loaded translations for ${newLang} before page reload`);
+        // console.log(`Loaded translations for ${newLang} before page reload`);
         
         // Small delay to allow other scripts to respond to the language change
         setTimeout(() => {
@@ -178,11 +178,11 @@ window.LanguageHandler = {
    * @returns {Promise<string>} The active language
    */
   async init() {
-    console.log("Initializing language handler...");
+    // console.log("Initializing language handler...");
     
     // Get and set current language
     this.currentLanguage = this.getCurrentLanguage();
-    console.log(`Current language detected: ${this.currentLanguage}`);
+    // console.log(`Current language detected: ${this.currentLanguage}`);
     
     // Apply the language
     this.setLanguage(this.currentLanguage);
@@ -190,7 +190,7 @@ window.LanguageHandler = {
     // Add event listener to language selector
     const langSelector = document.getElementById("languageSelect");
     if (langSelector) {
-      console.log("Adding event listener to language selector");
+      // console.log("Adding event listener to language selector");
       // Remove any existing listeners first to avoid duplicates
       langSelector.removeEventListener('change', this.handleLanguageChange);
       // Add new listener
@@ -202,16 +202,16 @@ window.LanguageHandler = {
     // Load translations
     await this.loadTranslations();
     
-    console.log(`Language handler initialized with: ${this.currentLanguage}`);
+    // console.log(`Language handler initialized with: ${this.currentLanguage}`);
     return this.currentLanguage;
   }
 };
 
 // Initialize when the document is loaded
 document.addEventListener("DOMContentLoaded", async () => {
-  console.log('LanguageHandler initializing...');
+  // console.log('LanguageHandler initializing...');
   await LanguageHandler.init();
-  console.log('LanguageHandler initialized with language:', LanguageHandler.currentLanguage);
+  // console.log('LanguageHandler initialized with language:', LanguageHandler.currentLanguage);
   
   // Force update UI when initialized
   LanguageHandler.updateUI(LanguageHandler.currentLanguage);

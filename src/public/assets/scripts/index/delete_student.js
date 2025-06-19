@@ -33,7 +33,6 @@ async function loadTranslations() {
     const res = await fetch(translationUrl);
     if (!res.ok) throw new Error("Failed to load translations");
     t = await res.json();
-    console.log("Loaded translations directly for delete student functionality");
     return true;
   } catch (error) {
     console.error("Error loading translations:", error);

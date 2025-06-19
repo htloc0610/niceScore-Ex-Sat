@@ -309,5 +309,111 @@
       "server_error": "Lỗi kết nối server",
       "loading_error_class": "Lỗi tải dữ liệu lớp học"
     }
+  },
+  "more":{
+    "navigator": {
+      "back": "Quay lại",
+      "faculty": "Khoa",
+      "status": "Trạng thái",
+      "course": "Niên khóa"
+    },
+    "action": "Hành động",
+    "save_button": "Lưu",
+    "cancel_button": "Đóng",
+    "faculty": {
+      "title": "Thông tin khoa",
+      "name_col": "Tên khoa",
+      "edit_button": "Chỉnh sửa khoa",
+      "add_button": "Thêm khoa mới"
+    },
+    "status": {
+      "title": "Trạng thái sinh viên",
+      "name_col": "Tên trạng thái",
+      "add_button": "Thêm trạng thái mới",
+      "edit_button": "Chỉnh sửa trạng thái"
+    },
+    "course": {
+      "title": "Thông tin khóa học",
+      "name_col": "Tên khóa học",
+      "add_button": "Thêm khóa học mới",
+      "edit_button": "Chỉnh sửa khóa học"
+    },
+    "swal": {
+      "success_title": "Thành công!",
+      "success_text": "Thêm khoa thành công!",
+      "error_title": "Lỗi!",
+      "error_text": "Đã xảy ra lỗi khi thêm khoa."
+    }
+  },
+  "class": {
+    "title": "Thông tin lớp học",
+    "class_code": "Mã lớp học",
+    "lecturer": "Giảng viên",
+    "academic_year": "Năm học",
+    "semester": "Học kỳ",
+    "schedule": "Lịch học",
+    "max_students": "Sĩ số tối đa",
+    "classroom": "Phòng học",
+     "add_student": "Thêm học sinh",
+      "confirmButton": "Xóa",
+      "cancelButton": "Hủy",
+     "add_table":
+     {
+      "title": "Thêm học sinh vào lớp",
+      "student_id": "Mã số sinh viên",
+      "close_button": "Đóng",
+      "add_button": "Thêm học sinh",
+      "swal": {
+        "success_title": "Thành công!",
+        "success_text": "Học sinh đã được thêm vào lớp học.",
+        "error_title": "Lỗi!",
+        "error_text": "Đã xảy ra lỗi khi thêm học sinh vào lớp."
+      }
+     },
+     
+     "score": {
+      "not_yet": "Chưa có điểm",
+      "add_score_button": "Thêm điểm",
+      "fix_score": {
+        "title": "Chỉnh sửa điểm",
+        "score": "Điểm",
+        "swal":{
+          "success_title": "Thành công!",
+          "success_text": "Điểm đã được cập nhật thành công.",
+          "error_title": "Lỗi!",
+          "error_text": "Đã xảy ra lỗi khi cập nhật điểm."
+        }
+      },
+      "add_score": {
+        "title": "Thêm điểm",
+        "score": "Điểm",
+        "swal": {
+          "success_title": "Thành công!",
+          "success_text": "Điểm đã được thêm thành công.",
+          "error_title": "Lỗi!",
+          "error_text": "Đã xảy ra lỗi khi thêm điểm."
+        }
+      },
+      "delete_student": "Xóa học sinh khỏi lớp",
+      "delete_confirm": {
+        "title": "Hủy đăng ký",
+        "text": "Bạn có chắc không? Học sinh sẽ bị xóa khỏi lớp học này!",
+        "reason": "Nhập lý do hủy đăng ký",
+        "swal": {
+          "success_title": "Thành công!",
+          "success_text": "Học sinh đã được xóa khỏi lớp học.",
+          "error_title": "Lỗi!",
+          "error_text": "Đã xảy ra lỗi khi xóa học sinh khỏi lớp."
+        }
+      }
+     },
+    "table": {
+      "title": "Danh sách học sinh trong lớp",
+      "student_id": "MSSV",
+      "full_name": "Họ tên",
+      "email": "Email",
+      "score": "Điểm",
+      "actions": "Hành động"
+    }
   }
 }

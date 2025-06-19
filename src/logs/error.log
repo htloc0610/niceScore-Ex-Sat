@@ -210,3 +210,6 @@
 {"level":"error","message":"Error exporting grades: Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-15T08:47:58.755Z"}
 {"level":"error","message":"Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-15T08:48:08.519Z"}
 {"level":"error","message":"Error exporting grades: Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-15T08:48:08.521Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-19T20:35:30.980Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-19T20:35:43.765Z"}
+{"level":"error","message":"Error fetching all faculties","timestamp":"2025-06-19T20:37:32.809Z"}

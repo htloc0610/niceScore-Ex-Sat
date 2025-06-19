@@ -60,11 +60,11 @@ async function loadStudents(classId) {
             </span>
           </td>
           <td class="px-4 py-2 text-sm ${student.grade? "hidden" : ""}">
-            <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 mb-1" onclick="addGrade(${student.student_id || "N/A"}, ${classId})">Thêm điểm</button>            
-            <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700" onclick="cancel(${registration.registration_id || "N/A"}, ${student.student_id || "N/A"})">Hủy đăng ký</button>
+            <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 mb-1" onclick="addGrade(${student.student_id || "N/A"}, ${classId})"> ${t.class.add_grade_button}</button>            
+            <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700" onclick="cancel(${registration.registration_id || "N/A"}, ${student.student_id || "N/A"})">${t.class.cancel_button}</button>
           </td>
           <td class="px-4 py-2 text-sm ${student.grade? "": "hidden"}">
-            <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="editGrade(${student.student_id || "N||A"}, ${student.transcript_id || "N/A"},  ${student.grade || "N/A"})" >Sửa điểm</button>           
+            <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="editGrade(${student.student_id || "N||A"}, ${student.transcript_id || "N/A"},  ${student.grade || "N/A"})" >${t.class.edit_grade_button}</button>           
 
           </td>
 
@@ -127,8 +127,8 @@ addStudentForm.addEventListener("submit", async (e) => {
     // alert("Đã thêm học sinh thành công!");
     Swal.fire({
       icon: 'success',
-      title: 'Thành công!',
-      text: 'Thêm sinh viên thành công!',
+      title: `${t.class.add_table.swal.success_title}`,
+      text: `${t.class.add_table.swal.success_text}`,
       confirmButtonText: 'OK',
       timer: 2000,
       timerProgressBar: true,
@@ -140,8 +140,8 @@ addStudentForm.addEventListener("submit", async (e) => {
     // alert("Có lỗi khi thêm sinh viên: " + error.message);
     Swal.fire({
       icon: 'error',
-      title: 'Lỗi!',
-      text: 'Đã xảy ra lỗi: ' + error.message,
+      title: `${t.class.add_table.swal.error_title}`,
+      text: `${t.class.add_table.swal.error_text} ` + error.message,
       confirmButtonText: 'Đóng'
     });
     

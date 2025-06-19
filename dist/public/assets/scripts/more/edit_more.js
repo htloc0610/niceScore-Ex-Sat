@@ -1,8 +1,12 @@
-function editMore(id, entityType) {
+async function editMore(id, entityType) {
+    const lang = localStorage.getItem("lang") || 'en';
+    const translationUrl = `/assets/scripts/locales/${lang}.json`;
+    res = await fetch(translationUrl);
+    let t = await res.json();
     const entityConfigs = {
-        "Faculty": { name: "Khoa", idField: "faculty_id", nameField: "name", apiEndpoint: "/api/faculty", tableId: "faculty-table-body" },
-        "Status": { name: "Tình trạng", idField: "status_id", nameField: "name", apiEndpoint: "/api/status", tableId: "status-table-body" },
-        "Course": { name: "Khóa", idField: "course_id", nameField: "course_name", apiEndpoint: "/api/course", tableId: "course-table-body" }
+        "Faculty": { name: "Khoa", idField: "faculty_id", nameField: "name", apiEndpoint: "/api/faculty", tableId: "faculty-table-body", title: t.more.faculty.edit_button , nameCol: t.more.faculty.name_col, t: t },
+        "Status": { name: "Tình trạng", idField: "status_id", nameField: "name", apiEndpoint: "/api/status", tableId: "status-table-body", title: t.more.status.edit_button , nameCol: t.more.status.name_col, t: t },
+        "Course": { name: "Khóa", idField: "course_id", nameField: "course_name", apiEndpoint: "/api/course", tableId: "course-table-body", title: t.more.course.edit_button , nameCol: t.more.course.name_col, t: t }
     };
 
     const config = entityConfigs[entityType];
@@ -15,9 +19,9 @@ function editMore(id, entityType) {
         // alert("Đã xảy ra lỗi khi cập nhật.");
         Swal.fire({
             icon: 'error',
-            title: 'Lỗi!',
-            text: 'Đã xảy ra lỗi khi cập nhật.',
-            confirmButtonText: 'Đóng'
+            title: `${t.more.swal.error_title}`,
+            text: `${t.more.swal.error_text}`,
+            confirmButtonText: `${t.more.cancel_button}`
         });
     }
     const name = row.children[1].textContent;
@@ -40,11 +44,6 @@ function editMore(id, entityType) {
         "justify-center"  // Căn giữa theo chiều ngang
     );
 
-    // const modal = document.createElement("div");
-    // modal.classList.add("fixed", "top-1/2", "left-1/2", "transform", "-translate-x-1/2", "-translate-y-1/2", "bg-white", "p-5", "shadow-lg", "rounded-lg");
-
-    // Tạo modal (div con)
-    // Tạo modal (div con)
     const modal = document.createElement("div");
     modal.classList.add(
         "bg-white",       // Nền trắng
@@ -56,13 +55,13 @@ function editMore(id, entityType) {
 
     const form = document.createElement("form");
     form.innerHTML = `
-      <h2 class="text-xl font-bold mb-4 mx-20">Chỉnh sửa ${config.name}</h2>
+      <h2 class="text-xl font-bold mb-4 mx-20">${config.title}</h2>
       <div class="grid gap-4">
         <div>
           <input type="text" id="${config.idField}" name="${config.idField}" value="${id}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" hidden>
         </div>
         <div>
-          <label for="${config.nameField}" class="block text-sm font-medium text-gray-700">Tên ${config.name.toLowerCase()}:</label>
+          <label for="${config.nameField}" class="block text-sm font-medium text-gray-700">${config.nameCol}:</label>
           <input type="text" id="${config.nameField}" name="${config.nameField}" value="${name}" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
         </div>
       </div>
@@ -91,8 +90,8 @@ function editMore(id, entityType) {
                     // alert(`${config.name} đã được cập nhật!`);
                     Swal.fire({
                         icon: 'success',
-                        title: 'Thành công!',
-                        text: `${config.name} đã được cập nhật!`,
+                        title: `${t.swal.success_title}`,
+                        text: `${t.swal.success_text}`,
                         confirmButtonText: 'OK',
                         timer: 2000,
                         timerProgressBar: true,
@@ -105,9 +104,9 @@ function editMore(id, entityType) {
                     // alert(`Lỗi khi cập nhật ${config.name}.`);
                     Swal.fire({
                         icon: 'error',
-                        title: 'Lỗi!',
-                        text: `Lỗi khi cập nhật ${config.name}.`,
-                        confirmButtonText: 'Đóng'
+                        title: `${t.swal.error_title}`,
+                        text: `${t.swal.error_text}`,
+                        confirmButtonText: `${t.more.cancel_button}`
                     });
                 }
             })
@@ -116,9 +115,9 @@ function editMore(id, entityType) {
                 // alert("Đã xảy ra lỗi khi cập nhật.");
                 Swal.fire({
                     icon: 'error',
-                    title: 'Lỗi!',
-                    text: 'Đã xảy ra lỗi khi cập nhật.',
-                    confirmButtonText: 'Đóng'
+                    title: `${t.swal.error_title}`,
+                    text: `${t.swal.error_text}`,
+                    confirmButtonText: `${t.more.cancel_button}`
                 });
             });
     });

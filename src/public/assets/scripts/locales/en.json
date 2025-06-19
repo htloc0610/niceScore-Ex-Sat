@@ -303,5 +303,40 @@
       "server_error": "Server connection error",
       "loading_error_class": "Error loading class data"
     }
+  },
+  "more": {
+    "navigator": {
+      "back": "Back",
+      "faculty": "Faculty",
+      "status": "Status",
+      "course": "Academic Year"
+    },
+    "action": "Action",
+    "save_button": "Save",
+    "cancel_button": "Close",
+    "faculty": {
+      "title": "Faculty Information",
+      "name_col": "Faculty Name",
+      "edit_button": "Edit Faculty",
+      "add_button": "Add New Faculty"
+    },
+    "status": {
+      "title": "Student Status",
+      "name_col": "Status Name",
+      "add_button": "Add New Status",
+      "edit_button": "Edit Status"
+    },
+    "course": {
+      "title": "Course Information",
+      "name_col": "Course Name",
+      "add_button": "Add New Course",
+      "edit_button": "Edit Course"
+    },
+    "swal": {
+      "success_title": "Success!",
+      "success_text": "Faculty added successfully!",
+      "error_title": "Error!",
+      "error_text": "An error occurred while adding faculty."
+    }
   }
 }

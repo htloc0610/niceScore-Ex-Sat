@@ -10,12 +10,27 @@ import class_registationService from "../services/class_registation.service";
 
 const router = Router();
 
+function getLocalizedFaculty(faculty: any, lang: string) {
+  return {
+    faculty_id: faculty.faculty_id,
+    name: lang === 'vi' ? faculty.name_vi : faculty.name_en
+  }
+}
+function getLocalizedStatus(status: any, lang: string) {
+  return {
+    status_id: status.status_id,
+    name: lang === 'vi' ? status.name_vi : status.name_en
+  };
+}
+
 // [GET] /more
 router.get("/more", async (req, res) => {
-  const faculties = await facultyService.getAllFaculties(); 
-  const statuses = await statusService.getAllStatuses();
+    const lang = res.locals.lang || 'en';
+  var faculties = await facultyService.getAllFaculties(); 
+  faculties = faculties.map(faculty => getLocalizedFaculty(faculty, lang || 'en'));
+  var statuses = await statusService.getAllStatuses();
+  statuses = statuses.map(status => getLocalizedStatus(status, lang || 'en'));
   const courses = await courseService.getAllCourses();
-  const lang = res.locals.lang || 'en';
   const modules = await moduleService.getAllModules(lang);
   res.render("more", {
     faculties: faculties, 
@@ -113,11 +128,20 @@ router.get("/:id", async (req, res) => {
 
 // [GET] /
 router.get("/", async (req, res) => {
-  const faculties = await facultyService.getAllFaculties();
-  const studentsDataValue = await studentService.getListStudent();
-  const students = studentsDataValue.map(student => student.get({plain: true}));
-  // console.log(students);
   const lang = res.locals.lang || 'en';
+  var faculties = await facultyService.getAllFaculties(); 
+  faculties = faculties.map(faculty => getLocalizedFaculty(faculty, lang));
+  const studentsDataValue = await studentService.getListStudent();
+  var students = studentsDataValue.map(student => student.get({plain: true}));
+  students = students.map(student => {
+    return {
+      ...student,
+      faculty:getLocalizedFaculty(student.faculty, lang), // Localize faculty name
+      status: getLocalizedStatus(student.status, lang) // Localize status names
+    }
+  });
+
+  console.log(students);
   res.render("index", {faculties: faculties, students: students, lang: lang}); // Render the "index" Handlebars template
 });
 

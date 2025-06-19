@@ -3,7 +3,9 @@ const tableBody = document.getElementById("student-table-body");
 const facultySelect = document.getElementById("faculty_search");
 let t;
 document.addEventListener("DOMContentLoaded", async () => {
+  console.log("IM HERE");
   currentStudents = students;
+  console.log("Current Students:", currentStudents);
   const lang = localStorage.getItem("lang") || 'en';
     const translationUrl = `/assets/scripts/locales/${lang}.json`;
 
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   graduatedCount = students.filter(
     (student) => student.status.name === t.index.js.studentStatus.graduated
   ).length;
+  console.log("Graduated Count:", graduatedCount, t.index.js.studentStatus.graduated);
   document.getElementById("graduatedCount").innerHTML = graduatedCount|| 0;
 
   studyingCount = students.filter(
@@ -128,9 +131,20 @@ function RefreshTable(id) {
           </span>
         </td>
         <td class="px-2 py-3 text-sm">
-          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="window.location.href='/${student.student_id}'">${t.index.js.button.details}</button>
-          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" type="submit" onclick="deleteStudent('${student.student_id}')">${t.index.js.button.delete}</button>
+          <button onclick="fetchCancellationData(${student.student_id})" class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded">
+            ${t.index.button.history}
+          </button>
+          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" onclick="window.location.href='/${student.student_id}'">
+            ${t.index.button.details}
+          </button>
+          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-md active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" onclick="downloadAndPrint(${student.student_id})">
+            ${t.index.button.transcript}
+          </button>
+          <button class="p-1 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-md active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-purple" onclick="deleteStudent('${student.student_id}')">
+            ${t.index.button.delete}
+          </button>
         </td>
+
       `;
 
       tableBody.appendChild(row);
