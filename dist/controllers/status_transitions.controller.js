@@ -67,6 +67,7 @@ const statusTransitionController = {
         const { id, current_status, new_status } = req.body;
         try {
             const result = yield status_transitions_service_1.default.updateStatusTransitions(id, current_status, new_status);
+            console.log(result, "this is the result");
             logger_1.logger.info(`Updating status transition with id ${id}`);
             res.status(200).json(result);
         }

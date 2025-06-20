@@ -251,3 +251,15 @@
 {"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-06-20T08:54:45.463Z"}
 {"level":"error","message":"Error adding student: Validation error","timestamp":"2025-06-20T08:54:45.468Z"}
 {"level":"error","message":"Error adding new studentSequelizeUniqueConstraintError: Validation error","timestamp":"2025-06-20T08:54:45.471Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:44.695Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:44.704Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:46.759Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:46.762Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:47.402Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:47.404Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:47.830Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:56:47.833Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:57:04.173Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:57:04.176Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:58:03.172Z"}
+{"level":"error","message":"Error getting status transitions: column currentStatus.name_vn does not exist","timestamp":"2025-06-20T09:58:03.177Z"}

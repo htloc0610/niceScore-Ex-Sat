@@ -64,6 +64,8 @@ const statusTransitionController = {
         current_status,
         new_status
       );
+
+      console.log(result, "this is the result");
       
       logger.info(`Updating status transition with id ${id}`);
       res.status(200).json(result);

@@ -55,12 +55,12 @@ const statusTransitionService = {
                     {
                         model: status_model_1.default,
                         as: "currentStatus", // Dùng alias đã định nghĩa trong belongsTo
-                        attributes: ["status_id", "name_vn", "name_en"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
+                        attributes: ["status_id", "name_vi", "name_en"], // Sửa 'id' thành 'status_id' nếu đúng theo schema
                     },
                     {
                         model: status_model_1.default,
                         as: "newStatus", // Dùng alias đã định nghĩa trong belongsTo
-                        attributes: ["status_id", "name_vn", "name_en"], // Sửa 'id' thành 'status_id'
+                        attributes: ["status_id", "name_vi", "name_en"], // Sửa 'id' thành 'status_id'
                     },
                 ],
             });

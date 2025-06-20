@@ -1,406 +1,319 @@
-let t; // Global translations object
+document.addEventListener("DOMContentLoaded", () => {
+    // Đối tượng dịch văn bản tĩnh
+    const translations = {
+        vi: {
+            tableHeaders: {
+                currentStatus: "Trạng thái hiện tại",
+                nextStatus: "Trạng thái tiếp theo",
+                action: "Hành động",
+            },
+            buttons: {
+                add: "Thêm",
+                edit: "Sửa",
+                delete: "Xóa",
+                save: "Lưu",
+                cancel: "Hủy",
+            },
+            modalTitles: {
+                add: "Thêm trạng thái",
+                edit: "Chỉnh sửa",
+            },
+            alerts: {
+                addSuccess: "Thêm trạng thái thành công!",
+                editSuccess: "Cập nhật trạng thái thành công!",
+                deleteSuccess: "Xóa trạng thái thành công!",
+                addError: "Đã xảy ra lỗi khi thêm trạng thái.",
+                editError: "Đã xảy ra lỗi khi cập nhật trạng thái.",
+                deleteError: "Đã xảy ra lỗi khi xóa trạng thái.",
+            },
+        },
+        en: {
+            tableHeaders: {
+                currentStatus: "Current Status",
+                nextStatus: "Next Status",
+                action: "Action",
+            },
+            buttons: {
+                add: "Add",
+                edit: "Edit",
+                delete: "Delete",
+                save: "Save",
+                cancel: "Cancel",
+            },
+            modalTitles: {
+                add: "Add Status",
+                edit: "Edit Status",
+            },
+            alerts: {
+                addSuccess: "Status transition added successfully!",
+                editSuccess: "Status transition updated successfully!",
+                deleteSuccess: "Status transition deleted successfully!",
+                addError: "An error occurred while adding the status transition.",
+                editError: "An error occurred while updating the status transition.",
+                deleteError: "An error occurred while deleting the status transition.",
+            },
+        },
+    };
 
-document.addEventListener("DOMContentLoaded", async () => {
-    // Load translations
-    const lang = localStorage.getItem("lang") || 'en';
-    const translationUrl = `/assets/scripts/locales/${lang}.json`;
+    // Hàm lấy ngôn ngữ hiện tại
+    const getLang = () => localStorage.getItem('lang') || 'vi';
 
-    try {
-        const res = await fetch(translationUrl);
-        if (!res.ok) throw new Error("Failed to load translations");
-        t = await res.json();
-        console.log("Loaded translations for status transitions page", t);
-    } catch (error) {
-        console.error("Error loading translations:", error);
-    }
-    
-    const statusTransitionButton = document.querySelector("#status-transition .ml-4");
+    // Hàm làm mới bảng
+    const refreshTable = async () => {
+        try {
+            const lang = getLang();
+            const response = await fetch("/api/status_transition");
+            if (!response.ok) {
+                throw new Error("Failed to fetch data");
+            }
 
-    if (statusTransitionButton) {
-        statusTransitionButton.addEventListener("click", async () => {
-            try {
-                // Call the API to fetch data
-                const response = await fetch("/api/status_transition");
-                if (!response.ok) {
-                    throw new Error("Failed to fetch data");
+            const data = await response.json();
+            const tableBody = document.querySelector("tbody");
+            const tableHead = document.querySelector("thead");
+
+            if (tableBody && tableHead) {
+                // Cập nhật tiêu đề bảng
+                tableHead.innerHTML = `
+                    <tr>
+                        <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">${translations[lang].tableHeaders.currentStatus}</th>
+                        <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">${translations[lang].tableHeaders.nextStatus}</th>
+                        <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">${translations[lang].tableHeaders.action}</th>
+                    </tr>
+                `;
+
+                // Xóa các hàng hiện có
+                tableBody.innerHTML = "";
+
+                // Hiển thị dữ liệu
+                data.forEach((config) => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${config.currentStatus[`name_${lang}`]}</td>
+                        <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${config.newStatus[`name_${lang}`]}</td>
+                        <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
+                            <button class="edit-button px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" data-id="${config.id}">
+                                ${translations[lang].buttons.edit}
+                            </button>
+                            <button class="delete-button px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-red" data-id="${config.id}">
+                                ${translations[lang].buttons.delete}
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching or rendering data:", error);
+        }
+    };
+
+    // Hàm lấy danh sách trạng thái từ API
+    const fetchOptions = async () => {
+        try {
+            const response = await fetch("/api/status");
+            if (!response.ok) {
+                throw new Error("Failed to fetch status options");
+            }
+            return (await response.json()).status || [];
+        } catch (error) {
+            console.error("Error fetching status options:", error);
+            return [];
+        }
+    };
+
+    // Hàm tạo modal (dùng chung cho Thêm và Chỉnh sửa)
+    const createModal = (mode, config = {}, row = null) => {
+        const lang = getLang();
+        const overlay = document.createElement("div");
+        overlay.className = "fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50";
+
+        const modal = document.createElement("div");
+        modal.className = "bg-white p-8 rounded-2xl shadow-2xl w-[500px] max-w-full";
+
+        const title = document.createElement("h2");
+        title.className = "text-2xl font-bold mb-6 text-gray-700";
+        title.textContent = translations[lang].modalTitles[mode];
+
+        const currentStatusInput = document.createElement("select");
+        currentStatusInput.className = "w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
+
+        const nextStatusInput = document.createElement("select");
+        nextStatusInput.className = "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
+
+        // Lấy danh sách trạng thái
+        fetchOptions().then((status) => {
+            status.forEach((option) => {
+                const currentOption = document.createElement("option");
+                currentOption.value = option.status_id;
+                currentOption.textContent = option[`name_${lang}`];
+                if (mode === "edit" && option[`name_${lang}`] === row.querySelector("td:nth-child(1)").textContent.trim()) {
+                    currentOption.selected = true;
                 }
+                currentStatusInput.appendChild(currentOption);
 
-                const data = await response.json();
-                
-                // Render the data into the table
-                const tableBody = document.querySelector("tbody");
-                if (tableBody) {
-                    tableBody.innerHTML = ""; // Clear existing rows
-                    const tableHead = document.querySelector("thead");
-                    if (tableHead) {
-                        tableHead.innerHTML = `
-                            <tr>
-                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Trạng thái hiện tại</th>
-                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Trạng thái tiếp theo</th>
-                                <th class="px-4 py-2 text-left text-gray-600 dark:text-gray-400">Hành động</th>
-                            </tr>
-                        `;
-                    }
+                const nextOption = document.createElement("option");
+                nextOption.value = option.status_id;
+                nextOption.textContent = option[`name_${lang}`];
+                if (mode === "edit" && option[`name_${lang}`] === row.querySelector("td:nth-child(2)").textContent.trim()) {
+                    nextOption.selected = true;
+                }
+                nextStatusInput.appendChild(nextOption);
+            });
+        });
 
-                    data.forEach((config) => {
-                        const row = document.createElement("tr");
+        const buttonContainer = document.createElement("div");
+        buttonContainer.className = "flex justify-end space-x-4 mt-6";
 
-                        row.innerHTML = `
-                            <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${config.currentStatus.name}</td>
-                            <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${config.newStatus.name}</td>
-                            <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                                <button class="edit-button px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" data-id="${config.id}">
-                                    Sửa
-                                </button>
-                                <button class="delete-button px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-red" data-id="${config.id}">
-                                    Xóa
-                                </button>
-                            </td>
-                        `;
+        const saveButton = document.createElement("button");
+        saveButton.textContent = translations[lang].buttons.save;
+        saveButton.className = "bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition";
 
-                        tableBody.appendChild(row);
+        const cancelButton = document.createElement("button");
+        cancelButton.textContent = translations[lang].buttons.cancel;
+        cancelButton.className = "bg-gray-300 text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-400 transition";
 
+        saveButton.addEventListener("click", async () => {
+            const newCurrentStatus = currentStatusInput.value.trim();
+            const newNextStatus = nextStatusInput.value.trim();
+
+            if (newCurrentStatus && newNextStatus) {
+                try {
+                    const response = await fetch(`/api/status_transition`, {
+                        method: mode === "edit" ? "PUT" : "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ 
+                            ...(mode === "edit" && { id: config.id }), 
+                            current_status: newCurrentStatus, 
+                            new_status: newNextStatus 
+                        }),
                     });
 
-                    // Add "Add" button below the table
-                    let addButton = document.querySelector(".add-button");
-                    if (!addButton) {
-                        addButton = document.createElement("button");
-                        addButton.textContent = "Thêm";
-                        addButton.className =
-                            "add-button mt-4 bg-green-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-green-700 transition";
+                    if (!response.ok) {
+                        throw new Error(`Failed to ${mode === "edit" ? "update" : "add"} status transition`);
                     }
 
-                    // Add button event
-                    addButton.addEventListener("click", () => {
-                        // Create overlay
-                        const overlay = document.createElement("div");
-                        overlay.className = "fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50";
-
-                        // Create larger modal
-                        const modal = document.createElement("div");
-                        modal.className = "bg-white p-8 rounded-2xl shadow-2xl w-[500px] max-w-full";
-
-                        // Modal title
-                        const title = document.createElement("h2");
-                        title.className = "text-2xl font-bold mb-6 text-gray-700";
-                        title.textContent = `Thêm trạng thái`;
-
-                        // Dropdown for current status
-                        const currentStatusInput = document.createElement("select");
-                        currentStatusInput.className = "w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
-                        currentStatusInput.placeholder = "Trạng thái hiện tại";
-
-                        // Populate current status dropdown
-                        status.forEach((option) => {
-                            const optionElement = document.createElement("option");
-                            optionElement.value = option.status_id;
-                            optionElement.textContent = option.name;
-                            currentStatusInput.appendChild(optionElement);
-                        });
-
-                        // Dropdown for next status
-                        const nextStatusInput = document.createElement("select");
-                        nextStatusInput.className = "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
-                        nextStatusInput.placeholder = "Trạng thái tiếp theo";
-
-                        // Populate next status dropdown
-                        status.forEach((option) => {
-                            const optionElement = document.createElement("option");
-                            optionElement.value = option.status_id;
-                            optionElement.textContent = option.name;
-                            nextStatusInput.appendChild(optionElement);
-                        });
-
-                        // Button container
-                        const buttonContainer = document.createElement("div");
-                        buttonContainer.className = "flex justify-end space-x-4 mt-6";
-
-                        // Save button
-                        const saveButton = document.createElement("button");
-                        saveButton.textContent = "Lưu";
-                        saveButton.className =
-                            "bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition";
-
-                        // Cancel button
-                        const cancelButton = document.createElement("button");
-                        cancelButton.textContent = "Hủy";
-                        cancelButton.className =
-                            "bg-gray-300 text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-400 transition";
-
-                        // Save button event
-                        saveButton.addEventListener("click", () => {
-                            const newCurrentStatus = currentStatusInput.value.trim();
-                            const newNextStatus = nextStatusInput.value.trim();
-
-                            if (newCurrentStatus && newNextStatus) {
-                                fetch(`/api/status_transition`, {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify({ current_status: newCurrentStatus, new_status: newNextStatus }),
-                                })
-                                    .then((response) => {                                        
-                                        return response.json();
-                                    })
-                                    .then((newConfig) => {
-                                        console.log(newConfig);
-                                        
-                                        // alert("Status transition added successfully!");
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Thành công!',
-                                            text: 'Thêm trạng thái thành công!',
-                                            confirmButtonText: 'OK',
-                                            timer: 2000,
-                                            timerProgressBar: true,
-                                            showConfirmButton: false
-                                        });
-                                        const row = document.createElement("tr");
-                                        row.innerHTML = `
-                                            <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${status.find(option => option.status_id == newConfig.current_status)?.name || newConfig.current_status}</td>
-                                            <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">${status.find(option => option.status_id == newConfig.new_status)?.name || newConfig.new_status}</td>
-                                            <td class="px-4 py-2 border-t border-gray-200 dark:border-gray-700">
-                                                <button class="edit-button px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue" data-id="${newConfig.id}">
-                                                    Edit
-                                                </button>
-                                                <button class="delete-button px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-red" data-id="${newConfig.id}">
-                                                    Delete
-                                                </button>
-                                            </td>
-                                        `;
-                                        document.querySelector("tbody").appendChild(row);
-                                    })
-                                    .catch((error) => {
-                                        console.error(error);
-                                        // alert("An error occurred while adding the status transition.");
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Lỗi!',
-                                            text: 'Đã xảy ra lỗi: ' + error.message,
-                                            confirmButtonText: 'Đóng'
-                                        });
-                                    });
-                            }
-                            document.body.removeChild(overlay);
-                        });
-
-                        // Cancel button event
-                        cancelButton.addEventListener("click", () => {
-                            document.body.removeChild(overlay);
-                        });
-
-                        // Append elements
-                        buttonContainer.appendChild(saveButton);
-                        buttonContainer.appendChild(cancelButton);
-                        modal.appendChild(title);
-                        modal.appendChild(currentStatusInput);
-                        modal.appendChild(nextStatusInput);
-                        modal.appendChild(buttonContainer);
-                        overlay.appendChild(modal);
-                        document.body.appendChild(overlay);
+                    const newConfig = await response.json();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công!',
+                        text: translations[lang].alerts[`${mode}Success`],
+                        confirmButtonText: 'OK',
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
                     });
 
-                    // Append the "Add" button to the container below the table
-                    const table = document.querySelector("table");
-                    
-                    if (table && !document.querySelector(".mt-4.flex.justify-end")) {
-                        const addButtonContainer = document.createElement("div");
-                        addButtonContainer.className = "mt-4 flex justify-end";
-                        addButtonContainer.appendChild(addButton);
-                        table.parentNode.insertBefore(addButtonContainer, table.nextSibling);
-                    }
-                    
-
-                    // Add event listeners for delete buttons
-                    document.querySelectorAll(".delete-button").forEach((button) => {
-                        button.addEventListener("click", async (event) => {
-                            const id = event.target.getAttribute("data-id");
-                            const confirmDelete = confirm("Are you sure you want to delete this item?");
-                            if (confirmDelete) {
-                                try {
-                                    const response = await fetch(`/api/status_transition/${id}`, {
-                                        method: "DELETE",
-                                    });
-                                    if (!response.ok) {
-                                        throw new Error("Failed to delete item");
-                                    }
-                                    // alert("Item deleted successfully");
-                                    Swal.fire({
-                                        icon: 'success',
-                                        title: 'Thành công!',
-                                        text: 'Xóa trạng thái thành công!',
-                                        confirmButtonText: 'OK',
-                                        timer: 2000,
-                                        timerProgressBar: true,
-                                        showConfirmButton: false
-                                    });
-                                    event.target.closest("tr").remove();
-                                } catch (error) {
-                                    console.error("Error deleting item:", error);
-                                    // alert("Failed to delete item");
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Lỗi!',
-                                        text: 'Đã xảy ra lỗi khi xóa trạng thái.',
-                                        confirmButtonText: 'Đóng'
-                                    });
-                                }
-                            }
-                        });
-                    });
-
-                    // Fetch options for dropdowns
-                    const fetchOptions = async () => {
-                        try {
-                            const response = await fetch("/api/status");
-                            if (!response.ok) {
-                                throw new Error("Failed to fetch status options");
-                            }
-                            return await response.json();
-                        } catch (error) {
-                            console.error("Error fetching status options:", error);
-                            return [];
-                        }
-                    };
-
-                    const status = (await fetchOptions()).status;
-
-                   
-
-                    // Add event listeners for edit buttons
-                    document.querySelectorAll(".edit-button").forEach((button) => {
-                        button.addEventListener("click", (event) => {
-                            const row = button.closest("tr");
-                            const currentStatus = row.querySelector("td:nth-child(1)").textContent.trim();
-                            const nextStatus = row.querySelector("td:nth-child(2)").textContent.trim();
-
-                            // Create overlay
-                            const overlay = document.createElement("div");
-                            overlay.className = "fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50";
-
-                            // Create larger modal
-                            const modal = document.createElement("div");
-                            modal.className = "bg-white p-8 rounded-2xl shadow-2xl w-[500px] max-w-full";
-
-                            // Modal title
-                            const title = document.createElement("h2");
-                            title.className = "text-2xl font-bold mb-6 text-gray-700";
-                            title.textContent = `Chỉnh sửa`;
-
-                            // Dropdown for current status
-                            const currentStatusInput = document.createElement("select");
-                            currentStatusInput.className = "w-full p-3 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
-                            currentStatusInput.placeholder = "Trạng thái hiện tại";
-
-                            // Populate current status dropdown
-                            status.forEach((option) => {
-                                const optionElement = document.createElement("option");
-                                optionElement.value = option.status_id;
-                                optionElement.textContent = option.name;
-                                if (option.name === currentStatus) {
-                                    optionElement.selected = true;
-                                }
-                                currentStatusInput.appendChild(optionElement);
-                            });
-
-                            // Dropdown for next status
-                            const nextStatusInput = document.createElement("select");
-                            nextStatusInput.className = "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500";
-                            nextStatusInput.placeholder = "Next Status";
-
-                            // Populate next status dropdown
-                            status.forEach((option) => {
-                                const optionElement = document.createElement("option");
-                                optionElement.value = option.status_id;
-                                optionElement.textContent = option.name;
-                                if (option.name === nextStatus) {
-                                    optionElement.selected = true;
-                                }
-                                nextStatusInput.appendChild(optionElement);
-                            });
-
-                            // Button container
-                            const buttonContainer = document.createElement("div");
-                            buttonContainer.className = "flex justify-end space-x-4 mt-6";
-
-                            // Save button
-                            const saveButton = document.createElement("button");
-                            saveButton.textContent = "Save";
-                            saveButton.className =
-                                "bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition";
-
-                            // Cancel button
-                            const cancelButton = document.createElement("button");
-                            cancelButton.textContent = "Cancel";
-                            cancelButton.className =
-                                "bg-gray-300 text-black px-5 py-2 rounded-lg font-medium hover:bg-gray-400 transition";
-
-                            // Save button event
-                            saveButton.addEventListener("click", () => {
-                                const newCurrentStatus = currentStatusInput.value.trim();
-                                const newNextStatus = nextStatusInput.value.trim();
-
-                                if (newCurrentStatus !== currentStatus || newNextStatus !== nextStatus) {
-                                    fetch(`/api/status_transition`, {
-                                        method: "PUT",
-                                        headers: { "Content-Type": "application/json" },
-                                        body: JSON.stringify({ id: button.getAttribute("data-id"), current_status: newCurrentStatus, new_status: newNextStatus }),
-                                    })
-                                        .then((response) => {
-                                            if (!response.ok) throw new Error("Failed to update status transition");
-                                            return response.json();
-                                        })
-                                        .then(() => {
-                                            // alert("Status transition updated successfully!");
-                                            Swal.fire({
-                                                icon: 'success',
-                                                title: 'Thành công!',
-                                                text: 'Cập nhật trạng thái thành công!',
-                                                confirmButtonText: 'OK',
-                                                timer: 2000,
-                                                timerProgressBar: true,
-                                                showConfirmButton: false
-                                            });
-                                            const newCurrentStatusName = status.find(option => option.status_id == newCurrentStatus)?.name || newCurrentStatus;
-                                            const newNextStatusName = status.find(option => option.status_id == newNextStatus)?.name || newNextStatus;
-
-                                            row.querySelector("td:nth-child(1)").textContent = newCurrentStatusName;
-                                            row.querySelector("td:nth-child(2)").textContent = newNextStatusName;
-                                        })
-                                        .catch((error) => {
-                                            console.error(error);
-                                            // alert("An error occurred while updating the status transition.");
-                                            Swal.fire({
-                                                icon: 'error',
-                                                title: 'Lỗi!',
-                                                text: 'Đã xảy ra lỗi: ' + error.message,
-                                                confirmButtonText: 'Đóng'
-                                            });
-                                        });
-                                }
-                                document.body.removeChild(overlay);
-                            });
-
-                            // Cancel button event
-                            cancelButton.addEventListener("click", () => {
-                                document.body.removeChild(overlay);
-                            });
-
-                            // Append elements
-                            buttonContainer.appendChild(saveButton);
-                            buttonContainer.appendChild(cancelButton);
-                            modal.appendChild(title);
-                            modal.appendChild(currentStatusInput);
-                            modal.appendChild(nextStatusInput);
-                            modal.appendChild(buttonContainer);
-                            overlay.appendChild(modal);
-                            document.body.appendChild(overlay);
-                        });
+                    // Làm mới bảng
+                    await refreshTable();
+                    document.body.removeChild(overlay);
+                } catch (error) {
+                    console.error(error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi!',
+                        text: translations[lang].alerts[`${mode}Error`],
+                        confirmButtonText: translations[lang].buttons.cancel,
                     });
                 }
-            } catch (error) {
-                console.error("Error fetching or rendering data:", error);
             }
         });
+
+        cancelButton.addEventListener("click", () => {
+            document.body.removeChild(overlay);
+        });
+
+        buttonContainer.appendChild(saveButton);
+        buttonContainer.appendChild(cancelButton);
+        modal.appendChild(title);
+        modal.appendChild(currentStatusInput);
+        modal.appendChild(nextStatusInput);
+        modal.appendChild(buttonContainer);
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+    };
+
+    // Xử lý nút chuyển đổi trạng thái
+    const statusTransitionButton = document.querySelector("#status-transition .ml-4");
+    if (statusTransitionButton) {
+        statusTransitionButton.addEventListener("click", async () => {
+            await refreshTable();
+
+            // Thêm nút "Thêm"
+            const lang = getLang();
+            let addButton = document.querySelector(".add-button");
+            if (!addButton) {
+                addButton = document.createElement("button");
+                addButton.textContent = translations[lang].buttons.add;
+                addButton.className = "add-button mt-4 bg-green-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-green-700 transition";
+                const table = document.querySelector("table");
+                if (table && !document.querySelector(".mt-4.flex.justify-end")) {
+                    const addButtonContainer = document.createElement("div");
+                    addButtonContainer.className = "mt-4 flex justify-end";
+                    addButtonContainer.appendChild(addButton);
+                    table.parentNode.insertBefore(addButtonContainer, table.nextSibling);
+                }
+            }
+
+            addButton.addEventListener("click", () => createModal("add"));
+
+            // Xử lý nút Xóa
+            document.querySelectorAll(".delete-button").forEach((button) => {
+                button.addEventListener("click", async (event) => {
+                    const id = event.target.getAttribute("data-id");
+                    const lang = getLang();
+                    const confirmDelete = confirm(`Are you sure you want to delete this item?`); // Có thể thay bằng Swal.fire
+                    if (confirmDelete) {
+                        try {
+                            const response = await fetch(`/api/status_transition/${id}`, {
+                                method: "DELETE",
+                            });
+                            if (!response.ok) {
+                                throw new Error("Failed to delete item");
+                            }
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: translations[lang].alerts.deleteSuccess,
+                                confirmButtonText: 'OK',
+                                timer: 2000,
+                                timerProgressBar: true,
+                                showConfirmButton: false,
+                            });
+                            await refreshTable();
+                        } catch (error) {
+                            console.error("Error deleting item:", error);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: translations[lang].alerts.deleteError,
+                                confirmButtonText: translations[lang].buttons.cancel,
+                            });
+                        }
+                    }
+                });
+            });
+
+            // Xử lý nút Sửa
+            document.querySelectorAll(".edit-button").forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    const row = button.closest("tr");
+                    const config = {
+                        id: button.getAttribute("data-id"),
+                    };
+                    createModal("edit", config, row);
+                });
+            });
+        });
     }
+
+    // Lắng nghe thay đổi ngôn ngữ
+    window.addEventListener('storage', async (event) => {
+        if (event.key === 'lang') {
+            await refreshTable();
+            const addButton = document.querySelector(".add-button");
+            if (addButton) {
+                addButton.textContent = translations[getLang()].buttons.add;
+            }
+        }
+    });
 });
