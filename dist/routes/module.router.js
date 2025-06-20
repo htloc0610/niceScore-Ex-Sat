@@ -10,8 +10,10 @@ const moduleRouter = (0, express_1.Router)();
 moduleRouter.get("/", module_controller_1.default.getListModules);
 // [POST] /api/module
 moduleRouter.post("/", module_controller_1.default.addModule);
+moduleRouter.get("/no-lang/:id", module_controller_1.default.getModuleByIdNoLanguage);
 // [GET] /api/module/:id/translations - Get all translations
 moduleRouter.get("/:id/translations", module_controller_1.default.getModuleWithTranslations);
+moduleRouter.get("/:id", module_controller_1.default.getModuleWithTranslations);
 // [GET] /api/module/:id/translations/:language - Get specific language translation (default en)
 moduleRouter.get("/:id/translations/:language", module_controller_1.default.getModuleWithLanguage);
 // [POST] /api/module/:id/translations - Add/update a translation with language in body
@@ -21,7 +23,6 @@ moduleRouter.post("/:id/translations/:language", module_controller_1.default.add
 // [DELETE] /api/module/:id/translations/:language
 moduleRouter.delete("/:id/translations/:language", module_controller_1.default.deleteModuleTranslation);
 // [GET] /api/module/:id
-moduleRouter.get("/:id", module_controller_1.default.getModule);
 // [PUT] /api/module/:id
 moduleRouter.put("/:id", module_controller_1.default.updateModule);
 // [DELETE] /api/module/:id

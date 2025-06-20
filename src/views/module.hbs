@@ -114,10 +114,16 @@
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="module-code" data-i18n-form-label="code">{{#if (t "modules.form.labels.code")}}{{t "modules.form.labels.code"}}{{else}}Mã môn học{{/if}}</label>
           <input type="text" id="module-code" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
         </div>
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="module-name" data-i18n-form-label="name">{{#if (t "modules.form.labels.name")}}{{t "modules.form.labels.name"}}{{else}}Tên môn học{{/if}}</label>
-          <input type="text" id="module-name" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
-        </div>
+        <div class="flex">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="module-name-vi" data-i18n-form-label="name">{{#if (t "modules.form.labels.name_vi")}}{{t "modules.form.labels.name_vi"}}{{else}}Tên môn học{{/if}}</label>
+            <input type="text" id="module-name-vi" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+          </div>
+          <div class="mb-4 ml-2">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="module-name-en" data-i18n-form-label="name">{{#if (t "modules.form.labels.name_en")}}{{t "modules.form.labels.x`"}}{{else}}Tên môn học (Tiếng Anh){{/if}}</label>
+            <input type="text" id="module-name-en" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+          </div>
+          </div>  
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="credits" data-i18n-form-label="credits">{{#if (t "modules.form.labels.credits")}}{{t "modules.form.labels.credits"}}{{else}}Số tín chỉ{{/if}}</label>
           <input type="number" id="credits" min="1" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
@@ -143,8 +149,14 @@
             <option value="0">{{#if (t "modules.form.labels.inactive")}}{{t "modules.form.labels.inactive"}}{{else}}Dừng{{/if}}</option>
           </select>
         </div>
+        <div class="flex gap-2">
         <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="description" data-i18n-form-label="description">{{#if (t "modules.form.labels.description")}}{{t "modules.form.labels.description"}}{{else}}Mô tả{{/if}}</label>        <textarea id="description" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="description_vi" data-i18n-form-label="description_vi">{{#if (t "modules.form.labels.description_vi")}}{{t "modules.form.labels.description_vi"}}{{else}}Mô tả tiếng Việt{{/if}}</label>        <textarea id="description_vi" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="description_en" data-i18n-form-label="description_en">{{#if (t "modules.form.labels.description_en")}}{{t "modules.form.labels.description_en"}}{{else}}Mô tả tiếng Anh{{/if}}</label>        <textarea id="description_en" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+        </div>
+        
         </div>
         <div class="flex justify-end gap-2">
           <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700">{{#if (t "modules.form.add.button")}}{{t "modules.form.add.button"}}{{else}}Thêm{{/if}}</button>
@@ -207,9 +219,15 @@
       <h4 id="edit-module-code-display" class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-4"></h4>
       <form id="edit-module-form">
         <input type="hidden" id="edit-module-id">
+        <div class="flex">
         <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-module-name" data-i18n-form-label="name">{{#if (t "modules.form.labels.name")}}{{t "modules.form.labels.name"}}{{else}}Tên môn học{{/if}}</label>
-          <input type="text" id="edit-module-name" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-module-name" data-i18n-form-label="name_vi">{{#if (t "modules.form.labels.name")}}{{t "modules.form.labels.name"}}{{else}}Tên môn học{{/if}}</label>
+          <input type="text" id="edit-module-name-vi" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-module-name" data-i18n-form-label="name_en">{{#if (t "modules.form.labels.name")}}{{t "modules.form.labels.name"}}{{else}}Tên môn học (Tiếng Anh){{/if}}</label>
+          <input type="text" id="edit-module-name-en" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+        </div>
         </div>
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-credits" data-i18n-form-label="credits">{{#if (t "modules.form.labels.credits")}}{{t "modules.form.labels.credits"}}{{else}}Số tín chỉ{{/if}}</label>
@@ -236,8 +254,11 @@
             <option value="0">{{#if (t "modules.form.labels.inactive")}}{{t "modules.form.labels.inactive"}}{{else}}Dừng{{/if}}</option>
           </select>
         </div>
+        <div class="flex gap-2">
         <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-description" data-i18n-form-label="description">{{#if (t "modules.form.labels.description")}}{{t "modules.form.labels.description"}}{{else}}Mô tả{{/if}}</label>        <textarea id="edit-description" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-description-vi" data-i18n-form-label="description_vi">{{#if (t "modules.form.labels.description_vi")}}{{t "modules.form.labels.description_vi"}}{{else}}Mô tả tiếng Việt{{/if}}</label>        <textarea id="edit-description-vi" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-description-en" data-i18n-form-label="description_en">{{#if (t "modules.form.labels.description")}}{{t "modules.form.labels.description"}}{{else}}Mô tả tiếng Anh{{/if}}</label>        <textarea id="edit-description-en" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
         </div>
         <div class="flex justify-end gap-2">
           <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-purple-600 rounded-lg hover:bg-purple-700">{{#if (t "modules.form.edit.button")}}{{t "modules.form.edit.button"}}{{else}}Lưu{{/if}}</button>
@@ -254,10 +275,16 @@
       <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">{{#if (t "modules.classes.edit_title")}}{{t "modules.classes.edit_title"}}{{else}}Chỉnh sửa Lớp Học{{/if}}</h3>
       <form id="edit-class-form">
         <input type="hidden" id="edit-class-id">
+        <div class="flex">
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-class-code">{{#if (t "modules.classes.code")}}{{t "modules.classes.code"}}{{else}}Mã lớp{{/if}}</label>
+            <input type="text" id="edit-class-code" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+          </div>
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-class-name">{{#if (t "modules.classes.name")}}{{t "modules.classes.name"}}{{else}}Tên lớp{{/if}}</label>
           <input type="text" id="edit-class-name" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>
         </div>
+        </div>  
         <div class="mb-4">
           <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" for="edit-lecturer">{{#if (t "modules.classes.lecturer")}}{{t "modules.classes.lecturer"}}{{else}}Giảng viên{{/if}}</label>
           <input type="text" id="edit-lecturer" class="w-full px-3 py-2 text-sm text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" required>

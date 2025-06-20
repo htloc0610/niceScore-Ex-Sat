@@ -61,7 +61,7 @@ const moduleService = {  async getAllModules(language = "en") {
           {
             model: Faculty,
             as: "faculty",
-            attributes: ["name"],
+            attributes: ["name_en", "name_vi"],
           },
           {
             model: Modules,
@@ -146,7 +146,7 @@ const moduleService = {  async getAllModules(language = "en") {
           {
             model: Faculty,
             as: "faculty",
-            attributes: ["name"],
+            attributes: ["name_en", "name_vi"],
           },
           {
             model: Modules,
@@ -181,6 +181,53 @@ const moduleService = {  async getAllModules(language = "en") {
       throw new Error("Error fetching module by ID: " + error.message);
     }
   },
+  async getModuleByIdNoLang(moduleId: number) {
+    try {
+      const module = await Modules.findOne({
+        where: { module_id: moduleId },
+        include: [
+          {
+            model: ModuleTranslation,
+            as: "translations",
+            attributes: ["language","module_name", "description"],
+          },
+          {
+            model: Faculty,
+            as: "faculty",
+            attributes: ["name_en", "name_vi"],
+          },
+          {
+            model: Modules,
+            as: "prerequisite",
+            attributes: ["module_code"],
+          },
+        ],
+      });
+
+      if (!module) {
+        throw new Error("Module not found");
+      }
+
+      const plainModule = module.get({ plain: true });
+      
+      // Extract translation data and add it to the module object
+      if (plainModule.translations && plainModule.translations.length > 0) {
+        plainModule.module_name = plainModule.translations[0].module_name;
+        plainModule.description = plainModule.translations[0].description;
+      } else {
+        // Default values if translation is not available
+        plainModule.module_name = `[${plainModule.module_code}]`;
+        plainModule.description = null;
+      }
+      
+      // Remove the translations array from the returned object     
+      return plainModule;
+    } catch (error) {
+      logger.error("Error fetching module by ID: " + error.message);
+      throw new Error("Error fetching module by ID: " + error.message);
+    }
+  },
+
 
   async hasRegisterStudent(moduleId: number) {
     try {
@@ -210,22 +257,19 @@ const moduleService = {  async getAllModules(language = "en") {
   async updateModule(moduleId: number, updatedData: any) {
     try {
       // Extract translation data
-      const { module_name, description, language = 'en', translations, ...moduleData } = updatedData;
-      
-      await sequelize.transaction(async (t: any) => {
+      const { module_name, description, language = 'en', translations, module_name_vi, module_name_en, description_vi, description_en, ...moduleData } = updatedData;
+      await sequelize.transaction(async (t) => {
         // Update the core module data
         if (Object.keys(moduleData).length > 0) {
           const [updated] = await Modules.update(moduleData, {
             where: { module_id: moduleId },
             transaction: t,
           });
-
           if (updated === 0) {
             throw new Error("Module not found");
           }
         }
-        
-        // Update or create the translation in the specified language
+        // Update or create the translation in the specified language (old API)
         if (module_name || description) {
           const [translation, created] = await ModuleTranslation.findOrCreate({
             where: { 
@@ -240,23 +284,18 @@ const moduleService = {  async getAllModules(language = "en") {
             },
             transaction: t,
           });
-          
           if (!created) {
-            // Update existing translation
             await translation.update({
               ...(module_name && { module_name }),
               ...(description !== undefined && { description }),
             }, { transaction: t });
           }
         }
-        
-        // Handle multiple translations update
+        // Handle multiple translations update (new API)
         if (translations && Array.isArray(translations)) {
           for (const translationData of translations) {
             const { language, module_name, description } = translationData;
-            
             if (!language) continue;
-            
             const [translation, created] = await ModuleTranslation.findOrCreate({
               where: { 
                 module_id: moduleId,
@@ -270,9 +309,7 @@ const moduleService = {  async getAllModules(language = "en") {
               },
               transaction: t,
             });
-            
             if (!created) {
-              // Update existing translation
               await translation.update({
                 ...(module_name && { module_name }),
                 ...(description !== undefined && { description }),
@@ -280,8 +317,44 @@ const moduleService = {  async getAllModules(language = "en") {
             }
           }
         }
+        // Handle flat fields for vi/en (frontend compatibility)
+        if (module_name_vi !== undefined || description_vi !== undefined) {
+          const [viTrans, viCreated] = await ModuleTranslation.findOrCreate({
+            where: { module_id: moduleId, language: 'vi' },
+            defaults: {
+              module_id: moduleId,
+              language: 'vi',
+              module_name: module_name_vi || '',
+              description: description_vi || null,
+            },
+            transaction: t,
+          });
+          if (!viCreated) {
+            await viTrans.update({
+              ...(module_name_vi !== undefined && { module_name: module_name_vi }),
+              ...(description_vi !== undefined && { description: description_vi }),
+            }, { transaction: t });
+          }
+        }
+        if (module_name_en !== undefined || description_en !== undefined) {
+          const [enTrans, enCreated] = await ModuleTranslation.findOrCreate({
+            where: { module_id: moduleId, language: 'en' },
+            defaults: {
+              module_id: moduleId,
+              language: 'en',
+              module_name: module_name_en || '',
+              description: description_en || null,
+            },
+            transaction: t,
+          });
+          if (!enCreated) {
+            await enTrans.update({
+              ...(module_name_en !== undefined && { module_name: module_name_en }),
+              ...(description_en !== undefined && { description: description_en }),
+            }, { transaction: t });
+          }
+        }
       });
-
       // Get the updated module with translations
       return await this.getModuleWithTranslations(moduleId);
     } catch (error) {

@@ -30,6 +30,19 @@ const facultyController = { getListModules: (req, res) => __awaiter(void 0, void
                 .send({ message: "An error occurred while fetching modules." });
         }
     }),
+    getModuleByIdNoLanguage: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const moduleId = parseInt(req.params.id);
+            const module = yield module_service_1.default.getModuleByIdNoLang(moduleId);
+            res.status(200).send({ message: "Module fetched successfully", module });
+        }
+        catch (error) {
+            console.error(error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching the module." });
+        }
+    }),
     addModule: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
@@ -80,6 +93,7 @@ const facultyController = { getListModules: (req, res) => __awaiter(void 0, void
     }),
     updateModule: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
+            console.log();
             const module_id = req.params.id;
             const updatedData = req.body;
             if (updatedData.module_code) {
@@ -88,7 +102,11 @@ const facultyController = { getListModules: (req, res) => __awaiter(void 0, void
                 });
                 return;
             }
-            if (updatedData.credits && (yield module_service_1.default.hasRegisterStudent(parseInt(module_id)))) {
+            // Fetch current module to compare credits
+            const currentModule = yield module_service_1.default.getModuleByIdNoLang(parseInt(module_id));
+            if (updatedData.credits !== undefined &&
+                updatedData.credits !== currentModule.credits &&
+                (yield module_service_1.default.hasRegisterStudent(parseInt(module_id)))) {
                 res.status(400).send({
                     message: "Module cannot be updated because it has registered students.",
                 });

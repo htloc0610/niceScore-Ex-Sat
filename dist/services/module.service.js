@@ -85,7 +85,7 @@ const moduleService = { getAllModules() {
                         {
                             model: faculty_model_1.default,
                             as: "faculty",
-                            attributes: ["name"],
+                            attributes: ["name_en", "name_vi"],
                         },
                         {
                             model: modules_model_1.default,
@@ -164,7 +164,7 @@ const moduleService = { getAllModules() {
                         {
                             model: faculty_model_1.default,
                             as: "faculty",
-                            attributes: ["name"],
+                            attributes: ["name_en", "name_vi"],
                         },
                         {
                             model: modules_model_1.default,
@@ -189,6 +189,52 @@ const moduleService = { getAllModules() {
                 }
                 // Remove the translations array from the returned object
                 delete plainModule.translations;
+                return plainModule;
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching module by ID: " + error.message);
+                throw new Error("Error fetching module by ID: " + error.message);
+            }
+        });
+    },
+    getModuleByIdNoLang(moduleId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const module = yield modules_model_1.default.findOne({
+                    where: { module_id: moduleId },
+                    include: [
+                        {
+                            model: module_translations_model_1.default,
+                            as: "translations",
+                            attributes: ["language", "module_name", "description"],
+                        },
+                        {
+                            model: faculty_model_1.default,
+                            as: "faculty",
+                            attributes: ["name_en", "name_vi"],
+                        },
+                        {
+                            model: modules_model_1.default,
+                            as: "prerequisite",
+                            attributes: ["module_code"],
+                        },
+                    ],
+                });
+                if (!module) {
+                    throw new Error("Module not found");
+                }
+                const plainModule = module.get({ plain: true });
+                // Extract translation data and add it to the module object
+                if (plainModule.translations && plainModule.translations.length > 0) {
+                    plainModule.module_name = plainModule.translations[0].module_name;
+                    plainModule.description = plainModule.translations[0].description;
+                }
+                else {
+                    // Default values if translation is not available
+                    plainModule.module_name = `[${plainModule.module_code}]`;
+                    plainModule.description = null;
+                }
+                // Remove the translations array from the returned object     
                 return plainModule;
             }
             catch (error) {
@@ -229,7 +275,7 @@ const moduleService = { getAllModules() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 // Extract translation data
-                const { module_name, description, language = 'en', translations } = updatedData, moduleData = __rest(updatedData, ["module_name", "description", "language", "translations"]);
+                const { module_name, description, language = 'en', translations, module_name_vi, module_name_en, description_vi, description_en } = updatedData, moduleData = __rest(updatedData, ["module_name", "description", "language", "translations", "module_name_vi", "module_name_en", "description_vi", "description_en"]);
                 yield db_1.default.transaction((t) => __awaiter(this, void 0, void 0, function* () {
                     // Update the core module data
                     if (Object.keys(moduleData).length > 0) {
@@ -241,7 +287,7 @@ const moduleService = { getAllModules() {
                             throw new Error("Module not found");
                         }
                     }
-                    // Update or create the translation in the specified language
+                    // Update or create the translation in the specified language (old API)
                     if (module_name || description) {
                         const [translation, created] = yield module_translations_model_1.default.findOrCreate({
                             where: {
@@ -257,11 +303,10 @@ const moduleService = { getAllModules() {
                             transaction: t,
                         });
                         if (!created) {
-                            // Update existing translation
                             yield translation.update(Object.assign(Object.assign({}, (module_name && { module_name })), (description !== undefined && { description })), { transaction: t });
                         }
                     }
-                    // Handle multiple translations update
+                    // Handle multiple translations update (new API)
                     if (translations && Array.isArray(translations)) {
                         for (const translationData of translations) {
                             const { language, module_name, description } = translationData;
@@ -281,9 +326,39 @@ const moduleService = { getAllModules() {
                                 transaction: t,
                             });
                             if (!created) {
-                                // Update existing translation
                                 yield translation.update(Object.assign(Object.assign({}, (module_name && { module_name })), (description !== undefined && { description })), { transaction: t });
                             }
+                        }
+                    }
+                    // Handle flat fields for vi/en (frontend compatibility)
+                    if (module_name_vi !== undefined || description_vi !== undefined) {
+                        const [viTrans, viCreated] = yield module_translations_model_1.default.findOrCreate({
+                            where: { module_id: moduleId, language: 'vi' },
+                            defaults: {
+                                module_id: moduleId,
+                                language: 'vi',
+                                module_name: module_name_vi || '',
+                                description: description_vi || null,
+                            },
+                            transaction: t,
+                        });
+                        if (!viCreated) {
+                            yield viTrans.update(Object.assign(Object.assign({}, (module_name_vi !== undefined && { module_name: module_name_vi })), (description_vi !== undefined && { description: description_vi })), { transaction: t });
+                        }
+                    }
+                    if (module_name_en !== undefined || description_en !== undefined) {
+                        const [enTrans, enCreated] = yield module_translations_model_1.default.findOrCreate({
+                            where: { module_id: moduleId, language: 'en' },
+                            defaults: {
+                                module_id: moduleId,
+                                language: 'en',
+                                module_name: module_name_en || '',
+                                description: description_en || null,
+                            },
+                            transaction: t,
+                        });
+                        if (!enCreated) {
+                            yield enTrans.update(Object.assign(Object.assign({}, (module_name_en !== undefined && { module_name: module_name_en })), (description_en !== undefined && { description: description_en })), { transaction: t });
                         }
                     }
                 }));
