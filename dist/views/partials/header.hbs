@@ -2,6 +2,27 @@
   <div
     class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300"
   >
+    <!-- Back button - only shows on non-homepage -->
+    <button
+      id="backButton"
+      class="p-1 mr-5 -ml-1 rounded-md focus:outline-none focus:shadow-outline-purple hidden"
+      onclick="window.history.back()"
+      aria-label="Go Back"
+    >
+      <svg
+        class="w-6 h-6"
+        aria-hidden="true"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </button>
+
     <!-- Mobile hamburger -->
     <button
       class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
@@ -98,23 +119,24 @@
           window.dispatchEvent(event);
           
           // Reload the page with the new language
-          const currentUrl = new URL(window.location);
-          currentUrl.searchParams.set('lang', selectedLang);
-          window.location.href = currentUrl.toString();
+          window.location.href = window.location.pathname + '?lang=' + selectedLang;
         });
+
+        // Set the select value to match the current language
+        document.getElementById('languageSelect').value = '{{lang}}';
         
-        // Set the initial value based on localStorage or URL param or server language
-        document.addEventListener('DOMContentLoaded', function() {
-          const urlParams = new URLSearchParams(window.location.search);
-          const urlLang = urlParams.get('lang');
-          const localLang = localStorage.getItem('lang');
-          const serverLang = document.documentElement.getAttribute('data-lang');
-          
-          // Select the appropriate option in the dropdown
-          const selectElement = document.getElementById('languageSelect');
-          const langToUse = urlLang || localLang || serverLang || 'en';
-          selectElement.value = langToUse;
+        document.addEventListener('DOMContentLoaded', function () {
+          const backButton = document.getElementById('backButton');
+          const path = window.location.pathname;
+
+          // Những đường dẫn được coi là trang chủ
+          const homepagePaths = ['/', '/index', '/index.html', '/class/', '/class/index.html'];
+
+          if (!homepagePaths.includes(path)) {
+            backButton.classList.remove('hidden');
+          }
         });
+
       </script>
 
     </ul>
