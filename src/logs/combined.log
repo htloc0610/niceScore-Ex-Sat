@@ -1605,3 +1605,30 @@
 {"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T04:30:07.416Z"}
 {"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T04:39:13.356Z"}
 {"level":"info","message":"Created new registration successfully","timestamp":"2025-06-20T04:39:27.770Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-06-20T04:55:31.010Z"}
+{"level":"info","message":"Created new registration successfully","timestamp":"2025-06-20T04:55:45.894Z"}
+{"level":"info","message":"Created new transcript successfully","timestamp":"2025-06-20T04:56:29.313Z"}
+{"level":"info","message":"Deleted registration with ID: 20 and saved cancellation reason","timestamp":"2025-06-20T05:05:52.994Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 4","timestamp":"2025-06-20T05:06:11.970Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T05:06:23.644Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:06:26.900Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:06:42.384Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:06:42.385Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:07:52.175Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:07:52.229Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:08:02.987Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:08:03.192Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:17:44.169Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:19:17.277Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:19:17.279Z"}
+{"level":"error","message":"Error fetching module by ID: column faculty.name does not exist","timestamp":"2025-06-20T05:19:20.992Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:36:03.789Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T05:36:04.809Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:36:05.113Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T05:39:15.812Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:39:16.950Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T05:39:16.956Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T05:41:22.244Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:41:22.246Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T05:51:05.621Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:51:05.624Z"}

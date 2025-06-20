@@ -233,3 +233,4 @@
 {"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-06-20T01:59:48.200Z"}
 {"level":"error","message":"Error adding student: Validation error","timestamp":"2025-06-20T01:59:48.202Z"}
 {"level":"error","message":"Error adding new studentSequelizeUniqueConstraintError: Validation error","timestamp":"2025-06-20T01:59:48.204Z"}
+{"level":"error","message":"Error fetching module by ID: column faculty.name does not exist","timestamp":"2025-06-20T05:19:20.992Z"}

@@ -1,4 +1,5 @@
-{  "index": {
+{
+  "index": {
     "header": {
       "title": "Hệ thống quản lý sinh viên FIT@HCMUS",
       "page_title": "Quản lý sinh viên"
@@ -310,7 +311,7 @@
       "loading_error_class": "Lỗi tải dữ liệu lớp học"
     }
   },
-  "more":{
+  "more": {
     "navigator": {
       "back": "Quay lại",
       "faculty": "Khoa",
@@ -346,74 +347,71 @@
     }
   },
   "class": {
-    "title": "Thông tin lớp học",
-    "class_code": "Mã lớp học",
-    "lecturer": "Giảng viên",
-    "academic_year": "Năm học",
-    "semester": "Học kỳ",
-    "schedule": "Lịch học",
-    "max_students": "Sĩ số tối đa",
-    "classroom": "Phòng học",
-     "add_student": "Thêm học sinh",
-      "confirmButton": "Xóa",
-      "cancelButton": "Hủy",
-     "add_table":
-     {
-      "title": "Thêm học sinh vào lớp",
-      "student_id": "Mã số sinh viên",
-      "close_button": "Đóng",
-      "add_button": "Thêm học sinh",
-      "swal": {
-        "success_title": "Thành công!",
-        "success_text": "Học sinh đã được thêm vào lớp học.",
-        "error_title": "Lỗi!",
-        "error_text": "Đã xảy ra lỗi khi thêm học sinh vào lớp."
-      }
-     },
-     
-     "score": {
-      "not_yet": "Chưa có điểm",
-      "add_score_button": "Thêm điểm",
-      "fix_score": {
-        "title": "Chỉnh sửa điểm",
-        "score": "Điểm",
-        "swal":{
-          "success_title": "Thành công!",
-          "success_text": "Điểm đã được cập nhật thành công.",
-          "error_title": "Lỗi!",
-          "error_text": "Đã xảy ra lỗi khi cập nhật điểm."
-        }
-      },
-      "add_score": {
-        "title": "Thêm điểm",
-        "score": "Điểm",
-        "swal": {
-          "success_title": "Thành công!",
-          "success_text": "Điểm đã được thêm thành công.",
-          "error_title": "Lỗi!",
-          "error_text": "Đã xảy ra lỗi khi thêm điểm."
-        }
-      },
-      "delete_student": "Xóa học sinh khỏi lớp",
-      "delete_confirm": {
-        "title": "Hủy đăng ký",
-        "text": "Bạn có chắc không? Học sinh sẽ bị xóa khỏi lớp học này!",
-        "reason": "Nhập lý do hủy đăng ký",
-        "swal": {
-          "success_title": "Thành công!",
-          "success_text": "Học sinh đã được xóa khỏi lớp học.",
-          "error_title": "Lỗi!",
-          "error_text": "Đã xảy ra lỗi khi xóa học sinh khỏi lớp."
-        }
-      }
-     },
     "table": {
       "title": "Danh sách học sinh trong lớp",
       "student_id": "MSSV",
       "full_name": "Họ tên",
       "email": "Email",
-      "score": "Điểm",
-      "actions": "Hành động"
+      "grade": "Điểm",
+      "actions": "Hành động",
+      "loading": "Đang tải danh sách học sinh...",
+      "empty_message": "Chưa có học sinh nào trong lớp này",
+      "total_count": "Tổng số: {0} học sinh",
+      "error_message": "Lỗi khi tải danh sách học sinh"
+    },
+    "title": "Thông tin lớp học",
+    "class_code": "Mã lớp:",
+    "lecturer": "Giảng viên:",
+    "academic_year": "Năm học:",
+    "semester": "Học kỳ:",
+    "schedule": "Lịch học:",
+    "classroom": "Phòng học:",
+    "max_students": "Sĩ số tối đa:",
+    "add_student": "Thêm học sinh",
+    "add_student_button": "Thêm học sinh",
+    "add_student_form": {
+      "student_id": "MSSV:",
+      "close_button": "Đóng",
+      "add_button": "Thêm",
+      "processing": "Đang xử lý..."
+    },
+    "add_grade_button": "Thêm điểm",
+    "edit_grade_button": "Sửa điểm",
+    "cancel_button": "Hủy đăng ký",
+    "close_button": "Đóng",
+    "grade": {
+      "not_available": "Chưa có điểm"
+    },
+    "add_table": {
+      "swal": {
+        "validation_title": "Lỗi xác nhận",
+        "student_id_required": "Vui lòng nhập MSSV",
+        "success_title": "Thành công",
+        "success_text": "Học sinh đã được thêm vào lớp học thành công",
+        "error_title": "Lỗi",
+        "error_text": "Lỗi khi đăng ký học sinh: "
+      }
+    },
+    "score": {
+      "add_score": {
+        "title": "Thêm điểm",
+        "grade_label": "Điểm",
+        "save_button": "Lưu"
+      },
+      "delete_student": {
+        "swal": {
+          "title": "Xác nhận xóa",
+          "text": "Bạn có chắc muốn xóa học sinh này?",
+          "confirm_button": "Xóa!"
+        }
+      },
+      "delete_confirm": {
+        "title": "Xác nhận hủy đăng ký",
+        "text": "Vui lòng cung cấp lý do hủy đăng ký",
+        "confirm_button": "Hủy đăng ký",
+        "reason": "Nhập lý do hủy đăng ký",
+        "input_aria": "Nhập lý do hủy"
+      }
     }
   }
 }

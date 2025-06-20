@@ -8,8 +8,11 @@ async function initPage() {
   const localLang = localStorage.getItem("lang");
   const lang = urlLang || localLang || "en";
   
+  console.log("Initializing page with language:", lang, "URL lang:", urlLang, "Local storage lang:", localLang);
+  
   // If a language was specified in URL, update localStorage
   if (urlLang) {
+    console.log("Setting localStorage language to URL value:", urlLang);
     localStorage.setItem("lang", urlLang);
   } 
   // If localStorage has a language but URL doesn't, update URL to maintain language state during navigation
@@ -17,6 +20,7 @@ async function initPage() {
     const currentUrl = new URL(window.location);
     currentUrl.searchParams.set('lang', localLang);
     
+    console.log("Updating URL with localStorage language:", localLang);
     // Use history.replaceState to update URL without reloading
     history.replaceState(null, '', currentUrl.toString());
   }
@@ -24,6 +28,7 @@ async function initPage() {
   // Set language value in the language selector dropdown if it exists
   const languageSelect = document.getElementById('languageSelect');
   if (languageSelect) {
+    console.log("Setting language selector to:", lang);
     languageSelect.value = lang;
   }
   
@@ -41,6 +46,11 @@ async function loadTranslationsAndUpdateUI(lang) {
     }
     t = await res.json();
     console.log("Loaded translations for class page", t);
+    
+    // Check if we got proper class translations
+    if (!t.class) {
+      console.error("Missing class translations in language file", lang);
+    }
 
     // Update any static UI elements that need translation
     updateUITranslations();
@@ -48,7 +58,7 @@ async function loadTranslationsAndUpdateUI(lang) {
     // Load students for the class if we're on a class page
     const classId = window.location.pathname.split("/").pop();
     if (classId) {
-      loadStudents(classId);
+      await loadStudents(classId);
     }
   } catch (error) {
     console.error("Error loading translations:", error);
@@ -61,20 +71,30 @@ async function loadTranslationsAndUpdateUI(lang) {
 
 // Function to update static UI elements with translations
 function updateUITranslations() {
+  console.log("Updating UI translations with:", t?.class);
+  
+  if (!t || !t.class) {
+    console.error("Missing translations for class page");
+    return;
+  }
+  
   // Update modal title and buttons
   const addStudentTitle = document.querySelector("#add-student-modal h3");
   if (addStudentTitle) {
     addStudentTitle.textContent = t?.class?.add_student || "Add Student";
+    console.log("Updated modal title to:", addStudentTitle.textContent);
   }
   
   const studentIdLabel = document.querySelector('label[for="student-id"]');
   if (studentIdLabel) {
     studentIdLabel.textContent = t?.class?.add_student_form?.student_id || "Student ID:";
+    console.log("Updated student ID label to:", studentIdLabel.textContent);
   }
   
   const closeButton = document.querySelector('#add-student-modal button[type="button"]');
   if (closeButton) {
     closeButton.textContent = t?.class?.add_student_form?.close_button || "Close";
+    console.log("Updated close button to:", closeButton.textContent);
   }
   
   const addButton = document.querySelector('#add-student-form button[type="submit"]');
@@ -85,9 +105,11 @@ function updateUITranslations() {
       const textNode = Array.from(addButton.childNodes).find(node => node.nodeType === 3);
       if (textNode) {
         textNode.nodeValue = t?.class?.add_student_form?.add_button || "Add";
+        console.log("Updated submit button text node to:", textNode.nodeValue);
       }
     } else {
       addButton.textContent = t?.class?.add_student_form?.add_button || "Add";
+      console.log("Updated submit button to:", addButton.textContent);
     }
   }
   
@@ -95,6 +117,7 @@ function updateUITranslations() {
   const tableHeader = document.querySelector("h4");
   if (tableHeader) {
     tableHeader.textContent = t?.class?.table?.title || "Students List";
+    console.log("Updated table header to:", tableHeader.textContent);
   }
   
   // Update add student button text
@@ -107,37 +130,68 @@ function updateUITranslations() {
       const textNodes = Array.from(addStudentBtn.childNodes)
         .filter(node => node.nodeType === 3);
       if (textNodes.length > 0) {
-        textNodes[textNodes.length - 1].nodeValue = t?.class?.add_student_button || "Add Student";
+        const buttonText = t?.class?.add_student_button || "Add Student";
+        textNodes[textNodes.length - 1].nodeValue = buttonText;
+        console.log("Updated add student button text node to:", buttonText);
       }
     } else {
-      addStudentBtn.textContent = t?.class?.add_student_button || "Add Student";
+      const buttonText = t?.class?.add_student_button || "Add Student";
+      addStudentBtn.textContent = buttonText;
+      console.log("Updated add student button to:", buttonText);
     }
+  }
+  
+  // Update page title if it exists
+  const pageTitle = document.querySelector("h1.class-title");
+  if (pageTitle) {
+    const titleText = t?.class?.title || "Class Information";
+    pageTitle.textContent = titleText;
+    console.log("Updated page title to:", titleText);
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM Content Loaded - Initializing class page");
   initPage();
   
   // Listen for language changes from the language selector
   const languageSelect = document.getElementById('languageSelect');
   if (languageSelect) {
+    console.log("Found language selector, adding event listener");
     languageSelect.addEventListener('change', function() {
       const selectedLang = this.value;
+      console.log("Language changed to:", selectedLang);
+      
       // Update localStorage and reload the page with the new language param
       localStorage.setItem('lang', selectedLang);
       
       // Redirect to the same page with the language parameter
       const currentUrl = new URL(window.location);
       currentUrl.searchParams.set('lang', selectedLang);
+      console.log("Redirecting to:", currentUrl.toString());
       window.location.href = currentUrl.toString();
     });
+  } else {
+    console.log("Language selector not found");
   }
   
   // Listen for custom language change event (from language-handler.js if used)
   window.addEventListener('languageChanged', async (e) => {
+    console.log("Language change event detected:", e.detail);
     if (e.detail && e.detail.language) {
       await loadTranslationsAndUpdateUI(e.detail.language);
     }
+  });
+  
+  // Add event listeners to any header language links that might exist
+  document.querySelectorAll('.language-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const lang = this.getAttribute('data-lang');
+      if (lang) {
+        console.log("Language link clicked:", lang);
+        localStorage.setItem('lang', lang);
+      }
+    });
   });
 });
 
@@ -230,7 +284,7 @@ async function loadStudents(classId) {
         return Promise.resolve({ transcript: null });
       }
       
-      return fetch(`/api/transcript/student/${r.student.student_id}/class/${classId}`)
+      return fetch(`/api/transcript/student/${r.student.student_id}/class/${classId}?lang=${currentLang}`)
         .then((res) => {
           if (!res.ok) {
             console.warn(`Failed to fetch transcript for student ${r.student.student_id}`);
@@ -264,7 +318,7 @@ async function loadStudents(classId) {
           : t?.class?.grade?.not_available || "Not available";
       const hasGrade = grade !== null && grade !== undefined;
 
-      // Create the row HTML with proper null checks
+      // Create the row HTML with proper null checks and translations
       row.innerHTML = `
         <td class="px-4 py-2 text-sm truncate">${studentId}</td>
         <td class="px-4 py-2 text-sm truncate" title="${fullName}">${fullName}</td>
@@ -282,19 +336,17 @@ async function loadStudents(classId) {
           </span>
         </td>
         <td class="px-4 py-2 text-sm ${hasGrade ? "hidden" : ""}">
-          <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 mb-1" onclick="addGrade(${studentId}, ${classId})">${
-        t?.class?.add_grade_button || "Add Grade"
-      }</button>            
-          <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700" onclick="cancel(${
-            registration.registration_id
-          }, ${studentId})">${t?.class?.cancel_button || "Cancel"}</button>
+          <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700 mb-1" onclick="addGrade(${studentId}, ${classId})">
+            ${t?.class?.add_grade_button || "Add Grade"}
+          </button>            
+          <button class="px-2 py-1 text-sm font-medium text-white bg-red-600 rounded hover:bg-red-700" onclick="cancel(${registration.registration_id}, ${studentId})">
+            ${t?.class?.cancel_button || "Cancel"}
+          </button>
         </td>
         <td class="px-4 py-2 text-sm ${hasGrade ? "" : "hidden"}">
-          <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="editGrade(${studentId}, ${
-        transcript_id || "null"
-      }, '${hasGrade ? grade : ""}')">${
-        t?.class?.edit_grade_button || "Edit Grade"
-      }</button>
+          <button class="px-2 py-1 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700" onclick="editGrade(${studentId}, ${transcript_id || "null"}, '${hasGrade ? grade : ""}')">
+            ${t?.class?.edit_grade_button || "Edit Grade"}
+          </button>
         </td>`;
       studentTableBody.appendChild(row);
     });
@@ -359,7 +411,8 @@ document
     // Add loading state to submit button
     const submitBtn = e.target.querySelector('button[type="submit"]');
     const originalBtnContent = submitBtn.innerHTML;
-    submitBtn.disabled = true;    submitBtn.innerHTML = `
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
       <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -368,7 +421,10 @@ document
     `;
 
     try {
-      const response = await fetch("/api/class_registation", {
+      // Get current language
+      const currentLang = localStorage.getItem("lang") || "en";
+      
+      const response = await fetch(`/api/class_registation?lang=${currentLang}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,4 +1,5 @@
-{  "index":{
+{
+  "index": {
     "header": {
       "title": "FIT@HCMUS Student Management System",
       "page_title": "Student Management"
@@ -103,7 +104,8 @@
     "alert": {
       "success": "Success",
       "error": "Error"
-    },    "js": {
+    },
+    "js": {
       "studentStatus": {
         "studying": "Studying",
         "graduated": "Graduated",
@@ -113,7 +115,8 @@
       "button": {
         "details": "Details",
         "delete": "Delete"
-      },      "faculty": {
+      },
+      "faculty": {
         "all": "All Faculties"
       },
       "delete": {
@@ -143,7 +146,8 @@
           "close": "Close",
           "ok": "OK"
         }
-      },"alert": {
+      },
+      "alert": {
         "error": "Error!",
         "loadCancellationFail": "Failed to load cancellation details. Please try again.",
         "deleteError": "An error occurred while deleting the student.",
@@ -218,7 +222,8 @@
       "male": "Male",
       "female": "Female",
       "other": "Other"
-    }  },
+    }
+  },
   "modules": {
     "list": {
       "title": "Modules",
@@ -268,7 +273,8 @@
         "delete": "Failed to delete module: ",
         "load": "Failed to load module data.",
         "connection": "Server connection error."
-      },      "confirm": {
+      },
+      "confirm": {
         "delete": {
           "title": "Are you sure?",
           "text": "This action will remove the module from the list!",
@@ -276,7 +282,8 @@
           "cancelButton": "Cancel"
         }
       }
-    },    "classes": {
+    },
+    "classes": {
       "title": "Class List",
       "add": "Add Class",
       "add_title": "Add New Class",
@@ -338,7 +345,8 @@
       "error_title": "Error!",
       "error_text": "An error occurred while adding faculty."
     }
-  },  "class": {
+  },
+  "class": {
     "table": {
       "title": "Students List",
       "student_id": "Student ID",
@@ -351,6 +359,14 @@
       "total_count": "Total: {0} students",
       "error_message": "Error loading student list"
     },
+    "title": "Class Information",
+    "class_code": "Class Code:",
+    "lecturer": "Lecturer:",
+    "academic_year": "Academic Year:",
+    "semester": "Semester:",
+    "schedule": "Schedule:",
+    "classroom": "Classroom:",
+    "max_students": "Maximum Students:",
     "add_student": "Add Student",
     "add_student_form": {
       "student_id": "Student ID:",
