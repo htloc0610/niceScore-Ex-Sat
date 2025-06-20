@@ -227,3 +227,9 @@
 {"level":"error","message":"Error exporting grades: Error fetching student grades: ModuleTranslation is associated to Module using an alias. You've included an alias (module_translations), but it does not match the alias(es) defined in your association (translations).","timestamp":"2025-06-20T00:49:06.365Z"}
 {"level":"error","message":"Error fetching student grades: ModuleTranslation is associated to Module using an alias. You've included an alias (module_translation), but it does not match the alias(es) defined in your association (translations).","timestamp":"2025-06-20T00:53:28.883Z"}
 {"level":"error","message":"Error exporting grades: Error fetching student grades: ModuleTranslation is associated to Module using an alias. You've included an alias (module_translation), but it does not match the alias(es) defined in your association (translations).","timestamp":"2025-06-20T00:53:28.906Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-06-20T01:59:34.080Z"}
+{"level":"error","message":"Error adding student: Validation error","timestamp":"2025-06-20T01:59:34.093Z"}
+{"level":"error","message":"Error adding new studentSequelizeUniqueConstraintError: Validation error","timestamp":"2025-06-20T01:59:34.097Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-06-20T01:59:48.200Z"}
+{"level":"error","message":"Error adding student: Validation error","timestamp":"2025-06-20T01:59:48.202Z"}
+{"level":"error","message":"Error adding new studentSequelizeUniqueConstraintError: Validation error","timestamp":"2025-06-20T01:59:48.204Z"}

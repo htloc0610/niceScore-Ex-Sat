@@ -338,5 +338,63 @@
       "error_title": "Error!",
       "error_text": "An error occurred while adding faculty."
     }
+  },  "class": {
+    "table": {
+      "title": "Students List",
+      "student_id": "Student ID",
+      "full_name": "Full Name",
+      "email": "Email",
+      "grade": "Grade",
+      "actions": "Actions",
+      "loading": "Loading students...",
+      "empty_message": "No students in this class yet",
+      "total_count": "Total: {0} students",
+      "error_message": "Error loading student list"
+    },
+    "add_student": "Add Student",
+    "add_student_form": {
+      "student_id": "Student ID:",
+      "close_button": "Close",
+      "add_button": "Add",
+      "processing": "Processing..."
+    },
+    "add_grade_button": "Add Grade",
+    "edit_grade_button": "Edit Grade",
+    "cancel_button": "Cancel",
+    "close_button": "Close",
+    "grade": {
+      "not_available": "Not available"
+    },
+    "add_table": {
+      "swal": {
+        "validation_title": "Validation Error",
+        "student_id_required": "Please enter a student ID",
+        "success_title": "Success",
+        "success_text": "Student registered successfully",
+        "error_title": "Error",
+        "error_text": "Failed to register student: "
+      }
+    },
+    "score": {
+      "add_score": {
+        "title": "Add Grade",
+        "grade_label": "Grade",
+        "save_button": "Save"
+      },
+      "delete_student": {
+        "swal": {
+          "title": "Confirm Delete",
+          "text": "Are you sure you want to delete this student?",
+          "confirm_button": "Delete!"
+        }
+      },
+      "delete_confirm": {
+        "title": "Confirm Cancellation",
+        "text": "Please provide a reason for cancellation",
+        "confirm_button": "Cancel Registration",
+        "reason": "Enter reason for cancellation",
+        "input_aria": "Enter cancellation reason"
+      }
+    }
   }
 }

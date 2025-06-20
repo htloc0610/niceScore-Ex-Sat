@@ -1,6 +1,27 @@
 const addStudentForm = document.getElementById("addStudentForm");
 let t; // Local reference to the global translations
 
+function getLocalizedFaculty(faculty, lang) {
+  return {
+    faculty_id: faculty.faculty_id,
+    name: lang === 'vi' ? faculty.name_vi : faculty.name_en
+  }
+}
+
+function getLocalizedCourse(course, lang) {
+  return {
+    course_id: course.course_id,
+    course_name: lang === 'vi' ? course.course_name_vi : course.course_name_en
+  }
+}
+
+function getLocalizedStatus(status, lang) {
+  return {
+    status_id: status.status_id,
+    name: lang === 'vi' ? status.name_vi : status.name_en
+  };
+}
+
 /**
  * Get the latest translations from the LanguageHandler
  * This ensures we always have the current language's translations
@@ -135,7 +156,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             facultySelect.appendChild(defaultOption);
 
             // Add the fetched faculties to the select list
-            data.faculties.forEach((faculty) => {
+            data.faculties.forEach((facultyRaw) => {
+                const faculty = getLocalizedFaculty(facultyRaw, localStorage.getItem("lang") || 'en');
                 const option = document.createElement("option");
                 option.value = faculty.faculty_id; // Set faculty_id as value
                 option.textContent = faculty.name; // Set name as text
@@ -160,18 +182,16 @@ document.addEventListener("DOMContentLoaded", async function () {
                 : (t?.index?.js?.add?.select?.course || "Select course");
                 
             defaultOption.textContent = coursePlaceholder;
-            courseSelect.appendChild(defaultOption);
-
-            // Add the fetched faculties to the select list
-            console.log(data.courses);
+            courseSelect.appendChild(defaultOption);            // Add the fetched courses to the select list
             data.courses.forEach((course) => {
+                const localizedCourse = getLocalizedCourse(course, localStorage.getItem("lang") || 'en');
                 const option = document.createElement("option");
-                option.value = course.course_id; // Set course_id as value
-                option.textContent = course.course_name; // Set name as text
+                option.value = localizedCourse.course_id; // Set course_id as value
+                option.textContent = localizedCourse.course_name; // Set name as text
                 courseSelect.appendChild(option);
             });
         })
-        .catch((error) => console.error("Error fetching faculties:", error));
+        .catch((error) => console.error("Error fetching courses:", error));
 
     fetch("/api/status")
         .then((response) => response.json())
@@ -189,17 +209,16 @@ document.addEventListener("DOMContentLoaded", async function () {
                 : (t?.index?.js?.add?.select?.status || "Select status");
                 
             defaultOption.textContent = statusPlaceholder;
-            statusSelect.appendChild(defaultOption);
-
-            // Add the fetched faculties to the select list
-            data.status.forEach((status) => {
+            statusSelect.appendChild(defaultOption);            // Add the fetched statuses to the select list
+            data.status.forEach((statusRaw) => {
+                const status = getLocalizedStatus(statusRaw, localStorage.getItem("lang") || 'en');
                 const option = document.createElement("option");
                 option.value = status.status_id; // Set status_id as value
                 option.textContent = status.name; // Set name as text
                 statusSelect.appendChild(option);
             });
         })
-        .catch((error) => console.error("Error fetching faculties:", error));
+        .catch((error) => console.error("Error fetching statuses:", error));
 
     const idTypeRadios = document.querySelectorAll('input[name="type"]');
     const hasChipLabel = document.getElementById("has_chip-label");
@@ -272,7 +291,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 return response.json();
             })
             .then(result => {
-                // alert("Thêm sinh viên thành công!");                // Always get the latest translations
                 getLatestTranslations();
                 
                 // Get translated text

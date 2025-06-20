@@ -81,10 +81,40 @@
           <option value="vi">Tiếng Việt</option>
         </select>      
       </form>
-      
-      <script>
+        <script>
         // Thiết lập data-lang trên HTML element để LanguageHandler biết server language
         document.documentElement.setAttribute('data-lang', '{{lang}}');
+        
+        // Set up the language change handler
+        document.getElementById('languageSelect').addEventListener('change', function() {
+          const selectedLang = this.value;
+          // Store the selected language in localStorage
+          localStorage.setItem('lang', selectedLang);
+          
+          // Create and dispatch custom languageChanged event for any JS that needs it
+          const event = new CustomEvent('languageChanged', {
+            detail: { language: selectedLang }
+          });
+          window.dispatchEvent(event);
+          
+          // Reload the page with the new language
+          const currentUrl = new URL(window.location);
+          currentUrl.searchParams.set('lang', selectedLang);
+          window.location.href = currentUrl.toString();
+        });
+        
+        // Set the initial value based on localStorage or URL param or server language
+        document.addEventListener('DOMContentLoaded', function() {
+          const urlParams = new URLSearchParams(window.location.search);
+          const urlLang = urlParams.get('lang');
+          const localLang = localStorage.getItem('lang');
+          const serverLang = document.documentElement.getAttribute('data-lang');
+          
+          // Select the appropriate option in the dropdown
+          const selectElement = document.getElementById('languageSelect');
+          const langToUse = urlLang || localLang || serverLang || 'en';
+          selectElement.value = langToUse;
+        });
       </script>
 
     </ul>

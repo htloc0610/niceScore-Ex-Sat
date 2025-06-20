@@ -48,6 +48,23 @@ const transcriptService = {
             }
         });
     },
+    getTranscriptByStudentAndClass(studentId, classId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const foundTranscript = yield transcripts_model_1.default.findOne({
+                    where: {
+                        student_id: studentId,
+                        class_id: classId,
+                    },
+                });
+                return foundTranscript ? foundTranscript.get() : null;
+            }
+            catch (error) {
+                logger_1.logger.error(`Error fetching transcript for student ${studentId} and class ${classId}: ${error.message}`);
+                throw new Error(`Error fetching transcript: ${error.message}`);
+            }
+        });
+    },
 };
 exports.default = transcriptService;
 //# sourceMappingURL=transcript.service.js.map

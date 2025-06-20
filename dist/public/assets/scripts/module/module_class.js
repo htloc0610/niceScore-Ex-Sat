@@ -11,7 +11,16 @@ let currentLang = "en";
 async function loadTranslations() {
   try {
     const urlParams = new URLSearchParams(window.location.search);
-    currentLang = urlParams.get("lang") || "en";
+    const urlLang = urlParams.get("lang");
+    const localStorageLang = localStorage.getItem("lang");
+    
+    // Prioritize URL param, then localStorage, then default to "en"
+    currentLang = urlLang || localStorageLang || "en";
+    
+    // If the language was specified in URL, save it to localStorage for consistency
+    if (urlLang) {
+      localStorage.setItem("lang", urlLang);
+    }
 
     const enResponse = await fetch("/assets/scripts/locales/en.json");
     const viResponse = await fetch("/assets/scripts/locales/vi.json");

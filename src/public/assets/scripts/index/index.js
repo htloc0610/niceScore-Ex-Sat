@@ -2,24 +2,59 @@ var currentStudents;
 const tableBody = document.getElementById("student-table-body");
 const facultySelect = document.getElementById("faculty_search");
 let t;
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("IM HERE");
-  currentStudents = students;
-  console.log("Current Students:", currentStudents);
-  const lang = localStorage.getItem("lang") || 'en';
-    const translationUrl = `/assets/scripts/locales/${lang}.json`;
 
-    async function loadTranslations() {
-      try {
-        const res = await fetch(translationUrl);
-        if (!res.ok) throw new Error("Failed to load translations");
-        t = await res.json();
-        console.log("Loaded translations", t);
-      } catch (error) {
-        console.error(error);
-      }
+// Function to load translations and update UI
+async function loadTranslationsAndUpdateUI(lang) {
+  const translationUrl = `/assets/scripts/locales/${lang}.json`;
+  try {
+    const res = await fetch(translationUrl);
+    if (!res.ok) throw new Error("Failed to load translations");
+    t = await res.json();
+    console.log("Loaded translations for index page", t);
+    
+    // Update UI elements with the new translations
+    updateCountsAndTable();
+  } catch (error) {
+    console.error("Error loading translations:", error);
+    // Fall back to English if there's an error loading translations
+    if (lang !== 'en') {
+      loadTranslationsAndUpdateUI('en');
     }
-   await loadTranslations();
+  }
+}
+
+// Update student counts and refresh table
+function updateCountsAndTable() {
+  document.getElementById("studentCount").innerHTML = students.length || 0;
+
+  graduatedCount = students.filter(
+    (student) => student.status.name === t?.index?.js?.studentStatus?.graduated
+  ).length;
+  document.getElementById("graduatedCount").innerHTML = graduatedCount || 0;
+
+  studyingCount = students.filter(
+    (student) => student.status.name === t?.index?.js?.studentStatus?.studying
+  ).length;
+  document.getElementById("studyingCount").innerHTML = studyingCount || 0;
+
+  pauseCount = students.filter(
+    (student) => student.status.name === t?.index?.js?.studentStatus?.pause
+  ).length;
+  document.getElementById("pauseCount").innerHTML = pauseCount || 0;
+  
+  // Refresh the table with the current search term
+  const inputField = document.getElementById("searchInput");
+  tableBody.innerHTML = "";
+  RefreshTable(inputField?.value || "");
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("Index page initialized");
+  currentStudents = students;
+  
+  // Load translations using the current language preference
+  const lang = localStorage.getItem("lang") || 'en';
+  await loadTranslationsAndUpdateUI(lang);
 
   document.getElementById("studentCount").innerHTML = students.length || 0;
 
@@ -38,7 +73,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     (student) => student.status.name === t.index.js.studentStatus.pause
   ).length;
   document.getElementById("pauseCount").innerHTML = pauseCount || 0;
-
   const inputField = document.getElementById("searchInput");
   facultySelect.addEventListener("change", function () {
     tableBody.innerHTML = "";
@@ -48,6 +82,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   inputField.addEventListener("input", (event) => {
     tableBody.innerHTML = "";
     RefreshTable(inputField.value);
+  });
+  
+  // Listen for language changes from the language selector
+  const languageSelect = document.getElementById('languageSelect');
+  if (languageSelect) {
+    languageSelect.addEventListener('change', function() {
+      const selectedLang = this.value;
+      // Update translations and refresh UI with the new language
+      // Note: The URL navigation is handled in header.hbs
+      loadTranslationsAndUpdateUI(selectedLang);
+    });
+  }
+  
+  // Listen for custom language change event
+  window.addEventListener('languageChanged', async (e) => {
+    if (e.detail && e.detail.language) {
+      await loadTranslationsAndUpdateUI(e.detail.language);
+    }
   });
 });
 

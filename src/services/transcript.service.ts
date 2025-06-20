@@ -31,6 +31,24 @@ const transcriptService = {
       throw new Error("Error updating transcript: " + error.message);
     }
   },
+
+  async getTranscriptByStudentAndClass(studentId: number, classId: number) {
+    try {
+      const foundTranscript = await transcript.findOne({
+        where: {
+          student_id: studentId,
+          class_id: classId,
+        },
+      });
+
+      return foundTranscript ? foundTranscript.get() : null;
+    } catch (error) {
+      logger.error(
+        `Error fetching transcript for student ${studentId} and class ${classId}: ${error.message}`
+      );
+      throw new Error(`Error fetching transcript: ${error.message}`);
+    }
+  },
 };
 
 export default transcriptService;

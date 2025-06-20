@@ -50,6 +50,30 @@ const transcriptController = {
         .status(500)
         .send({ message: "An error occurred while updating the transcript." });
     }
+  },
+  getTranscriptByStudentAndClass: async (req: Request, res: Response): Promise<void> => {
+    try {
+      const studentId = parseInt(req.params.studentId, 10);
+      const classId = parseInt(req.params.classId, 10);
+      
+      if (isNaN(studentId) || isNaN(classId)) {
+        res.status(400).send({ message: "Invalid student ID or class ID" });
+        return;
+      }
+
+      const transcript = await transcriptService.getTranscriptByStudentAndClass(studentId, classId);
+      
+      res.status(200).send({
+        message: "Transcript fetched successfully",
+        transcript
+      });
+    } catch (error) {
+      console.error("Error fetching transcript:", error);
+      logger.error(`Error fetching transcript: ${error.message}`);
+      res.status(500).send({ 
+        message: "An error occurred while fetching the transcript." 
+      });
+    }
   }
 };
 

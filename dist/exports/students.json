@@ -1,425 +1,465 @@
 [
   {
     "student_id": 1,
-    "full_name": "Nguyễn Văn ABC",
-    "date_of_birth": "2025-03-01",
-    "gender": "Khác",
-    "program": "Cử nhân",
-    "email": "22120001@student.hcmus.edu.vn",
-    "phone_number": "+84987111222",
-    "nationality": "Việt Nam",
+    "full_name": "Pham Van Hoang",
+    "date_of_birth": "2001-01-01",
+    "gender": "Nam",
+    "program": "CE2025",
+    "email": "hoang.pv@example.com",
+    "phone_number": "0912345678",
+    "nationality": "Vietnam",
     "faculty": {
-      "name": "Sinh học"
+      "name_vi": "Khoa học máy tính",
+      "name_en": "Computer Science"
     },
     "course": {
-      "course_name": "K21"
+      "course_id": 1,
+      "course_name_en": "Computer Engineering",
+      "course_name_vi": "Kỹ thuật máy tính"
     },
     "status": {
-      "name": "Đang học"
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
     },
     "permanentAddress": {
-      "house_number": "1",
-      "street_name": "2",
-      "ward": "3",
-      "district": "4",
-      "city": "5",
-      "country": "6"
+      "house_number": "12",
+      "street_name": "Nguyen Van Cu",
+      "ward": "Ward 5",
+      "district": "District 5",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "temporaryAddress": {
-      "house_number": "1",
-      "street_name": "2",
-      "ward": "34",
-      "district": "5",
-      "city": "7",
-      "country": "8"
+      "house_number": "12",
+      "street_name": "Nguyen Van Cu",
+      "ward": "Ward 5",
+      "district": "District 5",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "mailingAddress": {
-      "house_number": "9",
-      "street_name": "4",
-      "ward": "1",
-      "district": "2",
-      "city": "4",
-      "country": "5"
+      "house_number": "12",
+      "street_name": "Nguyen Van Cu",
+      "ward": "Ward 5",
+      "district": "District 5",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "identification": {
       "type": "CCCD",
-      "number": "00112233",
-      "issue_date": "2025-02-28",
-      "expiry_date": "2025-02-28",
-      "place_of_issue": "USA",
-      "country_of_issue": "Hoa Kỳ",
+      "number": "987654321000",
+      "issue_date": "2016-05-10",
+      "expiry_date": "2036-05-10",
+      "place_of_issue": "Hanoi",
+      "country_of_issue": "Vietnam",
+      "has_chip": true,
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 2,
+    "full_name": "Tran Thi Mai",
+    "date_of_birth": "2000-12-12",
+    "gender": "Nữ",
+    "program": "IT2025",
+    "email": "mai.tt@example.com",
+    "phone_number": "0923456789",
+    "nationality": "Vietnam",
+    "faculty": {
+      "name_vi": "Hệ thống thông tin",
+      "name_en": "Information System"
+    },
+    "course": {
+      "course_id": 2,
+      "course_name_en": "Information Technology",
+      "course_name_vi": "Công nghệ thông tin"
+    },
+    "status": {
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
+    },
+    "permanentAddress": {
+      "house_number": "43",
+      "street_name": "Tran Phu",
+      "ward": "Ward 6",
+      "district": "District 10",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "temporaryAddress": {
+      "house_number": "43",
+      "street_name": "Tran Phu",
+      "ward": "Ward 6",
+      "district": "District 10",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "mailingAddress": {
+      "house_number": "43",
+      "street_name": "Tran Phu",
+      "ward": "Ward 6",
+      "district": "District 10",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "identification": {
+      "type": "Passport",
+      "number": "PA1234567",
+      "issue_date": "2018-01-15",
+      "expiry_date": "2028-01-15",
+      "place_of_issue": "HCMC",
+      "country_of_issue": "Vietnam",
       "has_chip": false,
-      "notes": "Hộ chiếu lưu trú"
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 3,
+    "full_name": "Nguyen Van Duy",
+    "date_of_birth": "2002-02-02",
+    "gender": "Nam",
+    "program": "CS2025",
+    "email": "duy.nv@example.com",
+    "phone_number": "0934567890",
+    "nationality": "Vietnam",
+    "faculty": {
+      "name_vi": "An ninh mạng",
+      "name_en": "Cyber Security"
+    },
+    "course": {
+      "course_id": 3,
+      "course_name_en": "Cybersecurity",
+      "course_name_vi": "An ninh mạng"
+    },
+    "status": {
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
+    },
+    "permanentAddress": {
+      "house_number": "78",
+      "street_name": "Hoang Van Thu",
+      "ward": "Ward 2",
+      "district": "District 3",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "temporaryAddress": {
+      "house_number": "78",
+      "street_name": "Hoang Van Thu",
+      "ward": "Ward 2",
+      "district": "District 3",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "mailingAddress": {
+      "house_number": "78",
+      "street_name": "Hoang Van Thu",
+      "ward": "Ward 2",
+      "district": "District 3",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "identification": {
+      "type": "CCCD",
+      "number": "876543210999",
+      "issue_date": "2017-08-12",
+      "expiry_date": "2037-08-12",
+      "place_of_issue": "Da Nang",
+      "country_of_issue": "Vietnam",
+      "has_chip": true,
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 4,
+    "full_name": "Le Thi Linh",
+    "date_of_birth": "1999-03-03",
+    "gender": "Nữ",
+    "program": "AI2025",
+    "email": "linh.lt@example.com",
+    "phone_number": "0945678901",
+    "nationality": "Vietnam",
+    "faculty": {
+      "name_vi": "Khoa AI",
+      "name_en": "AI Department"
+    },
+    "course": {
+      "course_id": 4,
+      "course_name_en": "Artificial Intelligence",
+      "course_name_vi": "Trí tuệ nhân tạo"
+    },
+    "status": {
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
+    },
+    "permanentAddress": {
+      "house_number": "90",
+      "street_name": "Pham Van Dong",
+      "ward": "Ward 3",
+      "district": "District 7",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "temporaryAddress": {
+      "house_number": "90",
+      "street_name": "Pham Van Dong",
+      "ward": "Ward 3",
+      "district": "District 7",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "mailingAddress": {
+      "house_number": "90",
+      "street_name": "Pham Van Dong",
+      "ward": "Ward 3",
+      "district": "District 7",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "identification": {
+      "type": "Passport",
+      "number": "PB2345678",
+      "issue_date": "2019-03-22",
+      "expiry_date": "2029-03-22",
+      "place_of_issue": "HCMC",
+      "country_of_issue": "Vietnam",
+      "has_chip": false,
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 5,
+    "full_name": "Hoang Van Phuc",
+    "date_of_birth": "2003-04-04",
+    "gender": "Nam",
+    "program": "BA2025",
+    "email": "phuc.hv@example.com",
+    "phone_number": "0956789012",
+    "nationality": "Vietnam",
+    "faculty": {
+      "name_vi": "Khoa Kinh doanh",
+      "name_en": "Business Faculty"
+    },
+    "course": {
+      "course_id": 5,
+      "course_name_en": "Business Analytics",
+      "course_name_vi": "Phân tích kinh doanh"
+    },
+    "status": {
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
+    },
+    "permanentAddress": {
+      "house_number": "55",
+      "street_name": "Le Duan",
+      "ward": "Ward 1",
+      "district": "District 1",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "temporaryAddress": {
+      "house_number": "55",
+      "street_name": "Le Duan",
+      "ward": "Ward 1",
+      "district": "District 1",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "mailingAddress": {
+      "house_number": "55",
+      "street_name": "Le Duan",
+      "ward": "Ward 1",
+      "district": "District 1",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "identification": {
+      "type": "CCCD",
+      "number": "765432109888",
+      "issue_date": "2018-07-10",
+      "expiry_date": "2038-07-10",
+      "place_of_issue": "Hue",
+      "country_of_issue": "Vietnam",
+      "has_chip": true,
+      "notes": ""
+    }
+  },
+  {
+    "student_id": 6,
+    "full_name": "Dang Thi Hue",
+    "date_of_birth": "2001-05-05",
+    "gender": "Nữ",
+    "program": "ECO2025",
+    "email": "hue.dt@example.com",
+    "phone_number": "0967890123",
+    "nationality": "Vietnam",
+    "faculty": {
+      "name_vi": "Khoa Kinh doanh",
+      "name_en": "Business Faculty"
+    },
+    "course": {
+      "course_id": 6,
+      "course_name_en": "Economics",
+      "course_name_vi": "Kinh tế học"
+    },
+    "status": {
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
+    },
+    "permanentAddress": {
+      "house_number": "66",
+      "street_name": "Ly Thuong Kiet",
+      "ward": "Ward 4",
+      "district": "District 11",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "temporaryAddress": {
+      "house_number": "66",
+      "street_name": "Ly Thuong Kiet",
+      "ward": "Ward 4",
+      "district": "District 11",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "mailingAddress": {
+      "house_number": "66",
+      "street_name": "Ly Thuong Kiet",
+      "ward": "Ward 4",
+      "district": "District 11",
+      "city": "HCMC",
+      "country": "Vietnam"
+    },
+    "identification": {
+      "type": "CCCD",
+      "number": "654321098777",
+      "issue_date": "2020-10-01",
+      "expiry_date": "2040-10-01",
+      "place_of_issue": "Can Tho",
+      "country_of_issue": "Vietnam",
+      "has_chip": true,
+      "notes": ""
     }
   },
   {
     "student_id": 7,
-    "full_name": "Hoàng NgọcTuệ",
-    "date_of_birth": "2025-03-01",
-    "gender": "Khác",
-    "program": "Cử nhân",
-    "email": "vcdsvrrtn22@student.hcmus.edu.vn",
-    "phone_number": "+84228387572",
-    "nationality": "Hoa Kỳ",
-    "faculty": {
-      "name": "Sinh học"
-    },
-    "course": {
-      "course_name": "K17"
-    },
-    "status": {
-      "name": "Tạm dừng học"
-    },
-    "permanentAddress": {
-      "house_number": "",
-      "street_name": null,
-      "ward": "",
-      "district": "",
-      "city": "",
-      "country": ""
-    },
-    "temporaryAddress": {
-      "house_number": "",
-      "street_name": null,
-      "ward": "",
-      "district": "",
-      "city": "",
-      "country": ""
-    },
-    "mailingAddress": {
-      "house_number": "",
-      "street_name": null,
-      "ward": "",
-      "district": "",
-      "city": "",
-      "country": ""
-    },
-    "identification": {
-      "type": "CMND",
-      "number": "0988765443",
-      "issue_date": "2025-02-27",
-      "expiry_date": "2025-02-26",
-      "place_of_issue": "USA",
-      "country_of_issue": "",
-      "has_chip": false,
-      "notes": ""
-    }
-  },
-  {
-    "student_id": 10,
-    "full_name": "Võ Văn Tùng",
-    "date_of_birth": "2025-02-26",
-    "gender": "Nữ",
-    "program": "Cử nhân",
-    "email": "22129991@student.hcmus.edu.vn",
-    "phone_number": "+8482121541",
-    "nationality": "Việt Nam",
-    "faculty": {
-      "name": "Sinh học"
-    },
-    "course": {
-      "course_name": "K15"
-    },
-    "status": {
-      "name": "Nghỉ học"
-    },
-    "permanentAddress": {
-      "house_number": "1",
-      "street_name": "2",
-      "ward": "3",
-      "district": "4",
-      "city": "6",
-      "country": "5"
-    },
-    "temporaryAddress": {
-      "house_number": "1",
-      "street_name": "2",
-      "ward": "3",
-      "district": "4",
-      "city": "5",
-      "country": "6"
-    },
-    "mailingAddress": {
-      "house_number": "1",
-      "street_name": "2",
-      "ward": "3",
-      "district": "4",
-      "city": "5",
-      "country": "6"
-    },
-    "identification": {
-      "type": "CMND",
-      "number": "00002418473143",
-      "issue_date": "2025-03-15",
-      "expiry_date": "2025-03-08",
-      "place_of_issue": "USA",
-      "country_of_issue": "",
-      "has_chip": false,
-      "notes": ""
-    }
-  },
-  {
-    "student_id": 21,
-    "full_name": "Hoàng Ngọc Tuệ",
-    "date_of_birth": "2025-03-01",
+    "full_name": "Bui Van Khanh",
+    "date_of_birth": "2000-06-06",
     "gender": "Nam",
-    "program": "Cử nhân",
-    "email": "e4322@student.hcmus.edu.vn",
-    "phone_number": "+8452414",
-    "nationality": "Việt Nam",
+    "program": "IT2025",
+    "email": "khanh.bv@example.com",
+    "phone_number": "0978901234",
+    "nationality": "Vietnam",
     "faculty": {
-      "name": "Hóa học 1"
+      "name_vi": "Hệ thống thông tin",
+      "name_en": "Information System"
     },
     "course": {
-      "course_name": "K14"
+      "course_id": 2,
+      "course_name_en": "Information Technology",
+      "course_name_vi": "Công nghệ thông tin"
     },
     "status": {
-      "name": "Tạm dừng học"
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
     },
     "permanentAddress": {
-      "house_number": "",
-      "street_name": null,
-      "ward": "",
-      "district": "",
-      "city": "",
-      "country": ""
+      "house_number": "12",
+      "street_name": "Nguyen Van Cu",
+      "ward": "Ward 5",
+      "district": "District 5",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "temporaryAddress": {
-      "house_number": "",
-      "street_name": null,
-      "ward": "",
-      "district": "",
-      "city": "",
-      "country": ""
+      "house_number": "43",
+      "street_name": "Tran Phu",
+      "ward": "Ward 6",
+      "district": "District 10",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "mailingAddress": {
-      "house_number": "",
-      "street_name": null,
-      "ward": "",
-      "district": "",
-      "city": "",
-      "country": ""
-    },
-    "identification": {
-      "type": "CMND",
-      "number": "1548478452",
-      "issue_date": "2025-02-27",
-      "expiry_date": "2025-02-28",
-      "place_of_issue": "USA",
-      "country_of_issue": "",
-      "has_chip": false,
-      "notes": ""
-    }
-  },
-  {
-    "student_id": 120,
-    "full_name": "Nguyễn Văn A",
-    "date_of_birth": "2025-03-09",
-    "gender": "Nam",
-    "program": "Cử nhân",
-    "email": "dangdiennguyen22@gmail.com",
-    "phone_number": "0192984211",
-    "nationality": "VNam",
-    "faculty": {
-      "name": "CNTT"
-    },
-    "course": {
-      "course_name": "K22"
-    },
-    "status": {
-      "name": "Đã tốt nghiệp"
-    },
-    "permanentAddress": {
-      "house_number": "1234",
-      "street_name": "1234",
-      "ward": "3",
-      "district": "4",
-      "city": "Bình Định",
-      "country": "61"
-    },
-    "temporaryAddress": {
-      "house_number": "123443",
-      "street_name": "1234",
-      "ward": "4",
-      "district": "Bình Định",
-      "city": "Bình Định",
-      "country": "87"
-    },
-    "mailingAddress": {
-      "house_number": "",
-      "street_name": "1231",
-      "ward": "7",
-      "district": "i",
-      "city": "7",
-      "country": "6"
+      "house_number": "78",
+      "street_name": "Hoang Van Thu",
+      "ward": "Ward 2",
+      "district": "District 3",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "identification": {
       "type": "Passport",
-      "number": "00112233576",
-      "issue_date": "2025-03-13",
-      "expiry_date": "2025-03-08",
-      "place_of_issue": "SA",
-      "country_of_issue": "US",
-      "has_chip": false,
-      "notes": "No comment"
-    }
-  },
-  {
-    "student_id": 122,
-    "full_name": "Nguyễn Văn B",
-    "date_of_birth": "2025-03-09",
-    "gender": "Nam",
-    "program": "Cử nhân",
-    "email": "dangdiennguyen112@gmail.com",
-    "phone_number": "0375375375",
-    "nationality": "VN",
-    "faculty": {
-      "name": "CNTT"
-    },
-    "course": {
-      "course_name": "K23"
-    },
-    "status": {
-      "name": "Đã nghỉ học"
-    },
-    "permanentAddress": {
-      "house_number": "1",
-      "street_name": "123",
-      "ward": "3",
-      "district": "4",
-      "city": "HCM",
-      "country": "61"
-    },
-    "temporaryAddress": {
-      "house_number": "1",
-      "street_name": "",
-      "ward": "4",
-      "district": "5",
-      "city": "6",
-      "country": "87"
-    },
-    "mailingAddress": {
-      "house_number": "1",
-      "street_name": "",
-      "ward": "7",
-      "district": "i",
-      "city": "7",
-      "country": "6"
-    },
-    "identification": {
-      "type": "CMND",
-      "number": "00112238576",
-      "issue_date": "2025-03-13",
-      "expiry_date": "2025-03-08",
-      "place_of_issue": "SA",
-      "country_of_issue": "",
+      "number": "PC3456789",
+      "issue_date": "2020-06-20",
+      "expiry_date": "2030-06-20",
+      "place_of_issue": "HCMC",
+      "country_of_issue": "Vietnam",
       "has_chip": false,
       "notes": ""
     }
   },
   {
-    "student_id": 130,
-    "full_name": "Nguyễn Văn A",
-    "date_of_birth": "2025-03-09",
-    "gender": "Nam",
-    "program": "Cử nhân",
-    "email": "dangdiennguyen2112@gmail.com",
-    "phone_number": "0375375375",
-    "nationality": "VN",
+    "student_id": 8,
+    "full_name": "Vo Thi Trang",
+    "date_of_birth": "1998-07-07",
+    "gender": "Nữ",
+    "program": "AI2025",
+    "email": "trang.vt@example.com",
+    "phone_number": "0989012345",
+    "nationality": "Vietnam",
     "faculty": {
-      "name": "CNTT"
+      "name_vi": "Khoa AI",
+      "name_en": "AI Department"
     },
     "course": {
-      "course_name": "K25"
+      "course_id": 4,
+      "course_name_en": "Artificial Intelligence",
+      "course_name_vi": "Trí tuệ nhân tạo"
     },
     "status": {
-      "name": "Nghỉ học"
+      "status_id": 1,
+      "name_vi": "Đang học",
+      "name_en": "Is learning"
     },
     "permanentAddress": {
-      "house_number": "1",
-      "street_name": "null",
-      "ward": "3",
-      "district": "4",
-      "city": "5",
-      "country": "61"
+      "house_number": "78",
+      "street_name": "Hoang Van Thu",
+      "ward": "Ward 2",
+      "district": "District 3",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "temporaryAddress": {
-      "house_number": "1",
-      "street_name": "null",
-      "ward": "4",
-      "district": "5",
-      "city": "6",
-      "country": "87"
+      "house_number": "55",
+      "street_name": "Le Duan",
+      "ward": "Ward 1",
+      "district": "District 1",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "mailingAddress": {
-      "house_number": "1",
-      "street_name": "null",
-      "ward": "7",
-      "district": "i9",
-      "city": "7",
-      "country": "6"
-    },
-    "identification": {
-      "type": "CMND",
-      "number": "204242425645",
-      "issue_date": "2025-03-13",
-      "expiry_date": "2025-03-08",
-      "place_of_issue": "SA",
-      "country_of_issue": "",
-      "has_chip": false,
-      "notes": ""
-    }
-  },
-  {
-    "student_id": 199,
-    "full_name": "Trần Lượng",
-    "date_of_birth": "2004-03-18",
-    "gender": "Nam",
-    "program": "CLC",
-    "email": "luong@gmail.com",
-    "phone_number": "0123456789",
-    "nationality": "VN",
-    "faculty": {
-      "name": "Hoa hoc"
-    },
-    "course": {
-      "course_name": "K23"
-    },
-    "status": {
-      "name": "Đang học"
-    },
-    "permanentAddress": {
-      "house_number": "123",
-      "street_name": "null",
-      "ward": "4",
-      "district": "5",
-      "city": "HCM",
-      "country": "VN"
-    },
-    "temporaryAddress": {
-      "house_number": "124",
-      "street_name": "null",
-      "ward": "4",
-      "district": "5",
-      "city": "HCM",
-      "country": "VN"
-    },
-    "mailingAddress": {
-      "house_number": "125",
-      "street_name": "null",
-      "ward": "4",
-      "district": "5",
-      "city": "HCM",
-      "country": "VN"
+      "house_number": "43",
+      "street_name": "Tran Phu",
+      "ward": "Ward 6",
+      "district": "District 10",
+      "city": "HCMC",
+      "country": "Vietnam"
     },
     "identification": {
       "type": "CCCD",
-      "number": "10001000",
-      "issue_date": "2024-03-18",
-      "expiry_date": "2025-03-18",
-      "place_of_issue": "VN",
-      "country_of_issue": "",
-      "has_chip": false,
+      "number": "543210987666",
+      "issue_date": "2021-04-15",
+      "expiry_date": "2041-04-15",
+      "place_of_issue": "HCMC",
+      "country_of_issue": "Vietnam",
+      "has_chip": true,
       "notes": ""
     }
   }

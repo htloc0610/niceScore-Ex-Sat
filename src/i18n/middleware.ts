@@ -3,11 +3,11 @@
  * This middleware sets up the language for the current request
  */
 import { Request, Response, NextFunction } from 'express';
-import { resolveLanguage, DEFAULT_LANGUAGE, LANGUAGE_OPTIONS } from './config';
+import { resolveLanguage, DEFAULT_LANGUAGE, LANGUAGE_OPTIONS, isSupportedLanguage } from './config';
 
 /**
  * Middleware to handle language settings for the application
- * Priority: cookies > query parameters > default
+ * Priority: query parameters > cookies > default
  */
 export function languageMiddleware(req: Request, res: Response, next: NextFunction) {
   // Get language from cookie or query parameter
@@ -15,7 +15,10 @@ export function languageMiddleware(req: Request, res: Response, next: NextFuncti
   const queryLang = req.query.lang as string;
   
   // Resolve the language to use
-  const lang = resolveLanguage(cookieLang, queryLang);
+  // Changed to prioritize query parameters over cookies
+  const lang = queryLang && isSupportedLanguage(queryLang) 
+    ? queryLang 
+    : (cookieLang && isSupportedLanguage(cookieLang) ? cookieLang : DEFAULT_LANGUAGE);
   
   // If language comes from query parameter, update cookie for future requests
   if (queryLang && lang !== DEFAULT_LANGUAGE) {

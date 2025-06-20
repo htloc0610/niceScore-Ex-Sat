@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const transcript_service_1 = __importDefault(require("../services/transcript.service"));
+const logger_1 = require("../config/logger");
 const transcriptController = {
     addTranscript: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -59,6 +60,28 @@ const transcriptController = {
             res
                 .status(500)
                 .send({ message: "An error occurred while updating the transcript." });
+        }
+    }),
+    getTranscriptByStudentAndClass: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const studentId = parseInt(req.params.studentId, 10);
+            const classId = parseInt(req.params.classId, 10);
+            if (isNaN(studentId) || isNaN(classId)) {
+                res.status(400).send({ message: "Invalid student ID or class ID" });
+                return;
+            }
+            const transcript = yield transcript_service_1.default.getTranscriptByStudentAndClass(studentId, classId);
+            res.status(200).send({
+                message: "Transcript fetched successfully",
+                transcript
+            });
+        }
+        catch (error) {
+            console.error("Error fetching transcript:", error);
+            logger_1.logger.error(`Error fetching transcript: ${error.message}`);
+            res.status(500).send({
+                message: "An error occurred while fetching the transcript."
+            });
         }
     })
 };

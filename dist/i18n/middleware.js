@@ -4,7 +4,7 @@ exports.languageMiddleware = languageMiddleware;
 const config_1 = require("./config");
 /**
  * Middleware to handle language settings for the application
- * Priority: cookies > query parameters > default
+ * Priority: query parameters > cookies > default
  */
 function languageMiddleware(req, res, next) {
     var _a;
@@ -12,7 +12,10 @@ function languageMiddleware(req, res, next) {
     const cookieLang = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.lang;
     const queryLang = req.query.lang;
     // Resolve the language to use
-    const lang = (0, config_1.resolveLanguage)(cookieLang, queryLang);
+    // Changed to prioritize query parameters over cookies
+    const lang = queryLang && (0, config_1.isSupportedLanguage)(queryLang)
+        ? queryLang
+        : (cookieLang && (0, config_1.isSupportedLanguage)(cookieLang) ? cookieLang : config_1.DEFAULT_LANGUAGE);
     // If language comes from query parameter, update cookie for future requests
     if (queryLang && lang !== config_1.DEFAULT_LANGUAGE) {
         res.cookie('lang', lang, {

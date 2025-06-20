@@ -10,5 +10,7 @@ const transcriptRouter = (0, express_1.Router)();
 transcriptRouter.post("/", transcript_controller_1.default.addTranscript);
 // [PUT] /api/transcript/:id
 transcriptRouter.put("/:id", transcript_controller_1.default.updateTranscript);
+// [GET] /api/transcript/student/:studentId/class/:classId
+transcriptRouter.get("/student/:studentId/class/:classId", transcript_controller_1.default.getTranscriptByStudentAndClass);
 exports.default = transcriptRouter;
 //# sourceMappingURL=transcript.router.js.map

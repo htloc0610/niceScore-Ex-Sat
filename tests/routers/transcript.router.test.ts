@@ -6,6 +6,7 @@ import transcriptRouter from "../../src/routes/transcript.router";
 jest.mock("../../src/controllers/transcript.controller", () => ({
     addTranscript: jest.fn((req, res) => res.status(201).json({ message: "Transcript added" })),
     updateTranscript: jest.fn((req, res) => res.status(200).json({ message: "Transcript updated" })),
+    getTranscriptByStudentAndClass: jest.fn((req, res) => res.status(200).json({ message: "Transcript fetched successfully", transcript: { transcript_id: 1, student_id: 1, class_id: 1, grade: "8.50" } })),
 }));
 
 const app = express();
@@ -30,6 +31,18 @@ describe("Transcript Router", () => {
                 .send({ grades: [95, 85] });
             expect(response.status).toBe(200);
             expect(response.body).toEqual({ message: "Transcript updated" });
+        });
+    });
+
+    describe("GET /api/transcript/student/:studentId/class/:classId", () => {
+        it("should call getTranscriptByStudentAndClass and return 200", async () => {
+            const response = await request(app)
+                .get("/api/transcript/student/1/class/1");
+            expect(response.status).toBe(200);
+            expect(response.body).toEqual({ 
+                message: "Transcript fetched successfully", 
+                transcript: { transcript_id: 1, student_id: 1, class_id: 1, grade: "8.50" } 
+            });
         });
     });
 });
