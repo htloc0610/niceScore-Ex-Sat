@@ -21,8 +21,18 @@ app.use(cookieParser());
 // Language middleware
 app.use(languageMiddleware);
 
-// Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, "../src/public")));
+// Serve static files from the "public" directory with proper MIME types
+app.use(
+  express.static(path.join(__dirname, "../src/public"), {
+    setHeaders: (res, filePath) => {
+      if (filePath.endsWith(".css")) {
+        res.setHeader("Content-Type", "text/css");
+      } else if (filePath.endsWith(".js")) {
+        res.setHeader("Content-Type", "application/javascript");
+      }
+    },
+  })
+);
 
 // Configure Handlebars
 app.engine("hbs", hbs.engine);

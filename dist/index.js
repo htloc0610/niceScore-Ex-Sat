@@ -30,8 +30,17 @@ app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());
 // Language middleware
 app.use(i18n_1.languageMiddleware);
-// Serve static files from the "public" directory
-app.use(express_1.default.static(path_1.default.join(__dirname, "../src/public")));
+// Serve static files from the "public" directory with proper MIME types
+app.use(express_1.default.static(path_1.default.join(__dirname, "../src/public"), {
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".css")) {
+            res.setHeader("Content-Type", "text/css");
+        }
+        else if (filePath.endsWith(".js")) {
+            res.setHeader("Content-Type", "application/javascript");
+        }
+    },
+}));
 // Configure Handlebars
 app.engine("hbs", handlebars_1.default.engine);
 app.set("view engine", "hbs");

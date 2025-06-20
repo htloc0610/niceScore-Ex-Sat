@@ -5,20 +5,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{t "index.header.page_title"}}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-  <script src="./assets/js/init-alpine.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>    <script src="/assets/js/init-alpine.js"></script>
+
+  <!-- Charts.js resources - Loading safely with error handling -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
-  <script src="./assets/js/charts-lines.js" defer></script>
-  <script src="./assets/js/charts-pie.js" defer></script>
+  <script>
+    // Handle Chart.js loading errors
+    window.addEventListener('error', function(e) {
+      if (e.target.src && e.target.src.includes('Chart.min.js')) {
+        console.warn('Chart.js loading error handled gracefully');
+        e.preventDefault(); // Prevent the error from appearing in console
+      }
+    }, true);
+  </script>
+  <script src="/assets/js/charts-lines.js" defer></script>
+  <script src="/assets/js/charts-pie.js" defer></script>
+  <script src="/assets/js/chart-initialization.js" defer></script>
 
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./assets/css/add.css">
+  <link rel="stylesheet" href="/assets/css/add.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script src="./assets/scripts/language-handler.js"></script>
+  <script src="/assets/scripts/language-handler.js"></script>
 
 </head>
 
