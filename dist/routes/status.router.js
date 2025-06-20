@@ -8,6 +8,7 @@ const status_controller_1 = __importDefault(require("../controllers/status.contr
 const statusRouter = (0, express_1.Router)();
 // [GET] /api/status
 statusRouter.get("/", status_controller_1.default.getListStatus);
+statusRouter.get("/:id", status_controller_1.default.getStatusById);
 // [POST] /api/status
 statusRouter.post("/", status_controller_1.default.addStatus);
 // [PUT] /api/status

@@ -8,6 +8,7 @@ const faculty_controller_1 = __importDefault(require("../controllers/faculty.con
 const facultyRouter = (0, express_1.Router)();
 // [GET] /api/faculty
 facultyRouter.get("/", faculty_controller_1.default.getListFaculties);
+facultyRouter.get("/:id", faculty_controller_1.default.getFacultyById);
 // [POST] /api/faculty
 facultyRouter.post("/", faculty_controller_1.default.addFaculty);
 // [PUT] /api/faculty"

@@ -30,6 +30,24 @@ const facultyService = {
             }
         });
     },
+    getFacultyById(facultyId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const faculty = yield faculty_model_1.default.findOne({
+                    where: { faculty_id: facultyId },
+                });
+                if (!faculty) {
+                    logger_1.logger.warn(`Faculty with ID ${facultyId} not found`);
+                    return null;
+                }
+                return faculty.get();
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching faculty by ID: " + error.message);
+                throw new Error("Error fetching faculty by ID");
+            }
+        });
+    },
     // Get list of faculties
     getFaculties() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -43,13 +61,13 @@ const facultyService = {
             }
         });
     },
-    addFaculty(nameVn, nameEn) {
+    addFaculty(name_vi, name_en) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Adding a new faculty", { nameVn, nameEn });
+            console.log("Adding a new faculty", { name_vi, name_en });
             try {
                 const newFaculty = yield faculty_model_1.default.create({
-                    name_vn: nameVn,
-                    name_en: nameEn
+                    name_vi,
+                    name_en
                 });
                 logger_1.logger.info("Added new faculty successfully");
                 return newFaculty.toJSON();

@@ -14,6 +14,22 @@ const facultyService = {
       throw new Error("Error fetching all faculties");
     }
   },
+
+  async getFacultyById(facultyId: number) {
+    try {
+      const faculty = await Faculty.findOne({
+        where: { faculty_id: facultyId },
+      });
+      if (!faculty) {
+        logger.warn(`Faculty with ID ${facultyId} not found`);
+        return null;
+      }
+      return faculty.get();
+    } catch (error) {
+      logger.error("Error fetching faculty by ID: " + error.message);
+      throw new Error("Error fetching faculty by ID");
+    }
+  },
   // Get list of faculties
   async getFaculties() {
     try {
@@ -24,12 +40,12 @@ const facultyService = {
       throw new Error("Error fetching faculties list");
     }
   },
-  async addFaculty(nameVn: string, nameEn: string) {
-    console.log("Adding a new faculty", { nameVn, nameEn });
+  async addFaculty(name_vi: string, name_en: string) {
+    console.log("Adding a new faculty", { name_vi, name_en });
     try {
-      const newFaculty = await Faculty.create({ 
-        name_vn: nameVn, 
-        name_en: nameEn 
+      const newFaculty = await Faculty.create({
+        name_vi,
+        name_en
       });
       logger.info("Added new faculty successfully");
       return newFaculty.toJSON();

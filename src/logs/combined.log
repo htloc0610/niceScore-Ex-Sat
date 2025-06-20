@@ -1606,3 +1606,71 @@
 {"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T04:39:13.356Z"}
 {"level":"info","message":"Created new registration successfully","timestamp":"2025-06-20T04:39:27.770Z"}
 {"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T06:05:37.944Z"}
+{"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-20T04:49:39.914Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T04:49:42.586Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T04:50:58.367Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T04:50:58.949Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T04:53:59.227Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T04:55:12.436Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T04:56:58.012Z"}
+{"level":"error","message":"Error adding new faculty: notNull Violation: Faculty.name_vi cannot be null","timestamp":"2025-06-20T04:57:05.511Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T04:59:35.197Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:02:15.842Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:02:25.806Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:04:12.145Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:04:22.946Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:05:22.139Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:07:17.748Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:12:58.705Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:13:12.873Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:13:28.748Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:14:31.011Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:14:38.704Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:14:52.128Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:14:52.314Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:14:59.387Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:16:10.039Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:16:17.112Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:16:57.715Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:17:04.477Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:18:00.186Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:18:08.611Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:20:45.603Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:20:45.792Z"}
+{"level":"info","message":"Added new faculty successfully","timestamp":"2025-06-20T05:20:52.567Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:20:58.528Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:20:58.716Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:25:50.649Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:27:37.251Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:28:53.534Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:33:53.749Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:34:33.915Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:37:06.822Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:38:00.771Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:39:23.004Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:40:14.413Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:41:11.433Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:43:16.461Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:44:15.011Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:45:34.428Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:46:13.663Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-20T05:47:00.376Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T05:47:01.813Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-20T05:47:01.850Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:47:01.880Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T05:47:01.882Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-20T05:47:01.991Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:47:17.890Z"}
+{"level":"info","message":"Updated status with id 1 successfully","timestamp":"2025-06-20T05:47:30.443Z"}
+{"level":"info","message":"Status updated successfully","name_en":"Is learning","name_vi":"Đang học","status_id":"1","timestamp":"2025-06-20T05:47:30.446Z"}
+{"level":"error","message":"Error adding new status: notNull Violation: Status.name_vi cannot be null","timestamp":"2025-06-20T05:47:48.893Z"}
+{"level":"error","message":"An error occurred while adding the status Error adding new status: notNull Violation: Status.name_vi cannot be null","stack":"Error: Error adding new status: notNull Violation: Status.name_vi cannot be null\n    at Object.<anonymous> (C:\\Users\\Dien\\Desktop\\lan\\niceScore-Ex-Sat\\src\\services\\status.service.ts:35:15)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\Dien\\Desktop\\lan\\niceScore-Ex-Sat\\src\\services\\status.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-20T05:47:48.921Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:48:02.369Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T05:48:02.371Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:49:49.298Z"}
+{"level":"info","message":"Added new status successfully","timestamp":"2025-06-20T05:50:11.252Z"}
+{"level":"info","message":"Status added successfully","timestamp":"2025-06-20T05:50:11.253Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:50:18.736Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T05:50:18.927Z"}
+{"level":"info","message":"Added new status successfully","timestamp":"2025-06-20T05:50:41.519Z"}
+{"level":"info","message":"Status added successfully","timestamp":"2025-06-20T05:50:41.520Z"}
