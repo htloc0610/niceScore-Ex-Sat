@@ -339,7 +339,8 @@ document.getElementById("edit-class-form")?.addEventListener("submit", async (e)
     });
     const data = await response.json();
     if (data.message?.includes("success") || response.ok) {
-      // alert("Chỉnh sửa lớp học thành công!");      const successTitle = translations && translations[currentLang] && translations[currentLang].index && translations[currentLang].index.alert && translations[currentLang].index.alert.success || 'Success';
+      // alert("Chỉnh sửa lớp học thành công!");      
+      const successTitle = translations && translations[currentLang] && translations[currentLang].index && translations[currentLang].index.alert && translations[currentLang].index.alert.success || 'Success';
       const successText =
         (translations &&
           translations[currentLang] &&
