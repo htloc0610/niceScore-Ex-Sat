@@ -38,8 +38,11 @@ async function loadTranslations() {
 }
 
 // Load translations when page loads
+// Attach event listeners only if elements exist
+
 document.addEventListener("DOMContentLoaded", async () => {
   await loadTranslations();
+  // Optionally, load classes for a default module if needed
 });
 
 async function loadClasses(moduleId) {
@@ -146,101 +149,65 @@ async function loadClasses(moduleId) {
   }
 }
 
-document.getElementById("add-class-btn").addEventListener("click", (e) => {
+document.getElementById("add-class-btn")?.addEventListener("click", (e) => {
   e.preventDefault();
   document.getElementById("add-class-modal").classList.remove("hidden");
 });
 
 const addClassModal = document.getElementById("add-class-modal");
-addClassModal.addEventListener("click", (e) => {
+addClassModal?.addEventListener("click", (e) => {
   if (e.target === addClassModal) addClassModal.classList.add("hidden");
 });
 
 const editClassModal = document.getElementById("edit-class-modal");
-editClassModal.addEventListener("click", (e) => {
+editClassModal?.addEventListener("click", (e) => {
   if (e.target === editClassModal) editClassModal.classList.add("hidden");
 });
 
-document
-  .getElementById("add-class-form")
-  ?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = {
-      class_name: document.getElementById("class-name").value,
-      module_id: selectedModuleId,
-      academic_year: document.getElementById("academic-year").value,
-      semester: document.getElementById("semester").value,
-      instructor: document.getElementById("lecturer").value,
-      max_students: parseInt(document.getElementById("max-students").value),
-      schedule: document.getElementById("schedule").value,
-      classroom: document.getElementById("classroom").value,
-    };
+document.getElementById("add-class-form")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const formData = {
+    class_name: document.getElementById("class-name").value,
+    module_id: selectedModuleId,
+    academic_year: document.getElementById("academic-year").value,
+    semester: document.getElementById("semester").value,
+    instructor: document.getElementById("lecturer").value,
+    max_students: parseInt(document.getElementById("max-students").value),
+    schedule: document.getElementById("schedule").value,
+    classroom: document.getElementById("classroom").value,
+  };
 
-    try {
-      const response = await fetch("/api/class", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (data.message?.includes("success") || response.ok) {
-        // alert("Thêm lớp học thành công!");      const successTitle = translations && translations[currentLang] && translations[currentLang].index && translations[currentLang].index.alert && translations[currentLang].index.alert.success || 'Success';
-        const successText =
-          (translations &&
-            translations[currentLang] &&
-            translations[currentLang].modules &&
-            translations[currentLang].modules.classes &&
-            translations[currentLang].modules.classes.add_class_success) ||
-          "Class added successfully!";
-
-        Swal.fire({
-          icon: "success",
-          title: successTitle,
-          text: successText,
-          confirmButtonText: "OK",
-          timer: 2000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-        });
-
-        document.getElementById("add-class-modal").classList.add("hidden");
-        loadClasses(selectedModuleId);
-      } else {
-        // alert("Thêm lớp học thất bại: " + (data.message || "Lỗi không xác định"));      const errorTitle = translations && translations[currentLang] && translations[currentLang].modules && translations[currentLang].modules.alerts && translations[currentLang].modules.alerts.error && translations[currentLang].modules.alerts.error.title || 'Error!';
-        const closeButton =
-          (translations &&
-            translations[currentLang] &&
-            translations[currentLang].modules &&
-            translations[currentLang].modules.classes &&
-            translations[currentLang].modules.classes.close) ||
-          "Close";
-
-        Swal.fire({
-          icon: "error",
-          title: errorTitle,
-          text:
-            "Thêm lớp học thất bại: " + (data.message || "Lỗi không xác định"),
-          confirmButtonText: closeButton,
-        });
-      }
-    } catch (error) {
-      console.error("Error adding class:", error);
-      // alert("Lỗi kết nối server.");
-      const errorTitle =
-        (translations &&
-          translations[currentLang] &&
-          translations[currentLang].modules &&
-          translations[currentLang].modules.alerts &&
-          translations[currentLang].modules.alerts.error &&
-          translations[currentLang].modules.alerts.error.title) ||
-        "Error!";
-      const serverErrorText =
+  try {
+    const response = await fetch("/api/class", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    const data = await response.json();
+    if (data.message?.includes("success") || response.ok) {
+      // alert("Thêm lớp học thành công!");      const successTitle = translations && translations[currentLang] && translations[currentLang].index && translations[currentLang].index.alert && translations[currentLang].index.alert.success || 'Success';
+      const successText =
         (translations &&
           translations[currentLang] &&
           translations[currentLang].modules &&
           translations[currentLang].modules.classes &&
-          translations[currentLang].modules.classes.server_error) ||
-        "Server connection error";
+          translations[currentLang].modules.classes.add_class_success) ||
+        "Class added successfully!";
+
+      Swal.fire({
+        icon: "success",
+        title: successTitle,
+        text: successText,
+        confirmButtonText: "OK",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+
+      document.getElementById("add-class-modal").classList.add("hidden");
+      loadClasses(selectedModuleId);
+    } else {
+      // alert("Thêm lớp học thất bại: " + (data.message || "Lỗi không xác định"));      const errorTitle = translations && translations[currentLang] && translations[currentLang].modules && translations[currentLang].modules.alerts && translations[currentLang].modules.alerts.error && translations[currentLang].modules.alerts.error.title || 'Error!';
       const closeButton =
         (translations &&
           translations[currentLang] &&
@@ -252,11 +219,45 @@ document
       Swal.fire({
         icon: "error",
         title: errorTitle,
-        text: serverErrorText,
+        text:
+          "Thêm lớp học thất bại: " + (data.message || "Lỗi không xác định"),
         confirmButtonText: closeButton,
       });
     }
-  });
+  } catch (error) {
+    console.error("Error adding class:", error);
+    // alert("Lỗi kết nối server.");
+    const errorTitle =
+      (translations &&
+        translations[currentLang] &&
+        translations[currentLang].modules &&
+        translations[currentLang].modules.alerts &&
+        translations[currentLang].modules.alerts.error &&
+        translations[currentLang].modules.alerts.error.title) ||
+      "Error!";
+    const serverErrorText =
+      (translations &&
+        translations[currentLang] &&
+        translations[currentLang].modules &&
+        translations[currentLang].modules.classes &&
+        translations[currentLang].modules.classes.server_error) ||
+      "Server connection error";
+    const closeButton =
+      (translations &&
+        translations[currentLang] &&
+        translations[currentLang].modules &&
+        translations[currentLang].modules.classes &&
+        translations[currentLang].modules.classes.close) ||
+      "Close";
+
+    Swal.fire({
+      icon: "error",
+      title: errorTitle,
+      text: serverErrorText,
+      confirmButtonText: closeButton,
+    });
+  }
+});
 
 async function editClass(classId) {
   try {
@@ -266,18 +267,19 @@ async function editClass(classId) {
     });
     const data = await response.json();
     const classItem = data.classData;
-
     document.getElementById("edit-class-id").value = classItem.class_id;
     document.getElementById("edit-class-name").value = classItem.class_name;
     document.getElementById("edit-lecturer").value = classItem.instructor;
+
     document.getElementById("edit-max-students").value = classItem.max_students;
     document.getElementById("edit-academic-year").value =
       classItem.academic_year;
     document.getElementById("edit-semester").value = classItem.semester;
     document.getElementById("edit-schedule").value = classItem.schedule;
     document.getElementById("edit-classroom").value = classItem.classroom;
-
+    console.log("Clicked")
     document.getElementById("edit-class-modal").classList.remove("hidden");
+    console.log("Modal opened")
   } catch (error) {
     console.error("Error fetching class:", error);
     // alert("Lỗi tải dữ liệu lớp học.");
@@ -313,74 +315,72 @@ async function editClass(classId) {
   }
 }
 
-document
-  .getElementById("edit-class-form")
-  ?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const classId = document.getElementById("edit-class-id").value;
-    const formData = {
-      class_name: document.getElementById("edit-class-name").value,
-      module_id: selectedModuleId,
-      academic_year: document.getElementById("edit-academic-year").value,
-      semester: document.getElementById("edit-semester").value,
-      instructor: document.getElementById("edit-lecturer").value,
-      max_students: parseInt(
-        document.getElementById("edit-max-students").value
-      ),
-      schedule: document.getElementById("edit-schedule").value,
-      classroom: document.getElementById("edit-classroom").value,
-    };
+document.getElementById("edit-class-form")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const classId = document.getElementById("edit-class-id").value;
+  const formData = {
+    class_name: document.getElementById("edit-class-name").value,
+    module_id: selectedModuleId,
+    academic_year: document.getElementById("edit-academic-year").value,
+    semester: document.getElementById("edit-semester").value,
+    instructor: document.getElementById("edit-lecturer").value,
+    max_students: parseInt(
+      document.getElementById("edit-max-students").value
+    ),
+    schedule: document.getElementById("edit-schedule").value,
+    classroom: document.getElementById("edit-classroom").value,
+  };
 
-    try {
-      const response = await fetch(`/api/class/${classId}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+  try {
+    const response = await fetch(`/api/class/${classId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    const data = await response.json();
+    if (data.message?.includes("success") || response.ok) {
+      // alert("Chỉnh sửa lớp học thành công!");      const successTitle = translations && translations[currentLang] && translations[currentLang].index && translations[currentLang].index.alert && translations[currentLang].index.alert.success || 'Success';
+      const successText =
+        (translations &&
+          translations[currentLang] &&
+          translations[currentLang].modules &&
+          translations[currentLang].modules.classes &&
+          translations[currentLang].modules.classes.edit_class_success) ||
+        "Class updated successfully!";
+
+      Swal.fire({
+        icon: "success",
+        title: successTitle,
+        text: successText,
+        confirmButtonText: "OK",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
       });
-      const data = await response.json();
-      if (data.message?.includes("success") || response.ok) {
-        // alert("Chỉnh sửa lớp học thành công!");      const successTitle = translations && translations[currentLang] && translations[currentLang].index && translations[currentLang].index.alert && translations[currentLang].index.alert.success || 'Success';
-        const successText =
-          (translations &&
-            translations[currentLang] &&
-            translations[currentLang].modules &&
-            translations[currentLang].modules.classes &&
-            translations[currentLang].modules.classes.edit_class_success) ||
-          "Class updated successfully!";
-
-        Swal.fire({
-          icon: "success",
-          title: successTitle,
-          text: successText,
-          confirmButtonText: "OK",
-          timer: 2000,
-          timerProgressBar: true,
-          showConfirmButton: false,
-        });
-        document.getElementById("edit-class-modal").classList.add("hidden");
-        loadClasses(selectedModuleId);
-      } else {
-        // alert("Chỉnh sửa lớp học thất bại: " + (data.message || "Lỗi không xác định"));
-        Swal.fire({
-          icon: "error",
-          title: "Lỗi!",
-          text:
-            "Chỉnh sửa lớp học thất bại: " +
-            (data.message || "Lỗi không xác định"),
-          confirmButtonText: "Đóng",
-        });
-      }
-    } catch (error) {
-      console.error("Error editing class:", error);
-      // alert("Lỗi kết nối server.");
+      document.getElementById("edit-class-modal").classList.add("hidden");
+      loadClasses(selectedModuleId);
+    } else {
+      // alert("Chỉnh sửa lớp học thất bại: " + (data.message || "Lỗi không xác định"));
       Swal.fire({
         icon: "error",
         title: "Lỗi!",
-        text: "Lỗi kết nối server.",
+        text:
+          "Chỉnh sửa lớp học thất bại: " +
+          (data.message || "Lỗi không xác định"),
         confirmButtonText: "Đóng",
       });
     }
-  });
+  } catch (error) {
+    console.error("Error editing class:", error);
+    // alert("Lỗi kết nối server.");
+    Swal.fire({
+      icon: "error",
+      title: "Lỗi!",
+      text: "Lỗi kết nối server.",
+      confirmButtonText: "Đóng",
+    });
+  }
+});
 
 function closeAddClassModal() {
   document.getElementById("add-class-modal").classList.add("hidden");

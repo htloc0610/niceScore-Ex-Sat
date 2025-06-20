@@ -18,6 +18,19 @@ const facultyController = {  getListModules: async (req: Request, res: Response)
         .send({ message: "An error occurred while fetching modules." });
     }
   },
+  getModuleByIdNoLanguage: async (req: Request, res: Response): Promise<void> => {
+    try {
+      
+      const moduleId = parseInt(req.params.id);
+      const module = await moduleService.getModuleByIdNoLang(moduleId);
+      res.status(200).send({ message: "Module fetched successfully", module });
+    } catch (error) {
+      console.error(error);
+      res
+        .status(500)
+        .send({ message: "An error occurred while fetching the module." });
+    }
+  },
   addModule: async (req: Request, res: Response): Promise<void> => {
     try {
       const data = req.body;
@@ -69,6 +82,7 @@ const facultyController = {  getListModules: async (req: Request, res: Response)
   },
   updateModule: async (req: Request, res: Response): Promise<void> => {
     try {
+      console.log()
       const module_id = req.params.id;
       const updatedData = req.body;
 
@@ -79,7 +93,13 @@ const facultyController = {  getListModules: async (req: Request, res: Response)
         return;
       }
 
-      if(updatedData.credits && await moduleService.hasRegisterStudent(parseInt(module_id))) {
+      // Fetch current module to compare credits
+      const currentModule = await moduleService.getModuleByIdNoLang(parseInt(module_id));
+      if (
+        updatedData.credits !== undefined &&
+        updatedData.credits !== currentModule.credits &&
+        await moduleService.hasRegisterStudent(parseInt(module_id))
+      ) {
         res.status(400).send({
           message: "Module cannot be updated because it has registered students.",
         });

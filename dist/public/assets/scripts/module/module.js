@@ -28,12 +28,14 @@ const defaultTranslations = {
       },
       labels: {
         code: "Module Code",
-        name: "Module Name",
+        name_vi: "Module Name (Vietnamese)",
+        name_en: "Module Name (English)",
         credits: "Credits",
         faculty: "Faculty",
         prerequisite: "Prerequisite Module",
         status: "Status",
-        description: "Description",
+        description_vi: "Description (Vietnamese)",
+        description_en: "Description (English)",
         active: "Active",
         inactive: "Inactive",
         no_prerequisite: "None"
@@ -288,12 +290,14 @@ document.getElementById("add-module-form")?.addEventListener("submit", async (e)
   e.preventDefault();
   const formData = {
     module_code: document.getElementById("module-code").value,
-    module_name: document.getElementById("module-name").value,
+    module_name_vi: document.getElementById("module-name-vi").value,
+    module_name_en: document.getElementById("module-name-en").value,
     credits: parseInt(document.getElementById("credits").value),
     faculty_id: parseInt(document.getElementById("add-faculty-id").value),
     prerequisite_id: document.getElementById("add-prerequisite-id").value || null,
     is_active: document.getElementById("module-status").value === "1",
-    description: document.getElementById("description").value || null,
+    description_vi: document.getElementById("description_vi").value || null,
+    description_en: document.getElementById("description_en").value || null,
   };
 
   try {
@@ -337,25 +341,28 @@ document.getElementById("add-module-form")?.addEventListener("submit", async (e)
 async function editModule(moduleId) {
   try {
     const lang = localStorage.getItem("lang") || 'en';
-    const response = await fetch(`/api/module/${moduleId}?language=${lang}`, {
+    const response = await fetch(`/api/module/no-lang/${moduleId}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
     const module = data.module;
     credits = module.credits;
-
+    
     // Fill form with data
+    const viTrans = module.translations.find(tr => tr.language === "vi") || {};
+    const enTrans = module.translations.find(tr => tr.language === "en") || {};
+    console.log("Module data:", module, viTrans, enTrans);
     document.getElementById("edit-module-id").value = module.module_id;
-    document.getElementById("edit-module-code-display").textContent = 
-      `${t.modules?.form?.labels?.code || defaultTranslations.modules.form.labels.code}: ${module.module_code}`;
-    document.getElementById("edit-module-name").value = module.module_name;
+    document.getElementById("edit-module-name-vi").value = viTrans.module_name || "";
+    document.getElementById("edit-module-name-en").value = enTrans.module_name || "";
     document.getElementById("edit-credits").value = module.credits;
     document.getElementById("edit-faculty-id").value = module.faculty_id;
     document.getElementById("edit-prerequisite-id").value = module.prerequisite_id || "";
     document.getElementById("edit-module-status").value = module.is_active ? "1" : "0";
-    document.getElementById("edit-description").value = module.description || "";
-
+    document.getElementById("edit-description-vi").value = viTrans.description || "";
+    document.getElementById("edit-description-en").value = enTrans.description || "";
+    console.log("Module translations:", viTrans, enTrans);
     // Load dropdowns and select current values
     await loadDropdownData("edit", module.faculty_id, module.prerequisite_id || "");
 
@@ -371,16 +378,20 @@ async function editModule(moduleId) {
   }
 }
 
-document.getElementById("edit-module-form")?.addEventListener("submit", async (e) => {
+document.getElementById("edit-module-form").addEventListener("submit", async (e) => {
   e.preventDefault();
+  console.log("Clicked edit module submit");
   const moduleId = document.getElementById("edit-module-id").value;
   var formData = {
-    module_name: document.getElementById("edit-module-name").value,
+    module_id: document.getElementById("edit-module-id").value,
+    module_name_vi: document.getElementById("edit-module-name-vi").value,
+    module_name_en: document.getElementById("edit-module-name-en").value,
     credits: parseInt(document.getElementById("edit-credits").value),
     faculty_id: parseInt(document.getElementById("edit-faculty-id").value),
     prerequisite_id: document.getElementById("edit-prerequisite-id").value || null,
     is_active: document.getElementById("edit-module-status").value === "1",
-    description: document.getElementById("edit-description").value || null,
+    description_vi: document.getElementById("edit-description-vi").value || null,
+    description_en: document.getElementById("edit-description-en").value || null,
   };
 
   if (formData.credits === credits)
