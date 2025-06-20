@@ -1431,3 +1431,19 @@
 {"level":"info","message":"Successfully fetched modules list in en language","timestamp":"2025-06-19T22:38:31.094Z"}
 {"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-19T22:38:45.971Z"}
 {"level":"info","message":"Created new registration successfully","timestamp":"2025-06-19T22:50:41.147Z"}
+{"level":"info","message":"Successfully fetched students list","timestamp":"2025-06-20T00:35:26.459Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T00:36:37.904Z"}
+{"level":"error","message":"Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:37:56.630Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:37:56.681Z"}
+{"level":"error","message":"Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:04.850Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:04.854Z"}
+{"level":"error","message":"Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:05.041Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:05.045Z"}
+{"level":"error","message":"Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:10.175Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:10.180Z"}
+{"level":"error","message":"Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:52.262Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: column class->module.module_name does not exist","timestamp":"2025-06-20T00:38:52.267Z"}
+{"level":"error","message":"Error fetching student grades: ModuleTranslation is associated to Module using an alias. You've included an alias (module_translations), but it does not match the alias(es) defined in your association (translations).","timestamp":"2025-06-20T00:49:06.348Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: ModuleTranslation is associated to Module using an alias. You've included an alias (module_translations), but it does not match the alias(es) defined in your association (translations).","timestamp":"2025-06-20T00:49:06.365Z"}
+{"level":"error","message":"Error fetching student grades: ModuleTranslation is associated to Module using an alias. You've included an alias (module_translation), but it does not match the alias(es) defined in your association (translations).","timestamp":"2025-06-20T00:53:28.883Z"}
+{"level":"error","message":"Error exporting grades: Error fetching student grades: ModuleTranslation is associated to Module using an alias. You've included an alias (module_translation), but it does not match the alias(es) defined in your association (translations).","timestamp":"2025-06-20T00:53:28.906Z"}

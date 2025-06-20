@@ -9,6 +9,7 @@ import Class from "../models/classes.model";
 import Identification from "../models/identification.model";
 import addressService from "./address.service";
 import identificationService from "./identification.service";
+import ModuleTranslation from "../models/module_translations.model";
 import { logger } from "../config/logger";
 
 const studentService = {
@@ -458,26 +459,35 @@ const studentService = {
     }
   },
 
-  async getStudentGrades(studentId: number) {
+  async getStudentGrades(studentId: number, language: string = 'en') {
   try {
     const grades = await Transcript.findAll({
       where: { student_id: studentId },
+      attributes: ["grade"],
       include: [
         {
           model: Class,
-          as: "class", // Ensure this matches the alias set in the association
+          as: "class",
+          attributes: ["class_name"],
+
           include: [
             {
               model: Module,
-              as: "module", // Ensure 'module' alias is correct
-              attributes: ["module_code", "module_name", "credits"],
+              as: "module",
+              attributes: ["module_code", "credits"],
+              include: [
+                {
+                  model: ModuleTranslation,
+                  as: "translations",
+                  attributes: ['module_name'],
+                  where: {
+                    'language': language,
+                  },
+                },
+              ],
             },
           ],
-          attributes: ["class_name"],
-        },
-      ],
-      attributes: ["grade"],
-    });
+        }]});
 
     if (!grades || grades.length === 0) {
       throw new Error("No grades found for the student");
@@ -485,19 +495,17 @@ const studentService = {
 
     // Map the result to return the desired format
     const formattedGrades = grades.map((item) => {
-      const plainItem = item.get({ plain: true }); // Convert Sequelize instance to plain object
-      console.log(plainItem )
+      const plainItem = item.get({ plain: true });
       return {
         grade: plainItem.grade,
-        transcript_id: plainItem.transcript_id, // Accessing class_name from the related Class model
-        module_name: plainItem.class.module.module_name, // Accessing module_name from the related Module model
-        module_code: plainItem.class.module.module_code, // Accessing module_code from the related Module model
-        credits: plainItem.class.module.credits, // Accessing credits from the related Module model
+        transcript_id: plainItem.transcript_id,
+        module_name: plainItem.class.module.translations[0].module_name,
+        class_name: plainItem.class.class_name,
+        credits: plainItem.class.module.credits,
       };
     });
 
-    console.log(formattedGrades); // You can log the formatted result if needed
-    return formattedGrades; // Return the formatted grades array
+    return formattedGrades;
   } catch (error) {
     logger.error("Error fetching student grades: " + error.message);
     console.log("Error fetching student grades:", error);

@@ -19,6 +19,18 @@ const student_service_1 = __importDefault(require("../services/student.service")
 const logger_1 = require("../config/logger");
 const easy_template_x_1 = require("easy-template-x");
 const { convert } = require('docx2pdf-converter'); // npm package
+function getLocalizedFaculty(faculty, lang) {
+    return {
+        faculty_id: faculty.faculty_id,
+        name: lang === 'vi' ? faculty.name_vi : faculty.name_en
+    };
+}
+function getLocalizedStatus(status, lang) {
+    return {
+        status_id: status.status_id,
+        name: lang === 'vi' ? status.name_vi : status.name_en
+    };
+}
 const exportController = {
     // Hàm export dữ liệu ra JSON
     exportToJson: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -149,8 +161,9 @@ const exportController = {
         var _a, _b;
         try {
             const { id } = req.params;
+            const lang = res.locals.lang || 'en';
             // Fetch grades and student details
-            const rawGrades = (yield student_service_1.default.getStudentGrades(parseInt(id)));
+            const rawGrades = (yield student_service_1.default.getStudentGrades(parseInt(id), lang));
             const grades = rawGrades.map((grade, index) => ({
                 idx: index + 1,
                 credits: grade.credits,
@@ -159,7 +172,8 @@ const exportController = {
                 grade: parseFloat(grade.grade),
                 GPA: (parseFloat(grade.grade) * 0.4).toFixed(2),
             }));
-            const student = yield student_service_1.default.getStudentById(parseInt(id));
+            var student = yield student_service_1.default.getStudentById(parseInt(id));
+            console.log("Student:", student, "lang:", lang);
             const safeGrades = Array.isArray(grades)
                 ? grades.filter(g => g && g.grade >= 5)
                 : [];
@@ -172,6 +186,7 @@ const exportController = {
                 : "N/A";
             const data = {
                 student_name: student.full_name,
+                faculty_name: getLocalizedFaculty(student.faculty, lang).name,
                 s_id: student.student_id,
                 s_birthday: student.date_of_birth,
                 course_name: ((_a = student.course) === null || _a === void 0 ? void 0 : _a.course_name_vi) || ((_b = student.course) === null || _b === void 0 ? void 0 : _b.course_name_en),
@@ -182,7 +197,7 @@ const exportController = {
                 grades,
             };
             // Path to the Word template
-            const templateFilePath = path_1.default.join(__dirname, '../templates/grade.docx');
+            const templateFilePath = path_1.default.join(__dirname, `../templates/grade_${lang}.docx`);
             const templateFile = fs_1.default.readFileSync(templateFilePath);
             const handler = new easy_template_x_1.TemplateHandler();
             const doc = yield handler.process(templateFile, data);

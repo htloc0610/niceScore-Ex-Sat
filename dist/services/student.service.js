@@ -23,6 +23,7 @@ const classes_model_1 = __importDefault(require("../models/classes.model"));
 const identification_model_1 = __importDefault(require("../models/identification.model"));
 const address_service_1 = __importDefault(require("./address.service"));
 const identification_service_1 = __importDefault(require("./identification.service"));
+const module_translations_model_1 = __importDefault(require("../models/module_translations.model"));
 const logger_1 = require("../config/logger");
 const studentService = {
     // Get list of students with related data
@@ -436,44 +437,52 @@ const studentService = {
             }
         });
     },
-    getStudentGrades(studentId) {
-        return __awaiter(this, void 0, void 0, function* () {
+    getStudentGrades(studentId_1) {
+        return __awaiter(this, arguments, void 0, function* (studentId, language = 'en') {
             try {
                 const grades = yield transcripts_model_1.default.findAll({
                     where: { student_id: studentId },
+                    attributes: ["grade"],
                     include: [
                         {
                             model: classes_model_1.default,
-                            as: "class", // Ensure this matches the alias set in the association
+                            as: "class",
+                            attributes: ["class_name"],
                             include: [
                                 {
                                     model: modules_model_1.default,
-                                    as: "module", // Ensure 'module' alias is correct
-                                    attributes: ["module_code", "module_name", "credits"],
+                                    as: "module",
+                                    attributes: ["module_code", "credits"],
+                                    include: [
+                                        {
+                                            model: module_translations_model_1.default,
+                                            as: "translations",
+                                            attributes: ['module_name'],
+                                            where: {
+                                                'language': language,
+                                            },
+                                        },
+                                    ],
                                 },
                             ],
-                            attributes: ["class_name"],
-                        },
-                    ],
-                    attributes: ["grade"],
+                        }
+                    ]
                 });
                 if (!grades || grades.length === 0) {
                     throw new Error("No grades found for the student");
                 }
                 // Map the result to return the desired format
                 const formattedGrades = grades.map((item) => {
-                    const plainItem = item.get({ plain: true }); // Convert Sequelize instance to plain object
-                    console.log(plainItem);
+                    const plainItem = item.get({ plain: true });
                     return {
                         grade: plainItem.grade,
-                        transcript_id: plainItem.transcript_id, // Accessing class_name from the related Class model
-                        module_name: plainItem.class.module.module_name, // Accessing module_name from the related Module model
-                        module_code: plainItem.class.module.module_code, // Accessing module_code from the related Module model
-                        credits: plainItem.class.module.credits, // Accessing credits from the related Module model
+                        transcript_id: plainItem.transcript_id,
+                        module_name: plainItem.class.module.translations[0].module_name,
+                        class_name: plainItem.class.class_name,
+                        credits: plainItem.class.module.credits,
                     };
                 });
-                console.log(formattedGrades); // You can log the formatted result if needed
-                return formattedGrades; // Return the formatted grades array
+                return formattedGrades;
             }
             catch (error) {
                 logger_1.logger.error("Error fetching student grades: " + error.message);

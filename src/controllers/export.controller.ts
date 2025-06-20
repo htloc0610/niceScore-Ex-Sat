@@ -6,7 +6,18 @@ import studentService from "../services/student.service";
 import { logger } from "../config/logger";
 import { TemplateHandler } from 'easy-template-x';
 const { convert } = require('docx2pdf-converter'); // npm package
-
+function getLocalizedFaculty(faculty: any, lang: string) {
+  return {
+    faculty_id: faculty.faculty_id,
+    name: lang === 'vi' ? faculty.name_vi : faculty.name_en
+  }
+}
+function getLocalizedStatus(status: any, lang: string) {
+  return {
+    status_id: status.status_id,
+    name: lang === 'vi' ? status.name_vi : status.name_en
+  };
+}
 const exportController = {
   // Hàm export dữ liệu ra JSON
   exportToJson: async (req: Request, res: Response) => {
@@ -140,9 +151,9 @@ const exportController = {
     exportGrade: async (req: Request, res: Response) => {
         try {
           const { id } = req.params;
-    
+          const lang = res.locals.lang || 'en';
           // Fetch grades and student details
-          const rawGrades = (await studentService.getStudentGrades(parseInt(id)));
+          const rawGrades = (await studentService.getStudentGrades(parseInt(id), lang));
           const grades = rawGrades.map((grade: any, index: number) => ({
             idx: index + 1,
             credits: grade.credits,
@@ -152,8 +163,8 @@ const exportController = {
             GPA: (parseFloat(grade.grade) *0.4).toFixed(2),
           }));
 
-          const student = await studentService.getStudentById(parseInt(id)) as any;
-          
+          var student = await studentService.getStudentById(parseInt(id)) as any;
+          console.log("Student:", student, "lang:", lang);
           const safeGrades = Array.isArray(grades)
           ? grades.filter(g => g && g.grade >= 5)
           : [];
@@ -170,6 +181,7 @@ const exportController = {
 
           const data = {
             student_name: student.full_name,
+            faculty_name: getLocalizedFaculty(student.faculty, lang).name,
             s_id: student.student_id,
             s_birthday: student.date_of_birth,
             course_name: student.course?.course_name_vi || student.course?.course_name_en,
@@ -182,7 +194,7 @@ const exportController = {
 
     
           // Path to the Word template
-          const templateFilePath = path.join(__dirname, '../templates/grade.docx');
+          const templateFilePath = path.join(__dirname, `../templates/grade_${lang}.docx`);
           const templateFile = fs.readFileSync(templateFilePath);
           const handler = new TemplateHandler();
           const doc = await handler.process(templateFile, data);

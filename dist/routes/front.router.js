@@ -134,7 +134,6 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         return Object.assign(Object.assign({}, student), { faculty: getLocalizedFaculty(student.faculty, lang), status: getLocalizedStatus(student.status, lang) // Localize status names
          });
     });
-    console.log(students);
     res.render("index", { faculties: faculties, students: students, lang: lang }); // Render the "index" Handlebars template
 }));
 exports.default = router;

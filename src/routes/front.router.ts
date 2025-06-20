@@ -141,7 +141,6 @@ router.get("/", async (req, res) => {
     }
   });
 
-  console.log(students);
   res.render("index", {faculties: faculties, students: students, lang: lang}); // Render the "index" Handlebars template
 });
 
