@@ -258,25 +258,26 @@ const studentController = {
     }),
     deleteStudent: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { student_id } = req.body; // Extract the student ID from the request body
-            // Call the delete function in your service
+            const { student_id } = req.body;
             const result = yield student_service_1.default.deleteStudent(student_id);
-            // If the student was successfully deleted, return a success response
-            if (result === 0) {
-                logger_1.logger.error("Student not found");
-                res.status(404).send({ message: "Student not found" });
+            // Log để kiểm tra dữ liệu trả về
+            logger_1.logger.info("Delete result:", result);
+            // Xử lý tùy theo kiểu trả về
+            const isDeleted = typeof result === 'number' ? result > 0 : (result === null || result === void 0 ? void 0 : result.affectedRows) > 0;
+            if (isDeleted) {
+                logger_1.logger.info(`Student with ID ${student_id} deleted successfully`);
+                res.status(200).json({ message: "Student deleted successfully" });
             }
             else {
-                logger_1.logger.info("Student deleted successfully");
-                res.status(200).send({ message: "Student deleted successfully" });
+                logger_1.logger.warn(`Student with ID ${student_id} not found`);
+                res.status(404).json({ message: "Student not found" });
             }
         }
         catch (error) {
-            logger_1.logger.error("Error deleting student" + error);
-            console.log("Error deleting student:", error);
-            res
-                .status(500)
-                .send({ message: "An error occurred while deleting the student." });
+            logger_1.logger.error("Error deleting student:", error);
+            res.status(500).send({
+                message: "An error occurred while deleting the student."
+            });
         }
     }),
 };

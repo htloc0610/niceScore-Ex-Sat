@@ -1688,3 +1688,46 @@
 {"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-20T06:35:38.005Z"}
 {"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T06:35:38.266Z"}
 {"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T06:35:38.266Z"}
+{"level":"info","message":"Successfully fetched modules list in vi language","timestamp":"2025-06-20T07:13:03.710Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-20T07:13:17.872Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T07:13:18.077Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-20T07:13:18.080Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-20T07:13:18.274Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T07:13:18.279Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T07:13:18.279Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-20T07:13:25.325Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-20T07:13:25.518Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T07:13:25.520Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-20T07:13:25.532Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T07:13:25.534Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T07:13:25.534Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-20T07:16:18.087Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-20T07:16:18.793Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T07:16:19.014Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-20T07:16:19.243Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T07:16:19.451Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T07:16:19.452Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-20T07:40:51.935Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T07:40:52.148Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-20T07:40:52.150Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T07:40:52.359Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T07:40:52.360Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-20T07:40:52.392Z"}
+{"level":"info","message":"Student deleted successfully","timestamp":"2025-06-20T08:07:02.147Z"}
+{"level":"info","message":"Student deleted successfully","timestamp":"2025-06-20T08:07:35.670Z"}
+{"level":"info","message":"Student deleted successfully","timestamp":"2025-06-20T08:08:27.198Z"}
+{"level":"error","message":"Error deleting student: Error deleting student","stack":"Error: Error deleting student\n    at Object.<anonymous> (D:\\IT_3\\HK2\\TKUD\\Final\\niceScore-Ex-Sat\\src\\services\\student.service.ts:174:13)\n    at Generator.throw (<anonymous>)\n    at rejected (D:\\IT_3\\HK2\\TKUD\\Final\\niceScore-Ex-Sat\\src\\services\\student.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-06-20T08:24:44.061Z"}
+{"level":"info","message":"Successfully fetched cancellation details for studentId: 8","timestamp":"2025-06-20T08:29:06.051Z"}
+{"level":"error","message":"Error deleting student: Error deleting student","stack":"Error: Error deleting student\n    at Object.<anonymous> (D:\\IT_3\\HK2\\TKUD\\Final\\niceScore-Ex-Sat\\src\\services\\student.service.ts:174:13)\n    at Generator.throw (<anonymous>)\n    at rejected (D:\\IT_3\\HK2\\TKUD\\Final\\niceScore-Ex-Sat\\src\\services\\student.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-06-20T08:29:18.082Z"}
+{"level":"error","message":"Error deleting student: Error deleting student","stack":"Error: Error deleting student\n    at Object.<anonymous> (D:\\IT_3\\HK2\\TKUD\\Final\\niceScore-Ex-Sat\\src\\services\\student.service.ts:174:13)\n    at Generator.throw (<anonymous>)\n    at rejected (D:\\IT_3\\HK2\\TKUD\\Final\\niceScore-Ex-Sat\\src\\services\\student.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:95:5)","timestamp":"2025-06-20T08:29:25.826Z"}
+{"level":"info","message":"Fetching all courses","timestamp":"2025-06-20T08:30:26.956Z"}
+{"level":"info","message":"Fetched list of configurations successfully","timestamp":"2025-06-20T08:30:28.579Z"}
+{"level":"info","message":"Successfully fetched faculties list","timestamp":"2025-06-20T08:30:28.625Z"}
+{"level":"info","message":"Courses fetched successfully","timestamp":"2025-06-20T08:30:28.626Z"}
+{"level":"info","message":"Fetched status list successfully","timestamp":"2025-06-20T08:30:28.627Z"}
+{"level":"info","message":"Fetched list of status successfully","timestamp":"2025-06-20T08:30:28.628Z"}
+{"level":"info","message":"Student added successfully","timestamp":"2025-06-20T08:31:24.029Z"}
+{"level":"info","message":"Delete result:","timestamp":"2025-06-20T08:32:31.274Z"}
+{"level":"info","message":"Student with ID 15 deleted successfully","timestamp":"2025-06-20T08:32:31.274Z"}
+{"level":"info","message":"Delete result:","timestamp":"2025-06-20T08:37:48.311Z"}
+{"level":"info","message":"Student with ID 12 deleted successfully","timestamp":"2025-06-20T08:37:48.312Z"}

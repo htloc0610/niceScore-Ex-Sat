@@ -310,24 +310,28 @@ const studentController = {
 
   deleteStudent: async (req: Request, res: Response): Promise<void> => {
     try {
-      const { student_id } = req.body; // Extract the student ID from the request body
-      // Call the delete function in your service
+      const { student_id } = req.body;
+
       const result = await studentService.deleteStudent(student_id);
 
-      // If the student was successfully deleted, return a success response
-      if (result === 0) {
-        logger.error("Student not found");
-        res.status(404).send({ message: "Student not found" });
+      // Log để kiểm tra dữ liệu trả về
+      logger.info("Delete result:", result);
+
+      // Xử lý tùy theo kiểu trả về
+      const isDeleted = typeof result === 'number' ? result > 0 : (result as any)?.affectedRows > 0;
+
+      if (isDeleted) {
+        logger.info(`Student with ID ${student_id} deleted successfully`);
+        res.status(200).json({ message: "Student deleted successfully" });
       } else {
-        logger.info("Student deleted successfully");
-        res.status(200).send({ message: "Student deleted successfully" });
+        logger.warn(`Student with ID ${student_id} not found`);
+        res.status(404).json({ message: "Student not found" });
       }
     } catch (error) {
-      logger.error("Error deleting student" + error);
-      console.log("Error deleting student:", error);
-      res
-        .status(500)
-        .send({ message: "An error occurred while deleting the student." });
+      logger.error("Error deleting student:", error);
+      res.status(500).send({
+        message: "An error occurred while deleting the student."
+      });
     }
   },
 };

@@ -23,6 +23,13 @@ function getLocalizedStatus(status: any, lang: string) {
   };
 }
 
+function getLocalizedCourse(course: any, lang: string) {
+  return {
+    course_id: course.course_id,
+    name: lang === 'vi' ? course.course_name_vi : course.course_name_en
+  };
+}
+
 // [GET] /more
 router.get("/more", async (req, res) => {
     const lang = res.locals.lang || 'en';
@@ -30,7 +37,9 @@ router.get("/more", async (req, res) => {
   faculties = faculties.map(faculty => getLocalizedFaculty(faculty, lang || 'en'));
   var statuses = await statusService.getAllStatuses();
   statuses = statuses.map(status => getLocalizedStatus(status, lang || 'en'));
-  const courses = await courseService.getAllCourses();
+  var courses = await courseService.getAllCourses();
+  courses = courses.map(course => getLocalizedCourse(course, lang || 'en'));
+
   const modules = await moduleService.getAllModules(lang);
   res.render("more", {
     faculties: faculties, 
@@ -137,7 +146,8 @@ router.get("/", async (req, res) => {
     return {
       ...student,
       faculty:getLocalizedFaculty(student.faculty, lang), // Localize faculty name
-      status: getLocalizedStatus(student.status, lang) // Localize status names
+      status: getLocalizedStatus(student.status, lang), // Localize status names
+      course: getLocalizedCourse(student.course, lang) // Localize course names
     }
   });
 

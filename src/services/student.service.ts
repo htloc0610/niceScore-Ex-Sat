@@ -31,7 +31,7 @@ const studentService = {
         include: [          {
             model: Faculty,
             as: "faculty",
-            attributes: ["name_vi", "name_en"], // Get faculty names in both languages
+            attributes: ["faculty_id","name_vi", "name_en"], // Get faculty names in both languages
           },          {
             model: Course,
             as: "course",

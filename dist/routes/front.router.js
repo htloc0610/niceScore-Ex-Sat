@@ -34,6 +34,12 @@ function getLocalizedStatus(status, lang) {
         name: lang === 'vi' ? status.name_vi : status.name_en
     };
 }
+function getLocalizedCourse(course, lang) {
+    return {
+        course_id: course.course_id,
+        name: lang === 'vi' ? course.course_name_vi : course.course_name_en
+    };
+}
 // [GET] /more
 router.get("/more", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const lang = res.locals.lang || 'en';
@@ -41,7 +47,8 @@ router.get("/more", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     faculties = faculties.map(faculty => getLocalizedFaculty(faculty, lang || 'en'));
     var statuses = yield status_service_1.default.getAllStatuses();
     statuses = statuses.map(status => getLocalizedStatus(status, lang || 'en'));
-    const courses = yield course_service_1.default.getAllCourses();
+    var courses = yield course_service_1.default.getAllCourses();
+    courses = courses.map(course => getLocalizedCourse(course, lang || 'en'));
     const modules = yield module_service_1.default.getAllModules(lang);
     res.render("more", {
         faculties: faculties,
@@ -131,7 +138,7 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const studentsDataValue = yield student_service_1.default.getListStudent();
     var students = studentsDataValue.map(student => student.get({ plain: true }));
     students = students.map(student => {
-        return Object.assign(Object.assign({}, student), { faculty: getLocalizedFaculty(student.faculty, lang), status: getLocalizedStatus(student.status, lang) // Localize status names
+        return Object.assign(Object.assign({}, student), { faculty: getLocalizedFaculty(student.faculty, lang), status: getLocalizedStatus(student.status, lang), course: getLocalizedCourse(student.course, lang) // Localize course names
          });
     });
     res.render("index", { faculties: faculties, students: students, lang: lang }); // Render the "index" Handlebars template

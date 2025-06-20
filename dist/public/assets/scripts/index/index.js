@@ -165,7 +165,7 @@ function RefreshTable(id) {
         <td class="px-2 py-3 text-sm">${student.date_of_birth}</td>
         <td class="px-2 py-3 text-sm">${student.gender}</td>
         <td class="px-2 py-3 text-sm">${student.faculty.name}</td>
-        <td class="px-2 py-3 text-sm">${student.course.course_name}</td>
+        <td class="px-2 py-3 text-sm">${student.course.name}</td>
         <td class="px-2 py-3 text-sm">${student.program}</td>
         <td class="px-2 py-3 text-sm">${student.permanentAddress.city}</td>
         <td class="px-2 py-3 text-sm max-w-[150px] truncate hover:overflow-visible hover:whitespace-normal">
