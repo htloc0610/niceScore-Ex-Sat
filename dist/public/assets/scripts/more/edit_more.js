@@ -3,10 +3,11 @@ async function editMore(id, entityType) {
     const translationUrl = `/assets/scripts/locales/${lang}.json`;
     res = await fetch(translationUrl);
     let t = await res.json();
+    console.log("T is", t);
     const entityConfigs = {
-        "Faculty": { name: "Khoa", idField: "faculty_id", nameField: "name", apiEndpoint: "/api/faculty", tableId: "faculty-table-body", title: t.more.faculty.edit_button , nameCol: t.more.faculty.name_col, t: t },
-        "Status": { name: "Tình trạng", idField: "status_id", nameField: "name", apiEndpoint: "/api/status", tableId: "status-table-body", title: t.more.status.edit_button , nameCol: t.more.status.name_col, t: t },
-        "Course": { name: "Khóa", idField: "course_id", nameField: "course_name", apiEndpoint: "/api/course", tableId: "course-table-body", title: t.more.course.edit_button , nameCol: t.more.course.name_col, t: t }
+        "Faculty": { name: "Khoa", idField: "faculty_id", nameField: "name", apiEndpoint: "/api/faculty", tableId: "faculty-table-body", title: t.more.faculty.edit_button , nameCol: t.more.faculty.name_col, t: t, entityType: "Faculty" },
+        "Status": { name: "Tình trạng", idField: "status_id", nameField: "name", apiEndpoint: "/api/status", tableId: "status-table-body", title: t.more.status.edit_button , nameCol: t.more.status.name_col, t: t, entityType: "Status" },
+        "Course": { name: "Khóa", idField: "course_id", nameField: "course_name", apiEndpoint: "/api/course", tableId: "course-table-body", title: t.more.course.edit_button , nameCol: t.more.course.name_col, t: t, entityType: "Course" }
     };
 
     const config = entityConfigs[entityType];
@@ -24,8 +25,21 @@ async function editMore(id, entityType) {
             confirmButtonText: `${t.more.cancel_button}`
         });
     }
-    const name = row.children[1].textContent;
-
+    var name_vi, name_en;
+    await fetch(config.apiEndpoint + `/${id}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.message.includes("successfully") || data.message.includes("found")) {
+                console.log("Data fetched successfully:", data, config.entityType);
+                const entityData = data[config.entityType.toLowerCase()];
+                console.log("Entity Data:", entityData);
+                name_vi = entityData["name_vi"];
+                name_en = entityData["name_en"];
+                return entityData;
+            } else {
+                throw new Error(`Error fetching ${config.name}: ${data.message}`);
+            }
+        });
 
     // const overlay = document.createElement("div");
     // overlay.classList.add("fixed", "top-0", "left-0", "w-full", "h-full", "bg-gray-50", "bg-opacity-50");
@@ -61,9 +75,15 @@ async function editMore(id, entityType) {
           <input type="text" id="${config.idField}" name="${config.idField}" value="${id}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" hidden>
         </div>
         <div>
-          <label for="${config.nameField}" class="block text-sm font-medium text-gray-700">${config.nameCol}:</label>
-          <input type="text" id="${config.nameField}" name="${config.nameField}" value="${name}" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+          <label for="name_vi" class="block text-sm font-medium text-gray-700">${config.nameCol} (Tiếng Việt):</label>
+          <input type="text" id="name_vi" name="name_vi" value="${name_vi}" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
         </div>
+        <div>
+          <label for="name_en" class="block text-sm font-medium text-gray-700">${config.nameCol} (English):</label>
+          <input type="text" id="name_en" name="name_en" value="${name_en}" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        </div>
+      </div>
+
       </div>
       <div class="mt-4 flex justify-end">
         <button type="button" id="closeModal" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Đóng</button>
@@ -90,8 +110,8 @@ async function editMore(id, entityType) {
                     // alert(`${config.name} đã được cập nhật!`);
                     Swal.fire({
                         icon: 'success',
-                        title: `${t.swal.success_title}`,
-                        text: `${t.swal.success_text}`,
+                        title: `${t.more.swal.success_title}`,
+                        text: `${t.more.swal.success_text}`,
                         confirmButtonText: 'OK',
                         timer: 2000,
                         timerProgressBar: true,
@@ -99,13 +119,13 @@ async function editMore(id, entityType) {
                     });
                     document.body.removeChild(overlay);
 
-                    row.children[1].textContent = entityData[config.nameField];
+                    row.children[1].textContent = entityData[`name_${lang}`];
                 } else {
                     // alert(`Lỗi khi cập nhật ${config.name}.`);
                     Swal.fire({
                         icon: 'error',
-                        title: `${t.swal.error_title}`,
-                        text: `${t.swal.error_text}`,
+                        title: `${t.more.swal.error_title}`,
+                        text: `${t.more.swal.error_text}`,
                         confirmButtonText: `${t.more.cancel_button}`
                     });
                 }
@@ -115,8 +135,8 @@ async function editMore(id, entityType) {
                 // alert("Đã xảy ra lỗi khi cập nhật.");
                 Swal.fire({
                     icon: 'error',
-                    title: `${t.swal.error_title}`,
-                    text: `${t.swal.error_text}`,
+                    title: `${t.more.swal.error_title}`,
+                    text: `${t.more.swal.error_text}`,
                     confirmButtonText: `${t.more.cancel_button}`
                 });
             });

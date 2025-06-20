@@ -27,11 +27,30 @@ const statusController = {
                 .status(500)
                 .send({ message: "An error occurred while fetching status." });
         }
-    }), addStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    }),
+    getStatusById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const statusId = parseInt(req.params.id, 10);
+            const status = yield status_service_1.default.getStatusById(statusId);
+            if (!status) {
+                logger_1.logger.warn(`Status with ID ${statusId} not found`);
+                res.status(404).send({ message: "Status not found" });
+                return;
+            }
+            res.send({ message: "Status found", status });
+        }
+        catch (error) {
+            logger_1.logger.error("An error occurred while fetching status by ID", error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching the status." });
+        }
+    }),
+    addStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const data = req.body;
             console.log(data, "data: ");
-            const newStatus = yield status_service_1.default.addStatus(data.name_vn, data.name_en);
+            const newStatus = yield status_service_1.default.addStatus(data.name_vi, data.name_en);
             logger_1.logger.info("Status added successfully");
             res.status(201).send({ message: "Status added successfully", newStatus });
         }
@@ -43,13 +62,13 @@ const statusController = {
         }
     }), updateStatus: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { status_id, name_vn, name_en } = req.body;
+            const { status_id, name_vi, name_en } = req.body;
             const updatedData = req.body;
             const updatedStatus = yield status_service_1.default.updateStatus(status_id, updatedData);
             if (!updatedStatus) {
                 logger_1.logger.error("Status not found or no changes made", {
                     status_id,
-                    name_vn,
+                    name_vi,
                     name_en
                 });
                 res
@@ -57,7 +76,7 @@ const statusController = {
                     .send({ message: "Status not found or no changes made." });
             }
             else {
-                logger_1.logger.info("Status updated successfully", { status_id, name_vn, name_en });
+                logger_1.logger.info("Status updated successfully", { status_id, name_vi, name_en });
                 res.status(200).send({
                     message: "Status updated successfully",
                     updatedStatus,

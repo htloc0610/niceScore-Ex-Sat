@@ -24,15 +24,30 @@ const statusService = {
       logger.error("Error fetching status list: " + error.message);
       throw new Error("Error fetching status list");
     }
-  },  async addStatus(name_vn: string, name_en: string) {
-    console.log("Adding a new status", name_vn, name_en);
+  },  async addStatus(name_vi: string, name_en: string) {
+    console.log("Adding a new status", name_vi , name_en);
     try {
-        const newStatus = await Status.create({ name_vn, name_en });
+        const newStatus = await Status.create({ name_vi, name_en });
         logger.info("Added new status successfully");
         return newStatus.toJSON();
     } catch (error) {
         logger.error("Error adding new status: " + error.message);
         throw new Error("Error adding new status: " + error.message);
+    }
+  },
+  async getStatusById(statusId: number) {
+    try {
+      const status = await Status.findOne({
+        where: { status_id: statusId },
+      });
+      if (!status) {
+        logger.warn(`Status with ID ${statusId} not found`);
+        return null;
+      }
+      return status.get();
+    } catch (error) {
+      logger.error("Error fetching status by ID: " + error.message);
+      throw new Error("Error fetching status by ID");
     }
   },
   async updateStatus(statusId: number, statusData: any) {

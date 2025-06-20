@@ -6,6 +6,8 @@ const facultyRouter = Router();
 // [GET] /api/faculty
 facultyRouter.get("/", facultyController.getListFaculties);
 
+facultyRouter.get("/:id", facultyController.getFacultyById);
+
 // [POST] /api/faculty
 facultyRouter.post("/", facultyController.addFaculty);
 

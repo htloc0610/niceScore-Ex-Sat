@@ -28,14 +28,34 @@ const facultyController = {
                 .status(500)
                 .send({ message: "An error occurred while fetching faculties." });
         }
-    }), addFaculty: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    }),
+    getFacultyById: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { name_vn, name_en } = req.body;
-            if (!name_vn || !name_en) {
+            const facultyId = parseInt(req.params.id, 10);
+            const faculty = yield faculty_service_1.default.getFacultyById(facultyId);
+            if (!faculty) {
+                logger_1.logger.warn(`Faculty with ID ${facultyId} not found`);
+                res.status(404).send({ message: "Faculty not found" });
+                return;
+            }
+            res.send({ message: "Faculty found", faculty });
+        }
+        catch (error) {
+            logger_1.logger.error("Error fetching faculty by ID");
+            console.log("Error fetching faculty by ID:", error);
+            res
+                .status(500)
+                .send({ message: "An error occurred while fetching the faculty." });
+        }
+    }),
+    addFaculty: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { name_vi, name_en } = req.body;
+            if (!name_vi || !name_en) {
                 res.status(400).send({ message: "Both Vietnamese and English names are required" });
                 return;
             }
-            const newFaculty = yield faculty_service_1.default.addFaculty(name_vn, name_en);
+            const newFaculty = yield faculty_service_1.default.addFaculty(name_vi, name_en);
             res
                 .status(201)
                 .send({ message: "Faculty added successfully", newFaculty });

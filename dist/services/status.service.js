@@ -43,17 +43,35 @@ const statusService = {
                 throw new Error("Error fetching status list");
             }
         });
-    }, addStatus(name_vn, name_en) {
+    }, addStatus(name_vi, name_en) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("Adding a new status", name_vn, name_en);
+            console.log("Adding a new status", name_vi, name_en);
             try {
-                const newStatus = yield status_model_1.default.create({ name_vn, name_en });
+                const newStatus = yield status_model_1.default.create({ name_vi, name_en });
                 logger_1.logger.info("Added new status successfully");
                 return newStatus.toJSON();
             }
             catch (error) {
                 logger_1.logger.error("Error adding new status: " + error.message);
                 throw new Error("Error adding new status: " + error.message);
+            }
+        });
+    },
+    getStatusById(statusId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const status = yield status_model_1.default.findOne({
+                    where: { status_id: statusId },
+                });
+                if (!status) {
+                    logger_1.logger.warn(`Status with ID ${statusId} not found`);
+                    return null;
+                }
+                return status.get();
+            }
+            catch (error) {
+                logger_1.logger.error("Error fetching status by ID: " + error.message);
+                throw new Error("Error fetching status by ID");
             }
         });
     },

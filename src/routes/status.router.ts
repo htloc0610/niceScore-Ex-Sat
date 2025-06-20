@@ -6,6 +6,8 @@ const statusRouter = Router();
 // [GET] /api/status
 statusRouter.get("/", statusController.getListStatus);
 
+statusRouter.get("/:id", statusController.getStatusById);
+
 // [POST] /api/status
 statusRouter.post("/", statusController.addStatus);
 
