@@ -31,6 +31,12 @@ function getLocalizedStatus(status, lang) {
         name: lang === 'vi' ? status.name_vi : status.name_en
     };
 }
+function getLocalizedCourse(course, lang) {
+    return {
+        course_id: course.course_id,
+        course_name: lang === 'vi' ? course.course_name_vi : course.course_name_en
+    };
+}
 const exportController = {
     // Hàm export dữ liệu ra JSON
     exportToJson: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -158,7 +164,6 @@ const exportController = {
       }
     }*/
     exportGrade: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a, _b;
         try {
             const { id } = req.params;
             const lang = res.locals.lang || 'en';
@@ -173,7 +178,6 @@ const exportController = {
                 GPA: (parseFloat(grade.grade) * 0.4).toFixed(2),
             }));
             var student = yield student_service_1.default.getStudentById(parseInt(id));
-            console.log("Student:", student, "lang:", lang);
             const safeGrades = Array.isArray(grades)
                 ? grades.filter(g => g && g.grade >= 5)
                 : [];
@@ -189,7 +193,7 @@ const exportController = {
                 faculty_name: getLocalizedFaculty(student.faculty, lang).name,
                 s_id: student.student_id,
                 s_birthday: student.date_of_birth,
-                course_name: ((_a = student.course) === null || _a === void 0 ? void 0 : _a.course_name_vi) || ((_b = student.course) === null || _b === void 0 ? void 0 : _b.course_name_en),
+                course_name: getLocalizedCourse(student.course, lang).course_name,
                 program_name: student.program || "Không có",
                 total_credits: total_credits,
                 average_grade: average_grade,

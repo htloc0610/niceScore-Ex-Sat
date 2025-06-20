@@ -477,6 +477,7 @@ const studentService = {
                     return {
                         grade: plainItem.grade,
                         transcript_id: plainItem.transcript_id,
+                        module_code: plainItem.class.module.module_code,
                         module_name: plainItem.class.module.translations[0].module_name,
                         class_name: plainItem.class.class_name,
                         credits: plainItem.class.module.credits,

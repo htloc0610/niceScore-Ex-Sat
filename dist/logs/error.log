@@ -244,3 +244,10 @@
 {"level":"error","message":"Error fetching module with translations: column faculty.name does not exist","timestamp":"2025-06-20T07:00:21.538Z"}
 {"level":"error","message":"Error adding new module: Error fetching module with translations: column faculty.name does not exist","timestamp":"2025-06-20T07:00:21.539Z"}
 >>>>>>> ed70da81cc6c2e079b7963bf93a0936473eb836a
+{"level":"error","message":"Error deleting student: Error deleting student","stack":"Error: Error deleting student\n    at Object.<anonymous> (C:\\Users\\Dien\\Desktop\\lan\\niceScore-Ex-Sat\\src\\services\\student.service.ts:174:13)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\Dien\\Desktop\\lan\\niceScore-Ex-Sat\\src\\services\\student.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-20T08:49:49.276Z"}
+{"level":"error","message":"Error deleting student: Error deleting student","stack":"Error: Error deleting student\n    at Object.<anonymous> (C:\\Users\\Dien\\Desktop\\lan\\niceScore-Ex-Sat\\src\\services\\student.service.ts:174:13)\n    at Generator.throw (<anonymous>)\n    at rejected (C:\\Users\\Dien\\Desktop\\lan\\niceScore-Ex-Sat\\src\\services\\student.service.ts:6:65)\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)","timestamp":"2025-06-20T08:52:47.895Z"}
+{"level":"error","message":"Error adding student: Validation error","timestamp":"2025-06-20T08:54:14.634Z"}
+{"level":"error","message":"Error adding new studentSequelizeUniqueConstraintError: Validation error","timestamp":"2025-06-20T08:54:14.657Z"}
+{"level":"error","message":"Error adding identification: Validation error","timestamp":"2025-06-20T08:54:45.463Z"}
+{"level":"error","message":"Error adding student: Validation error","timestamp":"2025-06-20T08:54:45.468Z"}
+{"level":"error","message":"Error adding new studentSequelizeUniqueConstraintError: Validation error","timestamp":"2025-06-20T08:54:45.471Z"}

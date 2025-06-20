@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { raw, Request, Response } from "express";
 import fs from "fs";
 import path from "path";
 import ExcelJS from "exceljs";
@@ -16,6 +16,13 @@ function getLocalizedStatus(status: any, lang: string) {
   return {
     status_id: status.status_id,
     name: lang === 'vi' ? status.name_vi : status.name_en
+  };
+}
+function getLocalizedCourse(course: any, lang: string) {
+  return {
+    course_id: course.course_id,
+    course_name: lang === 'vi' ? course.course_name_vi : course.course_name_en
+
   };
 }
 const exportController = {
@@ -154,6 +161,7 @@ const exportController = {
           const lang = res.locals.lang || 'en';
           // Fetch grades and student details
           const rawGrades = (await studentService.getStudentGrades(parseInt(id), lang));
+          
           const grades = rawGrades.map((grade: any, index: number) => ({
             idx: index + 1,
             credits: grade.credits,
@@ -162,9 +170,7 @@ const exportController = {
             grade: parseFloat(grade.grade),
             GPA: (parseFloat(grade.grade) *0.4).toFixed(2),
           }));
-
           var student = await studentService.getStudentById(parseInt(id)) as any;
-          console.log("Student:", student, "lang:", lang);
           const safeGrades = Array.isArray(grades)
           ? grades.filter(g => g && g.grade >= 5)
           : [];
@@ -184,7 +190,7 @@ const exportController = {
             faculty_name: getLocalizedFaculty(student.faculty, lang).name,
             s_id: student.student_id,
             s_birthday: student.date_of_birth,
-            course_name: student.course?.course_name_vi || student.course?.course_name_en,
+            course_name: getLocalizedCourse(student.course, lang).course_name,
             program_name: student.program || "Không có",
             total_credits: total_credits,
             average_grade: average_grade,
